@@ -1,0 +1,11 @@
+::ng-deep .c-btn{
+    background-color: white;
+    border: 2px solid green
+}
+.multi-select{
+    display: block;
+    margin-top: 4px;
+}
+.error{
+    margin-top: -23px;
+}

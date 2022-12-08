@@ -1,0 +1,142 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.EDIT_TITLE' | translate }}</h5>
+<form [formGroup]="commonLookUpTypeCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <!-- <div class="form-group" *ngIf ="isSystemAdmin">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" [(value)]="commonLookUpType.companyId"
+                    placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" (selectionChange)="getCommonLookUpTypesByCompanyId()">
+          <ng-container *ngFor="let item of companies">
+            <mat-option value="{{item.id}}">{{item.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div> -->
+    <div class="form-group" *ngIf="commonLookUpType.parentId!==null && commonLookUpType.parentId!== undefined">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.PARENTID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="parentId" [(value)]="commonLookUpType.parentId"
+          placeholder="{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.PARENTID.PLACEHOLDER' | translate }}"
+          [disabled]="true">
+          <ng-container *ngFor="let item of commonLookUpTypes">
+            <mat-option value="{{item.id}}">{{item.lookUpTypeName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.parentId.errors && f.parentId.errors.required">
+          {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.PARENTID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.SHORTCODE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="shortCode" [(value)]="commonLookUpType.shortCode"
+          placeholder="{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.SHORTCODE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.shortCode.errors}">
+        <mat-error *ngIf="submitted && f.shortCode.errors && f.shortCode.errors.required">
+          {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.SHORTCODE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.shortCode.errors && f.shortCode.errors.maxlength">
+          {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.SHORTCODE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.LOOKUPTYPENAME.PLACEHOLDER' | translate }}
+        </mat-label>
+        <input matInput formControlName="lookUpTypeName" [(value)]="commonLookUpType.lookUpTypeName"
+          placeholder="{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.LOOKUPTYPENAME.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.lookUpTypeName.errors}">
+        <mat-error *ngIf="submitted && f.lookUpTypeName.errors && f.lookUpTypeName.errors.required">
+          {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.LOOKUPTYPENAME.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.lookUpTypeName.errors && f.lookUpTypeName.errors.maxlength">
+          {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.LOOKUPTYPENAME.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.LOOKUPTYPENAMELC.PLACEHOLDER' | translate }}
+        </mat-label>
+        <input matInput formControlName="lookUpTypeNameLC" [(value)]="commonLookUpType.lookUpTypeNameLC"
+          placeholder="{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.LOOKUPTYPENAMELC.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.lookUpTypeNameLC.errors}">
+        <mat-error *ngIf="submitted && f.lookUpTypeNameLC.errors && f.lookUpTypeNameLC.errors.required">
+          {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.LOOKUPTYPENAMELC.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.lookUpTypeNameLC.errors && f.lookUpTypeNameLC.errors.maxlength">
+          {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.LOOKUPTYPENAMELC.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.REMARKS.PLACEHOLDER' | translate }}</mat-label>
+              <input matInput formControlName="remarks" [(value)]="commonLookUpType.remarks"
+                placeholder="{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.REMARKS.PLACEHOLDER' | translate }}"
+                [ngClass]="{'is-invalid': submitted && f.remarks.errors}">
+              <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.required">
+                {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.REMARKS.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+              <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.maxlength">
+                {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.REMARKS.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-6 col-12">
+          <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}</mat-label>
+              <input type="number" matInput formControlName="sortOrder" [(value)]="commonLookUpType.sortOrder"
+                placeholder="{{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}"
+                [ngClass]="{'is-invalid': submitted && f.sortOrder.errors}">
+              <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.required">
+                {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.SORTORDER.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+              <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.maxlength">
+                {{ 'COMPANY.COMMONLOOKUPTYPE.CREATE.CREATE_FORM.SORTORDER.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    
+   
+    
+      <!-- <mat-checkbox *ngIf="isSystemAdmin" class="example-margin"  [checked]="isAllCompanies" (change)="change($event.checked)" >Is For All Compnaies ?</mat-checkbox> -->
+      <div class="row " *ngIf ="!isAllCompanies">
+        <div class="col-sm-12 col-md-12">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId"
+              (selectionChange)="onChangeCompany($event.value)">
+              <mat-option *ngFor="let item of companies" [value]="item.id">
+                {{item.companyName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">
+              {{ 'COMMON.SELECT.COMPANYID.REQUIRED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+        <!--<div class="col-sm-6 float-right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>-->
+      </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessages}}
+          
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

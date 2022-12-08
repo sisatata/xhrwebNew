@@ -1,0 +1,85 @@
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-4">
+    <h1 id="tableLabel">{{'PAYROLL.SALARYSTRUCTURECOMPONENT.INDEX.TITLE' | translate }}</h1>
+  </div>
+  <div class="col-lg-2 col-md-3 col-sm-10">
+    <button mat-raised-button (click)="createSalaryStructureComponent()" class="btn btn-success btn-block text-center"
+            matTooltip="{{'PAYROLL.SALARYSTRUCTURECOMPONENT.INDEX.CREATESALARYSTRUCTURECOMPONENTBUTTONTEXT' | translate }}">
+      <mat-icon class="create-icon-button">add</mat-icon>
+      {{'PAYROLL.SALARYSTRUCTURECOMPONENT.INDEX.CREATESALARYSTRUCTURECOMPONENTBUTTONTEXT' | translate }}
+    </button>
+  </div>
+</div>
+
+<form [formGroup] ="salarystructurecomponentFilterFormGroup" (ngSubmit)="getSalaryStructureComponent()">
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-3">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId" (selectionChange)="onChangeCompany($event.value)">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required"> Company is required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+  </div>
+
+  </form>
+  <section *blockUI = "'salarystructurecomponent-list-section'">
+    <table class="table table-striped" aria-labelledby="tableLabel">
+      <thead>
+        <tr>
+          <th class="text-center">{{'PAYROLL.SALARYSTRUCTURECOMPONENT.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+          <th>{{'PAYROLL.SALARYSTRUCTURECOMPONENT.INDEX.TABLE.HEADER.SALARYSTRUTUREID' | translate }}</th>
+          <th>{{'PAYROLL.SALARYSTRUCTURECOMPONENT.INDEX.TABLE.HEADER.SALARYCOMPONENTNAME' | translate }}</th>
+          <th>{{'PAYROLL.SALARYSTRUCTURECOMPONENT.INDEX.TABLE.HEADER.VALUE' | translate }}</th>
+          <th>{{'PAYROLL.SALARYSTRUCTURECOMPONENT.INDEX.TABLE.HEADER.VALUETYPE' | translate }}</th>
+          <th>{{'PAYROLL.SALARYSTRUCTURECOMPONENT.INDEX.TABLE.HEADER.PERCENTON' | translate }}</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of salarystructurecomponents | paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index">
+          <td class="pt-0 text-center">
+            <button mat-icon-button (click)="editSalaryStructureComponent(item)">
+              <mat-icon>create</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onDeleteSalaryStructureComponent(item)">
+              <mat-icon class="mat-icon-delete">delete</mat-icon>
+            </button>
+          </td>
+          <td>{{item.salaryStrutureId}}</td>
+          <td>{{item.salaryComponentName}}</td>
+          <td>{{item.value}}</td>
+          <td>{{item.valueType}}</td>
+          <td>{{item.percentOn}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="row justify-content-between" *ngIf="totalItems > 0">
+      <div class="col-md-5 col-sm-5 text-left">
+        {{totalItemsText}}
+      </div>
+      <div class="col-md-5 col-sm-5 text-left">
+        <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+                             directionLinks="true" previousLabel="" nextLabel="">
+        </pagination-controls>
+      </div>
+      <div class="col-md-2 col-sm-2 text-left">
+        <mat-form-field>
+          <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()" placeholder="Items Per Page">
+            <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+              {{item.text}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+      </div>
+    </div>
+  </section>
+

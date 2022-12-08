@@ -1,0 +1,62 @@
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'COMPANY.PAYMENTOPTION.CREATE.CREATE_TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{'COMPANY.PAYMENTOPTION.CREATE.EDIT_TITLE' | translate}}</h5>
+
+<form class="paymentoption-from" [formGroup]="paymentoptionCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="paymentoption.companyId" (selectionChange)="onChangeCompany()">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>-->
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.PAYMENTOPTIONID.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="paymentOptionId" placeholder="{{'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.PAYMENTOPTIONID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.paymentOptionId.errors}" />
+        <mat-error *ngIf="submitted && f.paymentOptionId.errors && f.paymentOptionId.errors.required">{{ 'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.PAYMENTOPTIONID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.paymentOptionId.errors && f.paymentOptionId.errors.maxlength">{{'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.PAYMENTOPTIONID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.OPTIONNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="optionName" placeholder="{{'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.OPTIONNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.optionName.errors}" />
+        <mat-error *ngIf="submitted && f.optionName.errors && f.optionName.errors.required">{{ 'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.OPTIONNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.optionName.errors && f.optionName.errors.maxlength">{{'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.OPTIONNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.OPTIONCODE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="optionCode" placeholder="{{'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.OPTIONCODE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.optionCode.errors}" />
+        <mat-error *ngIf="submitted && f.optionCode.errors && f.optionCode.errors.required">{{ 'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.OPTIONCODE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.optionCode.errors && f.optionCode.errors.maxlength">{{'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.OPTIONCODE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="sortOrder" placeholder="{{'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.sortOrder.errors}" />
+        <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.required">{{ 'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.SORTORDER.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.maxlength">{{'COMPANY.PAYMENTOPTION.CREATE.CREATE_FORM.SORTORDER.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+

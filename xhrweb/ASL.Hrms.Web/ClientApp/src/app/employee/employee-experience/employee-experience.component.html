@@ -1,0 +1,65 @@
+<!--<h1 id="tableLabel">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TITLE' | translate }}</h1>-->
+
+<div class="row float-right m-1 p-2">
+  <button *ngIf="isAdmin || isHRManager" mat-raised-button (click)="createEmployeeExperience()" matTooltip="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}" class="btn btn-success">
+    <mat-icon class="create-icon-button">add</mat-icon>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}
+  </button>
+</div>
+
+<section *blockUI="'employee-experience-section'">
+  <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+    <thead>
+      <tr class="table-secondary">
+        <th *ngIf="isAdmin || isHRManager" class="text-center">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.COMPANYNAME' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.DESIGNATION' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.FUNCTIONALDESIGNATION' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.DEPARTMENT' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.RESPONSIBILITIES' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.COMPANYADDRESS' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.COMPANYCONTACTNO' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.COMPANYMOBILE' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.COMPANYEMAIL' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.COMPANYWEB' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.FROMDATE' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.HEADER.TODATE' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of employeeExperiences">
+        <td *ngIf="isAdmin || isHRManager" class="pt-0 text-center">
+          <button mat-icon-button (click)="editEmployeeExperience(item)" matTooltip="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.EDIT_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon>create</mat-icon>
+          </button>
+
+          <button mat-icon-button (click)="onDeleteEmployeeExperience(item)" matTooltip="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.DELETE_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon class="mat-icon-delete">delete</mat-icon>
+          </button>
+        </td>
+        <td>{{item.companyName}}</td>
+        <td>{{item.designation}}</td>
+        <td>{{item.functionalDesignation}}</td>
+        <td>{{item.department}}</td>
+        <td>{{item.responsibilities}}</td>
+        <td>{{item.companyAddress}}</td>
+        <td>{{item.companyContactNo}}</td>
+        <td>{{item.companyMobile}}</td>
+        <td>{{item.companyEmail}}</td>
+        <td>{{item.companyWeb}}</td>
+        <td>{{item.fromDate  | date: 'dd/MM/yyyy'}}</td>
+        <td>{{item.toDate  | date: 'dd/MM/yyyy'}}</td>
+        
+      </tr>
+      <tr *ngIf="employeeExperiences.length==0">
+        <td colspan="14" class="text-center">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.INDEX.TABLE.NODATAFOUNDTEXT' | translate }}</td>
+      </tr>
+    </tbody>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessages}}
+          
+      </div>
+  </mat-error>
+  </table>
+</section>

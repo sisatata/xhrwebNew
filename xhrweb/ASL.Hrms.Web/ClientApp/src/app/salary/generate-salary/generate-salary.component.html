@@ -1,0 +1,85 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h1 id="tableLabel">{{'PAYROLL.GENERATESALARY.CREATE.INDEX.TITLE' | translate }}</h1>
+<section *blockUI="'salary-generate'">
+<form [formGroup]="generateSalaryFilterFormGroup" (ngSubmit)="submitForm()">
+  <div class="row">
+    <div class="col-12">
+      <mat-error *ngIf="!isFormValid">
+        <div class="d-flex text-center">
+          {{errorMessages}}
+        </div>
+      </mat-error>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline">
+        <mat-label class="label-font">{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId"
+          (selectionChange)="onChangeCompany($event.value)" required>
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required"> {{COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT | translate}}
+          </mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline">
+        <mat-label class="label-font">{{'COMMON.SELECT.FINANCIALYEARID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="Financial Year" formControlName="financialYearId"
+          [(value)]="financialYearId" (selectionChange)="onChangeFinancialYears($event)" required>
+          <mat-option *ngFor="let item of financialYears" [value]="item.id">
+            {{item.financialYearName}}
+          </mat-option>
+        </mat-select>
+      
+        <mat-error *ngIf="submitted && f.financialYearId.errors && f.financialYearId.errors.required">
+          {{'COMMON.SELECT.FINANCIALYEARID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          
+      </mat-form-field>
+     
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline">
+        <mat-label class="label-font"> {{'COMPANY.MONTHCYCLE.INDEX.TITLE' | translate }}</mat-label>
+        <mat-select placeholder="Month Cycle" formControlName="monthCycleId" [(value)]="monthCycleId"
+          (selectionChange)="onChangeMonthCycle($event)" required>
+          <mat-option *ngFor="let item of monthCycles" [value]="item.id">
+            {{item.monthCycleName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.monthCycleId.errors && f.monthCycleId.errors.required">
+          {{'COMMON.SELECT.MONTHCYCLEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+       
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline">
+        <mat-label class="label-font">Employee</mat-label>
+        <mat-select placeholder="Employee" formControlName="employeeId" [(value)]="employeeId"
+          (selectionChange)="onChangeEmployee($event)">
+          <mat-option *ngFor="let item of employees" [value]="item.id">
+            {{item.fullName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">Employee is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 float-right">
+      <button type="submit" [disabled]="!generateSalaryFilterFormGroup.valid"
+        class="btn btn-success">{{'PAYROLL.GENERATESALARY.CREATE.INDEX.BUTTONTEXT' | translate }}</button>
+    </div>
+  </div>
+</form>
+</section>

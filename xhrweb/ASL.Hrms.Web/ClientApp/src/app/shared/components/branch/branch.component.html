@@ -1,0 +1,66 @@
+<form [formGroup]="employeeFilterFormGroup" (ngSubmit)="getAllEmployees()">
+    
+    <div class="row">
+  
+      <div class="col-sm-2 col-md-3 col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Company</mat-label>
+          <mat-select placeholder="Company" formControlName="companyId"
+                      (selectionChange)="onChangeCompany($event.value)" [(value)]="companyId">
+            <mat-option *ngFor="let item of companies" [value]="item.id">
+              {{item.companyName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-2 col-md-3 col-lg-2">
+       
+        <mat-form-field appearance="outline">
+          <mat-label>Branch</mat-label>
+          <mat-select placeholder="Branch" formControlName="branchId"
+                      (selectionChange)="onChangeBranch($event.value)" [(value)]="branchId" multiple>
+            <mat-option *ngFor="let item of branches" [value]="item.id">
+              {{item.branchName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
+      </div>
+      <div class="col-sm-3 col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.DEPARTMENTID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select placeholder="{{ 'COMMON.SELECT.DEPARTMENTID.PLACEHOLDER' | translate }}"
+                      formControlName="departmentId" (selectionChange)="onChangeDepartment($event.value)" multiple>
+            <mat-option *ngFor="let item of departments" [value]="item.id">
+              {{item.departmentName}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="submitted && f.departmentId.errors && f.departmentId.errors.required">Department is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3 col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.DESIGNATIONID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select placeholder="{{ 'COMMON.SELECT.DESIGNATIONID.PLACEHOLDER' | translate }}"
+                      formControlName="designationId" (selectionChange)="onChangeDesignation($event.value)" multiple>
+            <mat-option *ngFor="let item of designations" [value]="item.id">
+              {{item.designationName}} - {{item.departmentName}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="submitted && f.designationId.errors &&f.designationId.errors.required">Designation is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-4 col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Name, Email or Id</mat-label>
+          <input  matInput formControlName="searchText"  placeholder="Name, Employee or Id" [ngClass]="{'is-invalid': submitted && f.reason.errors}" />
+         
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-12">
+        <button mat-raised-button type="button" (click)="search()" class="btn btn-success btn-block text-center mb-2"
+                matTooltip="seacrh">
+         Search
+        </button>
+      </div>
+    </div>
+  </form>

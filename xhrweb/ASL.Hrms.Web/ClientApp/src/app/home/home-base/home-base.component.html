@@ -1,0 +1,47 @@
+<div class="jumbotron jumbotron-fluid" *ngIf="isEmployee && !isAdmin">
+  <div >
+    <h2 class="display-4 text-center">Welcome to <span style="color:forestgreen">planetHR</span></h2>
+    <h2 class="card-title h2 text-center">
+      Ultimate HR & Payroll solution of your Company
+    </h2>
+    <div class="text-center" style="     padding-bottom:100px;
+    color: forestgreen">
+      <h4>{{ 'HOME.DASHBOARDCOMINGSOON' | translate }}</h4>
+    </div>
+  </div>
+</div>
+<h1 *ngIf="isAdmin" class="title">Dashboard</h1>
+<div class="notification-card">
+  <div class="row" *ngIf="isAdmin ">
+    <div class="col-12 pl-0" >
+      <ngx-charts-number-card [view]="view" [scheme]="colorScheme" [results]="single" (select)="onSelect($event)"
+        [cardColor]="cardColor">
+      </ngx-charts-number-card>
+    </div>
+  </div>
+</div>
+
+<div class="row m-l-10 chart-container" *ngIf="isAdmin">
+  <div class="col-md-12 col-sm-12 col-12" class="black-border mar mr-3  bg-white">
+    <app-attendance-chart></app-attendance-chart>
+  </div>
+  <div class="col-md-12 col-sm-12 col-12" class="black-border mar mr-3 bg-white">
+    <app-gender-chart></app-gender-chart>
+  </div>
+  <div class="col-md-12 col-sm-12 col-12" class="black-border mar mr-3 bg-white">
+    <app-leave-chart></app-leave-chart>
+  </div>
+  <div class="col-md-12 col-sm-12 col-12" class="black-border mar mr-3 bg-white h-455">
+    <app-payroll-chart></app-payroll-chart>
+  </div>
+  <div class="col-md-12 col-sm-12 col-12" class="black-border mar  mr-3 bg-white">
+    <app-yearly-payroll-chart></app-yearly-payroll-chart>
+  </div>
+
+  
+
+  <div class="col-md-12 col-sm-12 col-12" class="black-border mar  mr-3   bg-white">
+    <app-department-salary-chart>
+    </app-department-salary-chart>
+  </div>
+</div>

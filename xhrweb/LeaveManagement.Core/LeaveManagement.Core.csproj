@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Handlers\ApplicationEventHandlers\**" />
+    <EmbeddedResource Remove="Handlers\ApplicationEventHandlers\**" />
+    <None Remove="Handlers\ApplicationEventHandlers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" Version="1.4.2" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ASL.Hrms.SharedKernel\ASL.Hrms.SharedKernel.csproj" />
+    <!--<ProjectReference Include="..\Asl.Infrastructure\Asl.Infrastructure.csproj" />-->
+  </ItemGroup>
+
+</Project>

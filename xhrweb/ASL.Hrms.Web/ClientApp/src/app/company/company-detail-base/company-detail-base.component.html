@@ -1,0 +1,14 @@
+<h1 class="title">{{ 'EMPLOYEE.EMPLOYEE.DETAIL.BASEHEADER' | translate }} {{companyName}}</h1>
+
+<app-company-detail [companyId]="companyId" 
+[isActive] = "isActive"
+[companyShortName] = "companyShortName"
+[companySlogan] = "companySlogan"
+[companyName]="companyName"
+[companyWebsite]="companyWebsite"
+[facebookLink]="facebookLink"
+[companyLogo]="companyLogo"
+></app-company-detail>
+<br/>
+
+<app-company-other-info-base [companyId]="companyId" [companyName]="companyName"></app-company-other-info-base>

@@ -1,0 +1,54 @@
+.chart {
+  border: 2px solid black;
+}
+.black-border {
+  border: 2px solid #e9eaee;
+}
+.mar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.count-chart {
+  margin-left: -17px;
+}
+.notification-card{
+  margin: 0;
+}
+/* Responsive CSS */
+@media screen and (max-width: 1455px) {
+  .h-455 {
+    height: 455px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .notification-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  h1 {
+    text-align: center;
+  }
+  .h-455 {
+    height: 455px;
+  }
+  .chart-container{
+    justify-content: center;
+  }
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .m-l-10 {
+    margin-left: 10px;
+  }
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

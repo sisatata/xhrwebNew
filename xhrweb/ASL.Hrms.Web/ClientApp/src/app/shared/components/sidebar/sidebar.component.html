@@ -1,0 +1,281 @@
+<a  class="float" id="float-icon" (click)="expandSideMenu()" >
+  <i class="fa fa-arrow-right my-float"></i>
+  </a>
+
+<nav id="sidebarMenu" class="col-md-3 col-lg-3 col-xl-2 d-md-block sidebar collapse" [ngClass]="{'show' : showCollapsed}">
+  <div class="sidebar-sticky pt-3 pb-5">
+    <ul class="nav flex-column">
+     
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="['/']">
+          <i class="fa fa-home"></i>Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="isEmployee">
+        <a class="nav-link" [routerLinkActive]="['active']" 
+          [routerLink]="['/employee/employee-details',employeeId,userName]">
+          <i class="fa fa-id-card"></i>My Profile <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="isSuperAdmin || isSystemAdmin">
+        <a class="nav-link collapsed text-truncate" href="#submenuadmin" data-toggle="collapse"
+          data-target="#submenuadmin">
+          <i class="fa fa-table"></i><span class=" d-sm-inline">Admin</span>
+        </a>
+        <div class="collapse" id="submenuadmin" aria-expanded="false">
+          <ul class="flex-column pl-2 nav">
+            <li class="nav-item" *ngIf="isSuperAdmin || isSystemAdmin"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/admin/assign-role']"><span>Assign Role</span></a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1">
+          <i class="fa fa-table"></i> <span class=" d-sm-inline">Company Setup</span>
+        </a>
+        <div class="collapse" id="submenu1" aria-expanded="false">
+          <ul class="flex-column pl-2 nav">
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/company/list']" [routerLinkActiveOptions]="{ exact: true }"><span>Companies</span></a>
+            </li>
+            <li class="nav-item" *ngIf="isSystemAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/company/request-list']"><span>Company List</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/company/branch']"><span>Branch</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/company/department']"><span>Department</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/company/designation']"><span>Designation</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/company/financialYear']"><span>Financial Year</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/company/monthCycle']"><span>Month Cycle</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/company/common-lookup']"><span>Common Lookup</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/company/configuration']"><span>Configurations</span></a></li>
+          </ul>
+        </div>
+      </li>
+      <!-- <li class="nav-item" *ngIf="isAdmin">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/employee/list']"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <i class="fa fa-users"></i>Employee Info <span class="sr-only">(current)</span>
+        </a>
+      </li> -->
+      <li class="nav-item" *ngIf="isSuperAdmin || isSystemAdmin">
+        <a class="nav-link collapsed text-truncate" href="#submenemployee" data-toggle="collapse"
+          data-target="#submenemployee">
+          <i class="fa fa-users"></i><span class=" d-sm-inline">Employee</span>
+        </a>
+      
+        <div class="collapse" id="submenemployee" aria-expanded="false">
+          <ul class="flex-column pl-2 nav">
+            <li class="nav-item" *ngIf="isAdmin">
+              <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/employee/list']"
+                [routerLinkActiveOptions]="{ exact: true }">
+               Employee Info <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="isSuperAdmin || isSystemAdmin || isAdmin"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/employee/employee-promotion-transfer']"><span>Emp Promotion Transfer</span></a></li>
+                <!-- employee-file-import-history -->
+                <li class="nav-item" *ngIf="isSuperAdmin || isSystemAdmin || isAdmin"><a class="nav-link py-0"
+                  [routerLinkActive]="['active']" [routerLink]="['/employee/employee-promotion-transfer-list']"><span>Emp Promotion Transfer List</span></a></li> 
+                  <li class="nav-item" *ngIf="isSuperAdmin || isSystemAdmin || isAdmin"><a class="nav-link py-0"
+                    [routerLinkActive]="['active']" [routerLink]="['/employee/employee-file-import-history']"><span>Employee Import File.</span></a></li> 
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="isEmployee || isAdmin">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/attendance/employee-attendance']">
+          <i class="fa fa-id-card"></i>Attendance Status<span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="isEmployee || isReportingManager">
+        <a class="nav-link attendance" [routerLinkActive]="['active']" [routerLink]="['/attendance/attendance-request']">
+          <i class="fa fa-id-card"></i>Attendance Requests<span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a class="nav-link collapsed text-truncate" href="#submenuattendance" data-toggle="collapse"
+          data-target="#submenuattendance">
+          <i class="fa fa-table"></i> <span class=" d-sm-inline">Attendance</span>
+        </a>
+        <div class="collapse" id="submenuattendance" aria-expanded="false">
+          <ul class="flex-column pl-2 nav">
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/attendance/shiftGroup']"><span>Shift Group</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/attendance/shift']"><span>Shift</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/attendance/shiftAllocation']"><span>Shift Allocation</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/attendance/attendanceProcess']"><span>Attendance Process</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/attendance/holiday']"><span>Holiday</span></a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin || isEmployee">
+        <a class="nav-link collapsed text-truncate" href="#submenuleave" data-toggle="collapse"
+          data-target="#submenuleave">
+          <i class="fa fa-table"></i> <span class=" d-sm-inline">Leave Management</span>
+        </a>
+        <div class="collapse" id="submenuleave" aria-expanded="false">
+          <ul class="flex-column pl-2 nav">
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+              [routerLink]="['/leave/leave-group']"><span>Leave Group</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/leave/leaveType']"><span>Leave Setup</span></a></li>
+               
+            <li class="nav-item" *ngIf="isAdmin || isEmployee"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/leave/leaveApplication']"><span>Leave Application</span></a></li>
+            <li class="nav-item" *ngIf="isEmployee || isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/leave/leave-balance']"><span>Leave Balance</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/leave/leave-process']"><span>Leave Entitlement</span></a></li>
+                <li class="nav-item" *ngIf="isReportingManager"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                  [routerLink]="['/leave/leave-request']"><span>Leave Requests</span></a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed text-truncate" href="#submenutask" data-toggle="collapse"
+          data-target="#submenutask">
+          <i class="fa fa-tasks"></i> <span class=" d-sm-inline">Task Management</span>
+        </a>
+        <div class="collapse" id="submenutask" aria-expanded="false">
+          <ul class="flex-column pl-2 nav">
+            <li class="nav-item" *ngIf="isAdmin || isEmployee"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/task/task-category']"><span>Task Category</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin || isEmployee"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/task/task-detail']"><span>Task Details</span></a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed text-truncate" href="#submenupayroll" data-toggle="collapse"
+          data-target="#submenupayroll">
+          <i class="fa fa-credit-card"></i> <span class=" d-sm-inline">Payroll</span>
+        </a>
+        <div class="collapse" id="submenupayroll" aria-expanded="false">
+          <ul class="flex-column pl-2 nav">
+            <li class="nav-item" *ngIf="isAdmin || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/bank']"><span>Bank Setup</span></a></li>
+            <!--<li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']" [routerLink]="['/payroll/bank-branch']"><span>Bank Branch</span></a></li>-->
+            <li class="nav-item"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/payroll/emloyee-bank-account']"><span>Emp Bank Account</span></a></li>
+
+                <!--<li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']" [routerLink]="['/payroll/bank-branch']"><span>Bank Branch</span></a></li>-->
+            <li class="nav-item"><a class="nav-link py-0" [routerLinkActive]="['active']"
+              [routerLink]="['/payroll/bill-claim']"><span>Bill Claim</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/salary-structure']"><span>Salary
+                  Structure</span></a></li>
+            <li class="nav-item" *ngIf="isEmployee || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/employee-salary']"><span>Employee
+                  Salary</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/generate-salary']"><span>Generate
+                  Salary</span></a></li>
+                  <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0"
+                    [routerLinkActive]="['active']" [routerLink]="['/payroll/earn-leave-encashment']"><span>Earn Leave Encashment.
+                      </span></a></li>
+            <li class="nav-item" *ngIf="isPayrollManager || isEmployee"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/payroll/emp-paid-salary']"><span>Employee Paid Salary</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/benefit-deduction']"><span>Benefit
+                  Deduction</span></a></li>
+            <!-- <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/payroll/emp-paid-salary']"><span>Employee Paid Salary</span></a></li> earn-leave-encashment -->
+            <li class="nav-item" *ngIf="isAdmin || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/income-tax-payer-type']"><span>Income Tax Payer
+                  Type</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/income-tax-slab']"><span>Income Tax
+                  Slab</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/income-tax-parameter']"><span>Income Tax
+                  Parameter</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/income-tax-investment']"><span>Income Tax
+                  Investment</span></a></li>
+            <li class="nav-item" *ngIf="isPayrollManager"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/payroll/festival-bonus']"><span>Bonus Config.</span></a></li>
+            <li class="nav-item" *ngIf="isAdmin || isPayrollManager"><a class="nav-link py-0"
+                [routerLinkActive]="['active']" [routerLink]="['/payroll/festival-bonus-process']"><span>Bonus
+                  Process</span></a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin || isEmployee">
+        <a class="nav-link collapsed text-truncate" href="#submenureport" data-toggle="collapse"
+          data-target="#submenureport">
+          <i class="fa fa-table"></i> <span class=" d-sm-inline">Reports</span>
+        </a>
+        <div class="collapse" id="submenureport" aria-expanded="false">
+      <li class="nav-item">
+        <a class="nav-link collapsed text-truncate" href="#attendanceSubMenuReport" data-toggle="collapse"
+          data-target="#attendanceSubMenuReport">
+          <span class=" d-sm-inline">Attendance Reports</span>
+        </a>
+        <div class="collapse" id="attendanceSubMenuReport" aria-expanded="false">
+          <ul class="flex-column pl-2 nav">
+            <li class="nav-item"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/report/attendance']"><span>Job Card</span></a></li>
+            <li class="nav-item"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/report/attendance-report']"><span>Attendance Details</span></a></li>
+          </ul>
+        </div>
+        <ul class="flex-column pl-2 nav">
+          <li class="nav-item" *ngIf="isAdmin || isEmployee"><a class="nav-link py-0" [routerLinkActive]="['active']"
+              [routerLink]="['/report/bill']"><span>Bill Report</span></a></li>
+          <li class="nav-item" *ngIf="isPayrollManager  ||  isSystemAdmin || isAdmin"><a class="nav-link py-0"
+              [routerLinkActive]="['active']" [routerLink]="['/report/ot-summary-report']"><span>OT Summary
+                Report</span></a></li>
+          <!--<li class="nav-item" *ngIf="isAdmin"> earn-leave-encashment-report<a class="nav-link py-0" [routerLinkActive]="['active']" [routerLink]="['/payroll/bank-branch']"><span>Bank Branch</span></a></li>-->
+          <li class="nav-item" *ngIf="isPayrollManager || isEmployee"><a class="nav-link py-0"
+              [routerLinkActive]="['active']" [routerLink]="['/report/salary']"><span>Salary Report</span></a></li>
+          <li class="nav-item">
+            <li class="nav-item" *ngIf="isEmployee"><a class="nav-link py-0"
+              [routerLinkActive]="['active']" [routerLink]="['/report/task-report']"><span>Task Report</span></a></li>
+          <li class="nav-item">
+            <a class="nav-link collapsed text-truncate" href="#leaveSubMenuReport" data-toggle="collapse"
+              data-target="#leaveSubMenuReport">
+              <span class=" d-sm-inline">Leave Reports</span>
+            </a>
+            <div class="collapse" id="leaveSubMenuReport" aria-expanded="false">
+              <ul class="flex-column pl-2 nav">
+                <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                    [routerLink]="['/report/leave']"><span>Leave</span></a></li>
+                <li class="nav-item" *ngIf="isAdmin || isEmployee"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                    [routerLink]="['/report/leave-details']"><span>Leave Details</span></a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item"><a class="nav-link py-0" [routerLinkActive]="['active']"
+              [routerLink]="['/report/bonus']"><span>Bonus Report</span></a></li>
+              <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/report/earn-leave-encashment-report']"><span>Earn Leave Encashment.</span></a></li>
+          <li class="nav-item"><a class="nav-link py-0" *ngIf="isAdmin" [routerLinkActive]="['active']"
+              [routerLink]="['/report/employee-enroll']"><span>Employee Enroll Report</span></a></li>
+          <li class="nav-item" *ngIf="isAdmin"><a class="nav-link py-0" [routerLinkActive]="['active']"
+              [routerLink]="['/report/confirmation']"><span>Confirmation Report</span></a></li>
+
+
+              <li class="nav-item" *ngIf="isAdmin || isEmployee"><a class="nav-link py-0" [routerLinkActive]="['active']"
+                [routerLink]="['/report/provident-fund-report']"><span>Provident Fund Report</span></a></li>
+        </ul>
+  </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['/about-us']">
+      <i class="fa fa-briefcase"></i>
+      About Us
+    </a>
+  </li>
+  </ul>
+  </div>
+</nav>

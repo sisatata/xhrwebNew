@@ -1,0 +1,87 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{'PAYROLL.SALARYSTRUCTURE.CREATE.EDIT_TITLE' | translate}}</h5>
+
+<form class="salarystructure-from" [formGroup]="salarystructureCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="salaryStructure.companyId" (selectionChange)="onChangeCompany()">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.STRUCTURENAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="structureName" placeholder="{{'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.STRUCTURENAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.structureName.errors}" />
+        <mat-error *ngIf="submitted && f.structureName.errors && f.structureName.errors.required">{{ 'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.STRUCTURENAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.structureName.errors && f.structureName.errors.maxlength">{{'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.STRUCTURENAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.DESCRIPTION.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="description" placeholder="{{'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.DESCRIPTION.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.description.errors}" />
+        <mat-error *ngIf="submitted && f.description.errors && f.description.errors.required">{{ 'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.DESCRIPTION.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.description.errors && f.description.errors.maxlength">{{'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.DESCRIPTION.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="startDate" formControlName="startDate" (click)="startDate.open()" placeholder="Start Date" [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">Start date is required</mat-error>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.maxlength"></mat-error>
+
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="endDate" formControlName="endDate" (click)="endDate.open()" placeholder="End date" [ngClass]="{'is-invalid': f.endDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">End date is required</mat-error>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.maxlength"></mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="startDate" placeholder="{{'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.startDate.errors}" />
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">{{ 'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.STARTDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.maxlength">{{'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.STARTDATE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="endDate" placeholder="{{'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.endDate.errors}" />
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">{{ 'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.ENDDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.maxlength">{{'PAYROLL.SALARYSTRUCTURE.CREATE.CREATE_FORM.ENDDATE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>-->
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+

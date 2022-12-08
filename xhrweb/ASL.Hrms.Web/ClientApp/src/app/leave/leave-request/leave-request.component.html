@@ -1,0 +1,149 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+
+<div class="row d-flex justify-content-between mt-3 mb-3">
+    <div class="col-12 col-md-6 col-lg-5">
+      <h1 id="tableLabel">{{ 'LEAVE.LEAVEREQUEST.INDEX.TITLE' | translate }}</h1>
+    </div>
+  </div>
+
+  <form [formGroup]="leaveRequestFilterFormGroup" >
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-2">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'COMPANY.DEPARTMENT.DROPDOWN.COMPANY.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select placeholder="{{ 'COMPANY.DEPARTMENT.DROPDOWN.COMPANY.PLACEHOLDER' | translate }}" formControlName="companyId">
+              <mat-option *ngFor="let item of companies" [value]="item.id">
+                {{item.companyName}}
+              </mat-option>
+            </mat-select>
+            <div *ngIf="submitted && f.companyId.errors">
+              <mat-error *ngIf="f.companyId.errors.required">Company is required</mat-error>
+            </div>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-2">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.APPROVAL_STATUS' | translate  }}</mat-label>
+            <mat-select  placeholder="{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.APPROVAL_STATUS' | translate  }}" formControlName="approvalStatus">
+              <mat-option *ngFor="let item of approvalStatuses" [value]="item.id">
+                {{item.value}}
+              </mat-option>
+            </mat-select>
+            
+          </mat-form-field>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+        <mat-form-field appearance="outline">
+            <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}</mat-label>
+            <input [(value)]="leaveRequest.startDate" matInput [matDatepicker]="startDate"
+              formControlName="startDate" (click)="startDate.open()" placeholder="Start Date"
+              [ngClass]="{'is-invalid': f.startDate.errors}">
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
+            <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">
+              {{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+            <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.maxlength"></mat-error>
+          </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <mat-form-field appearance="outline">
+          <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input [(value)]="leaveRequest.endDate" matInput [matDatepicker]="endDate" formControlName="endDate"
+          (click)="endDate.open()" placeholder="End date" [ngClass]="{'is-invalid': f.endDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">
+          {{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.maxlength"></mat-error>
+      </mat-form-field>
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-12">
+        <button mat-raised-button type="button" (click)="getAllLeaveRequestsByManager()" class="btn btn-success btn-block text-center mb-2"
+                matTooltip="seacrh">
+         Search
+        </button>
+      </div>
+    </div>
+    
+</form>
+
+<div class="table-responsive">
+    <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+      <thead>
+        <tr class="table-secondary">
+          <th class="text-center headcol">{{ 'COMPANY.COMPANY.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+          <th>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.APPLICANT_NAME' | translate }}</th>
+          <th>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.REQUEST_TYPE' | translate }}</th>
+          <th>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.DATE_RNAGE' | translate }}</th>
+          <th>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.APPROVAL_STATUS' | translate }}</th>
+          <th>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.BALANCE' | translate }}</th>
+          <th>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.REASON' | translate }}</th>
+          <th>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.ADDRESS_ON_LEAVE' | translate }}</th>
+          <th>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.EMERGENCY_CONTACT' | translate }}</th>
+      
+          <th>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.NOTE' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of leaveRequests | paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index"
+       
+        >
+          <tr>
+            <td class="pt-0 text-center headcol">
+              
+    
+           
+     
+            <button class="btn btn-success mr-1" (click)="approveOrRejectLeaveRequest(item,1)" [class.disabled]="item.approvalStatus === '9' ? true :  item.approvalStatus === '3' ? true:null" [disabled]="item.approvalStatus === '3' || item.approvalStatus === '9'">Approve</button>
+            <button class="btn btn-danger" (click)="approveOrRejectLeaveRequest(item,2)" [class.disabled]="item.approvalStatus === '9' ? true :  item.approvalStatus === '3' ? true:null"  [disabled]="item.approvalStatus === '9' || item.approvalStatus === '3'">Decline</button>
+            </td>
+            <td>{{item?.applicantName}}</td>
+           
+            <td>{{item?.leaveTypeName}}</td>
+           
+            <td>{{item?.startDate | date: 'dd/MM/yyyy'}} - {{item?.endDate | date: 'dd/MM/yyyy'}}</td>
+            <td>{{item?.approvalStatusText}}</td>
+            <td>{{item?.remainingBalance}}/{{item?.maximumBalance}}</td>
+            
+            <td>{{item?.reason}}</td>
+            <td>{{item?.addressOnLeave}}</td>
+            <td>{{item?.emergencyContact}}</td>
+            <td>{{item?.notes}}</td>
+            
+    
+    
+    
+          </tr>
+  
+        </ng-container>
+        
+        <tr *ngIf="leaveRequests.length==0">
+          <td colspan="50" class="text-center text-info">  {{'PAYROLL.PAIDSALARY.INDEX.EMPTYMESSAGE' | translate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <div class="row justify-content-between" *ngIf="totalItems > 0">
+      <div class="col-md-5 col-sm-5 text-left">
+        {{totalItemsText}}
+      </div>
+    
+      <div class="col-md-5 col-sm-5 text-left">
+        <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+          directionLinks="true" previousLabel="" nextLabel="">
+        </pagination-controls>
+      </div>
+    
+      <div class="col-md-2 col-sm-2 text-left">
+        <mat-form-field>
+          <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()" placeholder="Items Per Page">
+            <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+              {{item.text}}
+            </mat-option>
+          </mat-select>
+    
+        </mat-form-field>
+      </div>
+    </div>

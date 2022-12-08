@@ -1,0 +1,504 @@
+﻿@using System.IO;
+@using System.Linq;
+@using System.Globalization;
+@using ASL.Hrms.SharedKernel.Enums;
+@model IEnumerable<PayrollManagement.Application.ReportPrint.Model.GroupedPaySlipPdfVM>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <title>Leave Report</title>
+    <style type="text/css">
+        body {
+            font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+        }
+        .header {
+            text-align: center;
+            color: green;
+            padding-bottom: 35px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: auto;
+        }
+
+        td, th {
+            border: 1px solid gray;
+            padding: 2px 5px 2px 5px !important;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        table th {
+          @*  background-color: whitesmoke;*@
+            color: black;
+            padding: 7px 5px 7px 5px !important
+        }
+        .bg-smoke {
+            background-color: whitesmoke;
+        }
+
+        thead {
+            display: table-header-group
+        }
+
+
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: always
+        }
+
+        table.report-container {
+            page-break-after: always;
+        }
+
+        thead.report-header {
+            display: table-header-group;
+        }
+
+
+        table.report-container div.article {
+            page-break-inside: avoid;
+        }
+
+        fieldset {
+        }
+
+        legend {
+            color: black;
+            padding: 5px 10px;
+        }
+        .row {
+            margin-left: -5px;
+            margin-right: -5px;
+        }
+
+        .column {
+            float: left;
+            width: 30%;
+            padding: 5px;
+        }
+
+        /* Clearfix (clear floats) */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+        }
+
+       @* tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }*@
+        .font-normal{
+           font-weight:400!important;
+        }
+        .font-bold{
+            font-weight:700!important;
+        }
+
+        .employee{
+            margin-top:40px!important;
+        }
+       @* .table-wrapper{
+            border: 1px solid black;
+            padding:5px;
+            margin-top:15px;
+        }
+        .total-net {
+             font-weight:700;
+             text-align:center;
+             border-top: 1px solid black;
+             padding-top:10px;
+             margin-top:10px;
+             }*@
+    </style>
+
+
+</head>
+<body>
+    @{
+        if (Model.FirstOrDefault() != null)
+        {
+            var len = Model.FirstOrDefault().DataList;
+            for (int tot = 0; tot < len.Count(); tot++)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    if (Model != null)
+                    {
+
+                        var group = Model.FirstOrDefault();
+                        var paySlipdata = group.DataList[tot];
+                        var absentDeduction = decimal.Parse(paySlipdata.AbsentDeduction == null ? "0" : paySlipdata.AbsentDeduction == "" ? "0" : paySlipdata.AbsentDeduction).ToString("0.00");
+                        var otherDeduction = decimal.Parse(paySlipdata.OtherDeduction == null ? "0" : paySlipdata.OtherDeduction ==""? "0" : paySlipdata.OtherDeduction).ToString("0.00");
+                        var totalDeduction = decimal.Parse(absentDeduction) + decimal.Parse(otherDeduction);
+                        var copy = "";
+                        string date = DateTime.Now.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        string address = Model.FirstOrDefault().Address == null ? "Company Address" : Model.FirstOrDefault().Address;
+                        var basic = paySlipdata.Basic;
+                        var houseRent = paySlipdata.HouseRent == null ? 0 : paySlipdata.HouseRent;
+                        var medical = paySlipdata.Medical == null ? 0 : paySlipdata.Medical;
+                        var conveyance = paySlipdata.Conveyance == null ? 0 : paySlipdata.Conveyance;
+                        var others = paySlipdata.GrossSalary - (houseRent + conveyance + medical+ basic);
+
+
+
+                        if (i == 0)
+                        {
+                            copy = "Office Copy";
+                        }
+                        else
+                        {
+                            copy = "Employee Copy";
+
+
+                        }
+
+
+
+                        {
+
+
+                            <table class="@(i <= 0 ? "" : "employee")">
+                                <thead>
+                                    <tr>
+                                        <th colspan="30" style="border-style:none !important; background-color:white !important;">
+                                            <div class="report-header-cell" style="text-align:center !important; border-style:none !important; background-color:white !important; color:black">
+                                                <div style="font-size:18px !important; font-weight:700 !important">@Model.FirstOrDefault().CompanyName</div>
+                                                <span style="float:right;padding:3px; display:inline-block; border-style:solid;border-width:1px;background:whitesmoke;  border-color: black;">@copy</span>
+                                                <span style="float:left;padding:3px!important; display:inline-block; border-style:solid;border-width:1px;background:whitesmoke; ;  border-color: black;">@date</span>
+
+                                                <div style="font-size:15px !important; font-weight:400;"> @address</div>
+                                                <div style="font-size:15px !important; font-weight:400;">Pay slip for the month of <span style="font-weight:700;">@group.MonthCycleName, @group.FinancialYearName</span></div>
+
+                                            </div>
+                                        </th>
+                                    </tr>
+
+
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td>@paySlipdata.FullName</td>
+                                        <th>Id</th>
+                                        <td>@paySlipdata.EmployeeId</td>
+                                        <th>Employee Status</th>
+                                        <td>Active</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Designation:</th>
+                                        <td>@paySlipdata.DesignationName</td>
+                                        <th>Joining Date</th>
+                                        <td>@paySlipdata.JoiningDateString</td>
+                                        <th>Payment Method</th>
+                                        <td>@paySlipdata.PaymentOption</td>
+                                    </tr>
+
+
+
+
+                                </thead>
+                            </table>
+
+
+                            <table style="margin-top:5px!important">
+                                <thead>
+                                    <tr>
+                                        <th class="report-header-cell bg-smoke">
+                                            <div class="header-info">
+                                                Total Days In Month
+                                            </div>
+                                        </th>
+                                        <th class="report-header-cell bg-smoke">
+                                            <div class="header-info">
+                                                Weekly Off
+                                            </div>
+                                        </th>
+
+                                        <th class="report-header-cell bg-smoke">
+                                            <div class="header-info">
+                                                Total Working Days In Month
+                                            </div>
+                                        </th>
+                                        <th class="report-header-cell bg-smoke">
+                                            <div class="header-info">
+                                                Grade
+                                            </div>
+                                        </th>
+                                        <th class="report-header-cell bg-smoke">
+                                            <div class="header-info">
+                                                Absent
+                                            </div>
+                                        </th>
+                                        <th class="report-header-cell bg-smoke">
+                                            <div class="header-info">
+                                                OT Hours
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="report-content">
+                                    @{ string style = "";
+                                    }
+                                    <tr class="@style">
+
+
+                                        <td class="report-content-cell rotate  @style" style="text-align:left">
+                                            <div class="main @style">
+                                                @paySlipdata.TotalDaysInMonth
+
+                                            </div>
+                                        </td>
+                                        <td class="report-content-cell @style" style="text-align:left;">
+                                            <div class="main @style">  @paySlipdata.WeeklyOffDays</div>
+                                        </td>
+                                        <td class="report-content-cell @style" style="        text-align: left;">
+                                            <div class="main @style"> @paySlipdata.TotalWorkingDays</div>
+                                        </td>
+
+                                        <td class="report-content-cell @style" style="        text-align: left;">
+                                            <div class="main @style">@paySlipdata.GradeName</div>
+                                        </td>
+                                        <td class="report-content-cell @style" style="        text-align: left;">
+                                            <div class="main @style">@paySlipdata.TotalAbsentDays</div>
+                                        </td>
+                                        <td class="report-content-cell @style" style="        text-align: left;">
+                                            <div class="main @style">@paySlipdata.OTHour</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="table-wrapper">
+                                <div class="row" style="margin-top:7px!important;">
+                                    <div class="column">
+                                        <div class="report-content-cell text-center font-bold" style="border-style:solid;border-width:1px;background:whitesmoke; border-color: black;">Salary Structure</div>
+                                        <table>
+                                            <tr style="border-top:none!important;">
+                                                <th style="border-top:none!important;">Gross Salary</th>
+                                                <td style="text-align:right; border-top:none!important;">@paySlipdata.GrossSalary </td>
+
+                                            </tr>
+                                            <tr>
+                                                <th class="font-normal">Basic Salary</th>
+                                                <td style="text-align:right">@paySlipdata.Basic</td>
+
+                                            </tr>
+                                            <tr>
+                                                <th class="font-normal">House Rent</th>
+                                                <td style="text-align:right">@(paySlipdata.HouseRent == null ? 0 : paySlipdata.HouseRent )</td>
+
+                                            </tr>
+                                            <tr>
+                                                <th class="font-normal">Medical</th>
+                                                <td style="text-align:right">@(paySlipdata.Medical == null ? 0 : paySlipdata.Medical )</td>
+
+                                            </tr>
+                                            <tr>
+                                                <th class="font-normal">Conveyance</th>
+                                                <td style="text-align:right"> @(paySlipdata.Conveyance == null ? 0 : paySlipdata.Conveyance )</td>
+
+                                            </tr>
+                                            <tr>
+                                                <th class="font-normal">Others</th>
+                                                <td style="text-align:right">@(others)</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th class="font-bold">Total Amount</th>
+                                                <td style="text-align:right; font-weight:700;">@(paySlipdata.GrossSalary )</td>
+
+                                            </tr>
+                                        </table>
+
+                                    </div>
+
+                                    <div class="column" style="width:40%!important;">
+                                        <div class="report-content-cell text-center font-bold" style="border-style:solid;border-width:1px;background:whitesmoke;   border-color: black;">Salary Calculation</div>
+                                        <table>
+                                            <tr style="border-top:none!important;">
+                                                <th class="font-normal" style="border-top:none!important;">Current Month OT</th>
+                                                <td style="text-align:right; border-top:none!important;">@paySlipdata.OTRate</td>
+
+                                            </tr>
+                                            <tr>
+                                                <th class="font-normal">Increment</th>
+                                                <td style="text-align:right">0</td>
+
+                                            </tr>
+                                            <tr>
+                                                <th class="font-normal">Arrear</th>
+                                                <td style="text-align:right">0</td>
+
+                                            </tr>
+                                            <tr>
+                                                <th class="font-normal">Current Month OT</th>
+                                                <td style="text-align:right">@paySlipdata.OTRate</td>
+
+                                            </tr>
+
+                                            <tr style="height:17px">
+                                                <th class="font-normal" style="height:17px"></th>
+                                                <td style="text-align:right;height:17px"></td>
+
+                                            </tr>
+                                            <tr style="height:17px">
+                                                <th class="font-normal" style="height:17px"></th>
+                                                <td style="text-align:right;height:17px"></td>
+
+                                            </tr>
+
+
+
+                                            <tr>
+                                                <th class="font-bold">Total Amount</th>
+                                                <td style="text-align:right">@(paySlipdata.OTRate )</td>
+
+                                            </tr>
+
+                                        </table>
+
+                                    </div>
+                                    <div class="column">
+                                        <div class="report-content-cell text-center font-bold" style="border-style:solid;border-width:1px;background:whitesmoke;  border-color: black;">Deduction</div>
+                                        <table>
+                                            <tr border-top:none!important;>
+                                                <th class="font-normal" border-top:none!important;>Absent Deduction</th>
+                                                <td style="text-align:right;border-top:none!important;">@(paySlipdata.AbsentDeduction == "" ? "0.00": paySlipdata.AbsentDeduction==null?  "0.00" : paySlipdata.AbsentDeduction)</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th class="font-normal">Other Deduction</th>
+                                                <td style="text-align:right">@(paySlipdata.OtherDeduction == "" ? "0.00" : paySlipdata.OtherDeduction==null? "0.00" : paySlipdata.OtherDeduction)</td>
+
+                                            </tr>
+                                            <tr style="height:17px">
+                                                <th class="font-normal" style="height:17px"></th>
+                                                <td style="text-align:right;height:17px"></td>
+
+                                            </tr>
+                                            <tr style="height:17px">
+                                                <th class="font-normal" style="height:17px"></th>
+                                                <td style="text-align:right;height:17px"></td>
+
+                                            </tr>
+                                            <tr style="height:17px">
+                                                <th class="font-normal" style="height:17px"></th>
+                                                <td style="text-align:right;height:17px"></td>
+
+                                            </tr>
+                                            <tr style="margin-bottom:15px!important">
+                                                <th class="font-bold">Total Deduction</th>
+                                                <td style="text-align:right">@(totalDeduction )</td>
+
+                                            </tr>
+                                            <tr style="margin-top:15px!important;">
+                                                <th class="font-bold">Net Payable</th>
+                                                <td style="text-align:right;font-weight:700;">@paySlipdata.NetPayableAmount</td>
+
+                                            </tr>
+
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="total-net">
+                                    <p>In word: @paySlipdata.TotalNetPayableSalaryInWord taka only</p>
+                                </div>
+                            </div>
+
+
+
+                            <tfoot class="text-center">
+
+                                <tr class="text-center">
+                                    <td colspan="20" style="text-align:center;border-style:none !important;">
+                                        <div>
+
+                                            <table style="border:none !important;" class="text-center">
+
+                                                <tr style="border:none !important;" class="text-center">
+                                                    <br>
+                                                    <td style="border: none !important; text-align: center !important;">___________________</td>
+                                                    <td style="border: none !important; text-align: center !important;">___________________</td>
+                                                    <td style="border: none !important; text-align: center !important;">___________________</td>
+
+                                                    <td style="border: none !important; text-align: center !important;">___________________</td>
+
+                                                </tr>
+                                                <tr style="border:none !important;" class="text-center">
+                                                    <br>
+                                                    <td style="        border: none !important; text-align: center !important;">
+                                                        Prepared By
+                                                    </td>
+                                                    <td style="        border: none !important; text-align: center !important;">
+                                                        Accounts Manager
+                                                    </td>
+                                                    <td style="        border: none !important; text-align: center !important;">
+                                                        HR
+                                                    </td>
+
+                                                    <td style="        border: none !important;
+        text-align: center !important;">
+                                                        Received By
+                                                    </td>
+
+                                                </tr>
+
+                                            </table>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                            <table>
+                                <tr>
+                                    <td style="border: none !important; text-align: left !important; font-size: 10px;">
+                                        *This is computer generated report. No signature required
+                                    </td>
+                                    <td style="border: none !important; text-align: right !important; font-size: 10px;">
+                                        @DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)
+                                    </td>
+                                </tr>
+                            </table>
+
+
+
+
+
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            <div><h1>No Data Found!!!</h1></div>
+
+        }
+    }
+
+
+
+</body>
+</html>

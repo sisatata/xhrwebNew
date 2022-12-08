@@ -1,0 +1,88 @@
+<h5 mat-dialog-title *ngIf="!isEditMode">Create Office Notice</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">Edit Office Notice</h5>
+
+<form class="employee-from" [formGroup]="officeNoticeCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-select matInput formControlName="companyId" [(value)]="officeNotice.companyId"
+                    placeholder=" {{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required">Company Required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="subject" [(value)]="officeNotice.subject" placeholder="Subject" [ngClass]="{'is-invalid': submitted && f.subject.errors}">
+        <div *ngIf="submitted && f.subject.errors">
+          <mat-error *ngIf="f.subject.errors.required">subject required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="details" [(value)]="officeNotice.details" placeholder="Details" [ngClass]="{'is-invalid': submitted && f.details.errors}">
+        <div *ngIf="submitted && f.details.errors">
+          <mat-error *ngIf="f.details.errors.required">Details required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="startDate" formControlName="startDate" [(value)]="officeNotice.startDate"
+               (click)="startDate.open()" placeholder="Start Date" [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="endDate" formControlName="endDate" [(value)]="officeNotice.endDate"
+               (click)="endDate.open()" placeholder="End Date" [ngClass]="{'is-invalid': f.endDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isGeneral" [(value)]="officeNotice.isGeneral"
+                    matTooltip="Is General?">
+        Is General?
+      </mat-checkbox>
+    </div>
+
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isPublished" [(value)]="officeNotice.isPublished"
+                    matTooltip="Is Published?">
+        Is Published?
+      </mat-checkbox>
+    </div>
+
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isSectionSpecific" [(value)]="officeNotice.isSectionSpecific"
+                    matTooltip="Is Section Specific?">
+        Is Section Specific?
+      </mat-checkbox>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+
+

@@ -1,0 +1,40 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h5 mat-dialog-title>Notices</h5>
+    </div>
+    <div class="col-md-6 text-right">
+      <button class="green" (click) = "close()">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button> 
+    </div>
+  </div>
+
+
+
+</div>
+<section *blockUI="'branch-list-section'">
+  <table class='table' aria-labelledby="tableLabel" style="max-height: 550px;">
+    <thead>
+      <tr class="table-secondary">
+        <th class="font-weight-bold">S/N</th>
+        <th class="font-weight-bold">Subject</th>
+        <th class="font-weight-bold text-center">Notice Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of notices; let $index = index">
+        <td>{{$index+1}}</td>
+        <td class="word-break">{{item.subject}}</td>
+        <td class="word-break text-center">{{item.details}}</td>
+       
+      </tr>
+    </tbody>
+  </table>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</section>

@@ -1,0 +1,38 @@
+/* map height */
+div#map {
+    height: 300px;
+  }
+  
+  ::ng-deep .leaflet-marker-icon img {
+    width: 20px !important;
+  }
+  
+  ::ng-deep .leaflet-div-icon {
+    background: transparent !important;
+    border: none !important;
+  }
+  
+  ::ng-deep .leaflet-marker-icon span {
+    font-weight: bold;
+  }
+  .map{
+    width: 30px!important;
+    height: 30px;
+  }
+  .green{
+    background: transparent;
+    border: none;
+    color: green;
+}
+mat-list-item{cursor:pointer}
+.marker{
+  height: 25px;
+}
+
+
+/* Responsive CSS */
+@media screen and (max-width: 992px) {
+  ::ng-deep.mat-list-item-content {
+    font-size: 12px;
+  }
+}

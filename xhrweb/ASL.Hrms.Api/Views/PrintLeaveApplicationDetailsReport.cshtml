@@ -1,0 +1,331 @@
+﻿@using System.IO;
+@using System.Linq;
+@using System.Globalization;
+@using ASL.Hrms.SharedKernel.Enums;
+@model IEnumerable<LeaveManagement.Application.ReportPrint.Model.GroupedReportLeaveApplicationDetailsPdfVM>
+@*IEnumerable<PayrollManagement.Application.ReportPrint.Model.ReportBenefitBillClaimPdfVM>*@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>Leave Report</title>
+    <style type="text/css">
+        body {
+            font-family: "Times New Roman", Times, serif;
+        }
+        .header {
+            text-align: center;
+            color: green;
+            padding-bottom: 35px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: auto;
+        }
+        td, th {
+            border: 1px solid gray;
+            padding: 2px 5px 2px 5px !important;
+            font-size: 10px;
+            text-align: left;
+        }
+        table th {
+            background-color: whitesmoke;
+            color: black;
+            padding: 7px 5px 7px 5px !important
+        }
+        thead {
+            display: table-header-group
+        }
+        tfoot {
+            display: table-footer-group
+        }
+        tr {
+            page-break-inside: avoid;
+            page-break-after: always
+        }
+        table.report-container {
+            page-break-after: always;
+        }
+        thead.report-header {
+            display: table-header-group;
+        }
+        tfoot.report-footer {
+            display: table-footer-group;
+        }
+        table.report-container div.article {
+            page-break-inside: avoid;
+        }
+        fieldset {
+        }
+        legend {
+            color: black;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    @{
+        if (Model.FirstOrDefault() != null)
+        {
+            int k = 1;
+            var group = Model.FirstOrDefault();
+            var remLeaveBalance = new Dictionary<string, int?>();
+            string imagePath = Model.FirstOrDefault().CompanyLogoUri;
+            {
+        <table>
+            <thead>
+                    <tr>
+                        @if (imagePath != null && imagePath != "")
+                        {
+                            <th colspan="2" style="border:none!important;color:white;background:white;">
+                                <img src="@imagePath" style="height:100px;width:100px;margin-bottom:5px" alt="company logo" />
+                            </th>
+                        }
+                        <th colspan="30" style="border-style:none !important; background-color:white !important;">
+                            <div class="report-header-cell" style="text-align:center !important; border-style:none !important; background-color:white !important; color:black">
+                                <div style="font-size:27px !important; font-weight:700 !important">@Model.FirstOrDefault().CompanyName</div>
+                                <div style="font-size:22px !important;"> @Model.FirstOrDefault().CompanyAddress</div>
+                                <div style="font-size:22px !important; margin-bottom:5px;">Leave Report ( @Model.FirstOrDefault().ReportTitle ) From: @Model.FirstOrDefault().StartDate To: @Model.FirstOrDefault().EndDate</div>
+                                @*<div style="font-size:22px !important; font-weight:700 !important;">
+                    @empDetail.ReportTitle
+                </div>*@
+
+                            </div>
+                        </th>
+                    </tr>
+                <tr>
+                    <th class="report-header-cell">
+                        <div class="header-info">
+                            S/L
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Employee Id
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Name
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Joining Date
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Branch
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Department
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Designation
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Leave Type
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;width:50px!important;">
+                        <div class="header-info">
+                            Start Date
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            End Date
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Balance
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Leave Days
+                        </div>
+                    </th>
+                    <th style="text-align:left;">
+                        <div>
+                            Remaining Balance
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left; width:80px!important">
+                        <div class="header-info" style="width:80px!important">
+                            Reason
+                        </div>
+                    </th>
+                    <th class="report-header-cell" style="text-align:left;">
+                        <div class="header-info">
+                            Approval Status
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tfoot class="report-footer text-center">
+
+                <tr class="text-center">
+                    <td colspan="20" class="report-footer-cell" style="text-align:center;border-style:none !important;">
+                        <div class="footer-info">
+
+                            <table style="border:none !important;" class="text-center">
+                                <!--@*<tr style="border:none !important;">
+                            <td colspan="3" style="border:none !important;">&nbsp;</td>
+                        </tr>
+                        <tr style="border:none !important;">
+                            <td colspan="3" style="border:none !important;">&nbsp;</td>
+                        </tr>*@-->
+                                <tr style="border:none !important;">
+                                    <td colspan="3" style="border:none !important;">&nbsp;</td>
+                                </tr>
+                                <tr style="border:none !important;">
+                                    <td colspan="3" style="border:none !important;">&nbsp;</td>
+                                </tr>
+                                <tr style="border:none !important;" class="text-center">
+
+                                    <td style="border: none !important; text-align: left !important;">___________________</td>
+
+                                </tr>
+                                <tr style="border:none !important;" class="text-center">
+
+                                    <td style="border: none !important; text-align: left !important;">
+                                        Authorized By:
+                                    </td>
+
+
+                                </tr>
+
+                            </table>
+
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody class="report-content">
+                @{ string style = "";
+                }
+                @{ int i = 1;}
+                @foreach (var item in group.DataList)
+                {
+                    var status = (int)ApprovalStatuses.Approved;
+                    var approved = status.ToString();
+                    int? currentBalance = 0;
+                    int? remaining = 0;
+                    if (remLeaveBalance.ContainsKey(item.EID.ToString() + " " + item.LeaveTypeName+" "+item.LeaveCalendar))  // remLeaveBalance = current balance
+                    {
+                        if (item.ApprovalStatus == approved)
+                            remLeaveBalance[item.EID.ToString() + " " + item.LeaveTypeName + " " + item.LeaveCalendar] -= (int?)item.LeaveDays;
+                        else
+                        {
+                            // item.LeaveDays = 0;
+                            remLeaveBalance[item.EID.ToString() + " " + item.LeaveTypeName + " " + item.LeaveCalendar] += 0;
+                        }
+                    }
+                    else
+                    {
+                        if (item.ApprovalStatus == approved)
+                        {
+                            remLeaveBalance.Add(item.EID.ToString() + " " + item.LeaveTypeName + " " + item.LeaveCalendar, (int?)(item.Balance - item.LeaveDays));
+                        }
+                        else
+                            remLeaveBalance.Add(item.EID.ToString() + " " + item.LeaveTypeName + " " + item.LeaveCalendar, item.Balance);
+                    }
+                    if (item.ApprovalStatus == approved)
+                    {
+                        currentBalance = (int?)(remLeaveBalance[item.EID.ToString() + " " + item.LeaveTypeName + " " + item.LeaveCalendar] + item.LeaveDays);
+                        remaining = (int)(currentBalance - item.LeaveDays);
+                    }
+                    else
+                    {
+                        currentBalance = (int?)remLeaveBalance[item.EID.ToString() + " " + item.LeaveTypeName + " " + item.LeaveCalendar];
+                        remaining = (int?)(remLeaveBalance[item.EID.ToString() + " " + item.LeaveTypeName + " " + item.LeaveCalendar]);
+                    }
+                <tr class="@style">
+                    <td class="report-content-cell @style" style="width:30px !important;">
+                        <div class="main @style">@i</div>
+                    </td>
+                    <td class="report-content-cell rotate  @style" style="text-align:left">
+                        <div class="main @style">
+                            @item.EmployeeId
+                        </div>
+                    </td>
+                    <td class="report-content-cell @style" style="text-align:left;">
+                        <div class="main @style">@item.FullName</div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;">
+                        <div class="main @style">@item.JoiningDateString</div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;">
+                        <div class="main @style">@item.BranchName</div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;">
+                        <div class="main @style">@item.DepartmentName</div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;">
+                        <div class="main @style">@item.DesignationName</div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;">
+                        <div class="main @style">@item.LeaveTypeName</div>
+                    </td>
+                    <td class="report-content-cell @style" style="text-align: left;width:30px!important">
+                        <div class="main @style">@item.StartDate</div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;">
+                        <div class="main @style">@item.EndDate</div>
+                    </td>
+                    <td style="        text-align: left;">
+                        <div>@(currentBalance)</div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;">
+                        <div class="main @style">@item.LeaveDays </div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;">
+                        <div class="main @style">@(remaining )</div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;
+        width: 80px !important;
+        word-break: break-all;
+">
+                        <div class="main @style" style="width: 80px !important;
+        word-break: break-all;
+">@item.Reason</div>
+                    </td>
+                    <td class="report-content-cell @style" style="        text-align: left;">
+                        <div class="main @style">@item.ApprovalStatusText</div>
+                    </td>
+                </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+                <table>
+                    <tr>
+                        <td style="border: none !important; text-align: left !important; font-size: 10px; ">
+                            *This is computer generated report. No signature required
+                        </td>
+                        <td style="border: none !important; text-align: right !important; font-size: 10px;">
+                            @DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture)
+                        </td>
+                    </tr>
+                </table>
+            }
+        }
+        else
+        {
+            <div><h1>No Data Found!!!</h1></div>
+        }
+    }
+</body>
+</html>

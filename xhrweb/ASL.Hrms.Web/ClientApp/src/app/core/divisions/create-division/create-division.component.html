@@ -1,0 +1,70 @@
+<!--<div id="createDivisionDialog" class="xHR-modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Division</h5>
+        <div class="close icon-prepend-close" data-dismiss="modal" (click)="close()"></div>
+      </div>
+      <div class="modal-body">
+        <form class="division-from" [formGroup]="divisionForm" enctype="multipart/form-data">
+          <mat-dialog-content class="mat-typography">
+
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <mat-select  matInput placeholder="Select Company" formControlName="companyId" [(value)]="division.companyId">
+                  <mat-option>
+                    <ngx-mat-select-search [formControl]="companyFilterCtrl" noEntriesFoundLabel="No matching data found" placeholderLabel="Search"></ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option *ngFor="let company of filteredcompanies | async" [value]="company.id">
+                    {{company.name}}
+                  </mat-option>
+                </mat-select>
+                <div *ngIf="submitted && f.companyId.errors">
+                  <mat-error *ngIf="f.companyId.errors.required">Company is required</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+
+
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <input  matInput formControlName="name" placeholder="Division Name" [ngClass]="{'is-invalid': submitted && f.name.errors}" />
+                <div *ngIf="submitted && f.name.errors">
+                  <mat-error *ngIf="f.name.errors.required">Division name is required</mat-error>
+                  <mat-error *ngIf="f.name.errors.maxlength">Maximum length should be 250</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <input  matInput formControlName="divisionName" placeholder="Division Name" [ngClass]="{'is-invalid': submitted && f.name.errors}" />
+                <div *ngIf="submitted && f.divisionName.errors">
+                  <mat-error *ngIf="f.divisionName.errors.required">Division name is required</mat-error>
+                  <mat-error *ngIf="f.divisionName.errors.maxlength">Maximum length should be 250</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+
+
+            <div class="form-group">
+              <mat-form-field appearance="outline">
+                <input  matInput formControlName="contactPerson" name="contactPerson" placeholder="Contact Person" [ngClass]="{'is-invalid': submitted && f.contactPerson.errors}">
+                <div *ngIf="submitted && f.contactPerson.errors">
+                  <mat-error *ngIf="f.contactPerson.errors.maxlength">Maximum length should be 150</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+          </mat-dialog-content>
+
+          <mat-dialog-actions align="end">
+            <div class="modal-footer">
+              <button class="button quaternary solid" data-dismiss="modal" (click)="close()">Cancel</button>
+              <button class="button primary solid" (click)="onSubmit()">Save</button>
+            </div>
+          </mat-dialog-actions>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>-->

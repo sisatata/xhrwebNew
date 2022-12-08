@@ -1,0 +1,47 @@
+
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'EMPLOYEE.EMPLOYEEEMAIL.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'EMPLOYEE.EMPLOYEEEMAIL.CREATE.EDIT_TITLE' | translate }}</h5>
+
+
+<h6 *ngIf="submitted && employeeEmailCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+
+<form class="employee-from" [formGroup]="employeeEmailCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEMAIL.CREATE.CREATE_FORM.EMAILADDRESS.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="emailAddress" [(value)]="employeeEmail.emailAddress"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEMAIL.CREATE.CREATE_FORM.EMAILADDRESS.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.emailAddress.errors}">
+          <mat-error *ngIf="submitted && f.emailAddress.errors && f.emailAddress.errors.required">{{ 'EMPLOYEE.EMPLOYEEEMAIL.CREATE.CREATE_FORM.EMAILADDRESS.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          <mat-error *ngIf="submitted && f.emailAddress.errors && f.emailAddress.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEMAIL.CREATE.CREATE_FORM.EMAILADDRESS.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+          <mat-error *ngIf="submitted && f.emailAddress.errors && f.emailAddress.errors.email">{{ 'EMPLOYEE.EMPLOYEEEMAIL.CREATE.CREATE_FORM.EMAILADDRESS.VALID_EMAIL_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isPrimary" [(value)]="employeeEmail.isPrimary"
+                    matTooltip="Is Active?">
+        {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.ISACTIVE.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        <ul>
+          {{errorMessage}}
+          <li *ngFor="let error of errorMessages">
+            {{ error }}
+          </li>
+        </ul>
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+</mat-dialog-actions>
+</form>
+
+
+
+

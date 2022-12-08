@@ -1,0 +1,56 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5>
+  Employee Excel List Upload
+</h5>
+<mat-error *ngIf="!isFormValid">
+  <div class="d-flex">
+  
+      {{errorMessages}}
+     
+    
+  </div>
+</mat-error>
+<form class="branch-from"  enctype="multipart/form-data">
+<div class="container">
+  <div class="row text-center">
+
+    <div class="col-12 text-center" style="margin-top: 50px;margin-bottom: 50px;">
+      
+      <input   accept=".xlsx, .xls" #file id="employeeImport" type="file" multiple class="input-border"
+      (change)="uploadExcel(file.files)"
+        placeholder="Upload excel">
+    </div>
+    <div class="col-12 form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Comments</mat-label>
+        <input matInput [(ngModel)]="comments"   [ngModelOptions]="{standalone: true}" placeholder="Comments" >
+        
+      </mat-form-field>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-12">
+      <button mat-raised-button  (click)="onSubmit()" class="btn btn-success full-width"
+      matTooltip="Upload excel" [disabled]="!fileChoosed">
+     
+      Upload Excel
+    </button>
+  </div>
+  <div class="col-md-3 col-12">
+      <button mat-raised-button  (click)="downloadTemplate()" class="btn btn-success">Download Template</button>
+  </div>
+  <div class="col-md-3 col-12">
+    <button mat-raised-button  (click)="importFileHistory()" class="btn btn-success">Show Records</button>
+  </div>
+  <div class="col-md-3 col-12">
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+  </div>
+  
+ 
+  </div>
+
+</div>
+</form>

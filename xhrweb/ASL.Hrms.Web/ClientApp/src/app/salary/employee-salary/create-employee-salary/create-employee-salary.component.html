@@ -1,0 +1,169 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{'PAYROLL.EMPLOYEESALARY.CREATE.EDIT_TITLE' | translate}}</h5>
+
+<form class="employeesalary-from" [formGroup]="employeesalaryCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="employeesalary.companyId" (selectionChange)="onChangeCompany()">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+    <mat-form-field appearance = "outline">
+      <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.EMPLOYEEID.PLACEHOLDER' | translate }}</mat-label>
+      <input matInput formControlName="employeeId" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.EMPLOYEEID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.employeeId.errors}"/>
+      <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.maxlength">{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.EMPLOYEEID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+    </mat-form-field>
+  </div>-->
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="employeeId" [(value)]="employeeId"
+                    placeholder="{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}"
+                    (selectionChange)="onChangeEmployee()">
+          <ng-container *ngFor="let employee of employees">
+            <mat-option value="{{employee.id}}">{{employee.fullName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">{{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.BRANCHID.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput  [readonly] = "true" [(value)]="branchName" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.BRANCHID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.branchId.errors}" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.DEPARTMENTID.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [readonly] = "true" [(value)]="departmentName" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.DEPARTMENTID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.departmentId.errors}" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.POSITIONID.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput  [readonly] = "true"[(value)]="designationName" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.POSITIONID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.positionId.errors}" />
+      </mat-form-field>
+    </div>
+
+    <!-- <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.GRADEID.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [(value)]="gradeName" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.GRADEID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.gradeId.errors}" />
+      </mat-form-field>
+    </div> -->
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.GRADEID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select [disabled] = "true" matInput formControlName="gradeId" [(value)]="employeesalary.gradeId"
+                    placeholder="Grade"
+                    (selectionChange)="onChangeGrade($event)">
+          <ng-container *ngFor="let grade of grades">
+            <mat-option  value="{{grade.id}}">{{grade.gradeName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.gradeId.errors && f.gradeId.errors.required">Grade is required</mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.SALARYSTRUCTUREID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="salaryStructureId" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.SALARYSTRUCTUREID.PLACEHOLDER' | translate }}" [(value)]="employeesalary.salaryStructureId">
+          <ng-container *ngFor="let salaryStructure of salaryStructures">
+            <mat-option value="{{salaryStructure.id}}">{{salaryStructure.structureName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.salaryStructureId.errors && f.salaryStructureId.errors.required">Salary Structure is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.PAYMENTOPTIONID.PLACEHOLDER' | translate }}</mat-label>
+      <input matInput formControlName="paymentOptionId" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.PAYMENTOPTIONID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.paymentOptionId.errors}" />
+      <mat-error *ngIf="submitted && f.paymentOptionId.errors && f.paymentOptionId.errors.required">{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.PAYMENTOPTIONID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      <mat-error *ngIf="submitted && f.paymentOptionId.errors && f.paymentOptionId.errors.maxlength">{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.PAYMENTOPTIONID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+    </mat-form-field>
+  </div>-->
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.PAYMENTOPTIONID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="paymentOptionId" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.PAYMENTOPTIONID.PLACEHOLDER' | translate }}" [(value)]="employeesalary.paymentOptionId">
+          <ng-container *ngFor="let paymentOption of paymentOptions">
+            <mat-option value="{{paymentOption.paymentOptionId}}">{{paymentOption.optionName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.paymentOptionId.errors && f.paymentOptionId.errors.required">Payment option is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.GROSSSALARY.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="grossSalary" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.GROSSSALARY.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.grossSalary.errors}" />
+        <mat-error *ngIf="submitted && f.grossSalary.errors && f.grossSalary.errors.required">{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.GROSSSALARY.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.grossSalary.errors && f.grossSalary.errors.maxlength">{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.GROSSSALARY.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="startDate" formControlName="startDate" (click)="startDate.open()" placeholder="Start Date" [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">Start date is required</mat-error>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.maxlength"></mat-error>
+
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="endDate" formControlName="endDate" (click)="endDate.open()" placeholder="End date" [ngClass]="{'is-invalid': f.endDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">End date is required</mat-error>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.maxlength"></mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessages}}
+          
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+

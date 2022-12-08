@@ -1,0 +1,269 @@
+﻿@using System.Globalization;
+@using System.IO;
+@using System.Linq;
+@model IEnumerable<Attendance.Application.ReportPrint.Model.GroupedAttendanceSummaryPdfVM>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>Attendance Summary</title>
+    <style type="text/css">
+        .header {
+            text-align: center;
+            color: green;
+            padding-bottom: 35px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: auto;
+        }
+        td, th {
+            border: 1px solid gray;
+            padding: 2px 5px 2px 5px !important;
+            font-size: 15px;
+            text-align: left;
+        }
+        table th {
+            background-color: whitesmoke;
+            color: black;
+            padding: 7px 5px 7px 5px !important
+        }
+        thead {
+            display: table-header-group
+        }
+        tfoot {
+            display: table-footer-group
+        }
+        tr {
+            page-break-inside: avoid;
+            page-break-after: always
+        }
+       @* table.report-container {
+            page-break-after: always;
+        }*@
+        thead.report-header {
+            display: table-header-group;
+        }
+        tfoot.report-footer {
+            display: table-footer-group;
+        }
+        table.report-container div.article {
+            page-break-inside: avoid;
+        }
+        fieldset {
+        }
+        legend {
+            color: black;
+            padding: 5px 10px;
+        }
+        .center{
+            text-align:center!important;
+        }
+    </style>
+</head>
+<body>
+    @{ var groups = Model;
+        {
+            if (Model.Count() <= 0) return;
+            var lengthOfData = Model.FirstOrDefault().DataList.Count();
+            string imagePath = Model.FirstOrDefault().DataList[0].CompanyLogoUri;
+          //  var st =  DateTime.Parse(Model.FirstOrDefault().StartDate);
+          // var ed = DateTime.Parse(Model.FirstOrDefault().EndDate);
+           // var diff = ((ed - st).TotalDays)+1;
+            <table class="report-container">
+                <thead class="report-header">
+                        <tr>
+                            @if (imagePath != null && imagePath != "")
+                            {
+                            <th colspan="2" style="border:none!important;color:white;background:white;" >
+                                <img src="@imagePath" style="height:100px;width:100px;margin-bottom:5px" alt="company logo" />
+                            </th>
+                            }
+                            <th colspan="100" style="border-style:none !important; background-color:white !important;">
+                                <div class="header-info" style="text-align:center !important; border-style:none !important; background-color:white !important; color:black">
+                                    <div style="font-size:30px !important; font-weight:700 !important">@Model.FirstOrDefault().CompanyName</div>
+                                    <div style="font-size:16px !important">@Model.FirstOrDefault().Address</div>
+                                    <div style="font-size:18px !important;">Attendance Summary Report From @Model.FirstOrDefault().StartDate @Model.FirstOrDefault().EndDate</div>
+
+                                </div>
+                            </th>
+                        </tr>
+                    <tr>
+                        <th class="report-header-cell">
+                            <div class="header-info">
+                                S/L
+                            </div>
+                        </th>
+                        @*<th class="report-header-cell">
+            <div class="header-info">
+                Employee Id
+            </div>
+        </th>
+        <th class="report-header-cell">
+            <div class="header-info">
+                Name
+            </div>
+        </th>*@
+                        <th class="report-header-cell">
+                            <div class="header-info">
+                                Employee Id
+                            </div>
+                        </th>
+                        <th class="report-header-cell">
+                            <div class="header-info">
+                                Employee Name
+                            </div>
+                        </th>
+                        <th class="report-header-cell">
+                            <div class="header-info">
+                                Joining Date
+                            </div>
+                        </th>
+                        <th class="report-header-cell">
+                            <div class="header-info">
+                                Branch
+                            </div>
+                        </th>
+                        <th class="report-header-cell">
+                            <div class="header-info">
+                                Department
+                            </div>
+                        </th>
+                        <th class="report-header-cell">
+                            <div class="header-info">
+                                Designation
+                            </div>
+                        </th>
+                        <th class="report-header-cell center">
+                            <div class="header-info">
+                                Total P
+                            </div>
+                        </th>
+                        <th class="report-header-cell center">
+                            <div class="header-info">
+                                Total A
+                            </div>
+                        </th>
+                        <th class="report-header-cell center">
+                            <div class="header-info">
+                                Total L
+                            </div>
+                        </th>
+                        <th class="report-header-cel center">
+                            <div class="header-info">
+                                Total Leave Days
+                            </div>
+                        </th>
+                        @* <th class="report-header-cell center">
+            <div class="header-info">
+                Total OT
+            </div>
+        </th>*@
+                        @{
+                            int idx = 0;
+                            @foreach (var childItem in Model.FirstOrDefault().DataList)
+                            {
+                                var dayName = System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.GetDayName(childItem.PunchDate.Value.DayOfWeek).Substring(0, 3);
+                                <th class="report-header-cell center">
+                                    <div class="header-info">
+                                        @(childItem.PunchDate.Value.ToString("dd/MM/yyyy").Substring(0,2))
+                                    </div>
+                                    <span>
+
+
+                                        @(dayName)
+
+
+                                    </span>
+                                </th>
+                                idx++;
+                            }
+                        }
+                    </tr>
+                </thead>
+                <tbody class="report-content">
+
+                    @{
+                        int i = 1;
+                        string style = "";
+                        var cnt = 0;
+                      
+                        @foreach (var item in Model)
+                        {
+                    <tr style="@style">
+                        <td class="report-content-cell">
+                            <div class="main">@i</div>
+                        </td>
+                        <td class="report-content-cell">
+                            <div class="main">@item.EmployeeCode</div>
+                        </td>
+                        <td class="report-content-cell">
+                            <div class="main">@item.FullName</div>
+                        </td>
+                        <td class="report-content-cell">
+                            <div class="main">@item.JoiningDateString</div>
+                        </td>
+                        <td class="report-content-cell">
+                            <div class="main">@item.BranchName</div>
+                        </td>
+                        <td class="report-content-cell">
+                            <div class="main">@item.DepartmentName</div>
+                        </td>
+                        <td class="report-content-cell">
+                            <div class="main">@item.DesignationName</div>
+                        </td>
+                        <td class="report-content-cell center">
+                            <div class="main">@item.TotalPresentDays</div>
+                        </td>
+                        <td class="report-content-cell center">
+                            <div class="main">@item.TotalAbsentDays</div>
+                        </td>
+                        <td class="report-content-cell center">
+                            <div class="main">@item.TotalLateDays</div>
+                        </td>
+                        <td class="report-content-cell center">
+                            <div class="main">@item.TotalLeaveDays</div>
+                        </td>
+                        @*<td class="report-content-cell center">
+            <div class="main">@item.TotalOT</div>
+        </td>*@
+                        @{
+                            cnt = 0;
+                            var tot = Model.FirstOrDefault().DataList.Count();
+                            @foreach (var childItem in item.DataList)
+                            {
+                               cnt++;
+
+                                <td class="report-content-cell center">
+                                    <div class="main center">
+                                        <span style="display:block">@childItem.Status   </span>
+                                        <span style="display:block">@(childItem.TimeIn==null? "00:00" :childItem.TimeIn.Value.ToString("HH:mm"))   </span>
+                                        <span style="display:block">@(childItem.TimeOut==null? "00:00" :childItem.TimeOut.Value.ToString("HH:mm"))   </span>
+                                        @*  <span style="display:block">@(childItem.OTHour==null? "00:00" :childItem.OTHour.Value.ToString("HH:mm"))   </span>*@
+                                    </div>
+                                </td>
+                                if (cnt == tot)
+                                    break;
+
+                                //  break;
+                            }
+                           
+                        }
+                    </tr>
+                                i++;
+                                
+                            }
+
+                          
+
+                    }
+                    @*</tr>*@
+                </tbody>
+            </table>
+                            }
+    }
+</body>
+</html>

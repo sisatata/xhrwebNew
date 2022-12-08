@@ -1,0 +1,21 @@
+/*   
+  :host ::ng-deep .custom-spinner circle {
+  
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    top: 30%
+  }
+  .label-font{
+    font-size: 1.02rem;
+  }
+  .center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 999999;
+    height: 500px;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+  } */

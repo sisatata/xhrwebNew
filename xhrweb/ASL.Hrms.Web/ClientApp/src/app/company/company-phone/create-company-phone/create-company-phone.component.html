@@ -1,0 +1,52 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'COMPANY.COMPANYPHONE.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'COMPANY.COMPANYPHONE.CREATE.EDIT_TITLE' | translate }}</h5>
+
+
+<h6 *ngIf="submitted && companyPhoneCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+
+<form class="company-from" [formGroup]="companyPhoneCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEPHONE.CREATE.CREATE_FORM.PHONENUMBER.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="phoneNumber" [(value)]="phoneNumber"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEPHONE.CREATE.CREATE_FORM.PHONENUMBER.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.phoneNumber.errors}">
+        <mat-error *ngIf="submitted && f.phoneNumber.errors && f.phoneNumber.errors.required">{{ 'EMPLOYEE.EMPLOYEEPHONE.CREATE.CREATE_FORM.PHONENUMBER.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.phoneNumber.errors && f.phoneNumber.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEPHONE.CREATE.CREATE_FORM.PHONENUMBER.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.phoneNumber.errors && f.phoneNumber.errors.phone">{{ 'EMPLOYEE.EMPLOYEEPHONE.CREATE.CREATE_FORM.PHONENUMBER.VALID_PHONE_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <!-- <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.PHONETYPEID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="phoneTypeId" [(value)]="phoneTypeId"
+                    placeholder=" {{ 'COMMON.SELECT.PHONETYPEID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let phoneType of phoneTypes">
+            <mat-option value="{{phoneType.id}}">{{phoneType.lookUpTypeName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.phoneTypeId.errors && f.phoneTypeId.errors.required">{{ 'COMMON.SELECT.PHONETYPEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div> -->
+    <mat-error *ngIf="!isFormValid">
+        <div class="d-flex mx-auto">
+         
+          {{errorMessages}}
+            
+        </div>
+    </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+
+

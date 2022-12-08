@@ -1,0 +1,195 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+
+</div>
+<div class="d-flex justify-content-center align-items-center" style="padding-top:5%">
+  <div class="container h-100" *ngIf="!isRegistrationCompleted">
+    <div class="position-relative">
+      <button class="btn btn-success back-button" [routerLink]="['/']">Back
+      </button>
+    </div>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+      <div class="row">
+        <div class="col-md-12 mx-auto">
+
+          <div class="card" style="padding:0 5% 0 5%">
+            <span class="image-logo p-b-48">
+              <a [routerLink]="['/']"><img style="width:30%; height:20%" src="assets/images/logo.png" alt="logo"> </a>
+            </span>
+            <h1 class="text-center">Create a New Account</h1>
+            <span class="text-muted text-center">Please fillup required fields with proper
+              information</span>
+            <br />
+            <br />
+            <mat-error *ngIf="isRegistrationInvalid">
+              <div class="d-flex">
+                <ul class="mx-auto">
+                  {{errorMessage}}
+                  <li *ngFor="let error of errorMessages">
+                    {{ error }}
+                  </li>
+                </ul>
+              </div>
+            </mat-error>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>
+                    {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}
+                  </mat-label>
+                  <input matInput formControlName="companyName"
+                    placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}"
+                    [ngClass]="{'is-invalid': submitted && f.companyName.errors}" />
+                  <mat-error *ngIf="submitted && f.companyName.errors && f.companyName.errors.required">
+                    {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.REQUIERED_ERROR_TEXT' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.companyName.errors && f.companyName.errors.maxlength">
+                    {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.MAXLENGTH_ERROR_TEXT' | translate }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>
+                    {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}
+                  </mat-label>
+                  <input matInput formControlName="shortName"
+                    placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}"
+                    [ngClass]="{'is-invalid': submitted && f.shortName.errors}">
+                  <mat-error *ngIf="submitted && f.shortName.errors && f.shortName.errors.required">
+                    {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.REQUIERED_ERROR_TEXT' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.shortName.errors && f.shortName.errors.maxlength">
+                    {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.MAXLENGTH_ERROR_TEXT' | translate }}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>
+                    {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.PLACEHOLDER' | translate }}
+                  </mat-label>
+                  <input matInput formControlName="companySlogan"
+                    placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.PLACEHOLDER' | translate }}"
+                    [ngClass]="{'is-invalid': submitted && f.companySlogan.errors}" />
+                  <mat-error *ngIf="submitted && f.companySlogan.errors && f.companySlogan.errors.required">
+                    {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.REQUIERED_ERROR_TEXT' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.companySlogan.errors && f.companySlogan.errors.maxlength">
+                    {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.MAXLENGTH_ERROR_TEXT' | translate }}
+                  </mat-error>
+                </mat-form-field>
+
+                
+              </div> -->
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>
+                   Admin Name
+                  </mat-label>
+                  <input matInput formControlName="EmployeFullName"
+                    placeholder="Admin Name"
+                    [ngClass]="{'is-invalid': submitted && f.EmployeFullName.errors}" />
+                  <mat-error *ngIf="submitted && f.EmployeFullName.errors && f.EmployeFullName.errors.required">
+                   Admin name is required
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.EmployeFullName.errors && f.EmployeFullName.errors.maxlength">
+                   Max length should be 50
+                  </mat-error>
+                </mat-form-field>
+
+                
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Login Id</mat-label>
+                  <input matInput formControlName="userId" placeholder="Login Id ( Email Address )"
+                    [ngClass]="{'is-invalid': submitted && f.userId.errors}">
+                  <mat-error *ngIf="submitted && f.userId.errors && f.userId.errors.required">
+                    {{ 'EMPLOYEE.EMPLOYEE.CREATE.CREATE_FORM.USERID.REQUIERED_ERROR_TEXT' | translate }}
+                  </mat-error>
+                  <mat-error *ngIf="submitted && f.userId.errors && f.userId.errors.maxlength">
+                    {{ 'EMPLOYEE.EMPLOYEE.CREATE.CREATE_FORM.USERID.MAXLENGTH_ERROR_TEXT' | translate }}
+                  </mat-error>
+
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Enter password"
+                    formControlName="password" required autocomplete="new-password">
+                  <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <mat-error>
+                    Please enter password
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Retype Password</mat-label>
+                  <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" placeholder="Enter password"
+                    formControlName="confirmPassword" [errorStateMatcher]="matcher">
+                  <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+                    <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+
+                  <mat-error *ngIf="registrationForm.hasError('notSamePassword')">
+                    Passwords do not match
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+             <div class="row">
+              <div class="col-12">
+                <re-captcha (resolved)="resolved($event)" (error)="onError($event)" errorMode="handled"
+                  [siteKey]="siteKey"></re-captcha>
+              </div>
+
+            </div> 
+            <br />
+            <div class="row justify-content-center">
+              <button [disabled]="registrationForm.invalid || !isCapthaChecked" type="submit" class="btn btn-success col-sm-4">Register
+                Now</button>
+            </div>
+            <br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="container h-100" *ngIf="isRegistrationCompleted">
+
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <div class="card" style="padding:0 5% 0 5%">
+          <span class="image-logo p-b-48">
+            <a [routerLink]="['/']"><img style="width:30%; height:20%" src="assets/images/logo.png" alt="logo"> </a>
+          </span>
+
+          <div class="text-center">
+            <div class="alert alert-success" role="alert">
+              An email has been sent to your email address. Please confirm email.
+            </div>
+          </div>
+          <br />
+          <br />
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

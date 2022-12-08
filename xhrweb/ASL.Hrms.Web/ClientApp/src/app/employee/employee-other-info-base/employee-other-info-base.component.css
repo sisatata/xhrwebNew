@@ -1,0 +1,25 @@
+:host ::ng-deep .mat-tab-body-wrapper {
+  min-height: 250px;
+}
+
+:host ::ng-deep .mat-tab-body.mat-tab-body-active {
+  min-height: 250px;
+}
+
+
+/* Styles for tab labels */
+.mat-tab-label {
+    /*background-color: transparent;
+    color: red;*/
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+    background-color: transparent;
+    color: green;
+}
+
+/* Styles for the ink bar */
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background-color:green;
+}

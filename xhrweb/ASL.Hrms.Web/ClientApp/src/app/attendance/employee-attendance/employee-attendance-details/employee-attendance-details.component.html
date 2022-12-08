@@ -1,0 +1,49 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<div class="row">
+  <div class="col-6">
+    <h5 mat-dialog-title>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CREATE.EMPLOYEEATTENDANCEDETAILS' | translate }}</h5>
+  </div>
+  <div class="col-6 text-right">
+    <button class="green" (click)="close()">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+<div class="row text-center d-flex justify-content-center align-items-center" *ngIf="isDataEmpty">
+  No data available
+</div>
+<div class="text-right">
+</div>
+<div id="map" leaflet *ngIf="mapLoaded" class="mb-2" (leafletMapReady)="onMapReady($event)" [leafletOptions]="options"
+  (resized)="onResized()">
+</div>
+<mat-list>
+  <mat-list-item>
+    <img (click)="createStations(1)" src="assets/images/clock-in.png" class="marker" alt="clock-in">
+    <figcaption (click)="createStations(1)">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CLOCK_IN' | translate }}</figcaption>
+    <img (click)="createStations(2)" src="assets/images/clock-out.png" class="marker" alt="clock-out">
+    <figcaption (click)="createStations(2)">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CLOCK_OUT' | translate }}</figcaption>
+    <img (click)="createStations(3)" src="assets/images/check-in.png" class="marker" alt="check-in">
+    <figcaption (click)="createStations(3)">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CHECK_IN' | translate }}</figcaption>
+    <img (click)="createStations(4)" src="assets/images/punch.png" class="marker" alt="punch">
+    <figcaption (click)="createStations(4)">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.PUNCH' | translate }}</figcaption>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+  <ng-container *ngFor="let item of mapData;let $index = index">
+    <mat-list-item (click)="getSpecificMarker(item)">{{$index+1}}. {{item?.type || 'Missing Type'}},
+      {{item?.time| date: 'h:mm a'}}, {{item?.address || 'Missing Location'}},
+      {{item?.punchTypeText || 'Missing Punch Type'}}
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-list>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close (click)="close()">
+    {{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}
+  </button>
+  <button mat-raised-button class="btn btn-success" (click)="createStations()">
+    Reset
+  </button>
+</mat-dialog-actions>

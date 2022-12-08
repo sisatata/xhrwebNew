@@ -1,0 +1,73 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-12">
+    <h1 id="tableLabel">{{'REPORT.INDEX.SALARYREPORTTITLE' | translate}}</h1>
+  </div>
+</div>
+<form [formGroup]="salaryReportFilterFormGroup">
+  <div class="row">
+    <div class="col-md-3 col-12">
+      <mat-form-field appearance="outline">
+        <mat-label> {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId"
+          (selectionChange)="onChangeCompany($event.value)">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">Company is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3 col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Financial Year</mat-label>
+        <mat-select placeholder="Financial Year" formControlName="financialYearId" [value]="financialYearId"
+          (selectionChange)="onChangeFinancialYears($event)">
+          <mat-option *ngFor="let item of financialYears" [value]="item.id">
+            {{item.financialYearName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.financialYearId.errors && f.financialYearId.errors.required">Financial Year is
+          required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3 col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Month Cycle</mat-label>
+        <mat-select placeholder="Month Cycle" formControlName="monthCycleId" [value]="monthCycleId"
+          (selectionChange)="onChangeMonthCycle($event)">
+          <mat-option *ngFor="let item of monthCycles" [value]="item.id">
+            {{item.monthCycleName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.monthCycleId.errors && f.monthCycleId.errors.required">Month Cycle is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3 col-12">
+      <mat-form-field appearance="outline">
+        <mat-label>Employee</mat-label>
+        <mat-select matInput formControlName="employeeId" [(value)]="employeeId" placeholder="Select Employee"
+          (selectionChange)="onChangeEmployee($event)" [disabled]="!this.payrollManager">
+          <ng-container *ngFor="let employee of employees">
+            <mat-option value="{{employee.id}}">{{employee.fullName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">
+          {{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <button type="submit" (click)="onSubmit()" style="font-size: smaller;" class="btn btn-success mr-5">
+      {{'REPORT.INDEX.BUTTONTEXT.SALARY_REPORT_PDF_REPORT' | translate}}</button>
+    <button type="submit" (click)="downloadPayslipReport()" style="font-size: smaller;" class="btn btn-success">
+      {{'REPORT.INDEX.BUTTONTEXT.PAY_SLIP_REPORT_PDF' | translate}}</button>
+  </div>
+  <div *ngIf="submitted && pdfUrl" class="mt-5">
+    <iframe [src]="pdfUrl" style="width:100%;height:600px;"></iframe>
+  </div>
+</form>

@@ -1,0 +1,85 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">
+  {{'PAYROLL.EMPLOYEEBENEFITDEDUCTION.INDEX.CREATE.TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode"> {{'PAYROLL.EMPLOYEEBENEFITDEDUCTION.INDEX.EDIT.TITLE' | translate}}
+</h5>
+<h6 *ngIf="EmployeeBenefitDeductionCreateForm.invalid && submitted" class="text-danger">Please enter valid data and fill
+  up the required fields.</h6>
+<form [formGroup]="EmployeeBenefitDeductionCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LEAVE.LEAVEBALANCE.INDEX.EMPLOYEE.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'LEAVE.LEAVEBALANCE.INDEX.EMPLOYEE.PLACEHOLDER' | translate }}"
+          formControlName="employeeId" (selectionChange)="onChangeEmployee($event)"
+          [(value)]="employeeBenefitDeduction.employeeId">
+          <mat-option *ngFor="let item of employees" [value]="item.id">
+            {{item.fullName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.employeeId.errors">
+          {{ 'LEAVE.LEAVEBALANCE.INDEX.EMPLOYEE.ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.EMPLOYEEBENEFITDEDUCTION.INDEX.CREATE.AMOUNT.PLACEHOLDER' | translate}}</mat-label>
+        <input type="number" matInput [(value)]="employeeBenefitDeduction.amount" formControlName="amount"
+          placeholder="{{'PAYROLL.EMPLOYEEBENEFITDEDUCTION.INDEX.CREATE.AMOUNT.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.amount.errors}" />
+        <mat-error *ngIf="submitted && f.amount.errors && f.amount.errors.required">
+          {{'PAYROLL.EMPLOYEEBENEFITDEDUCTION.INDEX.CREATE.AMOUNT.REQUIRED_ERROR_TEXT' | translate}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input [(value)]="employeeBenefitDeduction.startDate" matInput [matDatepicker]="startDate"
+          formControlName="startDate" (click)="startDate.open()" placeholder="Start Date"
+          [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">
+          {{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.maxlength"></mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input [(value)]="employeeBenefitDeduction.endDate" matInput [matDatepicker]="endDate" formControlName="endDate"
+          (click)="endDate.open()" placeholder="End date" [ngClass]="{'is-invalid': f.endDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">
+          {{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.maxlength"></mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.EMPLOYEEBENEFITDEDUCTION.INDEX.CREATE.REMARKS.PLACEHOLDER' | translate}}</mat-label>
+        <input matInput [(value)]="employeeBenefitDeduction.remarks" formControlName="remarks"
+          placeholder="{{'PAYROLL.EMPLOYEEBENEFITDEDUCTION.INDEX.CREATE.REMARKS.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.remarks.errors}" />
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.required">
+          {{'PAYROLL.EMPLOYEEBENEFITDEDUCTION.INDEX.CREATE.REMARKS.REQUIRED_ERROR_TEXT' | translate}}</mat-error>
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.maxlength">
+          {{'PAYROLL.EMPLOYEEBENEFITDEDUCTION.INDEX.CREATE.REMARKS.MAX_LENGTH_ERROR_TEXT' | translate}}</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        {{errorMessages}}
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

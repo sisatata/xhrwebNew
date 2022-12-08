@@ -1,0 +1,51 @@
+<!--<h1>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TITLE' | translate }}</h1>-->
+<div class="row float-right m-1 p-2">
+  <button *ngIf="isAdmin || isHRManager" mat-raised-button (click)="createEmployeeEducation()"
+    matTooltip="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}" class="btn btn-success">
+    <mat-icon class="create-icon-button">add</mat-icon>
+    {{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}
+  </button>
+</div>
+<section *blockUI="'employee-education-section'">
+  <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+    <thead>
+      <tr class="table-secondary">
+        <th *ngIf="isAdmin || isHRManager" class="text-center">{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.HEADER.EDUCATIONALDEGREE' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.HEADER.EDUCATIONALINSTITUTE' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.HEADER.SESSION' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.HEADER.PASSINGYEAR' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.HEADER.BOARDORUNIVERSITY' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.HEADER.RESULT' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.HEADER.RESULTTYPE' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.HEADER.OUTOF' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of employeeEducations">
+        <td *ngIf="isAdmin || isHRManager" class="pt-0 text-center">
+          <button mat-icon-button (click)="editEmployeeEducation(item)"
+            matTooltip="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.EDIT_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon>create</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onDeleteEmployeeEducation(item)"
+            matTooltip="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.DELETE_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon class="mat-icon-delete">delete</mat-icon>
+          </button>
+        </td>
+        <td>{{item.educationalDegreeName}}</td>
+        <td>{{item.educationalInstituteName}}</td>
+        <td>{{item.session}}</td>
+        <td>{{item.passingYear}}</td>
+        <td>{{item.boardorUniversity}}</td>
+        <td>{{item.result}}</td>
+        <td>{{item.resultType}}</td>
+        <td>{{item.outOf}}</td>
+      </tr>
+      <tr *ngIf="employeeEducations.length==0">
+        <td colspan="11" class="text-center">{{ 'EMPLOYEE.EMPLOYEEEDUCATION.INDEX.TABLE.NODATAFOUNDTEXT' | translate }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

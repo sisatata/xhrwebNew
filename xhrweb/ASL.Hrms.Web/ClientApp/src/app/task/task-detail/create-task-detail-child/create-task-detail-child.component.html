@@ -1,0 +1,138 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'TASK.TASKDETAIL.INDEX.CREATE.TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{'TASK.TASKDETAIL.INDEX.EDIT.TITLE' | translate}}</h5>
+<h6 *ngIf="submitted && taskDetailChildCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+<form class="employee-from" [formGroup]="taskDetailChildCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'TASK.TASKDETAIL.INDEX.CREATE.TASK_CATEGORY.PLACE_HOLDER' | translate}}</mat-label>
+            <mat-select matInput formControlName="taskTypeId" [(value)]="taskDetail.taskTypeId"
+              placeholder="{{'TASK.TASKDETAIL.INDEX.CREATE.TASK_CATEGORY.PLACE_HOLDER' | translate}}">
+              <ng-container *ngFor="let taskCategory of taskCategories">
+                <mat-option value="{{taskCategory.id}}">{{taskCategory.taskCategoryName}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.taskTypeId.errors && f.taskTypeId.errors.required">
+              {{'TASK.TASKDETAIL.INDEX.CREATE.TASK_CATEGORY.REQUIERED_ERROR_TEXT' | translate}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'TASK.TASKDETAIL.INDEX.CREATE.TASK_NAME.PLACE_HOLDER' | translate}}</mat-label>
+            <input matInput formControlName="taskName" [(value)]="taskDetail.taskName"
+              placeholder="{{'TASK.TASKDETAIL.INDEX.CREATE.TASK_NAME.PLACE_HOLDER' | translate}}"
+              [ngClass]="{'is-invalid': submitted && f.taskName.errors}">
+            <mat-error *ngIf="submitted && f.taskName.errors && f.taskName.errors.required">
+              {{'TASK.TASKDETAIL.INDEX.CREATE.TASK_NAME.REQUIERED_ERROR_TEXT' | translate}}</mat-error>
+            <mat-error *ngIf="submitted && f.taskName.errors && f.taskName.errors.maxlength">
+              {{'TASK.TASKDETAIL.INDEX.CREATE.TASK_NAME.MAX_LENGTH_ERROR' | translate}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'TASK.TASKDETAIL.INDEX.CREATE.TASK_DESCRIPTION.PLACE_HOLDER' | translate}}</mat-label>
+        <input matInput formControlName="taskDescription" [(value)]="taskDetail.taskDescription"
+          placeholder="{{'TASK.TASKDETAIL.INDEX.CREATE.TASK_DESCRIPTION.PLACE_HOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.taskDescription.errors}">
+        <mat-error *ngIf="submitted && f.taskDescription.errors && f.taskDescription.errors.required" required>
+          {{'TASK.TASKDETAIL.INDEX.CREATE.TASK_DESCRIPTION.REQUIERED_ERROR_TEXT' | translate}}</mat-error>
+        <mat-error *ngIf="submitted && f.taskDescription.errors && f.taskDescription.errors.maxlength">
+          {{'TASK.TASKDETAIL.INDEX.CREATE.TASK_DESCRIPTION.MAX_LENGTH_ERROR' | translate}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}
+          </mat-label>
+          <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" (click)="startDatePicker.open()"
+            placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}"
+            [ngClass]="{'is-invalid': f.startDate.errors}">
+          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+          <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">{{
+                      'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.REQUIERED_ERROR_TEXT' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}
+          </mat-label>
+          <input matInput [matDatepicker]="endDatePicker" formControlName="endDate" (click)="endDatePicker.open()"
+            [(value)]="endDate"
+            placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}"
+            [ngClass]="{'is-invalid': f.endDate.errors}">
+          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+          <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">{{
+                      'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.REQUIERED_ERROR_TEXT' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>Assignee</mat-label>
+          <mat-select matInput formControlName="assigneeId" [(value)]="taskDetail.assigneeId"
+            placeholder="Assignee"
+            (selectionChange)="onChangeEmployee($event)" disabled>
+            <ng-container *ngFor="let employee of employees">
+              <mat-option value="{{employee.id}}">{{employee.fullName}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="submitted && f.assigneeId.errors && f.assigneeId.errors.required">
+            {{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Progress (%)</mat-label>
+            <input type="number" matInput formControlName="progress" [(value)]="taskDetail.progress"
+              placeholder="Progress"
+              [ngClass]="{'is-invalid': submitted && f.progress.errors}">
+            <mat-error *ngIf="submitted && f.progress.errors && f.progress.errors.required">
+              {{'TASK.TASKDETAIL.INDEX.CREATE.TASK_NAME.REQUIERED_ERROR_TEXT' | translate}}</mat-error>
+            <mat-error *ngIf="submitted && f.progress.errors && f.progress.errors.maxlength">
+              {{'TASK.TASKDETAIL.INDEX.CREATE.TASK_NAME.MAX_LENGTH_ERROR' | translate}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <mat-form-field appearance="outline">
+          <mat-label>{{'TASK.TASKDETAIL.INDEX.CREATE.PARENTTASK.PLACE_HOLDER' | translate}}</mat-label>
+          <mat-select matInput formControlName="parentTaskId" [(value)]="taskDetail.parentTaskId"
+            placeholder="{{'TASK.TASKDETAIL.INDEX.CREATE.PARENTTASK.PLACE_HOLDER' | translate}}"
+            (selectionChange)="onChangeParentTask($event)" disabled>
+            <ng-container *ngFor="let taskDetail of taskDetails">
+              <mat-option value="{{taskDetail.id}}">{{taskDetail.taskName}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <mat-error *ngIf="submitted && f.managerId.errors && f.managerId.errors.required">
+            {{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        {{errorMessage}}
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

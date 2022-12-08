@@ -1,0 +1,80 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CREATE.EDIT_TITLE' | translate }}</h5>
+<h6 *ngIf ="locationNotFound && isLocationMandatory" class="text-danger">Please allow your location, then close and reopen this pop up to submit your attendance</h6>
+<form class="employee-from" [formGroup]="attendanceCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select  matInput formControlName="employeeId" [(value)]="employeeId" [disabled]="!isAdmin"
+         placeholder="{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}"
+          (selectionChange)="onChangeEmployee()">
+          <ng-container *ngFor="let employee of employees">
+            <mat-option value="{{employee.id}}">{{employee.fullName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">{{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CREATE.CREATE_FORM.CLOCKTYPE.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="Clock Type" formControlName="clockTimeType"
+                    [(value)]="attendance.clockTimeType">
+          <mat-option *ngFor="let item of clockTypes" [value]="item.id">
+            {{item.value}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.clockTimeType.errors && f.clockTimeType.errors.required">
+          {{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CREATE.CREATE_FORM.CLOCKTYPE.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>  
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CREATE.CREATE_FORM.REMARKS.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="remarks"
+               placeholder="{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CREATE.CREATE_FORM.REMARKS.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.remarks.errors}" />
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.required">
+          {{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CREATE.CREATE_FORM.REMARKS.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.maxlength">
+          {{ 'ATTENDANCE.EMPLOYEEATTENDANCE.CREATE.CREATE_FORM.REMARKS.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+   
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="overNightMark" [(value)]="attendance.overNightMark"
+                    matTooltip="Is Over Night Office?">
+        Is Over Night Office?
+      </mat-checkbox>
+    </div>
+  </mat-dialog-content>
+  <mat-error>
+    <div class="d-flex" *ngIf = "!isFormValid">
+     
+       {{errorMessage}}
+        
+    </div>
+</mat-error>
+<div id="map" *ngIf="loadMap"
+     leaflet
+     (leafletMapReady)="onMapReady($event)"
+     [leafletOptions]="mapOptions">
+</div>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close
+            (click)="close()">
+      {{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}
+    </button>
+    <button mat-raised-button (click)="onSubmit()"
+            class="btn btn-success" [disabled]="locationNotFound">
+      {{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,87 @@
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-4">
+    <h1 id="tableLabel">{{'COMPANY.PAYMENTOPTION.INDEX.TITLE' | translate }}</h1>
+  </div>
+  <div class="col-lg-2 col-md-6 col-lg-3 col-sm-12">
+    <button mat-raised-button (click)="createPaymentOption()" class="btn btn-success btn-block text-center"
+            matTooltip="{{'COMPANY.PAYMENTOPTION.INDEX.CREATEPAYMENTOPTIONBUTTONTEXT' | translate }}">
+      <mat-icon class="create-icon-button">add</mat-icon>
+      {{'COMPANY.PAYMENTOPTION.INDEX.CREATEPAYMENTOPTIONBUTTONTEXT' | translate }}
+    </button>
+  </div>
+</div>
+
+<form [formGroup] ="paymentoptionFilterFormGroup" (ngSubmit)="getPaymentOption()">
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-3">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId" (selectionChange)="onChangeCompany($event.value)">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required"> Company is required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+  </div>
+
+  </form>
+  <section *blockUI = "'paymentoption-list-section'">
+    <table class="table table-striped" aria-labelledby="tableLabel">
+      <thead>
+        <tr>
+          <th class="text-center">{{'COMPANY.PAYMENTOPTION.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+
+          <th>{{'COMPANY.PAYMENTOPTION.INDEX.TABLE.HEADER.PAYMENTOPTIONID' | translate }}</th>
+          <th>{{'COMPANY.PAYMENTOPTION.INDEX.TABLE.HEADER.OPTIONNAME' | translate }}</th>
+          <th>{{'COMPANY.PAYMENTOPTION.INDEX.TABLE.HEADER.OPTIONCODE' | translate }}</th>
+          <th>{{'COMPANY.PAYMENTOPTION.INDEX.TABLE.HEADER.SORTORDER' | translate }}</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of paymentoptions | paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index">
+          <td class="pt-0 text-center">
+            <button mat-icon-button (click)="editPaymentOption(item)">
+              <mat-icon>create</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onDeletePaymentOption(item)">
+              <mat-icon class="mat-icon-delete">delete</mat-icon>
+            </button>
+          </td>
+
+          <td>{{item.paymentOptionId}}</td>
+          <td>{{item.optionName}}</td>
+          <td>{{item.optionCode}}</td>
+          <td>{{item.sortOrder}}</td>
+
+
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="row justify-content-between" *ngIf="totalItems > 0">
+      <div class="col-md-5 col-sm-5 text-left">
+        {{totalItemsText}}
+      </div>
+      <div class="col-md-5 col-sm-5 text-left">
+        <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+                             directionLinks="true" previousLabel="" nextLabel="">
+        </pagination-controls>
+      </div>
+      <div class="col-md-2 col-sm-2 text-left">
+        <mat-form-field>
+          <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()" placeholder="Items Per Page">
+            <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+              {{item.text}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+      </div>
+    </div>
+  </section>
+

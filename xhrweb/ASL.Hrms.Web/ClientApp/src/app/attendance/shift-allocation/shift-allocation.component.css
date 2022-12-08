@@ -1,0 +1,8 @@
+.mat-select /deep/ .mat-select-trigger {
+    min-width: 60px;
+  }
+
+
+.weekendColor{
+    background-color:#ffc0cb;
+}

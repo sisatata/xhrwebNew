@@ -1,0 +1,123 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+
+ <h5 mat-dialog-title *ngIf="!isEditMode">{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_TITLE' | translate}}</h5> 
+<h5 mat-dialog-title *ngIf="isEditMode">{{'EMPLOYEE.EMPLOYEECARD.CREATE.EDIT_TITLE' | translate}}</h5>
+<h6 *ngIf="submitted && employeeCardCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+<form class="employee-from" [formGroup]="employeeCardCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.CARD_MASKING_VALUE.PLACEHOLDER' | translate}}
+            </mat-label>
+            <input matInput formControlName="cardMaskingValue" [(value)]="employeeCard.cardMaskingValue"
+              placeholder="{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.CARD_MASKING_VALUE.PLACEHOLDER' | translate}}"
+              [ngClass]="{'is-invalid': submitted && f.cardMaskingValue.errors}">
+            <mat-error *ngIf="submitted && f.cardMaskingValue.errors && f.cardMaskingValue.errors.required">
+              {{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.CARD_MASKING_VALUE.REQUIERED_ERROR_TEXT' | translate}}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.cardMaskingValue.errors && f.cardMaskingValue.errors.maxlength">
+              {{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.CARD_MASKING_VALUE.MAX_LENGTH_ERROR' | translate}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.CHARGE_AMOUNT.PLACEHOLDER' | translate}}
+            </mat-label>
+            <input matInput type="number" formControlName="chargeAmount" [(value)]="employeeCard.chargeAmount"
+              placeholder="{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.CHARGE_AMOUNT.PLACEHOLDER' | translate}}"
+              [ngClass]="{'is-invalid': submitted && f.chargeAmount.errors}">
+            <mat-error *ngIf="submitted && f.chargeAmount.errors && f.chargeAmount.errors.required">
+              {{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.CHARGE_AMOUNT.REQUIERED_ERROR_TEXT' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <mat-label class="d-block mb-3">
+            {{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.CARD_REVOKED.PLACEHOLDER' | translate}}</mat-label>
+          <mat-radio-group formControlName="cardRevoked" (change)="cardRevokedChange($event.value)">
+            <mat-radio-button class="pr-3" value="true" [checked]="employeeCard.cardRevoked === true">Yes
+            </mat-radio-button>
+            <mat-radio-button value="false" [checked]="employeeCard.cardRevoked===false">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <mat-label class="d-block mb-3">{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.IS_PAID.PLACEHOLDER' | translate}}
+          </mat-label>
+          <mat-radio-group formControlName="isPaid"  (change)="paidChange($event.value)">
+            <mat-radio-button class="pr-3" value="true" [checked]="employeeCard.isPaid === true" >Yes</mat-radio-button>
+            <mat-radio-button value="false" [checked]="employeeCard.isPaid === false">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      
+      <div class="col-12 col-md-6" *ngIf="isCardRevoked">
+        <mat-form-field appearance="outline" >
+          <mat-label>{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.CARD_REVOKED_DATE.PLACEHOLDER' | translate}}
+          </mat-label>
+          <input matInput [matDatepicker]="cardRevokedDate" formControlName="cardRevokedDate"
+            [(value)]="employeeCard.cardRevokedDate" (click)="cardRevokedDate.open()" placeholder="Card Revoked Date"
+            [ngClass]="{'is-invalid': f.cardRevokedDate.errors}">
+          <mat-datepicker-toggle matSuffix [for]="cardRevokedDate"></mat-datepicker-toggle>
+          <mat-datepicker #cardRevokedDate></mat-datepicker>
+          <mat-error *ngIf="submitted && f.cardRevokedDate.errors && f.cardRevokedDate.errors.required">Card revoked
+            date is required</mat-error>
+          <mat-error *ngIf="submitted && f.cardRevokedDate.errors && f.cardRevokedDate.errors.maxlength">
+            {{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FROMDATE.MAXLENGTH_ERROR_TEXT' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-md-6" >
+        <mat-form-field appearance="outline" *ngIf="isPaidChecked">
+          <mat-label>{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.PAYMENT_DATE.PLACEHOLDER' | translate}}</mat-label>
+          <input matInput [matDatepicker]="paymentDate" formControlName="paymentDate"
+            [(value)]="employeeCard.paymentDate" (click)="paymentDate.open()" placeholder="Payment Date"
+            [ngClass]="{'is-invalid': f.paymentDate.errors}">
+          <mat-datepicker-toggle matSuffix [for]="paymentDate"></mat-datepicker-toggle>
+          <mat-datepicker #paymentDate></mat-datepicker>
+          <mat-error *ngIf="submitted && f.paymentDate.errors && f.paymentDate.errors.required">Payment date is
+            required</mat-error>
+          <mat-error *ngIf="submitted && f.paymentDate.errors && f.paymentDate.errors.maxlength">
+            {{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FROMDATE.MAXLENGTH_ERROR_TEXT' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.ISSUE_DATE.PLACEHOLDER' | translate}}</mat-label>
+            <input matInput [matDatepicker]="issueDate" formControlName="issueDate" [(value)]="employeeCard.issueDate"
+              (click)="issueDate.open()" placeholder="Issue Date" [ngClass]="{'is-invalid': f.issueDate.errors}">
+            <mat-datepicker-toggle matSuffix [for]="issueDate"></mat-datepicker-toggle>
+            <mat-datepicker #issueDate></mat-datepicker>
+            <mat-error *ngIf="submitted && f.issueDate.errors && f.issueDate.errors.required">Issue date is required
+            </mat-error>
+            <mat-error *ngIf="submitted && f.issueDate.errors && f.issueDate.errors.maxlength">
+              {{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_FORM.ISSUE_DATE.REQUIERED_ERROR_TEXT' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

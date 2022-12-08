@@ -1,0 +1,119 @@
+
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'COMPANY.COMPANY.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'COMPANY.COMPANY.CREATE.EDIT_TITLE' | translate }}</h5>
+
+<form class="company-from" [formGroup]="companyForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="companyName" placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.companyName.errors}" />
+        <mat-error *ngIf="submitted && f.companyName.errors && f.companyName.errors.required">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.companyName.errors && f.companyName.errors.maxlength">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYLOCALIZEDNAME.PLACEHOLDER' | translate }}</mat-label>
+      <input matInput formControlName="companyLocalizedName" placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYLOCALIZEDNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.companyLocalizedName.errors}" />
+      <mat-error *ngIf="submitted && f.companyLocalizedName.errors && f.companyLocalizedName.errors.required">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYLOCALIZEDNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      <mat-error *ngIf="submitted && f.companyLocalizedName.errors && f.companyLocalizedName.errors.maxlength">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORMCOMPANYLOCALIZEDNAMEE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+    </mat-form-field>
+  </div>-->
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="shortName" placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.shortName.errors}">
+        <mat-error *ngIf="submitted && f.shortName.errors && f.shortName.errors.required">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.shortName.errors && f.shortName.errors.maxlength">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="companySlogan" placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.companySlogan.errors}" />
+        <mat-error *ngIf="submitted && f.companySlogan.errors && f.companySlogan.errors.required">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.companySlogan.errors && f.companySlogan.errors.maxlength">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}</mat-label>
+      <input type="number" matInput formControlName="sortOrder" placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.sortOrder.errors}" />
+      <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.required">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SORTORDER.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.maxlength">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SORTORDER.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+    </mat-form-field>
+  </div>-->
+    <!--<div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.LICENSEKEY.PLACEHOLDER' | translate }}</mat-label>
+      <input matInput formControlName="licenseKey" placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.LICENSEKEY.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.licenseKey.errors}">
+      <mat-error *ngIf="submitted && f.licenseKey.errors && f.licenseKey.errors.required">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.LICENSEKEY.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      <mat-error *ngIf="submitted && f.licenseKey.errors && f.licenseKey.errors.maxlength">{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.LICENSEKEY.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+    </mat-form-field>
+  </div>-->
+
+    <div class="form-group" *ngIf="company.isActive">
+      <mat-checkbox class="form-group" formControlName="isActive" [(value)]="company.isActive"
+                    matTooltip="Is Active?">
+        {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.ISACTIVE.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+
+    <div class="form-group" *ngIf="!isEditMode">
+      <mat-form-field appearance="outline">
+        <mat-label>Login Id</mat-label>
+        <input matInput formControlName="userId"  placeholder="Login Id" [ngClass]="{'is-invalid': submitted && f.userId.errors}">
+        <mat-error *ngIf="submitted && f.userId.errors && f.userId.errors.required">{{ 'EMPLOYEE.EMPLOYEE.CREATE.CREATE_FORM.USERID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.userId.errors && f.userId.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEE.CREATE.CREATE_FORM.USERID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+
+      </mat-form-field>
+    </div>
+
+    <div class="form-group" *ngIf="!isEditMode">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Enter password"
+               formControlName="password" required>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error>
+          Please enter password
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+    <div class="form-group" *ngIf="!isEditMode">
+      <mat-form-field appearance="outline">
+        <mat-label>Retype Password</mat-label>
+        <input matInput [type]="hideConfirmPassword ? 'password' : 'text'"
+               placeholder="Enter password" formControlName="confirmPassword"
+               [errorStateMatcher]="matcher">
+        <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+          <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+
+        <mat-error *ngIf="companyForm.hasError('notSamePassword')">
+          Passwords do not match
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+
+
+

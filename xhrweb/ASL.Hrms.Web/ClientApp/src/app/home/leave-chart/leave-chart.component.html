@@ -1,0 +1,17 @@
+<div class="header">
+    <p class="ml-2">Leave Chart</p>
+    <h5 *ngIf="leaveChartEmpty" class="text-center">No data found</h5>
+</div>
+<ngx-charts-pie-chart
+[view]="view"
+[scheme]="colorScheme"
+[results]="single"
+[gradient]="gradient"
+[legend]="showLegend"
+[legendPosition]="legendPosition"
+[legendTitle]=null
+[labels]="showLabels"
+[doughnut]="isDoughnut"
+
+>
+</ngx-charts-pie-chart>

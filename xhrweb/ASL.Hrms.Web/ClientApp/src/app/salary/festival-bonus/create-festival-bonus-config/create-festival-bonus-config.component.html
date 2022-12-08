@@ -1,0 +1,162 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{'PAYROLL.BONUSCONFIG.CREATE.EDIT_TITLE' | translate }}</h5>
+<form class="employeesalary-from" [formGroup]="festivalBonusConfigCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+   
+      
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.RANGEFROMINMONTH.PLACEHOLDER' | translate }}</mat-label>
+            <input type="number" matInput formControlName="rangeFromInMonth" placeholder="{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.RANGEFROMINMONTH.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.rangeFromInMonth.errors}" />
+            <mat-error *ngIf="submitted && f.rangeFromInMonth.errors && f.rangeFromInMonth.errors.required">
+              {{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.RANGEFROMINMONTH.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+            <mat-error *ngIf="submitted && f.rangeFromInMonth.errors && f.rangeFromInMonth.errors.maxlength">
+              {{'PAYROLL.BANK.CREATE.CREATE_FORM.BANKNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.RANGETOINMONTH.PLACEHOLDER' | translate }}</mat-label>
+            <input type="number" matInput formControlName="rangeToInMonth" placeholder="{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.RANGETOINMONTH.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.rangeToInMonth.errors}" />
+            <mat-error *ngIf="submitted && f.rangeToInMonth.errors && f.rangeToInMonth.errors.required">
+              {{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.RANGETOINMONTH.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+            <mat-error *ngIf="submitted && f.rangeToInMonth.errors && f.rangeToInMonth.errors.maxlength">
+              {{'PAYROLL.BANK.CREATE.CREATE_FORM.BANKNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.BASICORGROSS.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select matInput formControlName="basicOrGrossId" placeholder="{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.BASICORGROSS.PLACEHOLDER' | translate }}"
+              [(ngModel)]="basicOrGross">
+              <mat-option
+              *ngFor="let option of basciOrGrosses"
+              [value]="option.id">
+            {{ option.value }}
+          </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.basicOrGrossId.errors && f.basicOrGrossId.errors.required">
+              {{'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.PERCENTAGEOFBASICORGROSS.PLACEHOLDER' | translate }}</mat-label>
+            <input type="number" matInput formControlName="percentOfBasicOrGross"
+              placeholder="{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.PERCENTAGEOFBASICORGROSS.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.percentOfBasicOrGross.errors}" />
+            <mat-error *ngIf="submitted && f.percentOfBasicOrGross.errors && f.percentOfBasicOrGross.errors.required">
+              {{ 'PAYROLL.BANK.CREATE.CREATE_FORM.BANKNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+            <mat-error *ngIf="submitted && f.percentOfBasicOrGross.errors && f.percentOfBasicOrGross.errors.maxlength">
+              {{'PAYROLL.BANK.CREATE.CREATE_FORM.BANKNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      
+      <div class="col-md-6 col-12" >
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.FIXEDAMOUNT.PLACEHOLDER' | translate }}</mat-label>
+            <input type="number" matInput formControlName="fixedAmount" placeholder="{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.FIXEDAMOUNT.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.fixedAmount.errors}" />
+            <mat-error *ngIf="submitted && f.fixedAmount.errors && f.fixedAmount.errors.required">
+              {{ 'PAYROLL.BANK.CREATE.CREATE_FORM.BANKNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+            <mat-error *ngIf="submitted && f.fixedAmount.errors && f.fixedAmount.errors.maxlength">
+              {{'PAYROLL.BANK.CREATE.CREATE_FORM.BANKNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+       
+      <div class="col-12">
+        <div class="form-group">
+          <mat-checkbox class="form-group" formControlName="isPaidFull" [(value)]="festivalBonusConfig.isPaidFull"
+            matTooltip="Is Paid Full?" (change)="showOptions($event)">
+            Is Paid Full
+          </mat-checkbox>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="showPartial">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.PARTIALON.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select matInput formControlName="partialOnId" placeholder="{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.PARTIALON.PLACEHOLDER' | translate }}"
+              [(ngModel)]="partialOn">
+              <mat-option
+              *ngFor="let option of partials"
+              [value]="option.id">
+            {{ option.value }}
+          </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.partialOnId.errors && f.partialOnId.errors.required">
+              {{'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="startDate" formControlName="startDate" (click)="startDate.open()"
+              placeholder="Start Date" [ngClass]="{'is-invalid': f.startDate.errors}">
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
+            <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">Start date is required
+            </mat-error>
+            <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.maxlength"></mat-error>
+
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="endDate" formControlName="endDate" (click)="endDate.open()"
+              placeholder="End date" [ngClass]="{'is-invalid': f.endDate.errors}">
+            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+            <mat-datepicker #endDate></mat-datepicker>
+            <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">End date is required
+            </mat-error>
+            <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.maxlength"></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+            <mat-form-field appearance="outline">
+              <mat-label>{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.REMARKS.PLACEHOLDER' | translate }}</mat-label>
+              <input matInput formControlName="remarks" placeholder="Remarks" [ngClass]="{'is-invalid': submitted && f.remarks.errors}" />
+              <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.required">{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.GROSSSALARY.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+              <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.maxlength">{{'PAYROLL.BONUSCONFIG.CREATE.CREATE_FORM.REMARKS.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+            </mat-form-field>
+          </div>
+      
+      </div>
+      <mat-error *ngIf="!isFormValid">
+        <div class="d-flex">
+         
+            {{errorMessages}}
+            
+        </div>
+    </mat-error>
+    </div>
+    <mat-dialog-actions>
+      <button mat-raised-button mat-dialog-close (click)="close()">{{'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+      <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+</form>

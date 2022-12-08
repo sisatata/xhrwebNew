@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Npgsql" Version="4.1.3.1" />
+    <PackageReference Include="Wkhtmltopdf.NetCore" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ASL.AccessControl\ASL.AccessControl.csproj" />
+    <ProjectReference Include="..\ASL.Utility\ASL.Utility.csproj" />
+    <ProjectReference Include="..\EmployeeEnrollment.Core\EmployeeEnrollment.Core.csproj" />
+    <ProjectReference Include="..\TaskManagement.Application\TaskManagement.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EmployeeDetail\" />
+    <Folder Include="EmployeeAddress\" />
+    <Folder Include="EmployeeEmail\" />
+    <Folder Include="EmployeeImage\" />
+    <Folder Include="EmployeePhone\" />
+    <Folder Include="EmployeeStatusHistory\" />
+    <Folder Include="EmployeeStatus\" />
+    <Folder Include="EmployeeExperience\" />
+    <Folder Include="EmployeeEducation\" />
+    <Folder Include="EmployeeFamilyMember\" />
+    <Folder Include="EmployeeManager\" />
+    <Folder Include="EmployeeCard\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,47 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title>Bill Claim Request</h5>
+<h6 *ngIf="submitted && billVerdictForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+<form class="employee-from" [formGroup]="billVerdictForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Claim Amount</mat-label>
+        <input matInput formControlName="claimAmount" [(value)]="billClaim.claimAmount" placeholder="Claim Amount"
+          [ngClass]="{'is-invalid': submitted && f.claimAmount.errors}" disabled>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Approved Amount</mat-label>
+        <input matInput type="number" formControlName="approvedAmount" [(value)]="billClaim.approvedAmount"
+          placeholder="Approved Amount" [ngClass]="{'is-invalid': submitted && f.approvedAmount.errors}">
+        <mat-error *ngIf="f.approvedAmount.errors && f.approvedAmount.errors.required">Approved amount is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Approved Notes</mat-label>
+        <input matInput formControlName="approvedNotes" [(value)]="billClaim.approvedNotes" placeholder="Approved Notes"
+          [ngClass]="{'is-invalid': submitted && f.approvedNotes.errors}">
+        <mat-error *ngIf="f.approvedNotes.errors && f.approvedNotes.errors.required">Approved note is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-12" *ngIf="billClaim.billAttachmentUri">
+      <a class="none" [href]="billClaim.billAttachmentUri" target="_blank">View uploaded file</a>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        {{errorMessages}}
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">Close</button>
+    <button mat-raised-button (click)="reject()" class="btn btn-danger">Reject</button>
+    <button mat-raised-button (click)="approve()" class="btn btn-success">Approve</button>
+  </mat-dialog-actions>
+</form>

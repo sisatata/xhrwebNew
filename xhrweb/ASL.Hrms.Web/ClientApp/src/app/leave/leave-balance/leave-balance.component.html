@@ -1,0 +1,121 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-6 col-lg-3">
+    <h1 id="tableLabel">{{ 'LEAVE.LEAVEBALANCE.INDEX.TITLE' | translate }}</h1>
+  </div>
+</div>
+<form [formGroup]="leaveBalanceFilterFormGroup" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-12 col-md-4 col-lg-2" *ngIf = "!isAdmin">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LEAVE.LEAVEBALANCE.INDEX.EMPLOYEE.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'LEAVE.LEAVEBALANCE.INDEX.EMPLOYEE.PLACEHOLDER' | translate }}"
+          formControlName="employeeId" (selectionChange)="onChangeEmployee($event)" [disabled]="!isAdmin">
+          <mat-option *ngFor="let item of employees" [value]="item.id">
+            {{item.fullName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.employeeId.errors">
+          {{ 'LEAVE.LEAVEBALANCE.INDEX.EMPLOYEE.ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+      </div>
+   <div class="col-12" *ngIf = "isAdmin">
+    <app-search-filter  [companyId]="companyId" ></app-search-filter>
+
+    
+   </div>
+     
+    
+    <div class="col-12 col-md-4 col-lg-2">
+        <mat-form-field appearance="outline">
+            <mat-label>Leave Year</mat-label>
+            <mat-select placeholder="Leave Year" formControlName="financialYearId" (selectionChange)="onChangeFinancialYear($event.value)">
+              <mat-option *ngFor="let item of financialYears" [value]="item.financialYearName">
+                {{item.financialYearName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.financialYearId.errors && f.financialYearId.errors.required">{{ 'COMMON.SELECT.FINANCIALYEARID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+    </div>
+    <div class="col-12 col-md-4 col-lg-2">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LEAVE.LEAVETYPE.INDEX.TABLE.HEADER.NAME' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'LEAVE.LEAVETYPE.INDEX.TABLE.HEADER.NAME' | translate }}"
+          (selectionChange)="onChangeLeaveType($event)" >
+          <mat-option *ngFor="let item of leaveTypes" [value]="item.leaveTypeName">
+            {{item.leaveTypeName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.employeeId.errors">
+          {{ 'LEAVE.LEAVEBALANCE.INDEX.EMPLOYEE.ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+      </div>
+    <div class="col-12 col-md-2 pull-right">
+      <button type="submit" class="btn btn-success w-100">Search</button>
+    </div>
+  </div>
+</form>
+<div>
+  <div class="table-responsive">
+  <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+    <thead>
+      <tr class="table-secondary">
+        <th *ngIf = "isAdmin">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.EMPLOYEEID' | translate }}</th>
+        <th>{{ 'LEAVE.LEAVEBALANCE.INDEX.TABLE.HEADER.EMPLOYEE_NAME' | translate }}</th>
+       
+        <th>{{ 'LEAVE.LEAVEBALANCE.INDEX.TABLE.HEADER.LEAVE_TYPE_NAME' | translate }}</th>
+        <th>{{ 'LEAVE.LEAVEBALANCE.INDEX.TABLE.HEADER.MAXIMUM_BALANCE' | translate }}</th>
+        <th>{{ 'LEAVE.LEAVEBALANCE.INDEX.TABLE.HEADER.USED_BALANCE' | translate }}</th>
+        <th>{{ 'LEAVE.LEAVEBALANCE.INDEX.TABLE.HEADER.REMAINING_BALANCE' | translate }}</th>
+        <th *ngIf = "isAdmin">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.BRANCH' | translate }}</th>
+        <th *ngIf = "isAdmin">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.DEPARTMENT' | translate }}</th>
+        <th *ngIf = "isAdmin">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.DESIGNATION' | translate }}</th>
+        <th *ngIf = "isAdmin">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.EMAIL' | translate }}</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr 
+        *ngFor="let item of leaveBalances| paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index">
+        <td *ngIf="isAdmin">{{item.companyEmployeeId}}</td>
+        <td>{{item.employeeName}}</td>
+       
+        <td>{{item.leaveTypeName}}</td>
+        <td>{{item.maximumBalance}}</td>
+        <td>{{item.usedBalance}}</td>
+        <td>{{item.remainingBalance}}</td>
+        <td *ngIf="isAdmin">{{item.branchName}}</td>
+        <td *ngIf="isAdmin">{{item.departmentName}}</td>
+        <td *ngIf="isAdmin">{{item.designationName}}</td>
+        <td *ngIf="isAdmin">{{item.loginId}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div *ngIf="!loading && leaveBalances.length === 0 && isSearched" class="text-info text-center">
+    {{'PAYROLL.PAIDSALARY.INDEX.EMPTYMESSAGE' | translate }}</div>
+  <br>
+  <div class="row " *ngIf="totalItems > 0" style="padding-top:20px;">
+    <div class="col-md-5 col-sm-5 text-left">
+      {{totalItemsText}}
+    </div>
+    <div class="col-md-5 col-sm-5 text-left">
+      <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+        directionLinks="true" previousLabel="" nextLabel="">
+      </pagination-controls>
+    </div>
+    <div class="col-md-2 col-sm-2 text-left">
+      <mat-form-field>
+        <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()" placeholder="{{ 'PAGINATION.PLACEHOLDER' | translate }}">
+          <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+            {{item.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>

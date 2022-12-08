@@ -1,0 +1,104 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'ATTENDANCE.HOLIDAY.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'ATTENDANCE.HOLIDAY.CREATE.EDIT_TITLE' | translate }}</h5>
+
+<form class="employee-from" [formGroup]="holidayCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" [(value)]="companyId" (selectionChange)="onChangeCompany()"
+          placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">
+          {{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <!-- <mat-form-field appearance="outline">
+                <mat-label>Holiday Date</mat-label>
+                <input matInput [matDatepicker]="holidayDate" (dateChange)="updateCalcs($event)" formControlName="holidayDate"
+                    [(value)]="holiday.holidayDate" (click)="holidayDate.open()" placeholder="Holiday Date"
+                    [ngClass]="{'is-invalid': f.holidayDate.errors}">
+                <mat-datepicker-toggle matSuffix [for]="holidayDate"></mat-datepicker-toggle>
+                <mat-datepicker #holidayDate></mat-datepicker>
+                <mat-error *ngIf="submitted && f.holidayDate.errors && f.holidayDate.errors.required">Holiday
+                    date is required</mat-error>
+            </mat-form-field> -->
+
+    <div class="form-group">
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}
+        </mat-label>
+        <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" (click)="startDatePicker.open()"
+          placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">
+{{
+            'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}
+        </mat-label>
+        <input matInput [matDatepicker]="endDatePicker" formControlName="endDate" (click)="endDatePicker.open()"
+          [(value)]="endDate"
+          placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': f.endDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">
+          {{
+                            'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+   
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'ATTENDANCE.HOLIDAY.CREATE.CREATE_FORM.REASON.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="reason"
+          placeholder="{{ 'ATTENDANCE.HOLIDAY.CREATE.CREATE_FORM.REASON.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.reason.errors}" />
+        <mat-error *ngIf="submitted && f.reason.errors && f.reason.errors.required">
+          {{ 'ATTENDANCE.HOLIDAY.CREATE.CREATE_FORM.REASON.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.reason.errors && f.reason.errors.maxlength">
+          {{ 'ATTENDANCE.HOLIDAY.CREATE.CREATE_FORM.REASON.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+
+        {{errorMessages}}
+
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

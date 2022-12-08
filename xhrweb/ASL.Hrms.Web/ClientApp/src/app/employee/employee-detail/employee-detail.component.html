@@ -1,0 +1,159 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+
+</div>
+<mat-accordion>
+  <mat-expansion-panel hideToggle>
+
+
+
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="h6">
+        {{ 'EMPLOYEE.EMPLOYEE.DETAIL.DETAILCARDHEADER' | translate }}
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    <form [formGroup]="employeeDetailForm" enctype="multipart/form-data" (ngSubmit)="saveEmployeeDetail()">
+      <mat-card class="example-card">
+        <mat-card-header>
+         
+        </mat-card-header>
+      
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-4">
+
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.DETAIL.FATHERSNAME.PLACEHOLDER' | translate }}</mat-label>
+                <input class="example-full-width" matInput formControlName="fathersName"
+                  [(value)]="employeeDetail.fathersName"
+                  placeholder="{{ 'EMPLOYEE.EMPLOYEE.DETAIL.FATHERSNAME.PLACEHOLDER' | translate }}"
+                  [ngClass]="{'is-invalid': submitted && f.fathersName.errors}">
+                <mat-error *ngIf="f.fathersName.errors && f.fathersName.errors.required">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.FATHERSNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                <mat-error *ngIf="f.fathersName.errors && f.fathersName.errors.maxlength">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.FATHERSNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.DETAIL.MOTHERSNAME.PLACEHOLDER' | translate }}</mat-label>
+                <input class="example-full-width" matInput formControlName="mothersName"
+                  [(value)]="employeeDetail.mothersName"
+                  placeholder="{{ 'EMPLOYEE.EMPLOYEE.DETAIL.MOTHERSNAME.PLACEHOLDER' | translate }}"
+                  [ngClass]="{'is-invalid': submitted && f.mothersName.errors}">
+                <mat-error *ngIf="f.mothersName.errors && f.mothersName.errors.required">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.MOTHERSNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                <mat-error *ngIf="f.mothersName.errors && f.mothersName.errors.maxlength">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.MOTHERSNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.DETAIL.SPOUSENAME.PLACEHOLDER' | translate }}</mat-label>
+                <input matInput formControlName="spouseName" [(value)]="employeeDetail.spouseName"
+                  placeholder="{{ 'EMPLOYEE.EMPLOYEE.DETAIL.SPOUSENAME.PLACEHOLDER' | translate }}"
+                  [ngClass]="{'is-invalid': submitted && f.spouseName.errors}">
+
+                <mat-error *ngIf="f.spouseName.errors && f.spouseName.errors.required">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.SPOUSENAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                <mat-error *ngIf="f.spouseName.errors && f.spouseName.errors.maxlength">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.SPOUSENAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.DETAIL.NID.PLACEHOLDER' | translate }}</mat-label>
+                <input matInput formControlName="nid" [(value)]="employeeDetail.nid"
+                  placeholder="{{ 'EMPLOYEE.EMPLOYEE.DETAIL.NID.PLACEHOLDER' | translate }}"
+                  [ngClass]="{'is-invalid': submitted && f.nid.errors}">
+  
+                <mat-error *ngIf="f.nid.errors && f.nid.errors.range">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.NID.DIGITERROR' | translate }}</mat-error>
+                <mat-error *ngIf="f.nid.errors && !f.nid.errors.range">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.NID.DIGITERROR' | translate }}</mat-error>
+
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.DETAIL.BID.PLACEHOLDER' | translate }}</mat-label>
+                <input matInput formControlName="bid" [(value)]="employeeDetail.bid"
+                  placeholder="{{ 'EMPLOYEE.EMPLOYEE.DETAIL.BID.PLACEHOLDER' | translate }}"
+                  [ngClass]="{'is-invalid': submitted && f.bid.errors}">
+
+                <mat-error *ngIf="f.bid.errors && f.bid.errors.required">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.BID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                <mat-error *ngIf="f.bid.errors && f.bid.errors.maxlength">
+                  {{ 'EMPLOYEE.EMPLOYEE.DETAIL.BID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'COMMON.SELECT.MARITALSTATUSID.PLACEHOLDER' | translate }}</mat-label>
+                <mat-select matInput formControlName="maritalStatusId" [(value)]="employeeDetail.maritalStatusId"
+                  placeholder=" {{ 'COMMON.SELECT.MARITALSTATUSID.PLACEHOLDER' | translate }}">
+                  <ng-container *ngFor="let maritalStatus of maritalStatuses">
+                    <mat-option value="{{maritalStatus.id}}">{{maritalStatus.lookUpTypeName}}</mat-option>
+                  </ng-container>
+                </mat-select>
+                <div *ngIf="submitted && f.maritalStatusId.errors">
+                  <mat-error *ngIf="f.maritalStatusId.errors.required">
+                    {{ 'COMMON.SELECT.MARITALSTATUSID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'COMMON.SELECT.RELIGIONID.PLACEHOLDER' | translate }}</mat-label>
+                <mat-select matInput formControlName="religionId" [(value)]="employeeDetail.religionId"
+                  placeholder=" {{ 'COMMON.SELECT.RELIGIONID.PLACEHOLDER' | translate }}">
+                  <ng-container *ngFor="let religion of religions">
+                    <mat-option value="{{religion.id}}">{{religion.lookUpTypeName}}</mat-option>
+                  </ng-container>
+                </mat-select>
+                <div *ngIf="submitted && f.religionId.errors">
+                  <mat-error *ngIf="f.religionId.errors.required">
+                    {{ 'COMMON.SELECT.RELIGIONID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'COMMON.SELECT.BLOODGROUPID.PLACEHOLDER' | translate }}</mat-label>
+                <mat-select matInput formControlName="bloodGroupId" [(value)]="employeeDetail.bloodGroupId"
+                  placeholder=" {{ 'COMMON.SELECT.BLOODGROUPID.PLACEHOLDER' | translate }}">
+                  <ng-container *ngFor="let boodGroup of bloodGroups">
+                    <mat-option value="{{boodGroup.id}}">{{boodGroup.lookUpTypeName}}</mat-option>
+                  </ng-container>
+                </mat-select>
+                <div *ngIf="submitted && f.bloodGroupId.errors">
+                  <mat-error *ngIf="f.bloodGroupId.errors.required">
+                    {{ 'COMMON.SELECT.BLOODGROUPID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="right">
+          <button *ngIf="isAdmin || isHRManager" class="btn btn-success" type="submit" mat-button>{{ 'COMMON.SAVE_BUTTON_TEXT' | translate}}</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-error *ngIf="!isFormValid">
+        <div class="d-flex">
+
+          {{errorMessages}}
+
+        </div>
+      </mat-error>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>

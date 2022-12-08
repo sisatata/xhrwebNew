@@ -1,0 +1,112 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status"> 
+</div>
+<h5 mat-dialog-title  *ngIf="!isEditMode && !showReApplyButton">Apply Leave</h5>
+<h5 mat-dialog-title  *ngIf="isEditMode && !showReApplyButton">Edit Leave Application</h5>
+<h5 mat-dialog-title  *ngIf="showReApplyButton">Re-apply Leave</h5>
+<form class="leaveApplication-from" [formGroup]="applyLeaveForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label> {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select  matInput formControlName="companyId" [(value)]="companyId"
+             placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" 
+            (selectionChange)="onChangeCompany()">
+              <ng-container *ngFor="let company of companies">
+                <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+              </ng-container>
+            </mat-select>
+             <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+             
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select  matInput formControlName="employeeId" [(value)]="employeeId" disabled
+             placeholder="{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}"
+              (selectionChange)="onChangeEmployee()">
+              <ng-container *ngFor="let employee of employees">
+                <mat-option value="{{employee.id}}">{{employee.fullName}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">{{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'LEAVE.LEAVETYPE.INDEX.TITLE' | translate}}</mat-label>
+            <mat-select  matInput formControlName="leaveTypeId" placeholder="Leave Type" [(value)]="leaveApplication.leaveTypeId" (selectionChange)="onChangeLeaveType()">
+              <ng-container *ngFor="let leaveType of leaveTypes">
+                <mat-option value="{{leaveType.id}}">{{leaveType.leaveTypeName}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.leaveTypeId.errors && f.leaveTypeId.errors.required">{{ 'LEAVE.LEAVEAPPLICATION.CREATE.ERROR.LEAVE_TYPE_ERROR_TEXT' | translate }}</mat-error>          
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}</mat-label>
+            <input  matInput [matDatepicker]="startDate" formControlName="startDate"   (click)="startDate.open()" (dateChange)="onChangeStartDate($event)" placeholder="Start Date" [ngClass]="{'is-invalid': f.startDate.errors}">
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
+              <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+              <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.maxlength"></mat-error>
+            
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}</mat-label>
+            <input  matInput [matDatepicker]="endDate" formControlName="endDate"  (click)="endDate.open()" (dateChange)="onChangeEndDate($event)"  placeholder="End date" [ngClass]="{'is-invalid': f.endDate.errors}">
+            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+            <mat-datepicker #endDate></mat-datepicker>
+              <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+              <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.maxlength"></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'LEAVE.LEAVEAPPLICATION.CREATE.LEAVEDURATION' | translate }}</mat-label>
+            <input type="number"  matInput formControlName="leaveDays"  placeholder="{{ 'LEAVE.LEAVEAPPLICATION.CREATE.LEAVEDURATION' | translate }}" [ngClass]="{'is-invalid': submitted && f.leaveDays.errors}" />
+         <mat-error *ngIf="submitted && f.leaveDays.errors && f.leaveDays.errors.required">{{ 'LEAVE.LEAVEAPPLICATION.CREATE.ERROR.NUMBER_OF_DAYS_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LEAVE.LEAVEAPPLICATION.CREATE.REASON.PLACEHOLDER' | translate }}</mat-label>
+        <input  matInput formControlName="reason"  placeholder="{{ 'LEAVE.LEAVEAPPLICATION.CREATE.REASON.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.reason.errors}" />
+        <mat-error *ngIf="submitted && f.reason.errors && f.reason.errors.required">Reason is required</mat-error> 
+        <mat-error *ngIf="submitted && f.reason.errors && f.reason.errors.maxlength">Max length should be 50</mat-error> 
+      </mat-form-field>
+    </div>
+      <mat-error *ngIf="!isFormValid">
+        <div class="d-flex">
+            {{errorMessages}}
+
+        </div>
+    </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" *ngIf="showReApplyButton" class="btn btn-success" >{{ 'COMMON.LEAVE_REAPPLY_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" *ngIf="!showReApplyButton" class="btn btn-success" >{{ 'COMMON.LEAVE_APPLY_BUTTON_TEXT' | translate }}</button>
+</mat-dialog-actions>
+</form>
+
+

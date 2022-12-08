@@ -1,0 +1,51 @@
+﻿/*.header {
+    text-align: center;
+    color: green;
+    padding-bottom: 35px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    page-break-inside: auto;
+}
+
+td, th {
+    border: 1px solid gray;
+    padding-left: 15px !important;
+    font-size: 22px;
+    text-align: left;
+}
+
+table th {
+    background-color: whitesmoke;
+    color: black;
+}
+
+thead {
+    display: table-header-group
+}
+
+tfoot {
+    display: table-footer-group
+}
+tr {
+    page-break-inside: avoid;
+    page-break-after: always
+}
+
+table.report-container {
+    page-break-after: always;
+}
+
+thead.report-header {
+    display: table-header-group;
+}
+
+tfoot.report-footer {
+    display: table-footer-group;
+}
+
+table.report-container div.article {
+    page-break-inside: avoid;
+}*/

@@ -1,0 +1,139 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'PAYROLL.INCOMETAXPARAMETER.CREATE.TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{'PAYROLL.INCOMETAXPARAMETER.EDIT.TITLE' | translate}}</h5>
+<h6 *ngIf="incomeTaxParameterCreateForm.invalid && submitted" class="text-danger">Please enter valid data and fill up
+  the required fields.</h6>
+  <h6 *ngIf="isDateOverLap && submitted" class="text-danger">{{dateOverLapErrorMessage}} 
+  </h6>
+<form [formGroup]="incomeTaxParameterCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId"
+          [disabled]="true">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required">Company is required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPARAMETER.CREATE.PARAMETER_NAME.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input (focus)="onFocus()"  matInput formControlName="parameterName" [(value)]="incomeTaxParameter.parameterName"
+          placeholder="{{'PAYROLL.INCOMETAXPARAMETER.CREATE.PARAMETER_NAME.PLACEHOLDER' | translate}} ( Space not allowed )"
+          [ngClass]="{'is-invalid': submitted && f.parameterName.errors}">
+        <mat-error *ngIf="submitted && f.parameterName.errors && f.parameterName.errors.required">
+          {{'PAYROLL.INCOMETAXPARAMETER.CREATE.PARAMETER_NAME.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.parameterName.errors && f.parameterName.errors.maxlength">
+          {{'PAYROLL.INCOMETAXPARAMETER.CREATE.PARAMETER_NAME.MAX_LENGTH_ERROR_TEXT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPARAMETER.CREATE.AMOUNT_LIMIT.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input type="number" matInput formControlName="limitAmount" [(value)]="incomeTaxParameter.limitAmount"
+          placeholder="{{'PAYROLL.INCOMETAXPARAMETER.CREATE.AMOUNT_LIMIT.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.limitAmount.errors}">
+        <mat-error *ngIf="submitted && f.limitAmount.errors && f.limitAmount.errors.required">
+          {{'PAYROLL.INCOMETAXPARAMETER.CREATE.AMOUNT_LIMIT.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.limitAmount.errors && f.limitAmount.errors.maxlength">
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPARAMETER.CREATE.LIMIT_PERCENTAGE_OF_BASIC.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input type="number" matInput formControlName="limitPercentageOfBasic"
+          [(value)]="incomeTaxParameter.limitPercentageOfBasic"
+          placeholder="{{'PAYROLL.INCOMETAXPARAMETER.CREATE.LIMIT_PERCENTAGE_OF_BASIC.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.limitAmount.errors}">
+        <mat-error *ngIf="submitted && f.limitPercentageOfBasic.errors && f.limitPercentageOfBasic.errors.required">
+          {{'PAYROLL.INCOMETAXPARAMETER.CREATE.LIMIT_PERCENTAGE_OF_BASIC.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.limitPercentageOfBasic.errors && f.limitPercentageOfBasic.errors.maxlength">
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPARAMETER.CREATE.TAX_PAYER_TYPE_NAME.PLACEHOLDER' | translate}}</mat-label>
+        <mat-select [(value)]="incomeTaxParameter.payerTypeCode"
+          placeholder="{{'PAYROLL.INCOMETAXPARAMETER.CREATE.TAX_PAYER_TYPE_NAME.PLACEHOLDER' | translate}}"
+          (selectionChange)="onChangeIncomeTaxPayerType($event)" formControlName="payerTypeCode">
+          <mat-option *ngFor="let item of incomeTaxPayerTypes" [value]="item.payerTypeCode">
+            {{item.payerTypeName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required">Company is required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input (focus)="onFocus()"  matInput [matDatepicker]="startDate" formControlName="startDate" [(value)]="incomeTaxParameter.startDate"
+          (click)="startDate.open()" placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">Start
+          date is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input (focus)="onFocus()"  matInput [matDatepicker]="endDate" formControlName="endDate" [(value)]="incomeTaxParameter.endDate"
+          (click)="endDate.open()" placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.endDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">End
+          date is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input matInput formControlName="remarks" [(value)]="incomeTaxParameter.remarks"
+          placeholder="{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.remarks.errors}">
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.required">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.maxlength">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.MAX_LENGTH_ERROR_TEXT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isActive" [(value)]="incomeTaxParameter.isActive"
+        matTooltip="{{'PAYROLL.INCOMETAXPARAMETER.INDEX.TABLE.HEADER.IS_ACTIVE' | translate}}">
+        {{'PAYROLL.INCOMETAXPARAMETER.INDEX.TABLE.HEADER.IS_ACTIVE' | translate}}
+      </mat-checkbox>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        {{errorMessages}}
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

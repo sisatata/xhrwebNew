@@ -1,0 +1,40 @@
+<!--<h1 id="tableLabel">{{ 'EMPLOYEE.EMPLOYEEPHONE.INDEX.TITLE' | translate }}</h1>-->
+
+<div class="row float-right m-1 p-2">
+  <button *ngIf="isAdmin || isHRManager" mat-raised-button  matTooltip="Create employee manager" (click)="createEmployeeManager()" class="btn btn-success">
+    <mat-icon class="create-icon-button">add</mat-icon>Employee Manager
+  </button>
+</div>
+
+<section *blockUI="'employee-manager-section'">
+  <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+    <thead>
+      <tr class="table-secondary">
+        <th *ngIf="isAdmin || isHRManager" class="text-center">Actions</th>
+        <th>Manager</th>
+        <th>Manager Type</th>
+        <th>Is Primary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of employeeManagers">
+        <td *ngIf="isAdmin || isHRManager" class="pt-0 text-center">
+          <button mat-icon-button *ngIf="canEditManager" (click)="editEmployeeManager(item)" matTooltip="{{ 'EMPLOYEE.EMPLOYEEPHONE.INDEX.EDIT_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon>create</mat-icon>
+          </button>
+
+          <button mat-icon-button *ngIf="canDeleteManager" (click)="onDeleteEmployeeManager(item)" matTooltip="{{ 'EMPLOYEE.EMPLOYEEPHONE.INDEX.DELETE_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon class="mat-icon-delete">delete</mat-icon>
+          </button> 
+        </td>
+        <td>{{item.managerName}}</td>
+        <td>{{item.managerTypeName}}</td>
+        <td>{{item.isPrimaryManager === true? 'Yes': 'No'}}</td>
+       
+      </tr>
+      <tr *ngIf="employeeManagers.length==0">
+        <td colspan="5" class="text-center">No Manager found</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

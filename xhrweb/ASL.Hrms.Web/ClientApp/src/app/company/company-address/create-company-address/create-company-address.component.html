@@ -1,0 +1,173 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'COMPANY.COMPANYADDRESS.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'COMPANY.COMPANYADDRESS.CREATE.EDIT_TITLE' | translate }}</h5>
+
+
+<h6 *ngIf="submitted && companyAddressCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+
+<form class="company-from" [formGroup]="companyAddressCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <!-- <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" [(value)]="companyId" (selectionChange)="onChangeCompany()"
+          placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">
+          {{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div> -->
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.ADDRESSLINE1.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="addressLine1" [(value)]="companyAddress.addressLine1"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.ADDRESSLINE1.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.addressLine1.errors}">
+        <mat-error *ngIf="submitted && f.addressLine1.errors && f.addressLine1.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.ADDRESSLINE1.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.addressLine1.errors && f.addressLine1.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.ADDRESSLINE1.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.ADDRESSLINE2.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="addressLine2" [(value)]="companyAddress.addressLine2"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.ADDRESSLINE2.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.addressLine2.errors}">
+        <mat-error *ngIf="submitted && f.addressLine2.errors && f.addressLine2.errors.required" required>
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.ADDRESSLINE2.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.addressLine2.errors && f.addressLine2.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.ADDRESSLINE2.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.VILLAGE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="village" [(value)]="companyAddress.village"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.VILLAGE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.village.errors}">
+        <mat-error *ngIf="submitted && f.village.errors && f.village.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.VILLAGE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.village.errors && f.village.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.VILLAGE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.POSTOFFICE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="postOffice" [(value)]="companyAddress.postOffice"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.POSTOFFICE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.postOffice.errors}">
+        <mat-error *ngIf="submitted && f.postOffice.errors && f.postOffice.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.POSTOFFICE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.postOffice.errors && f.postOffice.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.POSTOFFICE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <!-- <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COUNTRYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="countryId" [(value)]="companyAddress.countryId"
+          placeholder="{{ 'COMMON.SELECT.COUNTRYID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let country of countries">
+            <mat-option value="{{country.id}}">{{country.countryName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.countryId.errors && f.countryId.errors.required">
+          {{ 'COMMON.SELECT.COUNTRYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div> -->
+     <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.DISTRICTID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="districtId" [(value)]="companyAddress.districtId"
+        (selectionChange)= "getAllThanas(companyAddress.districtId)"
+          placeholder="{{ 'COMMON.SELECT.DISTRICTID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let district of districts">
+            <mat-option value="{{district.id}}">{{district.name}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.districtId.errors && f.districtId.errors.required">
+          {{ 'COMMON.SELECT.DISTRICTID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.THANAID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="thanaId" [(value)]="companyAddress.thanaId"
+          placeholder="{{ 'COMMON.SELECT.THANAID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let thana of thanas">
+            <mat-option value="{{thana.id}}">{{thana.upazilaName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.thanaId.errors && f.thanaId.errors.required">
+          {{ 'COMMON.SELECT.THANAID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+   
+
+    
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.LATITUDE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput type="number" formControlName="latitude" [(value)]="companyAddress.latitude"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.LATITUDE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.latitude.errors}">
+        <mat-error *ngIf="submitted && f.latitude.errors && f.latitude.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.LATITUDE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.latitude.errors && f.latitude.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.LATITUDE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.LONGITUDE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput type="number" formControlName="longitude" [(value)]="companyAddress.longitude"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.LONGITUDE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.longitude.errors}">
+        <mat-error *ngIf="submitted && f.longitude.errors && f.longitude.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.LONGITUDE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.longitude.errors && f.longitude.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEADDRESS.CREATE.CREATE_FORM.LONGITUDE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.ADDRESSTYPEID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="addressTypeId" [(value)]="companyAddress.addressTypeId"
+          placeholder="{{ 'COMMON.SELECT.ADDRESSTYPEID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let addressType of addressTypes">
+            <mat-option value="{{addressType.id}}">{{addressType.lookUpTypeName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.addressTypeId.errors && f.addressTypeId.errors.required">
+          {{ 'COMMON.SELECT.ADDRESSTYPEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessages}}
+          
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

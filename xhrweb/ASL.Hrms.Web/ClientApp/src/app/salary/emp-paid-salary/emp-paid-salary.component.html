@@ -1,0 +1,196 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+
+</div>
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    <h1 id="tableLabel">{{'PAYROLL.PAIDSALARY.INDEX.TITLE' | translate}}</h1>
+    <mat-error>
+      <div class="d-flex">
+        {{errorMessages}}
+      </div>
+    </mat-error>
+  </div>
+
+</div>
+<form [formGroup]="employeePaidSalaryFilterFormGroup">
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3" *ngIf="!isPayrollManager">
+      <mat-form-field appearance="outline">
+        <mat-label class="label-font">{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId"
+          (selectionChange)="onChangeCompany($event.value)" [disabled]="!isAdmin" required>
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required">{{'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}
+          </mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-12" *ngIf="isPayrollManager">
+      <app-search-filter [companyId]="companyId"></app-search-filter>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3">
+      <mat-form-field appearance="outline">
+        <mat-label class="label-font">{{'COMMON.SELECT.FINANCIALYEARID.PLACEHOLDER' | translate}}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}"
+          formControlName="financialYearId" [(value)]="financialYearId"
+          (selectionChange)="onChangeFinancialYears($event)" required>
+          <mat-option *ngFor="let item of financialYears" [value]="item.id">
+            {{item.financialYearName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.financialYearId.errors && f.financialYearId.errors.required">
+          {{'COMMON.SELECT.FINANCIALYEARID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-3 col-md-3 col-lg-3">
+      <mat-form-field appearance="outline">
+        <mat-label class="label-font">{{'COMPANY.MONTHCYCLE.INDEX.TITLE' | translate}}</mat-label>
+        <mat-select placeholder="Month Cycle" formControlName="monthCycleId" [(value)]="monthCycleId"
+          (selectionChange)="onChangeMonthCycle($event)"  required>
+          <mat-option *ngFor="let item of monthCycles" [value]="item.id">
+            {{item.monthCycleName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.monthCycleId.errors && f.monthCycleId.errors.required">
+          {{'COMMON.SELECT.MONTHCYCLEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2 col-12">
+      <button type="submit" (click)="submitForm()" [disabled]="!employeePaidSalaryFilterFormGroup.valid"
+        class="btn btn-success w-100">{{'PAYROLL.PAIDSALARY.INDEX.APPYFILTER_BUTTON' | translate }}</button>
+    </div>
+  </div>
+</form>
+<section *blockUI="'employee-paid-salary-list-section'">
+  <div>
+    <div class="position-relative">
+      <div class="table-responsive">
+        <div class="table-responsive">
+          <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+            <thead>
+              <tr class="table-secondary">
+                <th class="text-center">{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.EMPLOYEE' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.GROSSSALARY.PLACEHOLDER' | translate }}</th>
+                
+                <th>{{'PAYROLL.PAIDSALARY.INDEX.TABLE.HEADER.TOTAL_DEDUCTED_AMOUNT' | translate }}</th>
+                <th>{{'PAYROLL.PAIDSALARY.INDEX.TABLE.HEADER.PAYABLE_SALARY' | translate }}</th>
+                <th>{{'PAYROLL.PAIDSALARY.INDEX.TABLE.HEADER.NET_PAYABLE_AMOUNT' | translate }}</th>
+                <th *ngIf="isPayrollManager">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.BRANCH' | translate }}</th>
+                <th *ngIf="isPayrollManager">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.DEPARTMENT' | translate }}</th>
+                <th *ngIf="isPayrollManager">
+                  {{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.DESIGNATION' | translate }}</th>
+                <th *ngIf="isPayrollManager">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.EMAIL' | translate }}
+                </th>
+                <th *ngIf="isPayrollManager">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.EMPLOYEEID' | translate }}</th>
+                <!-- <th>{{'COMMON.SELECT.DESIGNATIONID.PLACEHOLDER' | translate}}</th>
+                <th>{{'COMMON.SELECT.DEPARTMENTID.PLACEHOLDER' | translate}}</th> -->
+
+
+              </tr>
+            </thead>
+
+            <tbody
+              *ngFor="let item of empPaidSalaries | paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index; let i = index">
+              <tr>
+                <td class="pt-0 text-center">
+                  <button mat-icon-button *ngIf="!hideme[i]" (click)="showChildList(i,item.id)"
+                    matTooltip="{{'PAYROLL.PAIDSALARY.INDEX.DETAILTOOLTIP' | translate}}">
+
+                    <mat-icon>list</mat-icon>
+                  </button>
+                  <button mat-icon-button *ngIf="hideme[i]" (click)="hideme[i] = !hideme[i]">
+                    <mat-icon class="mat-icon-delete">close</mat-icon>
+                  </button>
+                </td>
+                <td>{{item.fullName}}</td>
+                <td>{{item.grossSalary}}</td>
+               
+                <td>{{item.totalDeductionAmount.toFixed(2) }}</td>
+                <td>{{item.payableSalary.toFixed(2)  }}</td>
+                <td>{{item.netPayableAmount.toFixed(2)  }}</td>
+                <td *ngIf="isPayrollManager">{{item.branchName}}</td>
+                <td *ngIf="isPayrollManager">{{item.departmentName}}</td>
+                <td *ngIf="isPayrollManager">{{item.designationName}}</td>
+                <td *ngIf="isPayrollManager">{{item.loginId}}</td>
+                <td *ngIf="isPayrollManager">{{item.companyEmployeeId}}</td>
+              </tr>
+              <tr [hidden]="!hideme[i]" class="sub-table no-bg">
+                <td align="center"></td>
+                <td colspan="15" class="p-0">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>{{'PAYROLL.EMPLOYEESALARYCOMPONENT.INDEX.TABLE.HEADER.SALARYCOMPONENTNAME' | translate }}
+                        </th>
+                        <th>{{'PAYROLL.EMPLOYEESALARYCOMPONENT.INDEX.TABLE.HEADER.VALUE' | translate }}</th>
+                      </tr>
+
+                    </thead>
+                    <tbody *ngFor="let child of childList[i]">
+                      <tr>
+                        <td [ngClass]="(child.type === 'B')? 'benifit': 'deduct'">{{child.displayName }}
+                          <span class="display-name" *ngIf="child.description.length>0">( {{child.description }}
+                            )</span>
+
+                        </td>
+
+                        <td [ngClass]="(child.type === 'B')? 'benifit': 'deduct'">{{child.componentValue.toFixed(2) }}
+                        </td>
+                      </tr>
+
+                    </tbody>
+                    <tbody>
+                      <tr>
+                        <td colspan="2">
+                          <svg height="100" width="100" class="mr-30">
+                            <circle cx="50" cy="50" r="8" stroke="#ADD8E6" stroke-width="3" fill="#ADD8E6" />
+                          </svg>
+                          <span>Addition</span>
+                          <svg height="100" width="100" class="mr-30">
+                            <circle cx="50" cy="50" r="8" stroke="#FFCCCB" stroke-width="3" fill="#FFCCCB" />
+                          </svg>
+                          <span>Subtraction</span>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="isSearched && isEmpty && !loading" class="text-info text-center">
+            {{'PAYROLL.PAIDSALARY.INDEX.EMPTYMESSAGE' | translate }}</div>
+        </div>
+      </div>
+      <div class="row " *ngIf="totalItems > 0" style="padding-top:20px;">
+        <div class="col-md-5 col-sm-5 text-left">
+          {{totalItemsText}}
+        </div>
+        <div class="col-md-5 col-sm-5 text-left">
+          <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+            directionLinks="true" previousLabel="" nextLabel="">
+          </pagination-controls>
+        </div>
+        <div class="col-md-2 col-sm-2 text-left">
+          <mat-form-field>
+            <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()"
+              placeholder="{{ 'PAGINATION.PLACEHOLDER' | translate }}">
+              <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+                {{item.text}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

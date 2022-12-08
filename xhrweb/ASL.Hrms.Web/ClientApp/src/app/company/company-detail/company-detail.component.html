@@ -1,0 +1,125 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+
+</div>
+
+<mat-accordion>
+  <mat-expansion-panel hideToggle>
+
+
+  </mat-expansion-panel>
+  <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="h6">
+        Information Of {{companyName}}
+
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    <form [formGroup]="companyDetailForm" enctype="multipart/form-data" (ngSubmit)="saveCompanyDetail()">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <!-- <mat-card-title>Information Of {{companyName}}</mat-card-title> -->
+
+        </mat-card-header>
+        <mat-error *ngIf="!isFormValid">
+          <div class="d-flex">
+
+            {{errorMessages}}
+
+          </div>
+        </mat-error>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-12">
+              <mat-form-field appearance="outline">
+                <mat-label class="label-font">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}</mat-label>
+                <input class="example-full-width" matInput formControlName="companyName" [(value)]="companyName"
+                  placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}"
+                  [ngClass]="{'is-invalid': submitted && f.companyName.errors}">
+                <mat-error *ngIf="f.companyName.errors && f.companyName.errors.required">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                <mat-error *ngIf="f.companyName.errors && f.companyName.errors.maxlength">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <div class="col-12">
+              <mat-form-field appearance="outline">
+                <mat-label class="label-font">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.PLACEHOLDER' | translate }}</mat-label>
+                <input class="example-full-width" matInput formControlName="companySlogan" [(value)]="companySlogan"
+                  placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.PLACEHOLDER' | translate }}"
+                  [ngClass]="{'is-invalid': submitted && f.companySlogan.errors}">
+                <mat-error *ngIf="f.companySlogan.errors && f.companySlogan.errors.maxlength">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYSLOGAN.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label class="label-font">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}
+                </mat-label>
+                <input class="example-full-width" matInput formControlName="shortName" [(value)]="shortName"
+                  placeholder="{{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}"
+                  [ngClass]="{'is-invalid': submitted && f.shortName.errors}">
+                <mat-error *ngIf="f.shortName.errors && f.shortName.errors.required">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                <mat-error *ngIf="f.shortName.errors && f.shortName.errors.maxlength">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.SHORTNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label class="label-font">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.WEBSITE.PLACEHOLDER' | translate }}
+                </mat-label>
+                <input class="example-full-width" matInput formControlName="companyWebsite" [(value)]="companyWebsite"
+                  placeholder="  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.WEBSITE.PLACEHOLDER' | translate }}"
+                  [ngClass]="{'is-invalid': submitted && f.companyWebsite.errors}">
+                <mat-error *ngIf="f.companyWebsite.errors && f.companyWebsite.errors.required">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.WEBSITE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                <mat-error *ngIf="f.companyWebsite.errors && f.companyWebsite.errors.maxlength">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.WEBSITE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field appearance="outline">
+                <mat-label class="label-font">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.FACEBOOK.PLACEHOLDER' | translate }}
+                </mat-label>
+                <input class="example-full-width" matInput formControlName="facebookLink" [(value)]="facebookLink"
+                  placeholder="Facebook Link"
+                  [ngClass]="{'is-invalid': submitted && f.facebookLink.errors}">
+                <mat-error *ngIf="f.facebookLink.errors && f.facebookLink.errors.required">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.FACEBOOK.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+                <mat-error *ngIf="f.shortName.errors && f.shortName.errors.maxlength">
+                  {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.FACEBOOK.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <caption class="logo">Company Logo</caption>
+              <img  class="img-profile" [src]="companyImage"
+                style="height:200px; width:200px;">
+              <input #file id="image" type="file" multiple (change)="uploadImage(file.files)"
+                placeholder="Upload Image">
+              <div><span>(For better view image size should be 200x200 px)</span></div>  
+            </div>
+            
+            <!-- <div class="col-md-4">
+              <mat-checkbox class="form-group" matInput formControlName="isActive" [(value)]="isActive"
+                matTooltip="Is Active?">
+                Is Active
+              </mat-checkbox>
+            </div> -->
+          </div>
+          <mat-card-actions align="right">
+            <button class="btn btn-success" type="submit" mat-button>{{ 'COMMON.SAVE_BUTTON_TEXT' | translate}}</button>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>

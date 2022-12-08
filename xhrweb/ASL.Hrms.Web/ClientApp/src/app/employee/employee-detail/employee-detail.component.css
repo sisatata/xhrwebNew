@@ -1,0 +1,10 @@
+mat-form-field {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+.mat-card{
+  box-shadow: none!important;
+}

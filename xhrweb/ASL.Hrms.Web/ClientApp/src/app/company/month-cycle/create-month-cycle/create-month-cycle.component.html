@@ -1,0 +1,116 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'COMPANY.MONTHCYCLE.CREATE.EDIT_TITLE' | translate }}</h5>
+
+
+<form class="monthCycle-from" [formGroup]="monthCycleCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="monthCycle.companyId" (selectionChange)="onChangeCompany()">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.FINANCIALYEARID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="financialYearId" placeholder="{{ 'COMMON.SELECT.FINANCIALYEARID.PLACEHOLDER' | translate }}" [(value)]="monthCycle.financialYearId" (selectionChange)="onChangeFinancialYear()">
+          <ng-container *ngFor="let financialYear of financialYears">
+            <mat-option value="{{financialYear.id}}">{{financialYear.financialYearName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.financialYearId.errors && f.financialYearId.errors.required">{{ 'COMMON.SELECT.FINANCIALYEARID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLENAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="monthCycleName" placeholder="{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLENAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.monthCycleName.errors}" />
+        <mat-error *ngIf="submitted && f.monthCycleName.errors && f.monthCycleName.errors.required">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLENAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.monthCycleName.errors && f.monthCycleName.errors.maxlength">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLENAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLELOCALIZEDNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="monthCycleLocalizedName"
+               placeholder="{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLELOCALIZEDNAME.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.monthCycleLocalizedName.errors}" />
+        <mat-error *ngIf="submitted && f.monthCycleLocalizedName.errors && f.monthCycleLocalizedName.errors.required">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLELOCALIZEDNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.monthCycleLocalizedName.errors && f.monthCycleLocalizedName.errors.maxlength">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLELOCALIZEDNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>-->
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLESTARTDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [matDatepicker]="monthStartDate" formControlName="monthStartDate" (click)="monthStartDate.open()"
+               placeholder="{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLESTARTDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.monthStartDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="monthStartDate"></mat-datepicker-toggle>
+        <mat-datepicker #monthStartDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.monthStartDate.errors && f.monthStartDate.errors.required">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLESTARTDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.monthStartDate.errors && f.monthStartDate.errors.maxlength"></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLEENDDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [matDatepicker]="monthEndDate" formControlName="monthEndDate" (click)="monthEndDate.open()"
+               placeholder="{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLEENDDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.monthEndDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="monthEndDate"></mat-datepicker-toggle>
+        <mat-datepicker #monthEndDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.monthEndDate.errors && f.monthEndDate.errors.required">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.MONTHCYCLEENDDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.monthEndDate.errors && f.monthEndDate.errors.maxlength"></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.TOTALWORKINGDAYS.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="totalWorkingDays" placeholder="{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.TOTALWORKINGDAYS.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.totalWorkingDays.errors}" />
+        <mat-error *ngIf="submitted && f.totalWorkingDays.errors && f.totalWorkingDays.errors.required">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.TOTALWORKINGDAYS.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="runningFlag" [(value)]="monthCycle.runningFlag"
+                    matTooltip="Running Flag?">
+        {{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.RUNNINGFLAG.PLACEHOLDER' | translate }}
+      </mat-checkbox>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="sortOrder" placeholder="{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.sortOrder.errors}" />
+        <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.required">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.SORTORDER.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.maxlength">{{ 'COMPANY.MONTHCYCLE.CREATE.CREATE_FORM.SORTORDER.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessages}}
+          
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+
+

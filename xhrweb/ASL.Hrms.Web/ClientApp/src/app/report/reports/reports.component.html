@@ -1,0 +1,96 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-12">
+    <h1 id="tableLabel">{{'REPORT.INDEX.ATTENDANCEREPORTTITLE' | translate}}</h1>
+  </div>
+</div>
+
+  <form [formGroup]="reportFilterFormGroup">
+      <div class="row">
+        <div class="col-12" *ngIf = "isAdmin" >
+          <app-search-filter  [companyId]="companyId" [showEmployeeList] = "true"  [showInputField]="false" ></app-search-filter>
+        </div>
+        <div class="col-sm-3 col-md-3 col-12" *ngIf="isEmployee && !isAdmin">
+          <mat-form-field appearance="outline">
+            <mat-label> {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}"
+              formControlName="companyId">
+              <mat-option *ngFor="let item of companies" [value]="item.id">
+                {{item.companyName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">Company is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-3 col-md-3 col-12" *ngIf="isEmployee && !isAdmin">
+          <mat-form-field appearance="outline">
+            <mat-select matInput formControlName="employeeId" [(value)]="employeeId"
+              placeholder="Select Employee" (selectionChange)="onChangeEmployee($event)" [disabled]="!isAdmin">
+              <ng-container *ngFor="let employee of employees">
+                <mat-option value="{{employee.id}}">{{employee.fullName}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">
+              {{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-3 col-md-2 col-12">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}
+            </mat-label>
+            <input matInput [matDatepicker]="startDatePicker" formControlName="startTime"
+              (click)="startDatePicker.open()"
+              placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': f.startTime.errors}">
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+            <mat-error *ngIf="submitted && f.startTime.errors && f.startTime.errors.required">{{
+                    'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-3 col-md-2 col-12">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}
+            </mat-label>
+            <input matInput [matDatepicker]="endDatePicker" formControlName="endTime" (click)="endDatePicker.open()"
+              [(value)]="endTime"
+              placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': f.endTime.errors}">
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+            <mat-error *ngIf="submitted && f.endTime.errors && f.endTime.errors.required">{{
+                    'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="row justify-content-center text-center">
+       <div class="col-12 col-md-4 col-lg-4 col-xl-2 mt-2">
+        <button (click)="downloadAttndancePdfReport()" style="font-size: 12px;width: 100%; " type="submit"
+        class="btn btn-success ">{{'REPORT.INDEX.BUTTONTEXT.ATTENDANCE_PDF_REPORT' | translate}}</button>
+     
+       </div>
+       <div class="col-12 col-md-4 col-lg-4 col-xl-2 mt-2" *ngIf="isAdmin">
+        <button  type="submit" class="btn btn-success" style="font-size: 12px; width: 100%;"
+        (click)="downloadAttendanceSummaryReport()">{{'REPORT.INDEX.BUTTONTEXT.ATTENDANCE_SUMMARY_REPORT_PDF' | translate}}</button>
+      </div>
+      
+       <div class="col-12 col-md-4 col-lg-4 col-xl-2 mt-2" *ngIf="isAdmin">
+        <button  type="submit" class="btn btn-success" style="font-size: 12px;width: 100%;"
+        (click)="downloadJobCardSummaryReport()">{{'REPORT.INDEX.BUTTONTEXT.JOB_CARD_SUMMARY_REPORT_PDF' | translate}}</button>
+       </div>
+       </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex mx-auto">
+        {{errorMessages}}
+      </div>
+    </mat-error>
+    <div *ngIf="submitted && pdfUrl" class="mt-5">
+      <iframe [src]="pdfUrl" style="width:100%;height:600px;"></iframe>
+    </div>
+  </form>

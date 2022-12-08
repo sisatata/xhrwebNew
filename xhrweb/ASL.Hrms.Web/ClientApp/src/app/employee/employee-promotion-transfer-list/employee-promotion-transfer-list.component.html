@@ -1,0 +1,160 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+
+<div class="row d-flex justify-content-between mt-3 mb-3">
+    <div class="col-12 col-md-6 col-lg-5">
+      <h1 id="tableLabel">{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.TITLE' | translate  }}</h1>
+    </div>
+  </div>
+
+  <form [formGroup]="employeeProromotionTransferFilterFormGroup" >
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'COMPANY.DEPARTMENT.DROPDOWN.COMPANY.PLACEHOLDER' | translate }}</mat-label>
+              <mat-select placeholder="{{ 'COMPANY.DEPARTMENT.DROPDOWN.COMPANY.PLACEHOLDER' | translate }}" formControlName="companyId">
+                <mat-option *ngFor="let item of companies" [value]="item.id">
+                  {{item.companyName}}
+                </mat-option>
+              </mat-select>
+              <div *ngIf="submitted && f.companyId.errors">
+                <mat-error *ngIf="f.companyId.errors.required">Company is required</mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.APPROVAL_STATUS' | translate  }}</mat-label>
+              <mat-select (selectionChange)="onChangApprovalStatus($event.value);" placeholder="{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.APPROVAL_STATUS' | translate  }}" formControlName="approvalStatus">
+                <mat-option *ngFor="let item of approvalStatuses" [value]="item.id">
+                  {{item.value}}
+                </mat-option>
+              </mat-select>
+              
+            </mat-form-field>
+          </div>
+      </div>
+  </form>
+  <div class="table-responsive">
+  <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+    <thead>
+      <tr class="table-secondary">
+        <th class="text-center headcol">{{ 'COMPANY.COMPANY.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.EMPLOYEEID' | translate }} </th>
+       
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.FULLNAME' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.APPROVAL_STATUS' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.APPROVAL_NOTE' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.APPROVAL_DATE' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.CRITERIA' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.AMOUNT' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.BASIC/GROSS' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PERCENTAGE/FIXED' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_COMPANY' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_BRANCH' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_DEPARTMENT' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_DESIGNATION' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_GRADE' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_SALARYSTRUCTURE' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_PAYMENTOPTION' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_GRADE' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_SALARYSTRUCTURE' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_PAYMENTOPTION' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_COMPANY' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_BRANCH' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_DEPARTMENT' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_DESIGNATION' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_BASIC' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_HOUSERENT' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.PREVIOUS_GROSS' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_BASIC' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_HOUSERENT' | translate  }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.INDEX.NEW_GROSS' | translate  }}</th>
+        <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.STARTDATE' | translate }}</th>
+        <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.ENDDATE' | translate }}</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of employeePromotionTransfers | paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index"
+     
+      >
+        <tr>
+          <td class="pt-0 text-center headcol">
+            
+  
+          <a class="btn btn-primary mr-1 text-white"    (click)="navigateWithState(item.id)" [class.disabled]="item.approvalStatus === '9' ? true :  item.approvalStatus === '3' ? true:null">Edit</a>   
+   
+          <button class="btn btn-success mr-1" (click)="approveOrRejectEmployeePromotionTransfer(item,1)" [class.disabled]="item.approvalStatus === '9' ? true :  item.approvalStatus === '3' ? true:null" [disabled]="item.approvalStatus === '3' || item.approvalStatus === '9'">Approve</button>
+          <button class="btn btn-danger" (click)="approveOrRejectEmployeePromotionTransfer(item,2)" [class.disabled]="item.approvalStatus === '9' ? true :  item.approvalStatus === '3' ? true:null"  [disabled]="item.approvalStatus === '9' || item.approvalStatus === '3'">Decline</button>
+          </td>
+          <td>{{item?.companyEmployeeId}}</td>
+         
+          <td>{{item?.fullName}}</td>
+          <td>{{item?.approvalStatus === '9' ? 'Declined' : item?.approvalStatus === '3' ? 'Approved' : 'Pending'}}</td>
+          <td>{{item?.approveNote === null ?'N/A' :item?.approveNote }}</td>
+          <td>{{item?.approveDate === null? 'N/A' :item?.approveDate | date: 'dd/MM/yyyy'}}</td>
+          <td>{{item?.incrementTypeId === 10 ? 'Increment' : item?.incrementTypeId  === 20? 'Adjustment' : item?.incrementTypeId == 30 ? 'Promotion' : item?.incrementTypeId == 40 ? 'Transfer' : item?.incrementTypeId === 50 ? 'Promotion & Increment' : item?.incrementTypeId === 60 ? 'Starting Salary' : item?.incrementTypeId === 70 ? 'Revised Salary' : 'Others'}}</td>
+          <td>{{item?.incrementValue}}</td>
+          <td>{{item?.incrementOn === 10 ? 'Gross' : item?.incrementOn === 20 ? 'Basic ':  item?.incrementOn === 30? 'Basic & House Rent': 'N/A'}}</td>
+          <td>{{item?.incrementValueTypeId === 1 ? 'Fixed': item?.incrementValueTypeId === 2?'Percent':'N/A'}}</td>
+          <td>{{item?.previousCompanyName}}</td>
+          <td>{{item?.previousBranchName}}</td>
+          <td>{{item?.previousDepartmentName}}</td>
+          <td>{{item?.previousPositionName}}</td>
+          <td>{{item?.previousGradeName}}</td>
+          <td>{{item?.previousStructureName}}</td>
+          <td>{{item?.previousOptionName}}</td>
+          <td>{{item?.newGradeName}}</td>
+          <td>{{item?.newStructureName}}</td>
+          <td>{{item?.newOptionName === null ? 'N/A' :item?.newOptionName }}</td>
+          <td>{{item?.newCompanyName === null ? 'N/A' :item?.newCompanyName}}</td>
+          <td>{{item?.newBranchName === null ? 'N/A' :item?.newBranchName}}</td>
+          <td>{{item?.newDepartmentName === null ? 'N/A' :item?.newDepartmentName}}</td>
+          <td>{{item?.newPositionName === null ? 'N/A' :item?.newPositionName}}</td>
+          <td>{{item?.previousBasic}}</td>
+          <td>{{item?.previousHouserent}}</td>
+          <td>{{item?.previousGross}}</td>
+          <td>{{item?.newBasic === null ? 'N/A' :item?.newBasic}}</td>
+          <td>{{item?.newHouserent === null ? 'N/A' :item?.newHouserent}}</td>
+          <td>{{item?.newGross === null ? 'N/A' :item?.newGross}}</td>
+         
+          
+          <td>{{item?.startDate | date: 'dd/MM/yyyy'}}</td>
+          <td>{{item?.endDate | date: 'dd/MM/yyyy'}}</td>
+  
+  
+  
+        </tr>
+
+      </ng-container>
+      
+      <tr *ngIf="employeePromotionTransfers.length==0">
+        <td colspan="50" class="text-center text-info">  {{'PAYROLL.PAIDSALARY.INDEX.EMPTYMESSAGE' | translate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <div class="row justify-content-between" *ngIf="totalItems > 0">
+    <div class="col-md-5 col-sm-5 text-left">
+      {{totalItemsText}}
+    </div>
+  
+    <div class="col-md-5 col-sm-5 text-left">
+      <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+        directionLinks="true" previousLabel="" nextLabel="">
+      </pagination-controls>
+    </div>
+  
+    <div class="col-md-2 col-sm-2 text-left">
+      <mat-form-field>
+        <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()" placeholder="Items Per Page">
+          <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+            {{item.text}}
+          </mat-option>
+        </mat-select>
+  
+      </mat-form-field>
+    </div>
+  </div>

@@ -1,0 +1,10 @@
+/* This style sheet is not working */
+
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}

@@ -1,0 +1,129 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+
+<section *blockUI="'salarystructure-list-section'">
+  <div class="card">
+    <div>
+      <div>
+        <!--<table class="table table-bordered heading-hvr">-->
+        <div class="table-responsive">
+          <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+            <thead>
+              <tr class="table-secondary">
+                <th class="text-center">{{'PAYROLL.SALARYSTRUCTURE.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+                <th>{{'TASK.TASKDETAIL.INDEX.TABLE.HEADER.TASK_NAME' | translate}}</th>
+                <th>{{'TASK.TASKDETAIL.INDEX.TABLE.HEADER.TASK_DESCRIPTION' | translate}}</th>
+                <th>Progress</th>
+                <th>{{'TASK.TASKDETAIL.INDEX.TABLE.HEADER.START_DATE' | translate}}</th>
+                <th>{{'TASK.TASKDETAIL.INDEX.TABLE.HEADER.END_DATE' | translate}}</th>
+                <th>Assignee</th>
+                <th>Assigned By</th>
+                <th>{{'TASK.TASKDETAIL.INDEX.TABLE.HEADER.TASK_CATEGORY' | translate}}</th>
+                <th>{{'TASK.TASKDETAIL.INDEX.TABLE.HEADER.STATUS' | translate}}</th>
+              </tr>
+            </thead>
+            <tbody
+              *ngFor="let item of tasksDetail; let $index = index; let i = index">
+              <tr>
+                <td class="pt-0 text-center">
+                  <!-- <button mat-icon-button (click)="createTaskDetailChild( item)" matTooltip="Add new task detail">
+                    <mat-icon>add</mat-icon>
+                  </button> -->
+                  <button mat-icon-button (click)="editTaskDetail(item)" matTooltip="Edit">  
+                    <mat-icon>create</mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="onDeleteTaskDetail(item)" matTooltip="Delete">
+                    <mat-icon class="mat-icon-delete">delete</mat-icon>
+                  </button>
+                  <!-- <button mat-icon-button *ngIf="!hideme[i]" (click)="showChildList(i,item.id, tasksDetail)"
+                    matTooltip="Childs task detail">
+                    <mat-icon>list</mat-icon>
+                  </button> -->
+                  <!-- <button mat-icon-button *ngIf="hideme[i]" (click)="hideme[i] = !hideme[i]">
+                    <mat-icon class="mat-icon-delete">close</mat-icon>
+                  </button> -->
+                  <button mat-icon-button *ngIf="!hideme[i]" (click)="showTaskDetailLogs(i,item.id)"
+                    matTooltip="Task Detail logs">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                </td>
+                <td>{{item.taskName}}</td>
+                <td>{{item.taskDescription}}</td>
+                <td>{{item.progress === null? 'N/A': item.progress}}</td>
+                <td>{{item.startDate  | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.endDate | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.fullName}}</td>
+                <td>{{item.assignedBy === null? 'N/A': item.assignedBy}}</td>
+                <td>{{item.taskCategoryName}}</td>
+                <td>{{statuses[item.statusId]}}</td>
+              </tr>
+              <tr [hidden]="!hideme[i]" class="sub-table no-bg" >
+                <td align="center"></td>
+                <ng-container *ngIf="tasksDetail[i].listTaskDetail && tasksDetail[i].listTaskDetail.length">
+                  <!-- <ng-container *ngFor="let salary of salarystructures[i].listSal";> -->
+                    <td colspan="100"> <app-task-detail
+                      *ngIf="tasksDetail[i].listTaskDetail != undefined && tasksDetail[i].listTaskDetail != null"
+                      [data]="tasksDetail[i].listTaskDetail"></app-task-detail></td>
+                 
+                  <!-- </ng-container> -->
+                </ng-container>
+              </tr>
+              <tr [hidden]="!hideDetailLogs[i]" class="sub-table no-bg">
+                <td align="center"></td>
+                <td colspan="15" class="p-0">
+                  <table class="table mb-0 table-striped">
+                    <thead>
+                      <tr>
+                        <th class="text-center"><button mat-icon-button (click)="createTaskDetailLog(item)"
+                            matTooltip="Add task detail log">
+                            <mat-icon style="font-weight: 700;">add</mat-icon>
+                          </button>
+                        </th>
+                        <th class="text-center">{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.ACTIONS' | translate }}
+                        </th>
+                      
+                        <th>
+                          {{'TASK.TASKDETAILLOG.INDEX.TABLE.HEADER.UPDATE_INFO' | translate}}
+                        </th>
+                        <th>
+                          {{'TASK.TASKDETAILLOG.INDEX.TABLE.HEADER.UPDATED_DATE' | translate}}
+                        </th>
+                        <th>
+                          {{'TASK.TASKDETAILLOG.INDEX.TABLE.HEADER.SPEND_TIME' | translate}}
+                        </th>
+                        <th>{{'TASK.TASKDETAIL.INDEX.TABLE.HEADER.START_DATE' | translate}}</th>
+                        <th>
+                          {{'TASK.TASKDETAIL.INDEX.TABLE.HEADER.END_DATE' | translate}}
+                        </th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let taskDetailChild of childList[$index] 
+                   
+                    let $childIndex = index;">
+                      <tr>
+                        <td></td>
+                        <td class="pt-0 text-center">
+                          <button mat-icon-button (click)="editTaskDetailLog(taskDetailChild)"
+                            matTooltip="{{ 'COMMON.EDIT_BUTTON_TEXT' | translate }}">
+                            <mat-icon>create</mat-icon>
+                          </button>
+                        </td>
+                      
+                        <td>{{taskDetailChild.updateInfo}}</td>
+                        <td>{{taskDetailChild.dateUpdated | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{taskDetailChild.spendTime | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{taskDetailChild.startDate  | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{taskDetailChild.endDate  | date: 'dd/MM/yyyy'}}</td>
+                      </tr>
+                  </table>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

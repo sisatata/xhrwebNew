@@ -1,0 +1,89 @@
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.EDIT_TITLE' | translate}}</h5>
+
+<form class="salarystructurecomponent-from" [formGroup]="salarystructurecomponentCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="salarystructurecomp.companyId" (selectionChange)="onChangeCompany()">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Salary structure</mat-label>
+        <mat-select  [disabled]="!isEditMode" matInput formControlName="salaryStrutureId" placeholder="Salary structure" [(value)]="salarystructurecomp.salaryStrutureId">
+          <ng-container *ngFor="let salaryStructure of salaryStructures">
+            <mat-option value="{{salaryStructure.id}}">{{salaryStructure.structureName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.salaryStrutureId.errors && f.salaryStrutureId.errors.required">{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.SALARYSTRUTUREID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.SALARYSTRUTUREID.PLACEHOLDER' | translate }}</mat-label>
+      <input matInput formControlName="salaryStrutureId" placeholder="{{'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.SALARYSTRUTUREID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.salaryStrutureId.errors}" />
+      <mat-error *ngIf="submitted && f.salaryStrutureId.errors && f.salaryStrutureId.errors.required">{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.SALARYSTRUTUREID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      <mat-error *ngIf="submitted && f.salaryStrutureId.errors && f.salaryStrutureId.errors.maxlength">{{'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.SALARYSTRUTUREID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+    </mat-form-field>
+  </div>-->
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.SALARYCOMPONENTNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="salaryComponentName" placeholder="{{'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.SALARYCOMPONENTNAME.PLACEHOLDER' | translate }} (Space not allowed)" [ngClass]="{'is-invalid': submitted && f.salaryComponentName.errors}" />
+        <mat-error *ngIf="submitted && f.salaryComponentName.errors && f.salaryComponentName.errors.required">{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.SALARYCOMPONENTNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.salaryComponentName.errors && f.salaryComponentName.errors.maxlength">{{'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.SALARYCOMPONENTNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.VALUETYPE.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="valueType" placeholder="{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.VALUETYPE.PLACEHOLDER' | translate }}" [(value)]="salarystructurecomp.valueType" (selectionChange)="onChangeValue()">
+          <ng-container *ngFor="let valueType of valueTypes">
+            <mat-option value="{{valueType.id}}">{{valueType.value}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.valueType.errors && f.valueType.errors.required">{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.VALUETYPE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group" [hidden]="hidePercentOn">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.PERCENTON.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="percentOn" placeholder="{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.PERCENTON.PLACEHOLDER' | translate }}" [(value)]="salarystructurecomp.percentOn">
+          <ng-container *ngFor="let percentOnType of percentOnTypes">
+            <mat-option value="{{percentOnType.id}}">{{percentOnType.value}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.percentOn.errors && f.percentOn.errors.required">{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.PERCENTON.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.VALUE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="value" placeholder="{{'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.VALUE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.value.errors}" />
+        <mat-error *ngIf="submitted && f.value.errors && f.value.errors.required">{{ 'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.VALUE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.value.errors && f.value.errors.maxlength">{{'PAYROLL.SALARYSTRUCTURECOMPONENT.CREATE.CREATE_FORM.VALUE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+

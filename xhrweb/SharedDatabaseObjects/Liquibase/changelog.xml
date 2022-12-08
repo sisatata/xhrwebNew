@@ -1,0 +1,232 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+    <changeSet id="1" author="zafor">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetCompany.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetBranchByCompany.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetBranchById.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetDepartmentByBranch.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetDepartmentById.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetDesignationByEntity.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetDesignationById.sql" />
+    </changeSet>
+	
+	 <changeSet id="3" author="azad">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeList.sql" />
+    </changeSet>
+	
+	<changeSet id="4" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeDetailByEmployeeId.sql" />
+    </changeSet>
+	
+	<changeSet id="5" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetemployeeAddressByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeAddressbyId.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEmailByEmployeeId.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEmailById.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEmailListByEmployeeId.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEnrollmentByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeImageByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeePhoneByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeePhoneById.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeStatusByCompany.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeStatusHistoryByEmployee.sql" />
+		
+    </changeSet>
+	
+	<changeSet id="6" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeExperienceById.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeExperienceByEmployee.sql" />
+    </changeSet>
+	
+	<changeSet id="7" author="zafor">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\LeaveManagement\\views\\EmployeeInfo.sql" />
+	</changeSet>
+	
+	<changeSet id="8" author="Ashraf">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\getfinancialyearbycompanyid.sql" />
+	</changeSet>
+	
+	<changeSet id="9" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetemployeeAddressByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeAddressbyId.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEmailByEmployeeId.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEmailById.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEmailListByEmployeeId.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEnrollmentByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeImageByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeePhoneByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeePhoneById.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeStatusByCompany.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeStatusHistoryByEmployee.sql" />
+		
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEducationByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeEducationById.sql" />
+		
+    </changeSet>
+	<changeSet id="10" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetCommonLookUpTypeByCompany.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetCommonLookUpTypeByParentCode.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetCommonLookUpTypeByParentId.sql" />
+    </changeSet>
+	
+	<changeSet id="11" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeFamilyMemberByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeManagerByEmployee.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeManagerById.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeFamilyMemberById.sql" />
+    </changeSet>
+	
+	<changeSet id="12" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetDistrict.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetDistrictById.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetUpazilaByDistrict.sql" />
+		<sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetUpazilaById.sql" />
+    </changeSet>
+	<changeSet id="13" author="Ashraf">
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\LeaveManagement\\Functions\\GetLeaveTypeByCompany.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\LeaveManagement\\Functions\\GetLeaveApplicationByCompany.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\LeaveManagement\\Functions\\GetLeaveBalanceSummaryByEmployee.sql" />
+	</changeSet>
+	
+	<changeSet id="14" author="Azad">
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftGroupByCompany.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftGroupById.sql" />
+	</changeSet>
+	
+	
+	<changeSet id="15" author="Azad">
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftGroupByCompany.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftGroupById.sql" />
+	</changeSet>
+	
+	<changeSet id="16" author="Azad">
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftGroupByCompany.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftGroupById.sql" />
+	</changeSet>
+	
+	<changeSet id="17" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetOfficeNoticeById.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetOfficeNoticeByCompany.sql" />
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetOfficeNoticeActiveAndPublishedByCompany.sql" />
+	</changeSet>
+	
+	<changeSet id="18" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\EmployeeEnrollment\\Functions\\GetEmployeeList.sql" />
+    </changeSet>
+	
+	<changeSet id="20" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	
+	<changeSet id="21" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	
+	<changeSet id="22" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	
+	<changeSet id="23" author="Ashraf">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetMonthCycleByCompanyIdandFinancialYear.sql" />
+	</changeSet>
+	
+	<changeSet id="24" author="Azhar">
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\LeaveManagement\\Functions\\GetLeaveApplicationById.sql" />
+	</changeSet>
+	<changeSet id="25" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	<changeSet id="26" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	
+	<changeSet id="25" author="Azhar">
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetAttendanceRequestByCompany.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetAttendanceRequestById.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetAttendanceRequestBySearch.sql" />
+	</changeSet>
+	
+	<changeSet id="27" author="Ashraf">
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\LeaveManagement\\Functions\\GetLeaveTypeByCompany.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\LeaveManagement\\Functions\\GetLeaveApplicationByCompany.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\LeaveManagement\\Functions\\GetLeaveBalanceSummaryByEmployee.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\LeaveManagement\\Functions\\GetLeaveApplicationById.sql" />
+		<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetAttendanceProcessedDataListByEmployeeAndDateRange.sql" />
+	</changeSet>
+	<changeSet id="28" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	<changeSet id="29" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	
+	<changeSet id="30" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	<changeSet id="31" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	<changeSet id="32" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	<changeSet id="33" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	<changeSet id="34" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	<changeSet id="35" author="Ashraf">
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\Functions\\GetShiftByCompany.sql"/>
+	<sqlFile encoding="utf8" splitStatements="false" path="..\\Attendance\\Functions\\GetShiftAllocation.sql" />
+	
+	</changeSet>
+	<changeSet id="36" author="Azad">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetGradeByCompany.sql" />
+		 <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetGradeById.sql" />
+		  <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetConfirmationRuleActiveByCompany.sql" />
+		  <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetConfirmationRuleByCompany.sql" />		  
+	</changeSet>
+	<changeSet id="37" author="Azad">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetSalaryRuleActiveByCompany.sql" />
+		 <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetSalaryRuleByCompany.sql" />
+		 <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetSalaryRuleById.sql" />
+		 <sqlFile encoding="utf8"  splitStatements="false" path="..\\CompanySetup\\Functions\\GetConfirmationRuleById.sql" />		  
+	</changeSet>
+	
+	
+	
+	<changeSet id="38" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\Attendance\\views\\AttendanceCommon.sql" />
+	</changeSet>
+	<changeSet id="39" author="Azhar">
+        <sqlFile encoding="utf8"  splitStatements="false" path="..\\PayrollManagement\\Functions\\GetBenefitBillClaimByCompany.sql" />
+		
+	</changeSet>
+	
+</databaseChangeLog>

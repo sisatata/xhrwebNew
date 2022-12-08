@@ -1,0 +1,56 @@
+
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<div class="row float-right m-1 p-2">
+  <button  *ngIf="isAdmin || isHRManager" mat-raised-button (click)="createEmployeeCard()"
+    matTooltip="{{'EMPLOYEE.EMPLOYEECARD.CREATE.CREATE_TITLE' | translate}}" class="btn btn-success">
+    <mat-icon class="create-icon-small-button">add</mat-icon>{{'EMPLOYEE.EMPLOYEECARD.INDEX.TITLE' | translate}}
+  </button>
+</div>
+<section *blockUI="'employee-address-section'">
+  <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+    <thead>
+      <tr class="table-secondary">
+        <th  *ngIf="isAdmin || isHRManager" class="text-center">{{ 'EMPLOYEE.EMPLOYEEADDRESS.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+        <th>{{'EMPLOYEE.EMPLOYEECARD.INDEX.TABLE.HEADER.CARD_MASKING_VALUE' | translate}}</th>
+        <th>{{'EMPLOYEE.EMPLOYEECARD.INDEX.TABLE.HEADER.ISSUE_DATE' | translate}}</th>
+        <th>{{'EMPLOYEE.EMPLOYEECARD.INDEX.TABLE.HEADER.CHARGE_AMOUNT' | translate}}</th>
+        <th>{{'EMPLOYEE.EMPLOYEECARD.INDEX.TABLE.HEADER.CARD_MASKING_VALUE' | translate}}</th>
+        <th>{{'EMPLOYEE.EMPLOYEECARD.INDEX.TABLE.HEADER.IS_PAID' | translate}}</th>
+        <th>{{'EMPLOYEE.EMPLOYEECARD.INDEX.TABLE.HEADER.PAYMENT_DATE' | translate}}</th>
+        <th>{{'EMPLOYEE.EMPLOYEECARD.INDEX.TABLE.HEADER.CARD_REVOKED' | translate}}</th>
+        <th>{{'EMPLOYEE.EMPLOYEECARD.INDEX.TABLE.HEADER.CARD_REVOKED_DATE' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of employeeCards">
+        <td  *ngIf="isAdmin || isHRManager" class="pt-0 text-center">
+          <button *ngIf="isAdmin" mat-icon-button (click)="editEmployeeCard(item)"
+            matTooltip="{{'EMPLOYEE.EMPLOYEECARD.CREATE.EDIT_TITLE' | translate}}">
+            <mat-icon>create</mat-icon>
+          </button>
+          <button *ngIf="isAdmin" mat-icon-button (click)="onDeleteEmployeeCard(item)"
+            matTooltip="{{'EMPLOYEE.EMPLOYEECARD.INDEX.DELETE_BUTTON_TOOLTIP' | translate}}">
+            <mat-icon class="mat-icon-delete">delete</mat-icon>
+          </button>
+        </td>
+        <td>{{item.cardMaskingValue}}</td>
+        <td>{{item.issueDate | date: 'dd/MM/yyyy'}}</td>
+        <td>{{item.chargeAmount}}</td>
+        <td>{{item.cardMaskingValue}}</td>
+        <td>{{item.isPaid === true? 'Yes': 'No'}}</td>
+        <td>{{item.paymentDate | date: 'dd/MM/yyyy'}}</td>
+        <td>{{item.cardRevoked === true? 'Yes': 'No'}}</td>
+        <td>{{item.cardRevokedDate | date: 'dd/MM/yyyy'}}</td>
+       
+       
+       
+       
+      </tr>
+      <tr *ngIf="employeeCards.length === 0">
+        <td colspan="11" class="text-center">No data found</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

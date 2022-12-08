@@ -1,0 +1,83 @@
+/**
+ * -----------------------------------------------------------------------------
+ * Reset
+ * -----------------------------------------------------------------------------
+ */
+body {
+  font-size: 16px;
+  color: #262423;
+  background: #F1F1F1;
+  margin-top: 3.75rem;
+}
+
+@media screen and (min-width: 992px) {
+  body {
+    margin-top: 4.375rem;
+  }
+}
+
+main {
+  display: block;
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * Typography
+ * -----------------------------------------------------------------------------
+ */
+body {
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.5;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #9D2933;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+  a:hover,
+  a:focus,
+  a:active {
+    color: #9D2933;
+    text-decoration: underline;
+  }
+
+  a:not([href]):not([tabindex]):hover {
+    text-decoration: underline;
+  }
+
+/**
+ * -----------------------------------------------------------------------------
+ * List
+ * -----------------------------------------------------------------------------
+ */
+.list-unstyled {
+  margin: 0;
+  padding: 0;
+}
+
+  .list-unstyled li {
+    list-style-type: none;
+  }
+
+.xHR-dialog .mat-dialog-container {
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.layout-sidebar-login {
+  margin-top: 0 !important;
+}

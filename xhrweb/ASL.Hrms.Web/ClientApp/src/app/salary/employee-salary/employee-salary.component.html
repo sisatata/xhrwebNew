@@ -1,0 +1,153 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    <h1 id="tableLabel">{{'PAYROLL.EMPLOYEESALARY.INDEX.TITLE' | translate }}</h1>
+  </div>
+  <div class="col-lg-3 col-md-6 col-lg-4 col-sm-12" *ngIf="isAdmin && isPayrollManager">
+    <button mat-raised-button (click)="createEmployeeSalary()" class="btn btn-success btn-block text-center"
+            matTooltip="{{'PAYROLL.EMPLOYEESALARY.INDEX.CREATESALARYSTRUCTUREBUTTONTEXT' | translate }}">
+      <mat-icon class="create-icon-button">add</mat-icon>
+      {{'PAYROLL.EMPLOYEESALARY.INDEX.CREATESALARYSTRUCTUREBUTTONTEXT' | translate }}
+    </button>
+  </div>
+</div>
+
+<form [formGroup]="employeesalaryFilterFormGroup">
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-3" *ngIf = "!isPayrollManager">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId" (selectionChange)="onChangeCompany($event.value)">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required"> Company is required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-12" *ngIf = "isPayrollManager">
+      <app-search-filter  [companyId]="companyId" ></app-search-filter>
+     </div>
+     <div class="col-12 col-md-3 col-lg-2" *ngIf = "isPayrollManager">
+      <button type="submit" (click) = "search(true)" class="btn btn-success w-100">Search</button>
+    </div>
+  </div>
+
+</form>
+<section *blockUI="'employee-salary-list-section'">
+  <div >
+
+    <div>
+      <div>
+        <!--<table class="table table-bordered heading-hvr">-->
+        <div class="table-responsive">
+          <table class="table table-light table-hover table-responsive-sm text-nowrap" aria-labelledby="tableLabel">
+            <thead>
+              <tr class="table-secondary">
+                <th  class="text-center">{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.EMPLOYEE' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.BRANCH' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.DEPARTMENT' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.POSITION' | translate }}</th>
+              
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.GRADE' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.SALARYSTRUCTURE' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.PAYMENTOPTION' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.GROSSSALARY' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.STARTDATE' | translate }}</th>
+                <th>{{'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.ENDDATE' | translate }}</th>
+                <th *ngIf = "isPayrollManager">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.EMAIL' | translate }}</th>
+        <th *ngIf = "isPayrollManager">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.EMPLOYEEID' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of employeesalarys | paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index; let i = index">
+              <tr>
+                <td  class="pt-0 text-center">
+                  <button *ngIf="isAdmin && isPayrollManager" mat-icon-button (click)="editEmployeeSalary(item)">
+                    <mat-icon>create</mat-icon>
+                  </button>
+                  <button *ngIf="isAdmin && isPayrollManager" mat-icon-button (click)="onDeleteEmployeeSalary(item)">
+                    <mat-icon class="mat-icon-delete">delete</mat-icon>
+                  </button>
+
+                  <button mat-icon-button *ngIf="!hideme[i]" (click)="showChildList(i,item.id)">
+                    <mat-icon>list</mat-icon>
+
+                  </button>
+                  <button mat-icon-button *ngIf="hideme[i]" (click)="hideme[i] = !hideme[i]">
+                    <mat-icon class="mat-icon-delete">close</mat-icon>
+                  </button>
+                </td>
+                <td>{{item.fullName}}</td>
+                <td>{{item.branchName}}</td>
+                <td>{{item.departmentName}}</td>
+                <td>{{item.designationName}}</td>
+                <td>{{item.gradeName}}</td>
+                <td>{{item.structureName}}</td>
+                <td>{{item.optionName}}</td>
+                <td>{{item.grossSalary}}</td>
+                <td>{{item.startDate | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.endDate | date: 'dd/MM/yyyy'}}</td>
+                <td *ngIf="isPayrollManager">{{item.loginId}}</td>
+                <td *ngIf="isPayrollManager">{{item.companyEmployeeId}}</td>
+              </tr>
+
+              <tr [hidden]="!hideme[i]" class="sub-table no-bg">
+                <td align="center"></td>
+                <td colspan="15" class="p-0">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+
+                        <th>{{'PAYROLL.EMPLOYEESALARYCOMPONENT.INDEX.TABLE.HEADER.SALARYCOMPONENTNAME' | translate }}</th>
+                        <th>{{'PAYROLL.EMPLOYEESALARYCOMPONENT.INDEX.TABLE.HEADER.VALUE' | translate }}</th>
+
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let child of childList[i]">
+                      <tr>
+
+
+                        <td>{{child.salaryComponentName}}</td>
+                        <td>{{child.componentAmount}}</td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="row " *ngIf="totalItems > 0" style="padding-top:20px; margin-left: 5px;">
+        <div class="col-md-5 col-sm-5 text-left">
+          {{totalItemsText}}
+        </div>
+        <div class="col-md-5 col-sm-5 text-left">
+          <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+                               directionLinks="true" previousLabel="" nextLabel="">
+          </pagination-controls>
+        </div>
+        <div class="col-md-2 col-sm-2 text-left">
+          <mat-form-field>
+            <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()" placeholder="{{ 'PAGINATION.PLACEHOLDER' | translate }}">
+              <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+                {{item.text}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

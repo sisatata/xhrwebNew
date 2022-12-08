@@ -1,0 +1,72 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-4">
+    <h1 id="tableLabel">{{ 'COMPANY.COMPANY.INDEX.TITLE' | translate }}</h1>
+  </div>
+  <!--<div class="col-md-3 col-sm-10">
+      <button mat-raised-button (click)="createCompany()" class="btn btn-success btn-block text-center"
+          matTooltip="{{ 'COMPANY.COMPANY.INDEX.CREATECOMPANYBUTTONTEXT' | translate }}">
+          <mat-icon class="create-icon-button">add</mat-icon>
+          {{ 'COMPANY.COMPANY.INDEX.CREATECOMPANYBUTTONTEXT' | translate }}
+      </button>
+  </div>-->
+</div>
+
+<section *blockUI="'company-list-section'">
+  <div class="table-responsive">
+  <table class='table table-light table-hover  text-nowrap' aria-labelledby="tableLabel">
+    <thead>
+      <tr class="table-secondary">
+        <th class="text-center">{{ 'COMPANY.COMPANY.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+        <th>{{ 'COMPANY.COMPANY.INDEX.TABLE.HEADER.NAME' | translate }}</th>
+        <!--<th>{{ 'COMPANY.COMPANY.INDEX.TABLE.HEADER.LOCALIZEDNAME' | translate }}</th>-->
+        <th>{{ 'COMPANY.COMPANY.INDEX.TABLE.HEADER.SHORTNAME' | translate }}</th>
+        <!--<th>{{ 'COMPANY.COMPANY.INDEX.TABLE.HEADER.LICENSEKEY' | translate }}</th>
+        <th>{{ 'COMPANY.COMPANY.INDEX.TABLE.HEADER.SORTORDER' | translate }}</th>-->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of companies| paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index">
+        <td class="pt-0 text-center">
+          <button mat-icon-button  [routerLink]="['/company/', item.id, item.companyName, item.shortName, item.companySlogan, item.companyWebsite, item.facebookLink, item.companyLogoUri, item.isActive]">
+            <mat-icon>create</mat-icon>
+          </button>
+          <!--<button mat-icon-button (click)="onDeleteCompany(item)">
+            <mat-icon class="mat-icon-delete">delete</mat-icon>
+          </button>-->
+        </td>
+        <td>{{item.companyName}}</td>
+        <!--<td>{{item.companyLocalizedName}}</td>-->
+        <td>{{item.shortName}}</td>
+        <!--<td>{{item.licenseKey}}</td>
+        <td>{{item.sortOrder}}</td>-->
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row justify-content-between" *ngIf="totalItems > 0">
+  <div class="col-md-5 col-sm-5 text-left">
+    {{totalItemsText}}
+  </div>
+
+  <div class="col-md-5 col-sm-5 text-left">
+    <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+      directionLinks="true" previousLabel="" nextLabel="">
+    </pagination-controls>
+  </div>
+
+  <div class="col-md-2 col-sm-2 text-left">
+    <mat-form-field>
+      <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()" placeholder="Items Per Page">
+        <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+          {{item.text}}
+        </mat-option>
+      </mat-select>
+
+    </mat-form-field>
+  </div>
+</div>
+</section>

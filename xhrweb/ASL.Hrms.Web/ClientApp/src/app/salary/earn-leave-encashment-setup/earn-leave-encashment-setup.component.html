@@ -1,0 +1,87 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-6 col-lg-5 col-xl-3">
+    <h1 id="tableLabel">{{'PAYROLL.EARNLEAVEENCASHMENT.INDEX.TITLE' |  translate  }}</h1>
+  </div>
+  <div class="col-xl-3 col-lg-4 col-md-6  col-sm-12">
+    <button mat-raised-button (click)="createEarnLeaveEncashment()" class="btn btn-success btn-block text-center"
+      matTooltip="{{'PAYROLL.EARNLEAVEENCASHMENT.INDEX.CREATEBUTTONTOOLTIP' |  translate  }}">
+      <mat-icon class="create-icon-button">add</mat-icon>
+      {{'PAYROLL.EARNLEAVEENCASHMENT.INDEX.CREATEBUTTONTEXT' |  translate  }}
+    </button>
+  </div>
+</div>
+<form [formGroup]="earnLeaveEncashmentFilterFormGroup">
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-3">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<div>
+  <div>
+    <div>
+      <!--<table class="table table-bordered heading-hvr">-->
+      <div class="table-responsive">
+        <table class="table table-light table-hover table-responsive-sm text-nowrap" aria-labelledby="tableLabel">
+          <thead>
+            <tr class="table-secondary">
+              <th>{{  'LEAVE.LEAVEBALANCE.INDEX.TABLE.HEADER.EMPLOYEE_NAME'  | translate}}</th>
+              <th>{{ 'COMPANY.FINANCIALYEAR.INDEX.TITLE' | translate }}</th>
+              <th>{{ 'COMPANY.MONTHCYCLE.INDEX.TITLE' | translate }}</th>
+              <th> {{'PAYROLL.EARNLEAVEENCASHMENT.INDEX.TABLE.HEADER.ENCASHDATE' |  translate  }}</th>
+              <th> {{'PAYROLL.EARNLEAVEENCASHMENT.INDEX.TABLE.HEADER.ELENCASHEDDAYS' |  translate  }}</th>
+              <th> {{'PAYROLL.EARNLEAVEENCASHMENT.INDEX.TABLE.HEADER.ENCASHEDAMOUNT' |  translate  }}</th>
+              <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.REMARKS' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody
+           >
+            <tr  *ngFor="let item of earnLeaveEncashments | paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index; let i = index">
+              <td>{{item.fullName}}</td>
+              <td>{{item.financialYearName}}</td>
+              <td>{{item.monthCycleName}}</td>
+              <td>{{item.encashDate | date: 'dd/MM/yyyy'}}</td>
+              <td>{{item.elEncashedDays}}</td>
+              <td>{{item.encashedAmount}}</td>
+              <td>{{item.remarks}}</td> 
+              
+            </tr>
+            <tr *ngIf="earnLeaveEncashments.length === 0">
+              <td colspan="11" class="text-center">No data found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row " *ngIf="totalItems > 0" style="padding-top:20px; margin-left: 5px;">
+      <div class="col-md-5 col-sm-5 text-left">
+        {{totalItemsText}}
+      </div>
+      <div class="col-md-5 col-sm-5 text-left">
+        <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+          directionLinks="true" previousLabel="" nextLabel="">
+        </pagination-controls>
+      </div>
+      <div class="col-md-2 col-sm-2 text-left">
+        <mat-form-field>
+          <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()"
+            placeholder="{{ 'PAGINATION.PLACEHOLDER' | translate }}">
+            <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+              {{item.text}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</div>

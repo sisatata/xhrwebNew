@@ -1,0 +1,60 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'TASK.TASKCATEGORY.CREATE.TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{'TASK.TASKCATEGORY.EDIT.TITLE' | translate}}</h5>
+<h6 *ngIf="taskCategoryCreateForm.invalid && submitted" class="text-danger">Please enter valid data and fill up
+  the required fields.</h6>
+<form [formGroup]="taskCategoryCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId"
+          [disabled]="true">
+          <mat-option *ngFor="let item of companies" [value]="item.id">   
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required">Company is required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'TASK.TASKCATEGORY.CREATE.TASK_CATEGORY_NAME.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input matInput formControlName="taskCategoryName" [(value)]="taskCategory.taskCategoryName"
+          placeholder="{{'TASK.TASKCATEGORY.CREATE.TASK_CATEGORY_NAME.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.remarks.errors}">
+        <mat-error *ngIf="submitted && f.taskCategoryName.errors && f.taskCategoryName.errors.required">
+          {{'TASK.TASKCATEGORY.CREATE.TASK_CATEGORY_NAME.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.taskCategoryName.errors && f.taskCategoryName.errors.maxlength">
+          {{'TASK.TASKCATEGORY.CREATE.TASK_CATEGORY_NAME.MAX_LENGTH_ERROR_TEXT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input matInput formControlName="remarks" [(value)]="taskCategory.remarks"
+          placeholder="{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.remarks.errors}">
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.required">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.maxlength">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.MAX_LENGTH_ERROR_TEXT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

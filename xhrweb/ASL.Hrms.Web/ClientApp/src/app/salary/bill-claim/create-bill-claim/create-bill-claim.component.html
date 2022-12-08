@@ -1,0 +1,69 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">Create Claim Bill</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">Update Claim Bill</h5>
+<h6 *ngIf="submitted && billCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+<form class="employeeFamilyMember-from" [formGroup]="billCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Benefit Deduction Type</mat-label>
+        <mat-select matInput formControlName="benefitDeductionId" [(value)]="billClaim.benefitDeductionId"
+          placeholder="Benefit Deduction Type">
+          <ng-container *ngFor="let item of benefitDeductions">
+            <mat-option value="{{item.id}}">{{item.benifitDeductionCodeName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.benefitDeductionId.errors && f.benefitDeductionId.errors.required">
+          {{ 'COMMON.SELECT.RELATIONTYPEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Bill Date</mat-label>
+        <input matInput [matDatepicker]="claimDate" formControlName="claimDate" [(value)]="billClaim.claimDate"
+          (click)="claimDate.open()" placeholder="Bill Date" [ngClass]="{'is-invalid': f.claimDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="claimDate"></mat-datepicker-toggle>
+        <mat-datepicker #claimDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.claimDate.errors && f.claimDate.errors.required">Bill date is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input type="number" matInput formControlName="claimAmount" [(value)]="billClaim.claimAmount"
+          placeholder="Amount" [ngClass]="{'is-invalid': submitted && f.claimAmount.errors}">
+        <mat-error *ngIf="submitted && f.claimAmount.errors && f.claimAmount.errors.required">Amount is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>Reason for bill</mat-label>
+        <input matInput formControlName="remarks" [(value)]="billClaim.remarks" placeholder="Reason for bill"
+          [ngClass]="{'is-invalid': submitted && f.remarks.errors}">
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.required">Reason for bill is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-12" *ngIf="isEditMode && billClaim.billAttachmentUri">
+      <a class="none" [href]="billClaim.billAttachmentUri" target="_blank">View uploaded file</a>
+    </div>
+    <div class="col-md-12">
+      <caption class="caption">Attach File</caption>
+      <input #file id="image" type="file" multiple (change)="uploadFile(file.files)" placeholder="Attache File">
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        {{errorMessage}}
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

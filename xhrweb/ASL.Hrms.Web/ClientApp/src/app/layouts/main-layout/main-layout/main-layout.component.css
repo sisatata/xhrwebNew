@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
+  padding: 20px;
+}
+#mainBody{
+  margin-left:  auto;
+}
+@media screen and (max-width: 1200px) {
+  #mainBody{
+   padding-left: 100px;
+ } 
+}
+ @media screen and (max-width: 991px) {
+  #mainBody{
+    padding-left: unset;
+  }
+ } 
+
+ @media screen and (max-width: 768px) {
+  #mainBody{
+    padding-left: 20px;
+  }
+ } 

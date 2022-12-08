@@ -1,0 +1,86 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'PAYROLL.INCOMETAXPAYERTYPE.CREATE.TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'PAYROLL.INCOMETAXPAYERTYPE.EDIT.TITLE' | translate }}</h5>
+<h6 *ngIf="incomeTaxPayerTypeCreateForm.invalid && submitted" class="text-danger">Please enter valid data and fill up
+  the required fields.</h6>
+  <h6 *ngIf="submitted && isDuplicate" class="text-danger">{{duplicateMessage}}</h6>
+<form [formGroup]="incomeTaxPayerTypeCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId" [disabled]="true">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required">Company is required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.PAYER_TYPE_CODE.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input matInput formControlName="payerTypeCode" (focus)="onFocus()" [(value)]="incomeTaxPayerType.payerTypeCode"
+          placeholder="{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.PAYER_TYPE_CODE.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.payerTypeCode.errors}">
+        <mat-error *ngIf="submitted && f.payerTypeCode.errors && f.payerTypeCode.errors.required">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.PAYER_TYPE_CODE.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.payerTypeCode.errors && f.payerTypeCode.errors.maxlength">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.PAYER_TYPE_CODE.MAX_LENGTH_ERROR_TEXT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.PAYER_TYPE_NAME.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input matInput formControlName="payerTypeName" [(value)]="incomeTaxPayerType.payerTypeName"
+          placeholder="{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.PAYER_TYPE_NAME.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.payerTypeName.errors}">
+        <mat-error *ngIf="submitted && f.payerTypeName.errors && f.payerTypeName.errors.required">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.PAYER_TYPE_NAME.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.payerTypeName.errors && f.payerTypeName.errors.maxlength">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.PAYER_TYPE_NAME.MAX_LENGTH_ERROR_TEXT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input matInput formControlName="remarks" [(value)]="incomeTaxPayerType.remarks"
+          placeholder="{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.remarks.errors}">
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.required">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.maxlength">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.MAX_LENGTH_ERROR_TEXT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isActive" [(value)]="incomeTaxPayerType.isActive"
+        matTooltip="{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.IS_ACTIVE.PLACEHOLDER' | translate}}">
+        {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.IS_ACTIVE.PLACEHOLDER' | translate}}
+      </mat-checkbox>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        {{errorMessages}}
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

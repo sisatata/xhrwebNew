@@ -1,0 +1,16 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{ 'EMPLOYEE.EMPLOYEE.DETAIL.OTHERINFOCARDHEADER' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{companyName}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="Address"> <app-company-address [companyId]="companyId" [companyName]="companyName"></app-company-address></mat-tab>
+        <mat-tab label="Email"> <app-company-email [companyId]="companyId" [companyName]="companyName"></app-company-email> </mat-tab>
+        <mat-tab label="Phone"> <app-company-phone [companyId]="companyId" [companyName]="companyName"></app-company-phone></mat-tab>
+       
+         
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+  

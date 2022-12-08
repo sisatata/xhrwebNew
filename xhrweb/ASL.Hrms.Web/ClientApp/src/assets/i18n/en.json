@@ -1,0 +1,2880 @@
+{
+  "PAGINATION":{
+    "PLACEHOLDER":"Records Per Page",
+    "RECORDS":"Records"
+  },
+  "HOME": {
+    "TITLE": "Welcome to planetHR- Your ultimate HR & Payroll solution.",
+    "DASHBOARDCOMINGSOON": "Dashboard is coming Soon...",
+    "SELECT": "Change language"
+  },
+ "CHART":{
+ "ACTIVEEMPLLOYEELIST":{
+   "NAME":"Name",
+   "DESIGNATION":"Designation"
+ },
+ "ATTENDANCE":{
+   "TODAY_ATTENDANCE":"Today's Attendance"
+ },
+ "DEPARTMENTSALARY":{
+   "LASTMONTH_SALARY":"Last month salary"
+ },
+ "GENDER":{
+   "GENDER_CHART":"Gender Chart"
+ },
+ "LEAVE":{
+   "LEAVE_CHART":"Leave Chart"
+ },
+ "NEWEMPLOYEELIST":{
+   "NAME":"Name",
+   "DESIGNATION":"Designation",
+   "JOINING_DATE":"Joining Date"
+ },
+ "NOTICE":{
+   "NOTICE_DETAILS":"Notice Details"
+ },
+ "PAYROLL":{
+   "LAST_MONTH_PAYROLL":"Last month payroll"
+ },
+ "YEARLYPAYROLL":{
+   "CURRENT_YEAR_PAYROLL":"Current Year Payroll"
+ }
+
+ },
+  "LOGIN":{
+    "INDEX":{
+      "WAITTITLE":"Loading...",
+      "ERRORTEXT":{
+          "EMAILORPASSWORD":" Invalid Username or Password. Please try again",
+          "EMAIL_ERROR":" Please provide a valid email address"
+      },
+       "PLACEHOLDER":{
+         "EMAIL":"Email Address",
+         "PASSWORD":"Password"
+       },
+       "LOGIN_TEXT":"Login",
+       "FORGOT_PASSWORD":"Forgot Password?",
+       "CREATE_NEW_COMPANY":"Create New Company?",
+       "RECOVER_ACCOUNT_TEXT":"Recover Your Password",
+       "SEND_ACTIVATION_LINK_TEXT":"Send Activation Link"
+      
+    }
+    
+    
+    
+  },
+  "REPORT":{
+    "INDEX":{
+      "TITLE":"Reports",
+      "SALARYREPORTTITLE":"Salary Report",
+      "LEAVEREPORTTITLE":"Leave Report",
+      "PAYSLIPREPORT":"Pay Slip Report",
+      "ATTENDANCEREPORTTITLE":"Job Card Report",
+      "BILLCLAIMREPORTTITLE":"Bill Claim Report",
+      "BONUSREPORTTITLE":"Bonus Report",
+      "EARNLEAVEENCASHMENTREPORT":"Employee Earn Leave Encashment Report",
+      "CONFIRMATIONREPORTTITLE":"Employee Confirmation Report",
+      "OTSUMMARYREPORT":"OT Summary Report",
+      "TASKREPORT":"Task Report",
+      "PROVIDENTFUNDREPORT":"Provident Fund Report",
+  
+      "BUTTONTEXT":{
+        "ATTENDANCE_PDF_REPORT":"Download",
+        "ATTENDANCE_EXCEL_REPORT":"Download xlsx",
+        "BILL_CLAIM_PDF_REPORT":"Download pdf",
+        "BILL_CLAIM_EXCEL_REPORT":"Download xlsx",
+        "SALARY_REPORT_PDF_REPORT":"Download pdf",
+        "LEAVE_REPORT_PDF_REPORT":"Download pdf",
+        "PAY_SLIP_REPORT_PDF":"Download pay slip pdf",
+        "ATTENDANCE_SUMMARY_REPORT_PDF":"Download summary",
+        "JOB_CARD_SUMMARY_REPORT_PDF":"Job card summary"
+      }
+    }
+  },
+  "COMMON": {
+    "SELECT": {
+      "COMPANYID": {
+        "PLACEHOLDER": "Company",
+        "REQUIERED_ERROR_TEXT": "Company is required"
+      }, 
+     
+ 
+      "COMPANYAPPROVALSTATUS": {
+        "PLACEHOLDER": "Approval Status",
+        "REQUIERED_ERROR_TEXT": "Company Approval Status is required"
+      },
+      "BRANCHID": {
+        "PLACEHOLDER": "Branch ",
+        "REQUIERED_ERROR_TEXT": "Branch is required"
+      },
+      "DEPARTMENTID": {
+        "PLACEHOLDER": "Department",
+        "REQUIERED_ERROR_TEXT": "Department is required"
+      },
+      "DESIGNATIONID": {
+        "PLACEHOLDER": "Designation",
+        "REQUIERED_ERROR_TEXT": "Designation is required"  
+      },
+      "FINANCIALYEARID": {
+        "PLACEHOLDER": "Financial Year",
+        "REQUIERED_ERROR_TEXT": "Financial Year is required"
+      },  
+      "MONTHCYCLEID": {
+        "PLACEHOLDER": "Month Cycle",
+        "REQUIERED_ERROR_TEXT": "Month Cycle is required"
+      }, 
+      "SHIFTGROUPID": {
+        "PLACEHOLDER": "ShiftGroup",
+        "REQUIERED_ERROR_TEXT": "ShiftGroup is required"
+      },
+      "EMPLOYEEID": {
+        "PLACEHOLDER": "Employee",
+        "REQUIERED_ERROR_TEXT": "Employee is required"
+      },
+      "MARITALSTATUSID": {
+        "PLACEHOLDER": "Marital Status",
+        "REQUIERED_ERROR_TEXT": "Marital Status is required"
+      },
+      "RELIGIONID": {
+        "PLACEHOLDER": "Religion",
+        "REQUIERED_ERROR_TEXT": "Religion is required"
+      },
+      "BLOODGROUPID": {
+        "PLACEHOLDER": "Blood Group",
+        "REQUIERED_ERROR_TEXT": "Blood Group is required"
+      },
+      "POSITIONID": {
+        "PLACEHOLDER": "Select Position",
+        "REQUIERED_ERROR_TEXT": "Position is required"
+      },
+      "NATIONALITYID": {
+        "PLACEHOLDER": "Nationality",
+        "REQUIERED_ERROR_TEXT": "Nationality is required"
+      },
+      "GENDERID": {
+        "PLACEHOLDER": "Gender",
+        "REQUIERED_ERROR_TEXT": "Gender is required"
+      },
+      "THANAID": {
+        "PLACEHOLDER": "Thana",
+        "REQUIERED_ERROR_TEXT": "Thana is required"
+      },
+      "DISTRICTID": {
+        "PLACEHOLDER": "District",
+        "REQUIERED_ERROR_TEXT": "District is required"
+      },
+      "COUNTRYID": {
+        "PLACEHOLDER": "Country",
+        "REQUIERED_ERROR_TEXT": "Country is required"
+      },
+      "ADDRESSTYPEID": {
+        "PLACEHOLDER": "Address Type",
+        "REQUIERED_ERROR_TEXT": "Address Type is required"
+      },
+      "RELATIONTYPEID": {
+        "PLACEHOLDER": "Relation Type",
+        "REQUIERED_ERROR_TEXT": "Relation Type is required"
+      },
+      "PHONETYPEID": {
+        "PLACEHOLDER": "Phone Type",
+        "REQUIERED_ERROR_TEXT": "Phone Type is required"
+      }
+    },
+    "ERROR_TEXT":"Please enter valid data and fill up the required fields",
+    "VIEW_BUTTON_TEXT": "View",
+    "DETAIL_BUTTON_TEXT": "Detail",
+    "SUBMIT_BUTTON_TEXT": "Submit",
+    "SAVE_BUTTON_TEXT": "Save",
+    "CANCEL_BUTTON_TEXT": "Cancel",
+    "EDIT_BUTTON_TEXT": "Edit",
+    "UPDATE_BUTTON_TEXT": "Update",
+    "DELETE_BUTTON_TEXT": "Delete",
+    "LEAVE_APPLY_BUTTON_TEXT": "Apply",
+    "LEAVE_REAPPLY_BUTTON_TEXT": "Re-Apply",
+    "SEARCHTEXT":"Search",
+    "EXPORT":"Export"
+  },
+  "ATTENDANCE": {
+    "SHIFTGROUP": {
+      "INDEX": {
+        "TITLE": "Shift Groups",
+        "CREATE_BUTTON_TOOLTIP": "New Shift Group",
+        "EDIT_BUTTON_TOOLTIP": "Edit Shift Group",
+        "DELETE_BUTTON_TOOLTIP": "Delete Company",
+        "TABLE": {
+          "HEADER": {
+            "NAME": "Name",
+            "LOCALIZEDNAME": "Localized Name",
+            "COMPANYNAME": "Company Name",
+            "ACTIONS": "Actions"
+          },
+          "NODATAFOUNDTEXT": "No shift group found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Shift Group",
+        "EDIT_TITLE": "Edit Shift Group",
+        "CREATE_FORM": {
+          "SHIFTGROUPNAME": {
+            "PLACEHOLDER": "Shift Group Name",
+            "REQUIERED_ERROR_TEXT": "Shift Group name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHIFTGROUPNAMELC": {
+            "PLACEHOLDER": "Shift Group Localized Name",
+            "REQUIERED_ERROR_TEXT": "Shift Group Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "HOLIDAY": {
+      "INDEX": {
+        "TITLE": "Holidays",
+        "CREATE_BUTTON_TOOLTIP": "New Holiday",
+        "EDIT_BUTTON_TOOLTIP": "Edit Holiday",
+        "DELETE_BUTTON_TOOLTIP": "Delete Holiday",
+        "TABLE": {
+          "HEADER": {
+            "HOLIDAYDATE": "Holiday Date",
+            "REASON": "Reason",
+            "ACTIONS": "Actions"
+          },
+          "NODATAFOUNDTEXT": "No holiday found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Holiday",
+        "EDIT_TITLE": "Edit Holiday",
+        "CREATE_FORM": {
+          "HOLIDAYDATE": {
+            "PLACEHOLDER": "Holiday Date",
+            "REQUIERED_ERROR_TEXT": "Holiday Date is required"
+          },
+          "REASON": {
+            "PLACEHOLDER": "Reason",
+            "REQUIERED_ERROR_TEXT": "Reason is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "EMPLOYEEATTENDANCE": {
+      "INDEX": {
+        "TITLE": "Attendance Data",
+        "CREATE_BUTTON_TOOLTIP": "New Punch",
+        "EDIT_BUTTON_TOOLTIP": "Edit Punch",
+        "DELETE_BUTTON_TOOLTIP": "Delete Punch",
+        "TABLE": {
+          "HEADER": {
+            "PUNCHDATE": "Date",
+            "SHIFTCODE": "Shift",
+            "INTIME": "In Time",
+            "OUTTIME": "Out Time",
+            "STATUS": "Status",
+            "REMARKS": "Remarks",
+            "ACTIONS": "Actions",
+            "NAME":"Name",
+            "OFFICE_IN":"Office (In)",
+             "OFFICE_OUT":"Office (Out)",
+            "ADDRESS_IN":"Address (In)",
+            "ADDRESS_OUT":"Address (Out)",
+            "DESIGNATION":"Designation",
+            "EMAIL":"Email"
+            
+          },
+          "NODATAFOUNDTEXT": "No holiday found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Punch",
+        "EDIT_TITLE": "Edit Punch",
+        "EMPLOYEEATTENDANCEDETAILS":"Employee Attendances Details",
+        "CREATE_FORM": {
+          "REMARKS": {
+            "PLACEHOLDER": "Remarks",
+            "REQUIERED_ERROR_TEXT": "Remarks is required",
+            "MAXLENGTH_ERROR_TEXT": "Remarks length should be 150"
+          },
+          "CLOCKTYPE":{
+            "PLACEHOLDER": "Clock Type",
+            "REQUIERED_ERROR_TEXT": "Clock Type is required"
+          },
+          "EMPLOYEENAME":{
+            "PLACEHOLDER": "Employee Name",
+            "REQUIERED_ERROR_TEXT": "Employee Name is required"
+          }
+        }
+      },
+      "CLOCK_IN":"Clock In",
+      "CLOCK_OUT":"Clock Out",
+      "CHECK_IN":"Check In",
+      "PUNCH":"Punch",
+      "DELETE": {}
+    },
+    "SHIFT": {
+      "INDEX": {
+        "TITLE": "Shift Configuration",
+        "CREATESHIFTBUTTONTEXT": "New Shift",
+        "EDITSHIFTBUTTONTEXT": "Edit Shift",
+        "DELETESHIFTBUTTONTEXT": "Delete Shift",
+        "TABLE": {
+          "HEADER": {
+            "NAME": "Name",
+            "LOCALIZEDNAME": "Localized Name",
+            "SHIFTCODE": "Shift Code",
+            "SHIFTIN": "Shift In",
+            "SHIFTOUT": "Shift Out",
+            "SHIFTLATE": "Shift Late",
+            "LUNCHBREAKIN": "Lunch Break In",
+            "LUNCHBREAKOUT": "Lunch Break Out",
+            "EARLYOUT": "Early Out",
+            "REGHOUR": "Regular Hour",
+            "RAMADANIN": "Ramadan In",
+            "RAMADANOUT": "Ramadan Out",
+            "RAMADANLATE": "Ramadan Late",
+            "RAMADANEARLYOUT": "Ramadan Early Out",
+            "RAMADANLUNCHBREAKIN": "Ramadan Lunch Break In",
+            "RAMADANLUNCHBREAKOUT": "Ramadan Lunch Break Out",
+            "STARTTIME": "Start Time",
+            "ENDTIME": "End Time",
+            "GRACEIN": "Grace In",
+            "GRACEOUT": "Grace Out",
+            "RANGE": "Range",
+            "ISROLLINGSHIFT": "Is Rolling Shift",
+            "ISRELABORSHIFT": "Is Relabor Shift",
+            "ISACTIVE": "Is Active",
+            "ISDELETED": "Is Deleted",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Shift",
+        "EDIT_TITLE": "Edit Shift",
+        "CREATE_FORM": {
+          "SHIFTNAME": {
+            "PLACEHOLDER": "Shift Name",
+            "REQUIERED_ERROR_TEXT": "Shift name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHIFTLOCALIZEDNAME": {
+            "PLACEHOLDER": "Shift Localized Name",
+            "REQUIERED_ERROR_TEXT": "Shift Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHIFTCODE": {
+            "PLACEHOLDER": "Shift Code ",
+            "REQUIERED_ERROR_TEXT": "Shift Code is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 5"
+          },
+          "ISACTIVE": {
+            "PLACEHOLDER": "Is Active"
+          },
+          "SHIFTIN": {
+            "PLACEHOLDER": "Shift In",
+            "REQUIERED_ERROR_TEXT": "Shift In is required"
+          },
+          "SHIFTOUT": {
+            "PLACEHOLDER": "Shift Out",
+            "REQUIERED_ERROR_TEXT": "Shift Out is required"
+          },
+          "SHIFTLATE": {
+            "PLACEHOLDER": "Shift Late",
+            "REQUIERED_ERROR_TEXT": "Shift Late is required"
+          },
+          "LUNCHBREAKIN": {
+            "PLACEHOLDER": "Lunch Break In",
+            "REQUIERED_ERROR_TEXT": "Lunch Break In is required"
+          },
+          "LUNCHBREAKOUT": {
+            "PLACEHOLDER": "Lunch Break Out",
+            "REQUIERED_ERROR_TEXT": "Lunch Break Out is required"
+          },
+          "EARLYOUT": {
+            "PLACEHOLDER": "Early Out",
+            "REQUIERED_ERROR_TEXT": "Early Out is required"
+          },
+          "REGHOUR": {
+            "LABEL": "Regular Hour",
+            "PLACEHOLDER": "HH:mm, i.e. 08:30",
+            "REQUIERED_ERROR_TEXT": "Regular Hour is required"
+          },
+          "RAMADANIN": {
+            "PLACEHOLDER": "Ramadan In",
+            "REQUIERED_ERROR_TEXT": "Ramadan In is required"
+          },
+          "RAMADANOUT": {
+            "PLACEHOLDER": "Ramadan Out",
+            "REQUIERED_ERROR_TEXT": "Ramadan Out is required"
+          },
+          "RAMADANLATE": {
+            "PLACEHOLDER": "Ramadan Late",
+            "REQUIERED_ERROR_TEXT": "Ramadan Late is required"
+          },
+          "RAMADANLUNCHBREAKIN": {
+            "PLACEHOLDER": "Ramadan Lunch Break In",
+            "REQUIERED_ERROR_TEXT": "Ramadan Lunch Break In is required"
+          },
+          "RAMADANLUNCHBREAKOUT": {
+            "PLACEHOLDER": "Ramadan Lunch Break Out",
+            "REQUIERED_ERROR_TEXT": "Ramadan Lunch Break Out is required"
+          },
+          "RAMADANEARLYOUT": {
+            "PLACEHOLDER": "Ramadan Early Out",
+            "REQUIERED_ERROR_TEXT": "Ramadan Early Out is required"
+          },
+          "STARTTIME": {
+            "PLACEHOLDER": "Start Time",
+            "REQUIERED_ERROR_TEXT": "Start Time is required"
+          },
+          "ENDTIME": {
+            "PLACEHOLDER": "End Time",
+            "REQUIERED_ERROR_TEXT": "End Time is required"
+          },
+          "GRACEIN": {
+            "PLACEHOLDER": "Grace In"
+          },
+          "GRACEOUT": {
+            "PLACEHOLDER": "Grace Out"
+          },
+          "RANGE": {
+            "PLACEHOLDER": "Range"
+          },
+          "ISROLLINGSHIFT": {
+            "PLACEHOLDER": "Is Rolling Shift"
+          },
+          "ISRELABORSHIFT": {
+            "PLACEHOLDER": "Is Relabor Shift"
+          },
+          "ISDELETED": {
+            "PLACEHOLDER": "Is Deleted"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "SHIFTALLOCATION": {
+      "INDEX": {
+        "TITLE": "Shift Allocation",
+        "CREATESHIFTALLOCATIONBUTTONTEXT": "Assign Shift",
+        "EDITSHIFTALLOCATIONBUTTONTEXT": "Update Shift assignment",
+        "DELETESHIFTALLOCATIONBUTTONTEXT": "Delete shift assignment",
+        "TABLE": {
+          "HEADER": {
+            "EMPLOYEENAME": "Employee Name",
+            "SHIFTCODE": "Shift Code",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Shift Allocation",
+        "EDIT_TITLE": "Edit Shift Allocation",
+        "CREATE_FORM": {
+          "SHIFTNAME": {
+            "PLACEHOLDER": "Shift Name",
+            "REQUIERED_ERROR_TEXT": "Shift name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHIFTLOCALIZEDNAME": {
+            "PLACEHOLDER": "Shift Localized Name",
+            "REQUIERED_ERROR_TEXT": "Shift Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHIFTCODE": {
+            "PLACEHOLDER": "Shift Code ",
+            "REQUIERED_ERROR_TEXT": "Shift Code is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 5"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "ATTENDANCEREQUEST":{
+      "INDEX":{
+        "TITLE":"Attendance Request",
+        "TABLE":{
+          "HEADER":{
+            "REQUEST_DATE":"Request Date",
+            "REQUEST_TIME":"Request Time"
+          },
+          "SEARCH_BUTTON_TEXT":"Search",
+          "SEARCH_AS_EMPLOYEE_BUTTON_TEXT":"Search as employee",
+          "SEARCH_AS_MANAGER_BUTTON_TEXT":"Search as manager"
+        }
+      },
+      "CREATE":{
+        "CREATE":"Create Attendance Request",
+        "EDIT":"Edit Attendance Request",
+        "REQUEST_DATE":{
+          "PLACEHOLDER":"Request Date",
+           "REQUIERED_ERROR_TEXT":"Request Date is required"
+        },
+        "REQUEST_TIME":{
+          "PLACEHOLDER":"Request Time",
+           "REQUIERED_ERROR_TEXT":"Request Time is required"
+        },
+        "REQUEST_TYPE":{
+          "PLACEHOLDER":"Request Type",
+           "REQUIERED_ERROR_TEXT":"Request Type is required"
+        },
+        "REASON":{
+          "PLACEHOLDER":"Reason",
+        "REQUIERED_ERROR_TEXT":"Reason is required"
+        }
+        
+         
+      }
+
+    }
+  },
+  "COMPANY": {
+    "COMPANY": {
+      "INDEX": {
+        "TITLE": "Companies",
+        "CREATECOMPANYBUTTONTEXT": "New Company",
+        "EDITCOMPANYBUTTONTEXT": "Edit Company",
+        "DELETECOMPANYBUTTONTEXT": "Delete Company",
+        "TABLE": {
+          "HEADER": {
+            "NAME": "Name",
+            "LOCALIZEDNAME": "Localized Name",
+            "SHORTNAME": "Short Name", 
+            "LICENSEKEY": "License Key",
+            "APPROVALSTATUSTEXT": "Status",
+            "SORTORDER": "Sort Order",
+            "ACTIONS": "Actions",
+            "WEBSITE":"Company Website",
+            "FACEBOOK":"Facebook Link"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Company",
+        "EDIT_TITLE": "Edit Company",
+        "CREATE_FORM": {
+          "COMPANYNAME": {
+            "PLACEHOLDER": "Company Name",  
+            "REQUIERED_ERROR_TEXT": "Company name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "COMPANYLOCALIZEDNAME": {
+            "PLACEHOLDER": "Company Localized Name",
+            "REQUIERED_ERROR_TEXT": "Company Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHORTNAME": {
+            "PLACEHOLDER": "Short Name",
+            "REQUIERED_ERROR_TEXT": "Short name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "COMPANYSLOGAN": {
+            "PLACEHOLDER": "Company Slogan",                     
+            "REQUIERED_ERROR_TEXT": "Company Slogan is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"   
+          },
+          "SORTORDER": {
+            "PLACEHOLDER": "Sort Order",
+            "REQUIERED_ERROR_TEXT": "Sort Order is required"
+          },
+          "WEBSITE":{
+            "PLACEHOLDER": "Company Website",                     
+            "REQUIERED_ERROR_TEXT": "Company Website is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"   
+          },
+          "FACEBOOK":{
+            "PLACEHOLDER": "Facebook Link",                     
+            "REQUIERED_ERROR_TEXT": "Company Website is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"   
+          },
+          "LICENSEKEY": {
+            "PLACEHOLDER": "License Key",
+            "REQUIERED_ERROR_TEXT": "License Key is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "ISACTIVE": {
+            "TITLE": "Is Active?"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "COMPANYEMAIL":{
+      "INDEX":{
+        "CREATE_BUTTON_TOOLTIP": "Create Company Email",
+        "EDIT_BUTTON_TOOLTIP": "Edit Company Email",
+        "DELETE_BUTTON_TOOLTIP":"Delete Company Email"
+      },
+      "CREATE":{
+        "CREATE_TITLE": "Create Company Email",
+        "EDIT_TITLE": "Edit Company Email",
+        "TABLE":{
+          "NODATAFOUNDTEXT": "No Company Email Found"
+        }
+      }
+    },
+    "COMPANYPHONE":{
+      "INDEX":{
+        "CREATE_BUTTON_TOOLTIP": "Create Company Phone",
+        "EDIT_BUTTON_TOOLTIP": "Edit Company Phone",
+        "DELETE_BUTTON_TOOLTIP": "Delete Company Phone",
+        "TABLE":{
+          "NODATAFOUNDTEXT": "No Company Phone Found"
+        }
+      },
+      "CREATE":{
+        "CREATE_TITLE": "Create Company Phone",
+        "EDIT_TITLE": "Edit Company Phone"
+      }
+    },
+    "COMPANYADDRESS":{
+      "INDEX":{
+        "CREATE_BUTTON_TOOLTIP": "Create Company Address",
+        "EDIT_BUTTON_TOOLTIP": "Edit Company Address",
+        "DELETE_BUTTON_TOOLTIP": "Delete Company Address",
+        "TABLE":{
+          "NODATAFOUNDTEXT": "No Company Address Found"
+        }
+      },
+      "CREATE":{
+        "CREATE_TITLE": "Create Company Address",
+        "EDIT_TITLE": "Edit Company Address"
+      }
+    },
+    
+    "BRANCH": {
+      "INDEX": {
+        "TITLE": "Branches",
+        "CREATEBRANCHBUTTONTEXT": "New Branch",
+        "EDITBRANCHBUTTONTEXT": "Edit Branch",
+        "DELETEBRANCHBUTTONTEXT": "Delete Branch",
+        "TABLE": {
+          "HEADER": {
+            "NAME": "Name",
+            "LOCALIZEDNAME": "Localized Name",
+            "SHORTNAME": "Short Name",
+            "LICENSEKEY": "License Key",
+            "SORTORDER": "Sort Order",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Branch",
+        "EDIT_TITLE": "Edit Branch",
+        "CREATE_FORM": {
+          "BRANCHNAME": {
+            "PLACEHOLDER": "Branch Name",
+            "REQUIERED_ERROR_TEXT": "Branch name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "BRANCHLOCALIZEDNAME": {
+            "PLACEHOLDER": "Branch Localized Name",
+            "REQUIERED_ERROR_TEXT": "Branch Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHORTNAME": {
+            "PLACEHOLDER": "Short Name",
+            "REQUIERED_ERROR_TEXT": "Short name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SORTORDER": {
+            "PLACEHOLDER": "Sort Order",
+            "REQUIERED_ERROR_TEXT": "Sort Order is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "DEPARTMENT": {
+      "INDEX": {
+        "TITLE": "Departments",
+        "CREATEDEPARTMENTBUTTONTEXT": "New Department",
+        "EDITDEPARTMENTBUTTONTEXT": "Edit Department",
+        "DELETEDEPARTMENTBUTTONTEXT": "Delete Department",
+        "TABLE": {
+          "HEADER": {
+            "NAME": "Name",
+            "LOCALIZEDNAME": "Localized Name",
+            "SHORTNAME": "Short Name",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "HEADER": {
+        "HEADERNAME": "Departments"
+      },
+      "DROPDOWN": {
+        "COMPANY": {
+          "PLACEHOLDER": "Select Company "
+        },
+        "BRANCH": {
+          "PLACEHOLDER": "Select Branch"
+        }
+      },
+      "SUBMITTBUTTON": {
+        "BUTTONNAME": "Submit"
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Department",
+        "EDIT_TITLE": "Edit Department",
+        "CREATE_FORM": {
+          "DEPARTMENTNAME": {
+            "PLACEHOLDER": "Department Name",
+            "REQUIERED_ERROR_TEXT": "Department name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "DEPARTMENTLOCALIZEDNAME": {
+            "PLACEHOLDER": "Department Localized Name",
+            "REQUIERED_ERROR_TEXT": "Department Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHORTNAME": {
+            "PLACEHOLDER": "Short Name",
+            "REQUIERED_ERROR_TEXT": "Short name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SORTORDER": {
+            "PLACEHOLDER": "Sort Order",
+            "REQUIERED_ERROR_TEXT": "Sort Order is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "DESIGNATION": {
+      "INDEX": {
+        "TITLE": "Designations",
+        "CREATEDESIGNATIONBUTTONTEXT": "New Designation",
+        "EDITDESIGNATIONBUTTONTEXT": "Edit Designation",
+        "DELETEDESIGNATIONBUTTONTEXT": "Delete Designation",
+        "TABLE": {
+          "HEADER": {
+            "DEPARTMENTNAME": "Department Name",
+            "DEPARTMENTLOCALIZEDNAME": "Department Local Name",
+            "NAME": " Designation Name",
+            "LOCALIZEDNAME": "Designation Localized Name",
+            "SHORTNAME": "Short Name",
+            "SORTORDER": "Sort Order",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Designation",
+        "EDIT_TITLE": "Edit Designation",
+        "CREATE_FORM": {
+          "DESIGNATIONNAME": {
+            "PLACEHOLDER": "Designation Name",
+            "REQUIERED_ERROR_TEXT": "Designation name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "DESIGNATIONLOCALIZEDNAME": {
+            "PLACEHOLDER": "Designation Localized Name",
+            "REQUIERED_ERROR_TEXT": "Designation Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHORTNAME": {
+            "PLACEHOLDER": "Short Name",
+            "REQUIERED_ERROR_TEXT": "Short name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "SORTORDER": {
+            "PLACEHOLDER": "Sort Order",
+            "REQUIERED_ERROR_TEXT": "Sort Order is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "FINANCIALYEAR": {
+      "INDEX": {
+        "TITLE": "Financial Years",
+        "CREATEFINANCIALYEARBUTTONTEXT": "New Financial Year",
+        "EDITFINANCIALYEARBUTTONTEXT": "Edit Financial Year",
+        "DELETEFINANCIALYEARBUTTONTEXT": "Delete Financial Year",
+        "TABLE": {
+          "HEADER": {
+            "NAME": "Name",
+            "LOCALIZEDNAME": "Localized Name",
+            "STARTDATE": "Start Date",
+            "ENDDATE": "End Date",
+            "ISRUNNINGYEAR": "Is Running Year",
+            "SORTORDER": "Sort Order",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Financial Year",
+        "EDIT_TITLE": "Edit Financial Year",
+        "CREATE_FORM": {
+          "FINANCIALYEARNAME": {
+            "PLACEHOLDER": "Financial Year Name",
+            "REQUIERED_ERROR_TEXT": "Financial Year name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "FINANCIALYEARLOCALIZEDNAME": {
+            "PLACEHOLDER": "Financial Year Localized Name",
+            "REQUIERED_ERROR_TEXT": "Financial Year Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "FINANCIALYEARSTARTDATE": {
+            "PLACEHOLDER": "Financial Year Start Date",
+            "REQUIERED_ERROR_TEXT": "Financial Year Start Date is required"
+          },
+          "FINANCIALYEARENDDATE": {
+            "PLACEHOLDER": "Financial Year End Date",
+            "REQUIERED_ERROR_TEXT": "Financial Year End Date is required"
+          },
+          "ISRUNNINGYEAR": {
+            "PLACEHOLDER": "Is Running Year"
+          },
+          "SORTORDER": {
+            "PLACEHOLDER": "Sort Order",
+            "REQUIERED_ERROR_TEXT": "Sort Order is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "MONTHCYCLE": {
+      "INDEX": {
+        "TITLE": "Month Cycles",
+        "CREATEMONTHCYCLEBUTTONTEXT": "New Month Cycle",
+        "EDITMONTHCYCLEBUTTONTEXT": "Edit Month Cycle",
+        "DELETEMONTHCYCLEBUTTONTEXT": "Delete Month Cycle",
+        "TABLE": {
+          "HEADER": {
+            "NAME": "Name",
+            "LOCALIZEDNAME": "Localized Name",
+            "STARTDATE": "Start Date",
+            "ENDDATE": "End Date",
+            "ISRUNNINGYEAR": "Is Running Flag",
+            "TOTALWORKINGDAYS": "Total Working Days",
+            "SORTORDER": "Sort Order",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Month Cycle",
+        "EDIT_TITLE": "Edit Month Cycle",
+        "CREATE_FORM": {
+          "MONTHCYCLENAME": {
+            "PLACEHOLDER": "Month Cycle Name",
+            "REQUIERED_ERROR_TEXT": "Month Cycle name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "MONTHCYCLELOCALIZEDNAME": {
+            "PLACEHOLDER": "Month Cycle Localized Name",
+            "REQUIERED_ERROR_TEXT": "Month Cycle Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "MONTHCYCLESTARTDATE": {
+            "PLACEHOLDER": "Month Cycle Start Date",
+            "REQUIERED_ERROR_TEXT": "Month Cycle Start Date is required"
+          },
+          "MONTHCYCLEENDDATE": {
+            "PLACEHOLDER": "Month Cycle End Date",
+            "REQUIERED_ERROR_TEXT": "Month Cycle End Date is required"
+          },
+          "TOTALWORKINGDAYS": {
+            "PLACEHOLDER": "Total Working Days",
+            "REQUIERED_ERROR_TEXT": "Total Working days is required"
+          },
+          "RUNNINGFLAG": {
+            "PLACEHOLDER": "Running  flag"
+          },
+          "SORTORDER": {
+            "PLACEHOLDER": "Sort Order",
+            "REQUIERED_ERROR_TEXT": "Sort Order is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "COMMONLOOKUPTYPE": {
+      "INDEX": {
+        "TITLE": "Common LookUp Types",
+        "CREATE_BUTTON_TOOLTIP": "New Common LookUp Type",
+        "EDIT_BUTTON_TOOLTIP": "Edit Common LookUp Type",
+        "DELETE_BUTTON_TOOLTIP": "Dellete Common LookUp Type",
+        "TABLE": {
+          "HEADER": {
+            "PARENT": "Parent",
+            "SHORTCODE": "Short Code",
+            "LOOKUPTYPENAME": "LookUp Type Name",
+            "LOOKUPTYPENAMELC": "LookUp Type Name LC",
+            "REMARKS": "Remarks",
+            "SORTORDER": "Sort Order",
+            "ACTIONS": "Actions"
+          },
+          "NODATAFOUNDTEXT": "No Common LookUp Type found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "Create Common LookUp Type",
+        "EDIT_TITLE": "Edit Common LookUp Type",
+        "CREATE_BUTTON_TOOLTIP": "Create Common LookUp Type",
+        "EDIT_BUTTON_TOOLTIP": "Edit Common LookUp Type",
+        "DELETE_BUTTON_TOOLTIP": "Delete Common LookUp Type",
+        "CREATE_FORM": {
+          "PARENTID": {
+            "PLACEHOLDER": "Parent",
+            "REQUIERED_ERROR_TEXT": "Parent is required"
+          },
+          "SHORTCODE": {
+            "PLACEHOLDER": "Short Code",
+            "REQUIERED_ERROR_TEXT": "Short Code is required"
+          },
+          "LOOKUPTYPENAME": {
+            "PLACEHOLDER": "LookUp Type Name",
+            "REQUIERED_ERROR_TEXT": "LookUp Type Name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "LOOKUPTYPENAMELC": {
+            "PLACEHOLDER": "LookUp Type Name LC",
+            "REQUIERED_ERROR_TEXT": "LookUp Type Name LC is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "REMARKS": {
+            "PLACEHOLDER": "Remarks",
+            "REQUIERED_ERROR_TEXT": "Remarks is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "SORTORDER": {
+            "PLACEHOLDER": "Sort Order",
+            "REQUIERED_ERROR_TEXT": "Sort Order is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 30"
+          }
+        }
+      }
+    },
+    "CONFIGURATION": {
+      "INDEX": {
+        "TITLE": "Configurations",
+        "CREATECONFIGURATIONBUTTONTEXT": "New Configuration",
+        "EDITCONFIGURATIONBUTTONTEXT": "Edit Configuration",
+        "DELETECONFIGURATIONBUTTONTEXT": "Delete Configuration",
+        "TABLE": {
+          "HEADER": {
+            "CODE": "Code",
+            "DESCRIPTION": "Description",
+            "DEFAULTVALUE": "Default Value",
+            "CUSTOMVALUE": "Custom Value",
+            "STARTDATE": "Start Date",
+            "ENDDATE": "End Date",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "HEADER": {
+        "HEADERNAME": "Configurations"
+      },
+      "SUBMITTBUTTON": {
+        "BUTTONNAME": "Submit"
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Configuration",
+        "EDIT_TITLE": "Edit Configuration",
+        "CREATE_FORM": {
+          "CODE": {
+            "PLACEHOLDER": "Code",
+            "REQUIERED_ERROR_TEXT": "Code is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "DEFAULTVALUE": {
+            "PLACEHOLDER": "Default Value",
+            "REQUIERED_ERROR_TEXT": "Default Value is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "DESCRIPTION": {
+            "PLACEHOLDER": "Description",
+            "REQUIERED_ERROR_TEXT": "Short name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          }
+        }
+      },
+      "CREATECUSTOMCONFIGURATION": {
+        "CREATE_TITLE": "Create Custom Configuration",
+        "EDIT_TITLE": "Edit Custom Configuration",
+        "CREATE_FORM": {
+          "CODE": {
+            "PLACEHOLDER": "Code",
+            "REQUIERED_ERROR_TEXT": "Code is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "DEFAULTVALUE": {
+            "PLACEHOLDER": "Default Value",
+            "REQUIERED_ERROR_TEXT": "Default Value is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "CUSTOMVALUE": {
+            "PLACEHOLDER": "Custom Value",
+            "REQUIERED_ERROR_TEXT": "Custom Value is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "DESCRIPTION": {
+            "PLACEHOLDER": "Description",
+            "REQUIERED_ERROR_TEXT": "Short name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "STARTDATE": {
+            "PLACEHOLDER": "Start Date",
+            "REQUIERED_ERROR_TEXT": "Start Date is required"
+          },
+          "ENDDATE": {
+            "PLACEHOLDER": "End Date",
+            "REQUIERED_ERROR_TEXT": "End Date is required"
+          }
+        }
+      },
+      "CREATECUSTOMEMPLOYEECONFIGURATION":{
+        "CREATE_TITLE": "Create Custom Employee Configuration"
+      },
+      "DELETE": {}
+    }
+  },
+  "CORE": {},
+  "EMPLOYEE": {
+    "EMPLOYEE": {
+      "INDEX": {
+        "TITLE": "Employees",
+        "CREATEEMPLOYEEBUTTONTEXT": "New Employee",
+        "TABLE": {
+          "HEADER": {
+            "FULLNAME": "Full Name",
+            "FULLNAMELC": "Localized Name",
+            "COMPANY": "Company",
+            "DEPARTMENT": "Department",
+            "BRANCH": "Branch",
+            "EMPLOYEEID": "Employee Id",
+            "USERID": "User Id",
+            "POSITIONID": "Position",
+            "DATEOFBIRTH": "Date Of Birth",
+            "REFERENCENUMBER": "Reference Number",
+            "NATIONALITYID": "Nationality",
+            "GENDER": "Gender",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Employee",
+        "EDIT_TITLE": "Edit Employee",
+        "CREATE_FORM": {
+          "EMPLOYEEID": {
+            "PLACEHOLDER": "Employee Id",
+            "REQUIERED_ERROR_TEXT": "Employee Id is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 15"
+          },
+          "USERID": {
+            "PLACEHOLDER": "User Id",
+            "REQUIERED_ERROR_TEXT": "User Id is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 15"
+          },
+          "FULLNAME": {
+            "PLACEHOLDER": "Full Name",
+            "REQUIERED_ERROR_TEXT": "Fullname is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 50"
+          },
+          "FULLNAMELC": {
+            "PLACEHOLDER": "Localized Fullname",
+            "REQUIERED_ERROR_TEXT": "Localized Fullname is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 50"
+          },
+          "DATEOFBIRTH": {
+            "PLACEHOLDER": "Date Of Birth",
+            "REQUIERED_ERROR_TEXT": "Date Of Birth is required"
+          },
+          "REFERENCENUMBER": {
+            "PLACEHOLDER": "Reference Number",
+            "REQUIERED_ERROR_TEXT": "Reference Number is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 15"
+          },
+          "ISACTIVE": {
+            "TITLE": "Is Active?"
+          }
+        }
+      },
+      "DELETE": {},
+      "DETAIL": {
+        "BASEHEADER": "Details of",
+        "DETAILCARDHEADER": "Personal Details",
+        "OTHERINFOCARDHEADER": "Other Information",
+        "FATHERSNAME": {
+          "PLACEHOLDER": "Father's Name",
+          "REQUIERED_ERROR_TEXT": "Father's Name is required",
+          "MAXLENGTH_ERROR_TEXT": "Maximum length should be 15"
+        },
+        "MOTHERSNAME": {
+          "PLACEHOLDER": "Mother's Name",
+          "REQUIERED_ERROR_TEXT": "Mother's Name is required",
+          "MAXLENGTH_ERROR_TEXT": "Maximum length should be 15"
+        },
+        "SPOUSENAME": {
+          "PLACEHOLDER": "Spouse' Name",
+          "REQUIERED_ERROR_TEXT": "Spouse Name is required",
+          "MAXLENGTH_ERROR_TEXT": "Maximum length should be 15"
+        },
+        "NID": {
+          "PLACEHOLDER": "NID",
+          "REQUIERED_ERROR_TEXT": "NID is required",
+          "MAXLENGTH_ERROR_TEXT": "Maximum length should be 50",
+          "DIGITERROR": "NID Must Be 10, 13 or 17 Digits"
+        },
+        "BID": {
+          "PLACEHOLDER": "BID",
+          "REQUIERED_ERROR_TEXT": "BID is required",
+          "MAXLENGTH_ERROR_TEXT": "Maximum length should be 50"
+        }
+      },
+      "EMPLOYEEENROLLMENT": {
+        "TITLE":"Employee Enrollment",
+        "JOINING_DATE": {
+          "CAPTION": "Joining Date"
+        },
+        "PERMANENT_DATE": {
+          "CAPTION": "Permanent Date"
+        },
+        "QUIT_DATE": {
+          "CAPTION": "Quit Date"
+        },
+        "STATUS": {
+          "CAPTION": "Status"
+        },
+        "GRADE": {
+          "CAPTION": "Grade"
+        },
+        "CONFIRMATION_RULE": {
+          "CAPTION": "Confirmation Rule"
+        }
+      }
+      
+    },
+    "EMPLOYEEADDRESS": {
+      "INDEX": {
+        "TITLE": "Employee Address",
+        "CREATE_BUTTON_TEXT": "New Employee Address",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Address",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Address",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Address",
+        "TABLE": {
+          "HEADER": {
+            "ADDRESSLINE1": "Address Line1",
+            "ADDRESSLINE2": "Address Line2",
+            "VILLAGE": "Village",
+            "POSTOFFICE": "Post Office",
+            "THANA": "Thana",
+            "DISTRICT": "District",
+            "COUNTRY": "Country",
+            "LATITUDE": "Latitude",
+            "LONGITUDE": "Longitude",
+            "ACTIONS": "Actions",
+            "ADDRESS_TYPE":"Address Type"
+          },
+          "NODATAFOUNDTEXT": "No Employee Address found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "Create Employee Address",
+        "EDIT_TITLE": "Edit Employee Address",
+        "CREATE_FORM": {
+          "ADDRESSLINE1": {
+            "PLACEHOLDER": "Address line 1",
+            "REQUIERED_ERROR_TEXT": "Address line 1 is required"
+          },
+          "ADDRESSLINE2": {
+            "PLACEHOLDER": "Address line 2",
+            "REQUIERED_ERROR_TEXT": "Address line 2 is required"
+          },
+          "VILLAGE": {
+            "PLACEHOLDER": "Village",
+            "REQUIERED_ERROR_TEXT": "Village is required"
+          },
+          "POSTOFFICE": {
+            "PLACEHOLDER": "Post Office",
+            "REQUIERED_ERROR_TEXT": "Post office is required"
+          },
+          "LATITUDE": {
+            "PLACEHOLDER": "Latitude",
+            "REQUIERED_ERROR_TEXT": "Latitude is required"
+          },
+          "LONGITUDE": {
+            "PLACEHOLDER": "Longitude",
+            "REQUIERED_ERROR_TEXT": "Longitude is required"
+          }
+        }
+      }
+    },
+    "EMPLOYEEEMAIL": {
+      "INDEX": {
+        "TITLE": "Employee Emails",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Email",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Email",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Email",
+        "TABLE": {
+          "HEADER": {
+            "EMAILADDRESS": "Email Address",
+            "ISPRIMARY": "Is Primary?",
+            "ACTIONS": "Actions"
+          },
+          "NODATAFOUNDTEXT": "No Employee Email found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "Create Employee Email",
+        "EDIT_TITLE": "Edit Employee Email",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Email",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Email",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Email",
+        "CREATE_FORM": {
+          "EMAILADDRESS": {
+            "PLACEHOLDER": "Email Address",
+            "REQUIERED_ERROR_TEXT": "Email Address is required",
+            "VALID_EMAIL_ERROR_TEXT": "Email Address is not valid"
+          },
+          "ISPRIMARY": {
+            "PLACEHOLDER": "Is Primary?"
+          }
+        }
+      }
+    },
+    "EMPLOYEEPHONE": {
+      "INDEX": {
+        "TITLE": "Employee Phones",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Phone",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Phone",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Phone",
+        "TABLE": {
+          "HEADER": {
+            "PHONENUMBER": "Phone Number",
+            "PHONETYPEID": "Phone Type",
+            "ACTIONS": "Actions"
+          },
+          "NODATAFOUNDTEXT": "No Employee Phone found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "Create Employee Phone",
+        "EDIT_TITLE": "Edit Employee Phone",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Phone",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Phone",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Phone",
+        "CREATE_FORM": {
+          "PHONENUMBER": {
+            "PLACEHOLDER": "Phone Number",
+            "REQUIERED_ERROR_TEXT": "Phone Number is required",
+            "VALID_PHONE_ERROR_TEXT": "Phone number is not valid",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "PHONETYPEID": {
+            "PLACEHOLDER": "Phone Type",
+            "REQUIERED_ERROR_TEXT": "Phone Type is required"
+          }
+        }
+      }
+    },
+    
+    "EMPLOYEEIMPORTFILEHISTORY":{
+        "INDEX":{
+          "TITLE":"Employee Import File History",
+          "TABLE":{
+            "HEADER":{
+              "FILE_NAME":"File Name",
+              "FILE_TYPE":"File Type",
+              "COMMENTS":"Comments",
+              "STATUS":"Status",
+              "TOTAL_RECORD":"Total Record",
+              "TOTAL_FAIL":"Total Fail",
+              "TOTAL_SUCCESS":"Total Success"
+            }
+          }
+        }
+    },
+    "EMPLOYEEMANAGER": {
+      "INDEX": {
+        "TITLE": "Employee Managers",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Manager",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Manager",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Manager",
+        "TABLE": {
+          "HEADER": {
+            "MANAGERID": "MANAGER",
+            "MANAGERTYPE": "Manager Type",
+            "ACTIONS": "Actions"
+          },
+          "NODATAFOUNDTEXT": "No Employee Manager found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "Create Employee Manager",
+        "EDIT_TITLE": "Edit Employee Manager",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Manager",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Manager",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Manager",
+        "CREATE_FORM": {
+          "MANAGERNAME": {
+            "PLACEHOLDER": "Manager Name",
+            "REQUIERED_ERROR_TEXT": "Manager Name is required",
+            "VALID_PHONE_ERROR_TEXT": "Manager Name is not valid"
+          },
+          "MANAGERTYPEID": {
+            "PLACEHOLDER": "Manager Type",
+            "REQUIERED_ERROR_TEXT": "Manager Type is required"
+          }
+        }
+      }
+    },
+    "EMPLOYEEEXPERIENCE": {
+      "INDEX": {
+        "TITLE": "Employee Experiences",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Experience",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Experience",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Experience",
+        "TABLE": {
+          "HEADER": {
+            "COMPANYNAME": "Company Name",
+            "DESIGNATION": "Designation",
+            "FUNCTIONALDESIGNATION": "Functional Designation",
+            "DEPARTMENT": "Department",
+            "RESPONSIBILITIES": "Responsibilites",
+            "COMPANYADDRESS": "Company Address",
+            "COMPANYCONTACTNO": "Company Contact No",
+            "COMPANYMOBILE": "Company Mobile",
+            "COMPANYWEB": "Company Web",
+            "COMPANYEMAIL": "Company Email",
+            "FROMDATE": "From Date",
+            "TODATE": "To Date",
+            "ACTIONS": "Actions"
+          },
+          "NODATAFOUNDTEXT": "No Employee Experience found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "Create Employee Experience",
+        "EDIT_TITLE": "Edit Employee Experience",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Experience",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Experience",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Experience",
+        "CREATE_FORM": {
+          "COMPANYNAME": {
+            "PLACEHOLDER": "Company Name",
+            "REQUIERED_ERROR_TEXT": "Company Name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "DESIGNATION": {
+            "PLACEHOLDER": "Designation",
+            "REQUIERED_ERROR_TEXT": "Designation is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "FUNCTIONALDESIGNATION": {
+            "PLACEHOLDER": "Functional Designation",
+            "REQUIERED_ERROR_TEXT": "Functional Designation is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "DEPARTMENT": {
+            "PLACEHOLDER": "Department",
+            "REQUIERED_ERROR_TEXT": "Department is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "RESPONSIBILITIES": {
+            "PLACEHOLDER": "Responsibilities",
+            "REQUIERED_ERROR_TEXT": "Responsibilities is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 500"
+          },
+          "COMPANYADDRESS": {
+            "PLACEHOLDER": "Company Address",
+            "REQUIERED_ERROR_TEXT": "Company Address is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "COMPANYCONTACTNO": {
+            "PLACEHOLDER": "Company Contact No",
+            "REQUIERED_ERROR_TEXT": "Company Contact No is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "COMPANYMOBILE": {
+            "PLACEHOLDER": "Company Mobile",
+            "REQUIERED_ERROR_TEXT": "Company Mobile is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "COMPANYEMAIL": {
+            "PLACEHOLDER": "Company Email",
+            "REQUIERED_ERROR_TEXT": "Company Email is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "COMPANYWEB": {
+            "PLACEHOLDER": "Company Web",
+            "REQUIERED_ERROR_TEXT": "Company Web is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 50"
+          },
+          "FROMDATE": {
+            "PLACEHOLDER": "From Date",
+            "REQUIERED_ERROR_TEXT": "From Date is required"
+          },
+          "TODATE": {
+            "PLACEHOLDER": "To Date",
+            "REQUIERED_ERROR_TEXT": "To date is required"
+          },
+          "TILLDATE": {
+            "PLACEHOLDER": "Till Date",
+            "TITLE": "Till Date",
+            "TOOLTIP": "Till Date"
+          }
+        }
+      }
+    },
+    "EMPLOYEEEDUCATION": {
+      "INDEX": {
+        "TITLE": "Employee Educations",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Education",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Education",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Education",
+        "TABLE": {
+          "HEADER": {
+            "EDUCATIONALDEGREE": "Educational Degree",
+            "EDUCATIONALINSTITUTE": "Educational Institute",
+            "SESSION": "Session",
+            "PASSINGYEAR": "Passing Year",
+            "BOARDORUNIVERSITY": "Board or University",
+            "RESULT": "Result",
+            "RESULTTYPE": "Result Type",
+            "OUTOF": "Out Of",
+            "ACTIONS": "Actions"
+          },
+          "NODATAFOUNDTEXT": "No Employee Education found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "Create Employee Education",
+        "EDIT_TITLE": "Edit Employee Education",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Education",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Education",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Education",
+        "CREATE_FORM": {
+          "EDUCATIONALDEGREEID": {
+            "PLACEHOLDER": "Educational Degree",
+            "REQUIERED_ERROR_TEXT": "Educational Degree is required"
+          },
+          "EDUCATIONALINSTITUTEID": {
+            "PLACEHOLDER": "Educational Institute",
+            "REQUIERED_ERROR_TEXT": "Educational Institute is required"
+          },
+          "SESSION": {
+            "PLACEHOLDER": "Session",
+            "REQUIERED_ERROR_TEXT": "Session is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "PASSINGYEAR": {
+            "PLACEHOLDER": "Passing Year",
+            "REQUIERED_ERROR_TEXT": "Passing Year is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "BOARDORUNIVERSITY": {
+            "PLACEHOLDER": "Board or University",
+            "REQUIERED_ERROR_TEXT": "Board or University is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "RESULT": {
+            "PLACEHOLDER": "Result",
+            "REQUIERED_ERROR_TEXT": "Result is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 30"
+          },
+          "RESULTTYPE": {
+            "PLACEHOLDER": "Result Type",
+            "REQUIERED_ERROR_TEXT": "Result Type is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 10"
+          },
+          "OUTOF": {
+            "PLACEHOLDER": "Out Of",
+            "REQUIERED_ERROR_TEXT": "OutOf is required"
+          }
+        }
+      }
+    },
+    "EMPLOYEEFAMILYMEMBER": {
+      "INDEX": {
+        "TITLE": "Employee Family Members",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Family Member",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Family Member",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Family Member",
+        "TABLE": {
+          "HEADER": {
+            "FAMILIYMEMBERNAME": "Member Name",
+            "DATEOFBIRTH": "Date Of Birth",
+            "EDUCATIONCLASS": "Education Class",
+            "EDUCATIONALINSTITUTE": "Educational Institute",
+            "EDUCATIONYEAR": "Education Year",
+            "RELATIONTYPENAME": "Relation Type",
+            "ISDEPENDANT": "Dependent",
+            "ISELIGIBLEFORMEDICAL": "Eligible For Medical",
+            "ISELIGIBLEFOREDUCATION": "Eligible For Education",
+            "ACTIONS": "Actions"
+          },
+          "NODATAFOUNDTEXT": "No Employee Family Member found"
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "Create Employee Family Member",
+        "EDIT_TITLE": "Edit Employee Family Member",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Family Member",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Family Member",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Family Member",
+        "CREATE_FORM": {
+          "FAMILIYMEMBERNAME": {
+            "PLACEHOLDER": "Family Member Name",
+            "REQUIERED_ERROR_TEXT": "Family Member Name is required"
+          },
+          "DATEOFBIRTH": {
+            "PLACEHOLDER": "Date Of Birth",
+            "REQUIERED_ERROR_TEXT": "Date Of Birth is required"
+          },
+          "EDUCATIONCLASS": {
+            "PLACEHOLDER": "Education Class",
+            "REQUIERED_ERROR_TEXT": "Education Class is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "EDUCATIONALINSTITUTE": {
+            "PLACEHOLDER": "Educational Institute",
+            "REQUIERED_ERROR_TEXT": "Educational Institute is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "EDUCATIONYEAR": {
+            "PLACEHOLDER": "Education Year",
+            "REQUIERED_ERROR_TEXT": "Education Year is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 150"
+          },
+          "RELATIONTYPENAME": {
+            "PLACEHOLDER": "Relation Type Name",
+            "REQUIERED_ERROR_TEXT": "Relation Type Name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 30"
+          },
+          "ISDEPENDANT": {
+            "TITLE": "Dependant",
+            "TOOLTIP": "Is Dependant?"
+          },
+          "ISELIGIBLEFORMEDICAL": {
+            "TITLE": "Eligible For Medical",
+            "TOOLTIP": "Is Eligible For Medical?"
+          },
+          "ISELIGIBLEFOREDUCATION": {
+            "TITLE": "Eligible For Education",
+            "TOOLTIP": "Is Eligible For Education?"
+          }
+        }
+      }
+    },
+    "EMPLOYEECARD":{
+      "INDEX":{
+        "TITLE":"Employee Id Card",
+        "CREATE_BUTTON_TOOLTIP":"Create Employee Id Card",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Card",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Card",
+        "TABLE":{
+          "HEADER":{
+            "CARD_MASKING_VALUE":"Card Masking Value",
+            "ISSUE_DATE":"Issue Date",
+            "CHARGE_AMOUNT":"Charge Amount",
+            "IS_PAID":"Is Paid",
+            "PAYMENT_DATE":"Payment Date",
+            "CARD_REVOKED":"Card Revoked",
+            "CARD_REVOKED_DATE":"Card Revoked Date"
+
+          },
+          "NODATAFOUNDTEXT": "No Employee Card Found"
+        }
+      },
+      "CREATE":{
+        "CREATE_TITLE": "Create Employee Id Card",
+        "EDIT_TITLE": "Edit Employee Id Card",
+        "CREATE_BUTTON_TOOLTIP": "Create Employee Card",
+        "EDIT_BUTTON_TOOLTIP": "Edit Employee Card",
+        "DELETE_BUTTON_TOOLTIP": "Delete Employee Card",
+        "CREATE_FORM":{
+          "CARD_MASKING_VALUE":{
+            "PLACEHOLDER": "Card Masking Value",
+            "REQUIERED_ERROR_TEXT": "Card Masking Value is required",
+            "MAX_LENGTH_ERROR":"Max length should be 150"
+          },
+          "ISSUE_DATE":{
+            "PLACEHOLDER": "Issue Date",
+            "REQUIERED_ERROR_TEXT": "Issue Date is required"
+          },
+          "CHARGE_AMOUNT":{
+            "PLACEHOLDER": "Charge Amount",
+            "REQUIERED_ERROR_TEXT": "Charge Amount is required"
+          },
+          "IS_PAID":{
+            "PLACEHOLDER": "Is Paid?",
+            "REQUIERED_ERROR_TEXT": "Is Paid required"
+          },
+          "PAYMENT_DATE":{
+            "PLACEHOLDER": "Payment Date",
+            "REQUIERED_ERROR_TEXT": "Payment Date is required"
+          },
+          "CARD_REVOKED":{
+            "PLACEHOLDER": "Card Revoked",
+            "REQUIERED_ERROR_TEXT": "Card Revoked is required"
+          },
+          "CARD_REVOKED_DATE":{
+            "PLACEHOLDER": "Card Revoked Date",
+            "REQUIERED_ERROR_TEXT": "Card Revoked Date is required"
+          }
+          
+
+        }
+      }
+    },
+    "EMPLOYEEPROMOTIONTRANSFER":{
+      "INDEX":{
+        "TITLE":"Employee Promotion & Transfer",
+        "SEARCH_EMPLOYEES":"Search Employees",
+        "EMAIL_ADDRESS":"Email",
+        "HOUSE_RENT":"House Rent",
+        "MEDICAL":"Medical",
+        "BASIC":"Basic",
+        "CONVEYANCE":"Conveyance"
+      },
+      "CREATE":{
+        "PROPOSED_DATE":"Proposd Date",
+        "PERCENTAGE/FIXED":"Percentage/Fixed",
+        "BASIC/GROSS":"Basic/Gross",
+        "AMOUNT":"Amount",
+        "UPDATE":"Update",
+        "REASON":"Reasons"
+
+
+      }
+    },
+    "EMPLOYEEPROMOTIONTRANSFERLIST":{
+      "INDEX":{
+        "TITLE":"Employee Promotion & Transfer List",
+        "FULLNAME":"Full Name",
+        "APPROVAL_STATUS":"Approval Status",
+        "APPROVAL_NOTE":"Approval Note",
+        "APPROVAL_DATE":"Approval Date",
+        "CRITERIA":"Criteria",
+        "AMOUNT":"Amount",
+        "BASIC/GROSS":"Basic/Gross",
+        "PERCENTAGE/FIXED":"Percentage/Fixed",
+        "PREVIOUS_COMPANY":"Previous Company",
+        "PREVIOUS_BRANCH":"Previous Branch",
+        "PREVIOUS_DEPARTMENT":"Previous Department",
+        "PREVIOUS_DESIGNATION":"Previous Designation",
+        "PREVIOUS_BASIC":"Previous Basic",
+        "PREVIOUS_HOUSERENT":"Previous House Rent",
+        "PREVIOUS_GROSS":"Previous Gross",
+        "NEW_COMPANY":"New Company",
+        "NEW_BRANCH":"New Branch",
+        "NEW_DEPARTMENT":"New Department",
+        "NEW_DESIGNATION":"New Designation",
+        "NEW_BASIC":"New Basic",
+        "NEW_HOUSERENT":"New House Rent",
+        "NEW_GROSS":"New Gross",
+        "PREVIOUS_GRADE":"Previous Grade",
+        "PREVIOUS_SALARYSTRUCTURE":"Previous Salary Structure",
+        "PREVIOUS_PAYMENTOPTION":"Previous Payement Option",
+        "NEW_GRADE":"New Grade",
+        "NEW_SALARYSTRUCTURE":"New Salary Structure",
+        "NEW_PAYMENTOPTION":"New Payement Option"
+        
+      },
+      "APPROVEORREJECT":{
+        "APPROVE":"Approve",
+        "DECLINE":"Decline",
+        "NOTES":"Notes"
+      }
+    }
+  },
+  "LEAVE": {
+    "LEAVETYPE": {
+      "INDEX": {
+        "TITLE": "Leave Type",
+        "CREATELEAVETYPEBUTTONTEXT": "New Leave Type",
+        "EDITLEAVETYPEBUTTONTEXT": "Edit Leave Type",
+        "DELETELEAVETYPEBUTTONTEXT": "Delete Leave Type",
+        "TABLE": {
+          "HEADER": {
+            "NAME": "Leave Type Name",
+            "LOCALIZEDNAME": "Localized Name",
+            "SHORTNAME": "Short Name",
+            "BALANCE": "Balance",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      
+      "CREATE": {
+        "CREATE_TITLE": "New Leave Type",
+        "EDIT_TITLE": "Edit Leave Type",
+        "CREATE_FORM": {
+          "LEAVETYPENAME": {
+            "PLACEHOLDER": "Leave Type Name",
+            "REQUIERED_ERROR_TEXT": "Leave Type name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "LEAVETYPELOCALIZEDNAME": {
+            "PLACEHOLDER": "Leave Type Localized Name",
+            "REQUIERED_ERROR_TEXT": "Leave Type Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHORTNAME": {
+            "PLACEHOLDER": "Short Name",
+            "REQUIERED_ERROR_TEXT": "Short name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "BALANCE": {
+            "PLACEHOLDER": "Balance",
+            "REQUIERED_ERROR_TEXT": "Balance is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 50"
+          },
+          "ISCARRYFORWARD": {
+            "TITLE": "Is Carry Forward?"
+          },
+          "ISFEMALESPECIFIC": {
+            "TITLE": "Is Female Specific?"
+          },
+          "ISPAID": {
+            "TITLE": "Is Paid?"
+          },
+          "ISENCASHABLE": {
+            "TITLE": "Is Encashable?"
+          },
+          "ENCASHRESERVEBALANCE": {
+            "PLACEHOLDER": "Encash Reserve Balance",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 5"
+          },
+          "ISDEPENDONDATEOFCONFIRMATION": {
+            "TITLE": "Is Depend On Date Of Confirmation?"
+          },
+          "ISLEAVEDAYSFIXED": {
+            "TITLE": "Is Leave Days Fixed?"
+          },
+          "ISBASEDWORKINGDAYS": {
+            "TITLE": "Is Based Working Days?"
+          },
+          "CONSECUTIVELIMIT": {
+            "PLACEHOLDER": "Consecutive Limit",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 5"
+          },
+          "ISALLOWADVANELEAVEAPPLY": {
+            "TITLE": "Is Allow Advance Leave Apply?"
+          },
+          "ISALLOWWITHPRECEDINGHOLIDAY": {
+            "TITLE": "Is Allow With Preceding Holiday?"
+          },
+          "ISALLOWOPENINGBALANCE": {
+            "TITLE": "Is Allow Opening Balance?"
+          },
+          "ISPREVENTPOSTLEAVEAPPLY": {
+            "TITLE": "Is Prevent Post Leave Apply?"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    
+    "LEAVEPROCESS":{
+      "INDEX":{
+        "TITLE":"Leave Entitlement"
+      }
+    },
+    "LEAVEGROUP":{
+      "INDEX":{
+       "TITLE":"Leave Group",
+       "BUTTONTEXT":"Add Leave Grpup"
+      },
+      "CREATE":"Create New Leave Group",
+      "EDIT":"Edit Leave Group",
+      "ERROR":{
+        "LEAVEGROUPNAMEERRORTEXT":"Leave group name is required",
+        "LEAVEGROUPNAMEMAXLENGTHERRORTEXT":"Max Length shoulbe 250"
+      }
+
+    },
+    "LEAVEBALANCE":{
+      "INDEX":{
+        "TITLE":"Leave Balance",
+        "LEAVECALENDAR":{
+          "PLACEHOLDER":"Leave Calendar",
+          "ERROR_TEXT":"Leave Calendar is required"
+        },
+        "EMPLOYEE":{
+          "PLACEHOLDER":"Employee",
+          "ERROR_TEXT":"Employee is required"
+        },
+        "BUTTONTEXT":"Search",
+        "TABLE":{
+          "HEADER":{
+            "EMPLOYEE_NAME":"Employee Name",
+            "LEAVE_TYPE_NAME":"Leave Type Name",
+            "MAXIMUM_BALANCE":"Balance",
+            "USED_BALANCE":"Used Balance",
+            "REMAINING_BALANCE":"Remaining Balance"
+          }
+        }
+      }
+         
+    },
+    "LEAVEAPPLICATION":{
+      "CREATE":{
+        "CREATE_BUTTON_TOOLTIP":"Apply Leave",
+        "LEAVEDURATION":"Number Of Days",
+        "ERROR":{
+          "LEAVE_TYPE_ERROR_TEXT":"Leave Type is Required",
+           "NUMBER_OF_DAYS_ERROR_TEXT":"Number Of Days is Requires"
+        },
+        "REASON":{
+          "PLACEHOLDER":"Reason"
+        },
+        "STATUS":{
+          "PLACEHOLDER":"Status"
+        },
+        "NO_OF_DAYS":{
+          "PLACEHOLDER":"No Of Days"
+        }
+  
+      }
+      
+    }  ,
+    "LEAVEREQUEST":{
+      "INDEX":{
+        "TITLE":"Leave Requests",
+
+       "TABLE":{ 
+      
+      "HEADER":{
+        "APPLICANT_NAME":"Applicant Name",
+        "REQUEST_TYPE":"Request Type",
+        "DATE_RNAGE":"Date Range",
+        "APPROVAL_STATUS":"Approval Status",
+        "BALANCE":"Balance",
+        "REASON":"Reason",
+        "ADDRESS_ON_LEAVE":"Address on Leave",
+        "EMERGENCY_CONTACT":"Emergency Contact",
+        "NOTE":"Approval/Declination Note"
+
+      }
+    }
+      }
+    }
+  },
+  
+  "PAYROLL": {
+    "BANK": {
+      "INDEX": {
+        "TITLE": "Banks",
+        "CREATEBANKBUTTONTEXT": "New Bank",
+        "EDITBANKBUTTONTEXT": "Edit Bank",
+        "DELETEBANKBUTTONTEXT": "Delete Bank",
+        "TABLE": {
+          "HEADER": {
+            "NAME": "Name",
+            "LOCALIZEDNAME": "Localized Name",
+            "SHORTNAME": "Short Name",
+            "LICENSEKEY": "License Key",
+            "SORTORDER": "Sort Order",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Bank",
+        "EDIT_TITLE": "Edit Bank",
+        "CREATE_FORM": {
+          "BANKNAME": {
+            "PLACEHOLDER": "Bank Name",
+            "REQUIERED_ERROR_TEXT": "Bank name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "PAYROLLLOCALIZEDNAME": {
+            "PLACEHOLDER": "Bank Localized Name",
+            "REQUIERED_ERROR_TEXT": "Bank Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SHORTNAME": {
+            "PLACEHOLDER": "Short Name",
+            "REQUIERED_ERROR_TEXT": "Short name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SORTORDER": {
+            "PLACEHOLDER": "Sort Order",
+            "REQUIERED_ERROR_TEXT": "Sort Order is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "BENEFITDEDUCTION":{
+      "INDEX":{
+        "TITLE":"Benefit Deduction Code",
+        "HEADER":{
+        "BENEFIT_DEDUCTION_CODE":"Benefit Deduction Code",
+        "BENEFIT_DEDUCTION_CODE_NAME":"Benefit Deduction Code Name"
+        },
+        "CREATE":{
+          "BUTTON_TEXT":"Benefit Deduction",
+          "TITLE":"Create Benefit Deduction Code",
+          "BENEFIT_DEDUCTION_CODE":{
+            "PLACEHOLDER":"Benefit Deduction Code",
+            "REQUIRED_ERROR_TEXT":"Benefit Deduction Code is required",
+            "MAXLENGTH_ERROR_TEXT":"Maximum length should be 50"
+          },
+          "BENEFIT_DEDUCTION_CODE_NAME":{
+            "PLACEHOLDER":"Benefit Deduction Code Name",
+            "REQUIRED_ERROR_TEXT":"Benefit Deduction Code Name is required",
+            "MAXLENGTH_ERROR_TEXT":"Maximum length should be 50"
+          }
+        },
+        "EDIT":{
+          "TITLE":"Edit Benefit Deduction Code"
+        }
+        
+        
+      }
+    },
+    "BENEFITDEDUCTIONCONFIG":{
+       "INDEX":{
+          "TABLE":{
+            "HEADER":{
+              "NAME":"Name",
+              "DESCRIPTION":"Description",
+              "TYPE":"Type",
+              "CALCULATION_TYPE":"Calculation Type",
+              "BASIC_GROSS":"Basic Or Gross",
+              "PERCENTAGE_OF_BASICORGROSS":"Percentage Of Basic Or Gross",
+              "FIXED_AMOUNT":"Fixed Amount",
+              "INTERVAL":"Interval",
+              "IS_CALCULATE":"Is Calculate Salary",
+            
+              "SALARY":"Salary",
+              "IS_ACTIVE":"Is Active",
+              "START_DATE":"Start Date",
+              "END_DATE":"End Date"
+            }
+            
+          }
+       },
+       "CREATE":{
+         "CREATE_TITLE":"Create Benefit Deduction Configuration",
+         "EDIT_TITLE":"Edit Benefit Deduction Configuration",
+          "BENEFIT_DEDUCTION_COE":{
+            "PLACEHOLDER":"Benefit Deduction Code"
+          },
+          "NAME":{
+            "PLACEHOLDER":"Name",
+            "REQUIRED_ERROR_TEXT":"Name is required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+          },
+          "DESCRIPTION":{
+            "PLACEHOLDER":"Description",
+            "REQUIRED_ERROR_TEXT":"Description is required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          "TYPE":{
+            "PLACEHOLDER":"Type",
+            "REQUIRED_ERROR_TEXT":"Type is required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          "CALCULATION_TYPE":{
+            "PLACEHOLDER":"Calulation Type",
+            "REQUIRED_ERROR_TEXT":"Calulation Type is required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          "BASIC_GROSS":{
+            "PLACEHOLDER":"Basic Or Gross",
+            "REQUIRED_ERROR_TEXT":"Basic Or Gross is required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          "PERCENTAGE_OF_BASIC_GROSS":{
+            "PLACEHOLDER":"Percentage Of Basic Or Gross",
+            "REQUIRED_ERROR_TEXT":"Percentage Of Basic Or Gross is required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          "FIXED_AMOUNT":{
+            "PLACEHOLDER":"Fixed Amount",
+            "REQUIRED_ERROR_TEXT":"Fixed Amount is required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          "INTERVAL":{
+            "PLACEHOLDER":"Interval",
+            "REQUIRED_ERROR_TEXT":"Interval is required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          "START_DATE":{
+            "PLACEHOLDER":"Start Date",
+            "REQUIRED_ERROR_TEXT":"Start Date required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          
+          "END_DATE":{
+            "PLACEHOLDER":"End Date",
+            "REQUIRED_ERROR_TEXT":"Start Date required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          "IS_CALCULATE_SALARY":{
+            "PLACEHOLDER":" Is Calculate Salary",
+            "REQUIRED_ERROR_TEXT":" Is Calculate Salary required",
+            "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+          },
+          "IS_ACTIVE":{
+            "PLACEHOLDER":" Is ACtive"
+          }
+          
+          
+        }
+       
+          
+       
+    
+  },
+  "EMPLOYEEBENEFITDEDUCTION":{
+       "INDEX":{
+         "TABLE":{
+         "HEADER":{
+           "EMPLOYEE":"Employee",
+           "AMOUNT":"Amount",
+           "START_DATE":"Start Date",
+           "END_DATE":"End Date",
+           "REMARKS":"Remarks"
+         }
+       },
+       "CREATE":{
+        "TITLE":"Create employee benefit deduction",
+         "AMOUNT":{
+           "PLACEHOLDER":"Amount",
+           "REQUIRED_ERROR_TEXT":"Amount is required"
+         },
+         "REMARKS":{
+          "PLACEHOLDER":"Remarks",
+          "REQUIRED_ERROR_TEXT":"Remarks is required",
+          "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+        },
+        "START_DATE":{
+          "PLACEHOLDER":"Start Date",
+          "REQUIRED_ERROR_TEXT":"Start Date required",
+          "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+        },
+        "END_DATE":{
+          "PLACEHOLDER":"End Date",
+          "REQUIRED_ERROR_TEXT":"Start Date required",
+          "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+        }
+       },
+       "EDIT":{
+        "TITLE":"Edit employee benefit deduction"
+      }
+      }
+  },
+  "INCOMETAXPAYERTYPE":{
+    "INDEX":{
+      "TITLE":"Income Tax Payer Type",
+      "TABLE":{
+      "HEADER":{
+         "PAYER_TYPE_CODE":"Payer Type Code",
+         "PAYER_TYPE_NAME":"Payer Type Name",
+         "REMARKS":"Remarks",
+         "IS_ACTIVE":"Is Active"
+      }
+    }
+    },
+    "CREATE":{
+      "TITLE":"Create Income Tax Payer Type",
+      "PAYER_TYPE_CODE":{
+        "PLACEHOLDER":"Payer Type Code",
+        "REQUIRED_ERROR_TEXT":"Payer Type Code is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+      },
+      "PAYER_TYPE_NAME":{
+        "PLACEHOLDER":"Payer Type Name",
+        "REQUIRED_ERROR_TEXT":"Payer Type Name is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+      },
+      "REMARKS":{
+        "PLACEHOLDER":"Remarks",
+        "REQUIRED_ERROR_TEXT":"Payer Type Code is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+      },
+      "IS_ACTIVE":{
+        "PLACEHOLDER":"Is Active",
+        "REQUIRED_ERROR_TEXT":"Payer Type Code is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+      }
+    },
+    "EDIT":{
+      "TITLE":"Edit Income Tax Payer Type"
+    }
+    
+  },
+  "INCOMETAXSLAB":{
+    "INDEX":{
+      "TITLE":"Income Tax Slab",
+      "TABLE":{
+        "HEADER":{
+          "SLAB_NAME":"Slab Name",
+          "DESCRIPTION":"Description",
+          "SLAB_AMOUNT":"Slab Amount",
+          "TAXABLE_PERCENT":"Taxable Percent",
+          "TAX_PAYER_TYPE_NAME":"Tax Payer Type Name",
+          "START_DATE":"Start Date",
+          "END_DATE":"End Date",
+          "IS_RUNNING":"Is Running"
+        }
+      }
+    },
+    "CREATE":{
+   "TITLE":"Create Income Tax Slab",
+    
+    "SLAB_NAME":{
+      "PLACEHOLDER":"Slab Name",
+      "REQUIRED_ERROR_TEXT":"Slab Name is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "DESCRIPTION":{
+      "PLACEHOLDER":"Description",
+      "REQUIRED_ERROR_TEXT":"Description is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "SLAB_AMOUNT":{
+      "PLACEHOLDER":"Slab Amount",
+      "REQUIRED_ERROR_TEXT":"Slab Amount is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "TAXABLE_PERCENT":{
+      "PLACEHOLDER":"Taxable Percent",
+      "REQUIRED_ERROR_TEXT":"Taxable Percent is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "TAX_PAYER_TYPE":{
+      "PLACEHOLDER":"Income Tax Payer Type",
+      "REQUIRED_ERROR_TEXT":"Taxable Percent is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "SLAB_ORDER":{
+      "PLACEHOLDER":"Slab Order",
+      "REQUIRED_ERROR_TEXT":"Taxable Percent is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "IS_RUNNING":{
+      "PLACEHOLDER":"Is Running",
+      "REQUIRED_ERROR_TEXT":"Taxable Percent is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    }
+  
+  },
+  "EDIT":{
+    "TITLE":"Edit Income Tax Slab"
+  }
+  },
+  "INCOMETAXPARAMETER":{
+    "INDEX":{
+      "TITLE":"Income Tax Parameter",
+      "TABLE":{
+        "HEADER":{
+          "PARAMETER_NAME":"Parameter Name",
+          "AMOUNT_LIMIT":"Amount Limit",
+          "LIMIT_PERCENTAGE_OF_BASIC":"Limit Percentage Of Basic",
+          "TAXABLE_PERCENT":"Taxable Percent",
+          "TAX_PAYER_TYPE_NAME":"Tax Payer Type Name",
+          "START_DATE":"Start Date",
+          "END_DATE":"End Date",
+          "IS_ACTIVE":"Is Active",
+          "REMARKS":"Remarks"
+          
+        }
+      }
+    },
+    "CREATE":{
+   "TITLE":"Create Income Tax Parameter",
+    
+    "PARAMETER_NAME":{
+      "PLACEHOLDER":"Parameter Name",
+      "REQUIRED_ERROR_TEXT":"Parameter Name is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "AMOUNT_LIMIT":{
+      "PLACEHOLDER":"Amount Limit",
+      "REQUIRED_ERROR_TEXT":"Amount Limit is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "LIMIT_PERCENTAGE_OF_BASIC":{
+      "PLACEHOLDER":"Limit Percentage Of Basic",
+      "REQUIRED_ERROR_TEXT":"Limit Percentage Of Basic is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "TAX_PAYER_TYPE_NAME":{
+      "PLACEHOLDER":"Tax Payer Type Name",
+      "REQUIRED_ERROR_TEXT":"Tax Payer Type Name is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "TAX_PAYER_TYPE":{
+      "PLACEHOLDER":"Income Tax Payer Type",
+      "REQUIRED_ERROR_TEXT":"Taxable Percent is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "REMARKS":{
+      "PLACEHOLDER":"Remarks",
+      "REQUIRED_ERROR_TEXT":"Taxable Percent is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    }
+    
+  
+  },
+  "EDIT":{
+    "TITLE":"Edit Income Tax Parameter"
+  }
+  },
+  "INCOMETAXINVESTMENT":{
+    "INDEX":{
+      "TITLE":"Income Tax Investment",
+      "TABLE":{
+        "HEADER":{
+          "INVESTMENT_PERCENTAGE":"Investment Percentage",
+          "WAIVER_PERCENTAGE":"Waiver Percentage",
+          "START_DATE":"Start Date",
+          "END_DATE":"End Date",   
+          "REMARKS":"Remarks"
+          
+        }
+      }
+    },
+    "CREATE":{
+   "TITLE":"Create Income Tax Investment",
+    
+    "INVESTMENT_PERCENTAGE":{
+      "PLACEHOLDER":"Investment Perentage",
+      "REQUIRED_ERROR_TEXT":"Investment Perentage is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    "WAIVER_PERCENTAGE":{
+      "PLACEHOLDER":"Waiver Percentage",
+      "REQUIRED_ERROR_TEXT":"Amount Limit is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    },
+    
+    
+    "REMARKS":{
+      "PLACEHOLDER":"Remarks",
+      "REQUIRED_ERROR_TEXT":"Taxable Percent is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+    }
+    
+  
+  },
+  "EDIT":{
+    "TITLE":"Edit Income Tax Investment"
+  }
+  },
+  
+  
+    "PAIDSALARY":{
+      
+        "INDEX":{
+          "TITLE":"Employee Paid Salary",
+          "BUTTONTEXT": "New Emp Paid Salary",
+          "APPYFILTER_BUTTON":"Search", 
+          "EMPTYMESSAGE": "There is no data to show",
+           "DETAILTOOLTIP": "Show Details",
+          "TABLE":{
+            "HEADER":{
+              "PAYABLE_SALARY": "Payable Salary", 
+               "TOTAL_DEDUCTED_AMOUNT": "Total Deducted Amount",
+               "NET_PAYABLE_AMOUNT":"Net Payable Amount"
+               
+            }
+          }
+        }
+      
+    },       
+    "GENERATESALARY":{
+      "CREATE":{
+        "INDEX":{
+          "TITLE":"Generate Salary",
+          "BUTTONTEXT":"Generate",
+          "ERROR":{
+          "FINANCIAL_YEAR_REQUIRED_ERROR": " Financial Year Is required",
+          "MONTHCYCLE_REQUIRED_ERROR":"Month Cycle Is Required"
+          }
+        }
+      }
+    },
+    "BANKBRANCH": {
+      "INDEX": {
+        "TITLE": "Bank Branch",
+        "CREATEBANKBRANCHBUTTONTEXT": "New Branch",
+        "EDITBANKBRANCHBUTTONTEXT": "Edit Branch",
+        "DELETEBANKBRANCHBUTTONTEXT": "Delete Branch",
+        "TABLE": {
+          "HEADER": {
+            "BRANCHNAME": "Name",
+            "BRANCHNAMELC": "Localized Name",
+            "BRANCHADDRESS": "Address",
+            "CONTACTPERSON": "Contact Person",
+            "CONTACTNUMBER": "Phone No",
+            "CONTACTEMAILID": "Email",
+            "SORTORDER": "Sort Order",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Branch",
+        "EDIT_TITLE": "Edit Branch",
+        "CREATE_FORM": {
+          "BRANCHNAME": {
+            "PLACEHOLDER": "Branch Name",
+            "REQUIERED_ERROR_TEXT": "Branch name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "PAYROLLLOCALIZEDNAME": {
+            "PLACEHOLDER": "Bank Localized Name",
+            "REQUIERED_ERROR_TEXT": "Bank Localized name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "BRANCHADDRESS": {
+            "PLACEHOLDER": "Address",
+            "REQUIERED_ERROR_TEXT": "Address is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "CONTACTPERSON": {
+            "PLACEHOLDER": "Contact Person",
+            "REQUIERED_ERROR_TEXT": "Address is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 100"
+          },
+          "CONTACTNUMBER": {
+            "PLACEHOLDER": "Phone No",
+            "REQUIERED_ERROR_TEXT": "Phone No is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "CONTACTEMAILID": {
+            "PLACEHOLDER": "Email",
+            "REQUIERED_ERROR_TEXT": "Email is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 100"
+          },
+          "SORTORDER": {
+            "PLACEHOLDER": "Sort Order",
+            "REQUIERED_ERROR_TEXT": "Sort Order is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "EMPLOYEEBANKACCOUNT": {
+      "INDEX": {
+        "TITLE": "Employee Bank Account",
+        "CREATEEMPLOYEEBANKACCOUNTBUTTONTEXT": "New Bank Account",
+        "EDITEMPLOYEEBANKACCOUNTBUTTONTEXT": "Edit Bank Account",
+        "DELETEEMPLOYEEBANKACCOUNTBUTTONTEXT": "Delete Bank Account",
+        "TABLE": {
+          "HEADER": {
+            "BANK": "Bank",
+            "BANKBRANCH": "Bank Branch",
+            "ACCOUNTNO": "Account No",
+            "ACCOUNTTITLE": "Account Title",
+            "ISPRIMARY": "Is Primary",
+            "PAYMENTOPTION": "Payment Opt",
+            "STARTDATE": "Start Date",
+            "ENDDATE": "End Date",
+            "REMARKS": "Remarks",
+            "ACTIONS": "Actions",
+            "EMPLOYEEFULLNAME": "Employee"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Employee Account",
+        "EDIT_TITLE": "Edit Employee Account",
+        "CREATE_FORM": {
+          "BANKID": {
+            "PLACEHOLDER": "Bank",
+            "REQUIERED_ERROR_TEXT": "Bank is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "BANKBRANCHID": {
+            "PLACEHOLDER": "Branch",
+            "REQUIERED_ERROR_TEXT": "Branch is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "ACCOUNTNO": {
+            "PLACEHOLDER": "Account No",
+            "REQUIERED_ERROR_TEXT": "Account No is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 20"
+          },
+          "ACCOUNTTITLE": {
+            "PLACEHOLDER": "Account Title",
+            "REQUIERED_ERROR_TEXT": "Account Title is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 100"
+          },
+          "ISPRIMARY": {
+            "PLACEHOLDER": "Is Primary"
+          },
+          "PAYMENTOPTIONID": {
+            "PLACEHOLDER": "Payment Option",
+            "REQUIERED_ERROR_TEXT": "Payment Option is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 100"
+          },
+          "STARTDATE": {
+            "PLACEHOLDER": "Start Date",
+            "REQUIERED_ERROR_TEXT": "Start Date is required"
+          },
+          "ENDDATE": {
+            "PLACEHOLDER": "End Date",
+            "REQUIERED_ERROR_TEXT": "End Date is required"
+          },
+          "REMARKS": {
+            "PLACEHOLDER": "Remarks Option",
+            "REQUIERED_ERROR_TEXT": "Remarks is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "SALARYSTRUCTURE": {
+      "INDEX": {
+        "TITLE": "Salary Structure",
+        "CREATESALARYSTRUCTUREBUTTONTEXT": "New Structure",
+        "EDITSALARYSTRUCTUREBUTTONTEXT": "Edit Structure",
+        "DELETESALARYSTRUCTUREBUTTONTEXT": "Delete Structure",
+        "TABLE": {
+          "HEADER": {
+            "STRUCTURENAME": "Name",
+            "DESCRIPTION": "Description",
+            "STARTDATE": "Start Date",
+            "ENDDATE": "End Date",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Salary Structure",
+        "EDIT_TITLE": "Edit Salary Structure",
+        "CREATE_FORM": {
+          "STRUCTURENAME": {
+            "PLACEHOLDER": "Name",
+            "REQUIERED_ERROR_TEXT": "Name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "DESCRIPTION": {
+            "PLACEHOLDER": "Description",
+            "REQUIERED_ERROR_TEXT": "Description is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "STARTDATE": {
+            "PLACEHOLDER": "Start Date",
+            "REQUIERED_ERROR_TEXT": "Start Date is required"
+          },
+          "ENDDATE": {
+            "PLACEHOLDER": "End Date",
+            "REQUIERED_ERROR_TEXT": "End Date is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "SALARYSTRUCTURECOMPONENT": {
+      "INDEX": {
+        "TITLE": "Salary Structure Component",
+        "CREATESALARYSTRUCTURECOMPONENTBUTTONTEXT": "New Component",
+        "EDITSALARYSTRUCTURECOMPONENTBUTTONTEXT": "Edit Component",
+        "DELETESALARYSTRUCTURECOMPONENTBUTTONTEXT": "Delete Component",
+        "TABLE": {
+          "HEADER": {
+            "SALARYSTRUTUREID": "Structure",
+            "SALARYCOMPONENTNAME": "Description",
+            "VALUE": "Value",
+            "VALUETYPE": "Value Type",
+            "PERCENTON": "Percent On",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Salary Structure Component",
+        "EDIT_TITLE": "Edit Salary Structure Component",
+        "CREATE_FORM": {
+          "SALARYSTRUTUREID": {
+            "PLACEHOLDER": "Structure",
+            "REQUIERED_ERROR_TEXT": "Structure is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SALARYCOMPONENTNAME": {
+            "PLACEHOLDER": "Component Name",
+            "REQUIERED_ERROR_TEXT": "Component Name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 100"
+          },
+          "VALUE": {
+            "PLACEHOLDER": "Value",
+            "REQUIERED_ERROR_TEXT": "Value is required"
+          },
+          "VALUETYPE": {
+            "PLACEHOLDER": "Value Type",
+            "REQUIERED_ERROR_TEXT": "Value Type is required"
+          },
+          "PERCENTON": {
+            "PLACEHOLDER": "Percent On",
+            "REQUIERED_ERROR_TEXT": "Percent On is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "EMPLOYEESALARY": {
+      "INDEX": {
+        "TITLE": "Employee Salary",
+        "CREATESALARYSTRUCTUREBUTTONTEXT": "New Salary",
+        "EDITSALARYSTRUCTUREBUTTONTEXT": "Edit Salary",
+        "DELETESALARYSTRUCTUREBUTTONTEXT": "Delete Salary",
+        "TABLE": {
+          "HEADER": {
+            "EMPLOYEE": "Employee Name",
+            "POSITION": "Designation",
+            "DEPARTMENT": "Department",
+            "BRANCH": "Branch",
+            "GRADE": "Grade",
+            "SALARYSTRUCTURE": "Salary Structure",
+            "PAYMENTOPTION": "Payment Option",
+            "GROSSSALARY": "Gross Salary",
+            "STARTDATE": "Start Date",
+            "ENDDATE": "End Date",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Employee Salary",
+        "EDIT_TITLE": "Edit Employee Salary",
+        "CREATE_FORM": {
+          "EMPLOYEEID": {
+            "PLACEHOLDER": "Employee",
+            "REQUIERED_ERROR_TEXT": "Employee is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "BRANCHID": {
+            "PLACEHOLDER": "Branch",
+            "REQUIERED_ERROR_TEXT": "Branch is required",
+            "MAXLENGTH_ERROR_TEXT": "Branch length should be 250"
+          },
+          "DEPARTMENTID": {
+            "PLACEHOLDER": "Department",
+            "REQUIERED_ERROR_TEXT": "Department is required",
+            "MAXLENGTH_ERROR_TEXT": "Department length should be 250"
+          },
+          "POSITIONID": {
+            "PLACEHOLDER": "Designation",
+            "REQUIERED_ERROR_TEXT": "Designation is required",
+            "MAXLENGTH_ERROR_TEXT": "Designation length should be 250"
+          },
+          "GRADEID": {
+            "PLACEHOLDER": "Grade",
+            "REQUIERED_ERROR_TEXT": "Grade is required",
+            "MAXLENGTH_ERROR_TEXT": "Grade length should be 250"
+          },
+          "SALARYSTRUCTUREID": {
+            "PLACEHOLDER": "Salary Structure",
+            "REQUIERED_ERROR_TEXT": "Salary Structure is required",
+            "MAXLENGTH_ERROR_TEXT": "Salary Structure length should be 250"
+          },
+          "PAYMENTOPTIONID": {
+            "PLACEHOLDER": "Payment Option",
+            "REQUIERED_ERROR_TEXT": "Payment Option is required",
+            "MAXLENGTH_ERROR_TEXT": "Payment Option length should be 250"
+          },
+          "GROSSSALARY": {
+            "PLACEHOLDER": "Gross Amount",
+            "REQUIERED_ERROR_TEXT": "Gross Amount is required",
+            "MAXLENGTH_ERROR_TEXT": "Gross Amount length should be 250"
+          },
+          "STARTDATE": {
+            "PLACEHOLDER": "Start Date",
+            "REQUIERED_ERROR_TEXT": "Start Date is required"
+          },
+          "ENDDATE": {
+            "PLACEHOLDER": "End Date",
+            "REQUIERED_ERROR_TEXT": "End Date is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "EARNLEAVEENCASHMENT":{
+      "INDEX":{
+        "TITLE":"Earn Leave Encashment",
+        "CREATEBUTTONTEXT":"Earn Leave Encashment",
+        "CREATEBUTTONTOOLTIP":"Add employee earn leave encashment",
+        "TABLE":{
+          "HEADER":{
+            "ENCASHDATE":"Encash Date",
+            "ELENCASHEDDAYS":"EL Encashed Days",
+            "ENCASHEDAMOUNT":"Encashed Amount"
+          }
+        }
+
+        
+      },
+      
+       "CREATE":{
+         "TITLE":"Create Earn Leave Encashment",
+         "CREATE_FORM":{
+           "ENCASHDATE":{
+             "PLACEHOLDER":"Encash Date",
+             "REQUIRED_ERROR_TEXT":"Encash date is required"
+           },
+           "ELENCASHEDDAYS":{
+            "PLACEHOLDER":"Earn Leave Encashed Days",
+            "REQUIRED_ERROR_TEXT":"Earn Leave Encashed Days is required"
+          },
+          "ENCASHEDAMOUNT":{
+            "PLACEHOLDER":"Encashed Amount",
+            "REQUIRED_ERROR_TEXT":"Encashed Amount is required"
+          }
+         }
+       }
+   },
+    "EMPLOYEESALARYCOMPONENT": {
+      "INDEX": {
+        "TITLE": "Salary Structure Component",
+        "CREATESALARYSTRUCTURECOMPONENTBUTTONTEXT": "New Component",
+        "EDITSALARYSTRUCTURECOMPONENTBUTTONTEXT": "Edit Component",
+        "DELETESALARYSTRUCTURECOMPONENTBUTTONTEXT": "Delete Component",
+        "TABLE": {
+          "HEADER": {
+            "SALARYSTRUTUREID": "Structure",
+            "SALARYCOMPONENTNAME": "Description",
+            "VALUE": "Value",
+            "VALUETYPE": "Value Type",
+            "PERCENTON": "Percent On",
+            "ACTIONS": "Actions"
+          }
+        }
+      },
+      "CREATE": {
+        "CREATE_TITLE": "New Salary Structure Component",
+        "EDIT_TITLE": "Edit Salary Structure Component",
+        "CREATE_FORM": {
+          "SALARYSTRUTUREID": {
+            "PLACEHOLDER": "Structure",
+            "REQUIERED_ERROR_TEXT": "Structure is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "SALARYCOMPONENTNAME": {
+            "PLACEHOLDER": "Component Name",
+            "REQUIERED_ERROR_TEXT": "Component Name is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 100"
+          },
+          "VALUE": {
+            "PLACEHOLDER": "Value",
+            "REQUIERED_ERROR_TEXT": "Value is required"
+          },
+          "VALUETYPE": {
+            "PLACEHOLDER": "Value Type",
+            "REQUIERED_ERROR_TEXT": "Value Type is required"
+          },
+          "PERCENTON": {
+            "PLACEHOLDER": "Percent On",
+            "REQUIERED_ERROR_TEXT": "Percent On is required"
+          }
+        }
+      },
+      "DELETE": {}
+    },
+    "BONUSCONFIG":{
+      "INDEX":{
+        "TITLE":"Bonus Config.",
+        "EDITBONUSCONFIGTEXT":"Edit Bonus Config",
+        "DELETEBONUSCONFIGTEXT":"Delete Bonus Config",
+        "CREATEBONUSCONFIGTEXT":"Add New Bonus Config.",
+        "TABLE":{
+          "HEADER":{
+            "RANGEFROMINMONTH":"Range From In Month",
+            "RANGETOINMONTH":"Range To In Month",
+            "BASICORGROSS":"Basic/Gross",
+            "PERCENTAGEOFBASICORGROSS":"Percentage Of Basic Or Gross",
+            "FIXEDAMOUNT":"Fixed Amount",
+            "PARTIALON":"Partial On",
+            "STARDATE":"Start Date",
+            "ENDDATE":"End Date",
+            "REMARKS":"Remarks"
+
+          }
+        }
+      },
+      "CREATE":{
+        "CREATE_TITLE": "Create Bonus Config.",
+        "EDIT_TITLE": "Edit Bonus Config.",
+        "CREATE_FORM":{
+          "RANGEFROMINMONTH": {
+            "PLACEHOLDER": "Range From (In Month)",
+            "REQUIERED_ERROR_TEXT": "Range From In Month is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "RANGETOINMONTH": {
+            "PLACEHOLDER": "Range To (In Month)",
+            "REQUIERED_ERROR_TEXT": "Range To In Month is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "BASICORGROSS": {
+            "PLACEHOLDER": "Percent On",
+            "REQUIERED_ERROR_TEXT": "Basic/Gross is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "PERCENTAGEOFBASICORGROSS": {
+            "PLACEHOLDER": "Percentage Of Basic Or Gross",
+            "REQUIERED_ERROR_TEXT": "Percentage Of Basic Or Gross is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "FIXEDAMOUNT": {
+            "PLACEHOLDER": "Fixed Amount",
+            "REQUIERED_ERROR_TEXT": "Fixed Amount is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "PARTIALON": {
+            "PLACEHOLDER": "Partial On",
+            "REQUIERED_ERROR_TEXT": "Calculate On is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 250"
+          },
+          "REMARKS": {
+            "PLACEHOLDER": "Remarks",
+            "REQUIERED_ERROR_TEXT": "Remarks is required",
+            "MAXLENGTH_ERROR_TEXT": "Maximum length should be 50"
+          }
+        }
+
+      }
+
+    },
+    "BONUSPROCESS":{
+      "INDEX":{
+        "TITLE":"Festival Bonus Process",
+        "PRCOESSBONUSBUTTONTEXT":"Process"
+      }
+    }
+   
+  },
+  "SHARED": {},
+  "TASK": {
+    "TASKCATEGORY":{
+    "INDEX":{
+      "TITLE":"Task Category",
+      "TABLE":{
+      "HEADER":{
+         "TASK_CATEGORY_NAME":"Task Category Name",
+        
+         "REMARKS":"Remarks"
+       
+      }
+    }
+    },
+    "CREATE":{
+      "TITLE":"Create Task Category",
+      "TASK_CATEGORY_NAME":{
+        "PLACEHOLDER":"Task Category Name",
+        "REQUIRED_ERROR_TEXT":"Task Category Name is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+      },
+      
+      "REMARKS":{
+        "PLACEHOLDER":"Remarks",
+        "REQUIRED_ERROR_TEXT":"Payer Type Code is required",
+        "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 50"
+      }
+      
+    },
+    "EDIT":{
+      "TITLE":"Edit Task Category"
+    }
+  },
+    "TASKDETAIL":{
+       "INDEX":{
+         "TITLE":"Task Details",
+         "BUTTONTEXT":"Add Task Detail",
+         "TABLE":{
+           "HEADER":{
+            "TITLE":"Create Task Detail",
+              "TASK_NAME":"Task Name",
+              "TASK_DESCRIPTION":"Task Description",
+              "MANAGER":"Manager",
+              "STATUS":"Status",
+              "TASK_CATEGORY":"Task Category",
+              "START_DATE":"Start Date",
+              "END_DATE":"End Date"
+         }
+        },
+         "CREATE":{
+           "TITLE":"Create Task Detail",
+           "TASK_CATEGORY":{
+             "PLACE_HOLDER":"Task Category",
+             "REQUIERED_ERROR_TEXT":"Task category is required"
+           },
+           "TASK_NAME":{
+             "PLACE_HOLDER":"Task Name",
+             "REQUIERED_ERROR_TEXT":"Task Name is required",
+             "MAX_LENGTH_ERROR":"Max length should be 50"
+           },
+           "TASK_DESCRIPTION":{
+             "PLACE_HOLDER":"Task Description",
+              "MAX_LENGTH_ERROR":"Max length should be 150"
+           },
+           "MANAGER":{
+             "PLACE_HOLDER":"Manager"
+           },
+           "PARENTTASK":{
+             "PLACE_HOLDER":"Parent Task"
+           },
+           "STATUS":{
+             "PLACE_HOLDER":"Status"
+           }
+           
+          },
+          "EDIT":{
+            "TITLE":"Edit Task Detail"
+            
+          }
+         
+        
+        
+       
+    }
+    
+  },
+  "TASKDETAILLOG":{
+     "INDEX":{
+       "TABLE":{
+         "HEADER":{
+           "EMPLOYEE_NAME":"Employee Name",
+           "UPDATE_INFO":"Update Info",
+           "UPDATED_DATE":"Update Date",
+           "SPEND_TIME":"Spend Time"
+         }
+       },
+       "CREATE":{
+         "TITLE":"Create Task Detail Log",
+         "EMPLOYEE_NAME":{
+           "PLACE_HOLDER":"Employee",
+           "REQUIRED_ERROR_TEXT":"Employee is required"
+         },
+         "UPDATE_INFO":{
+           "PLACE_HOLDER":"Update Info",
+           "MAX_LENGTH_ERROR_TEXT":"Maximum length should be 150"
+         },
+         "UPDATED_DATE":{
+           "PLACE_HOLDER":"Update Date"
+         },
+         "SPEND_TIME":{
+          "PLACE_HOLDER":"Spend Time"
+        }
+        
+         
+         
+       },
+       "EDIT":{
+        "TITLE":"Edit Task Detail Log"
+      }
+     }
+  }
+}
+}

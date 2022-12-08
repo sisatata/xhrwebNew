@@ -1,0 +1,163 @@
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.EDIT_TITLE' | translate }}</h5>
+
+
+<h6 *ngIf="submitted && employeeExperienceCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+
+<form class="employee-from" [formGroup]="employeeExperienceCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="companyName" [(value)]="employeeExperience.companyName"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.companyName.errors}">
+        <mat-error *ngIf="submitted && f.companyName.errors && f.companyName.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.companyName.errors && f.companyName.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.DESIGNATION.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="designation" [(value)]="employeeExperience.designation"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.DESIGNATION.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.designation.errors}">
+        <mat-error *ngIf="submitted && f.designation.errors && f.designation.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.DESIGNATION.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.designation.errors && f.designation.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.DESIGNATION.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FUNCTIONALDESIGNATION.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="functionalDesignation" [(value)]="employeeExperience.functionalDesignation"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FUNCTIONALDESIGNATION.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.functionalDesignation.errors}" >
+        <mat-error *ngIf="submitted && f.functionalDesignation.errors && f.functionalDesignation.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FUNCTIONALDESIGNATION.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.functionalDesignation.errors && f.functionalDesignation.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FUNCTIONALDESIGNATION.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.DEPARTMENT.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="department" [(value)]="employeeExperience.department"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.DEPARTMENT.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.department.errors}">
+        <mat-error *ngIf="submitted && f.department.errors && f.department.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.DEPARTMENT.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.department.errors && f.department.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.DEPARTMENT.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.RESPONSIBILITIES.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="responsibilities" [(value)]="employeeExperience.responsibilities"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.RESPONSIBILITIES.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.responsibilities.errors}">
+        <mat-error *ngIf="submitted && f.responsibilities.errors && f.responsibilities.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.RESPONSIBILITIES.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.responsibilities.errors && f.responsibilities.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.RESPONSIBILITIES.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYADDRESS.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="companyAddress" [(value)]="employeeExperience.companyAddress"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYADDRESS.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.companyAddress.errors}">
+        <mat-error *ngIf="submitted && f.companyAddress.errors && f.companyAddress.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYADDRESS.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.companyAddress.errors && f.companyAddress.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYADDRESS.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYCONTACTNO.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="companyContactNo" [(value)]="employeeExperience.companyContactNo"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYCONTACTNO.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.companyContactNo.errors}">
+        <mat-error *ngIf="submitted && f.companyContactNo.errors && f.companyContactNo.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYCONTACTNO.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.companyContactNo.errors && f.companyContactNo.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYCONTACTNO.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYMOBILE.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="companyMobile" [(value)]="employeeExperience.companyMobile"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYMOBILE.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.companyMobile.errors}">
+        <mat-error *ngIf="submitted && f.companyMobile.errors && f.companyMobile.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYMOBILE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.companyMobile.errors && f.companyMobile.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYMOBILE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYEMAIL.PLACEHOLDER' | translate }}</mat-label>
+        <input type="tel" matInput formControlName="companyEmail" [(value)]="employeeExperience.companyContactNo"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYEMAIL.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.companyEmail.errors}">
+        <mat-error *ngIf="submitted && f.companyEmail.errors && f.companyEmail.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYEMAIL.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.companyEmail.errors && f.companyEmail.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYEMAIL.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.companyEmail.errors && f.companyEmail.errors.email">Email should be valid</mat-error>
+
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYWEB.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="companyWeb" [(value)]="employeeExperience.companyWeb"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYWEB.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.companyWeb.errors}">
+        <mat-error *ngIf="submitted && f.companyWeb.errors && f.companyWeb.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYWEB.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.companyWeb.errors && f.companyWeb.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.COMPANYWEB.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FROMDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [matDatepicker]="fromDate" formControlName="fromDate" [(value)]="employeeExperience.fromDate"
+               (click)="fromDate.open()" placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FROMDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.fromDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+        <mat-datepicker #fromDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.fromDate.errors && f.fromDate.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FROMDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.fromDate.errors && f.fromDate.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.FROMDATE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.TODATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [matDatepicker]="toDate" formControlName="toDate" [(value)]="employeeExperience.toDate"
+               (click)="toDate.open()" placeholder="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.TODATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.toDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+        <mat-datepicker #toDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.toDate.errors && f.toDate.errors.required">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.TODATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.toDate.errors && f.toDate.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.TODATE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="tillDate" [(value)]="employeeExperience.tillDate"
+                    matTooltip="{{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.TILLDATE.TOOLTIP' | translate }}">
+        {{ 'EMPLOYEE.EMPLOYEEEXPERIENCE.CREATE.CREATE_FORM.TILLDATE.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessages}}
+          
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

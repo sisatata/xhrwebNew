@@ -1,0 +1,58 @@
+CREATE OR REPLACE FUNCTION payroll.rptgetsalarysheetbycompany(companyid uuid, financialyearid uuid, monthcycleid uuid)
+ RETURNS TABLE( "EmployeeId" character varying,"FullName" character varying ,"JoiningDate" text, "MonthCycleName"  character varying, "CompanyName" character varying,   "DesignationName" character varying, "GradeName" character varying,"ComponentAmount" numeric, "TotalDaysInMonth" smallint, "TotalWorkingDays" smallint, "TotalPresentDays" smallint, "TotalAbsentDays" smallint, "TotalLeaveDays" smallint, "WeeklyOffDays" smallint, "GovernmentOffDays" smallint, "TotalWorkingHoliday" smallint, "Basic" numeric, "PayableSalary" numeric, "TotalDeductionAmount" numeric, "NetPayableAmount" numeric)
+ LANGUAGE plpgsql
+AS $function$
+	BEGIN
+	RETURN QUERY
+		SELECT 
+			--EmployeeSalaryProcessedData."Id" , 
+			e."EmployeeId" , 
+			Employee."FullName" ,
+			to_char(EmployeeEnrollment."JoiningDate",'dd-Mon-yyyy') as "JoiningDate", 
+			MonthCycle."MonthCycleName" ,
+			--EmployeeSalaryProcessedData."FinancialYearId" , 
+			--EmployeeSalaryProcessedData."MonthCycleId" , 
+			--EmployeeSalaryProcessedData."PaymentOptionId" , 
+			Company."CompanyName"  as "CompanyName",
+			--EmployeeSalaryProcessedData."BranchId" , 
+			--EmployeeSalaryProcessedData."DepartmentId" , 
+			Designation."DesignationName"  ,
+			Grade."GradeName" ,
+			
+			EmployeeSalaryProcessedData."TotalDaysInMonth" , 
+			EmployeeSalaryProcessedData."TotalWorkingDays" , 
+			EmployeeSalaryProcessedData."TotalPresentDays" , 
+			EmployeeSalaryProcessedData."TotalAbsentDays" , 
+			EmployeeSalaryProcessedData."TotalLeaveDays" , 
+			EmployeeSalaryProcessedData."WeeklyOffDays" , 
+			EmployeeSalaryProcessedData."GovernmentOffDays" , 
+			EmployeeSalaryProcessedData."TotalWorkingHoliday" , 
+			--EmployeeSalaryProcessedData."OTHour" , 
+			--EmployeeSalaryProcessedData."OTRate" , 
+			EmployeeSalaryProcessedData."GrossSalary" as Basic,
+			EmployeeSalaryProcessedData."PayableSalary" , 
+			EmployeeSalaryProcessedData."TotalDeductionAmount" , 
+			EmployeeSalaryProcessedData."NetPayableAmount" 
+			--EmployeeSalaryProcessedData."ProcessDate" , 
+			--EmployeeSalaryProcessedData."StampCost" ,  
+			--EmployeeSalaryProcessedData."EmloyeeSalaryId" , 
+			--EmployeeSalaryProcessedData."IsApproved" , 
+			--EmployeeSalaryProcessedData."ApprovedBy" , 
+			--EmployeeSalaryProcessedData."ApprovedTime" , 
+			--EmployeeSalaryProcessedData."Remarks" ,
+			--e."FullName" 
+		 FROM payroll."EmployeeSalaryProcessedDatas" AS EmployeeSalaryProcessedData 
+		 inner join employee."Employees" e on EmployeeSalaryProcessedData."EmployeeId" = e."Id" 
+		 inner join main."Company" Company on  Company."Id" = EmployeeSalaryProcessedData."CompanyId" 
+		 inner join main."Designations" Designation on Designation."Id" = EmployeeSalaryProcessedData."PositionId" 
+		 inner join main."Grades" Grade on Grade."Id" = EmployeeSalaryProcessedData."GradeId" 
+		 inner join employee."Employees" Employee on Employee."Id" = EmployeeSalaryProcessedData."EmployeeId" 
+		 inner join main."MonthCycles" MonthCycle on MonthCycle."Id" = 'dc71840a-d1f2-46bc-ba72-5fe32af0d930'
+		-- inner join payroll."SalaryStructureComponents" ssc on ssc."SalaryStrutureId" = esc2."SalaryStructureComponentId" 
+		-- inner join payroll."SalaryStructureComponents"  esc on esc."SalaryStrutureId" = esc2."SalaryStructureComponentId" 
+		 inner join employee."EmployeeEnrollments" EmployeeEnrollment on  EmployeeSalaryProcessedData."EmployeeId" = EmployeeEnrollment."EmployeeId" 
+		 WHERE EmployeeSalaryProcessedData."IsDeleted" = False and EmployeeSalaryProcessedData."CompanyId"  = 'ab5aeca2-7a4a-4a20-bb96-383e72e839dc' and EmployeeSalaryProcessedData."FinancialYearId"  =  '811e792c-0b56-422a-9c10-3d566a5ab49b'
+		and EmployeeSalaryProcessedData."MonthCycleId"  = 'dc71840a-d1f2-46bc-ba72-5fe32af0d930';
+	END;
+$function$
+;

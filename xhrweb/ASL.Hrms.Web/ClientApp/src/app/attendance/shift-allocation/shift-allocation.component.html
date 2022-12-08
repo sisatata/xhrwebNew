@@ -1,0 +1,208 @@
+<h1 id="tableLabel">{{ 'ATTENDANCE.SHIFTALLOCATION.INDEX.TITLE' | translate }}</h1>
+
+
+<form class="pt-3 pb-3" [formGroup]="shiftAllocationFilterFormGroup" (ngSubmit)="saveShiftAllocation()">
+  <div class="row">
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId"
+                    (selectionChange)="onChangeCompany($event.value)">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">Company is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.BRANCHID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'COMMON.SELECT.BRANCHID.PLACEHOLDER' | translate }}" formControlName="branchId"
+                    (selectionChange)="onChangeBranch($event.value)">
+          <mat-option *ngFor="let item of branches" [value]="item.id">
+            {{item.branchName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.branchId.errors && f.branchId.errors.required">Branch is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.DEPARTMENTID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'COMMON.SELECT.DEPARTMENTID.PLACEHOLDER' | translate }}"
+                    formControlName="departmentId" (selectionChange)="onChangeDepartment($event.value)">
+          <mat-option *ngFor="let item of departments" [value]="item.id">
+            {{item.departmentName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.departmentId.errors && f.departmentId.errors.required">Department is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.DESIGNATIONID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'COMMON.SELECT.DESIGNATIONID.PLACEHOLDER' | translate }}"
+                    formControlName="designationId" (selectionChange)="onChangeDesignation($event.value)">
+          <mat-option *ngFor="let item of designations" [value]="item.id">
+            {{item.designationName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.designationId.errors &&f.designationId.errors.required">Designation is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Financial Year</mat-label>
+        <mat-select placeholder="Financial Year" formControlName="financialYearId" [value]="financialYearId"
+                    (selectionChange)="onChangeFinancialYears($event)">
+          <mat-option *ngFor="let item of financialYears" [value]="item.id">
+            {{item.financialYearName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.financialYearId.errors && f.financialYearId.errors.required">Financial Year is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Month Cycle</mat-label>
+        <mat-select placeholder="Month Cycle" formControlName="monthCycleId" [value]="monthCycleId"
+                    (selectionChange)="onChangeMonthCycle($event)">
+          <mat-option *ngFor="let item of monthCycles" [value]="item.id">
+            {{item.monthCycleName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.monthCycleId.errors && f.monthCycleId.errors.required">Month Cycle is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Employee</mat-label>
+        <mat-select placeholder="Employee" formControlName="employeeId" (selectionChange)="onChangeEmployee($event)">
+          <mat-option *ngFor="let item of employees" [value]="item.id">
+            {{item.fullName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">Employee is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Rotational Day</mat-label>
+        <mat-select placeholder="Rotational Day" formControlName="rotationalDayId"
+                    (selectionChange)="onChangeRotationalDay($event.value)">
+          <mat-option *ngFor="let item of rotationalDays" [value]="item.id">
+            {{item.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Weekly Holiday</mat-label>
+        <mat-select placeholder="Weekly HoliDay" formControlName="weeklyHoliDayId"
+                    (selectionChange)="onChangeWeeklyHoliDay($event.value)" [(value)]="weeklyHoliDayId" multiple>
+          <mat-option *ngFor="let item of weeklyHoliDays" [value]="item.id">
+            {{item.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Shift Name</mat-label>
+        <mat-select placeholder="Shift Name" formControlName="shiftCode" (selectionChange)="onChangeShift($event)">
+          <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+            {{item.shiftName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.shiftCode.errors && f.shiftCode.errors.required">Shift is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <mat-select placeholder="Start Date" formControlName="startDate"
+                    (selectionChange)="onChangeStartDate($event.value)">
+          <mat-option *ngFor="let item of startDates" [value]="item.id">
+            {{item.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-6 float-right">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+
+</form>
+<section *blockUI="'shiftAllocation-list-section'">
+  <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th>
+          <mat-checkbox [(checked)]="selectAllChecked" class="p-0" *ngIf="allocatedShifts && allocatedShifts.length > 0" (change)="onChangeSelectAll($event)"></mat-checkbox>
+        </th>
+        <th>Actions</th>
+
+        <th class="text-nowrap">Employee Name</th>
+        <th class="text-nowrap">Department</th>
+        <th class="text-nowrap">Designation</th>
+        <th class="text-nowrap">Rotation Day</th>
+        <th class="text-center" *ngFor="let item of totalDayListOfMonth">{{item.dayNo}} {{item.day}}</th>
+      </tr>
+    </thead>
+    <tbody class="text-nowrap">
+      <tr *ngFor="let item of allocatedShifts">
+        <td>
+          <mat-checkbox [checked]="item.selected" (change)="selection($event,index,item)"></mat-checkbox>
+        </td>
+
+        <td class="p-0">
+          <button mat-icon-button (click)="editShiftAllocations(item)" *ngIf="item.id !=null">
+            <mat-icon>create</mat-icon>
+          </button>
+        </td>
+        <td>{{item.employeeName}}</td>
+        <td>{{item.departmentName}}</td>
+        <td>{{item.designationName}}</td>
+        <td>{{item.rotationDay}}</td>
+        <td [class.weekendColor]="item.c1== 'W' || item.c1== 'H'">{{item.c1 }}</td>
+        <td [class.weekendColor]="item.c2== 'W' || item.c2== 'H'">{{item.c2}}</td>
+        <td [class.weekendColor]="item.c3== 'W' || item.c3== 'H'">{{item.c3 }}</td>
+        <td [class.weekendColor]="item.c4== 'W' || item.c4== 'H'">{{item.c4 }}</td>
+        <td [class.weekendColor]="item.c5== 'W' || item.c5== 'H'">{{item.c5}}</td>
+        <td [class.weekendColor]="item.c6== 'W' || item.c6== 'H'">{{item.c6 }}</td>
+        <td [class.weekendColor]="item.c7== 'W' || item.c7== 'H'">{{item.c7 }}</td>
+        <td [class.weekendColor]="item.c8== 'W' || item.c8== 'H'">{{item.c8 }}</td>
+        <td [class.weekendColor]="item.c9== 'W' || item.c9== 'H'">{{item.c9 }}</td>
+        <td [class.weekendColor]="item.c10== 'W' || item.c10== 'H'">{{item.c10 }}</td>
+        <td [class.weekendColor]="item.c11== 'W' || item.c11== 'H'">{{item.c11 }}</td>
+        <td [class.weekendColor]="item.c12== 'W' || item.c12== 'H'">{{item.c12 }}</td>
+        <td [class.weekendColor]="item.c13== 'W' || item.c13== 'H'">{{item.c13 }}</td>
+        <td [class.weekendColor]="item.c14== 'W' || item.c14== 'H'">{{item.c14 }}</td>
+        <td [class.weekendColor]="item.c15== 'W' || item.c15== 'H'">{{item.c15 }}</td>
+        <td [class.weekendColor]="item.c16== 'W' || item.c16== 'H'">{{item.c16 }}</td>
+        <td [class.weekendColor]="item.c17== 'W' || item.c17== 'H'">{{item.c17 }}</td>
+        <td [class.weekendColor]="item.c18== 'W' || item.c18== 'H'">{{item.c18 }}</td>
+        <td [class.weekendColor]="item.c19== 'W' || item.c19== 'H'">{{item.c19 }}</td>
+        <td [class.weekendColor]="item.c20== 'W' || item.c20== 'H'">{{item.c20 }}</td>
+        <td [class.weekendColor]="item.c21== 'W' || item.c21== 'H'">{{item.c21 }}</td>
+        <td [class.weekendColor]="item.c22== 'W' || item.c22== 'H'">{{item.c22 }}</td>
+        <td [class.weekendColor]="item.c23== 'W' || item.c23== 'H'">{{item.c23 }}</td>
+        <td [class.weekendColor]="item.c24== 'W' || item.c24== 'H'">{{item.c24 }}</td>
+        <td [class.weekendColor]="item.c25== 'W' || item.c25== 'H'">{{item.c25 }}</td>
+        <td [class.weekendColor]="item.c26== 'W' || item.c26== 'H'">{{item.c26 }}</td>
+        <td [class.weekendColor]="item.c27== 'W' || item.c27== 'H'">{{item.c27 }}</td>
+        <td [class.weekendColor]="item.c28== 'W' || item.c28== 'H'">{{item.c28 }}</td>
+        <td [class.weekendColor]="item.c29== 'W' || item.c29== 'H'">{{item.c29 }}</td>
+        <td [class.weekendColor]="item.c30== 'W' || item.c30== 'H'">{{item.c30 }}</td>
+        <td [class.weekendColor]="item.c31== 'W' || item.c31== 'H'">{{item.c31 }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</section>

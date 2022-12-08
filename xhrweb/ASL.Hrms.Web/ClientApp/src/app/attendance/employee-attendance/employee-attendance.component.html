@@ -1,0 +1,150 @@
+
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+ 
+</div>
+<section *blockUI="'attendance-list-section'">
+  <div class="row d-flex justify-content-between mt-3 mb-3">
+    <div class="col-sm-12 col-md-6">
+      <h1 id="tableLabel">Attendance Status</h1>
+    </div>
+    <div class="col-lg-3 col-md-6 col-12">
+      <button mat-raised-button (click)="createAttendance()" class="btn btn-success btn-block text-center"
+              matTooltip="{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}">
+        <mat-icon class="create-icon-button">add</mat-icon>
+        {{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}
+      </button>
+    </div>
+  </div>
+  <app-search-filter *ngIf="isAdmin" [companyId]="companyId" (formData)="search(true)"></app-search-filter>
+  <form [formGroup]="attendanceFilterFormGroup" (ngSubmit)="getAttendanceData()">
+    <div class="row">
+      <div *ngIf = "!isAdmin" class="col-sm-2 col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-select  matInput formControlName="employeeId" [(value)]="employeeId" [disabled]="!isAdmin"
+         placeholder="Select Employee"
+          (selectionChange)="onChangeEmployee()">
+          <ng-container *ngFor="let employee of employees">
+            <mat-option value="{{employee.id}}">{{employee.fullName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">{{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+      <div class="col-sm-3 col-md-4 col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="startDatePicker" formControlName="startDate"
+                 (click)="startDatePicker.open()" (dateChange)="onChangeStartDate()"
+                 placeholder="Start Date" [ngClass]="{'is-invalid': f.startDate.errors}">
+          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+          <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">
+            Start date
+            is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3 col-md-4 col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="endDatePicker" formControlName="endDate"
+                 (click)="endDatePicker.open()" (dateChange)="onChangeEndDate()" placeholder="End Date"
+                 [ngClass]="{'is-invalid': f.endDate.errors}">
+          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+          <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">
+            End date is
+            required
+          </mat-error>
+        </mat-form-field>
+       
+          
+      
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-12">
+        <button mat-raised-button type="button" (click)="search(true)" class="btn btn-success btn-block text-center mb-2"
+                matTooltip="seacrh">
+         Search
+        </button>
+      </div>
+    </div>
+  </form>
+<div  class="table-responsive">
+  <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+    <thead>
+      <tr class="table-secondary">
+        <th class="text-center">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+        <th *ngIf="isAdmin">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.EMPLOYEEID' | translate }}</th>
+        <th *ngIf = "isAdmin">Name</th>
+        <th>Date</th>
+        <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.SHIFTCODE' | translate }}</th>
+        <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.INTIME' | translate }}</th>
+        <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.OUTTIME' | translate }}</th>
+        <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.STATUS' | translate }}</th>
+        <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.OFFICE_IN' | translate }}</th>
+        <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.OFFICE_OUT' | translate }}</th>
+        
+        <th *ngIf="isAdmin">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.BRANCH' | translate }}</th>
+        <th *ngIf="isAdmin">{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.DEPARTMENT' | translate }}</th>
+        <th *ngIf="isAdmin">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.DESIGNATION' | translate }}</th>
+        <th *ngIf="isAdmin">{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.EMAIL' | translate }}</th>
+        <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.ADDRESS_IN' | translate }}</th>
+        <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.ADDRESS_OUT' | translate }}</th>
+        <th>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.REMARKS' | translate }}</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of attendanceProcessDatas | paginate: {id:'pagination', itemsPerPage: pageSize, currentPage: currentPage, totalItems: totalItems  }; let $index = index">
+        <td class="pt-0 text-center">
+          <button mat-icon-button
+            matTooltip="{{ 'COMMON.DETAIL_BUTTON_TEXT' | translate }}" (click)="openEmployeeDetails(item)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </td>
+        <td *ngIf="isAdmin" [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.employeeCompanyId}}</td>
+        <td *ngIf = "isAdmin" [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.employeeName}}</td>
+      
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.punchDate | date: 'dd/MM/yyyy'}}</td>
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.shiftCode}}</td>
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'"><b>{{item.timeIn | date: 'HH:mm:ss'}}</b></td>
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'"><b>{{item.timeOut | date: 'HH:mm:ss'}}</b></td>
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.status}}</td>
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.shiftIn | date: 'HH:mm:ss'}}</td>
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.shiftOut | date: 'HH:mm:ss'}}</td>
+        
+        <td *ngIf="isAdmin" [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.branchName}}</td>
+        <td *ngIf="isAdmin" [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.departmentName}}</td>
+        <td *ngIf="isAdmin"[class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.designationName}}</td>
+        <td *ngIf="isAdmin" [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.loginId}}</td>
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.clockInAddress}}</td>
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.clockOutAddress}}</td>
+        <td [class.weekendColor]="item.status== 'W' || item.status== 'H'">{{item.employeeRemarks}}</td>
+        
+      </tr>
+      <tr *ngIf="attendanceProcessDatas.length==0">
+        <td class="text-center text-info" colspan="20" *ngIf ="searched">  {{'PAYROLL.PAIDSALARY.INDEX.EMPTYMESSAGE' | translate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <div class="row justify-content-between" *ngIf="totalItems > 0">
+    <div class="col-md-5 col-sm-5 text-left">
+      {{totalItemsText}}
+    </div>
+    <div class="col-md-5 col-sm-5 text-left">
+      <pagination-controls id="pagination" *ngIf="totalItems > 0" (pageChange)="pageChanged($event)"
+                           directionLinks="true" previousLabel="" nextLabel="">
+      </pagination-controls>
+    </div>
+    <div class="col-md-2 col-sm-2 text-left">
+      <mat-form-field>
+        <mat-select [(ngModel)]="pageSize" (selectionChange)="onChangePaginationPerPage()" placeholder="{{ 'PAGINATION.PLACEHOLDER' | translate }}">
+          <mat-option *ngFor="let item of paginationPageNumbers" [value]="item.value">
+            {{item.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</section>

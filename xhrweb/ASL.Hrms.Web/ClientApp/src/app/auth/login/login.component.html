@@ -1,0 +1,60 @@
+
+<div class="limiter">
+  <div class="container-login">
+    <div class="wrap-login">
+      <form class="login-form validate-form" [formGroup]="form" (submit)="onSubmit()" method="post">
+        <div class="loading-text text-center h4 mb-5" *ngIf="loading">{{'LOGIN.INDEX.WAITTITLE' | translate}}</div>
+        
+        <span class="login-form-title p-b-20">
+          <a [routerLink]="['/']"><img style="width:60%; height:60%; padding-bottom:20px;" src="assets/images/logo.png" alt="logo"> </a>
+        </span>
+        <mat-error *ngIf="loginInvalid" style="padding-bottom:20px;">
+          {{ 'LOGIN.INDEX.ERRORTEXT.EMAILORPASSWORD' | translate }}
+        </mat-error>
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'LOGIN.INDEX.PLACEHOLDER.EMAIL' | translate }}</mat-label>
+          <input matInput placeholder="{{ 'LOGIN.INDEX.PLACEHOLDER.EMAIL' | translate }}" formControlName="email" required>
+          <mat-error>
+            {{ 'LOGIN.INDEX.ERRORTEXT.EMAIL_ERROR' | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'LOGIN.INDEX.PLACEHOLDER.PASSWORD' | translate }}</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="{{ 'LOGIN.INDEX.PLACEHOLDER.PASSWORD' | translate }}" formControlName="password" required>
+          <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error>
+            Please provide a valid password
+          </mat-error>
+        </mat-form-field>
+        <div class="container-login-form-btn">
+          <div class="wrap-login-form-btn">
+            <div class="login-form-bgbtn"></div>
+            <button [disabled]="form.invalid" type="submit" class="login-form-btn" (click)="onSubmit()">
+             
+{{ 'LOGIN.INDEX.LOGIN_TEXT' | translate }}
+            </button>
+          </div>
+        </div>
+        <!-- <div class="row">
+    <div class="col-sm-12 col-xs-12 text-center">
+      <a href="#" routerLink="/auth/forgot-password">Forgot Password?</a>
+    </div>
+  </div> -->
+        <div class="text-center p-t-70">
+          <!-- <span class="txt1">
+      Don’t have an account?
+    </span>
+    <a href="#" [routerLink]="['/auth/register']">
+      Sign Up
+    </a> -->
+          <a href="#" routerLink="/auth/forgot-password">{{ 'LOGIN.INDEX.FORGOT_PASSWORD' | translate }}</a>
+        </div>
+        <div class="text-center p-t-70">
+          <a href="#" routerLink="/auth/company-register">{{'LOGIN.INDEX.CREATE_NEW_COMPANY' | translate}}</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

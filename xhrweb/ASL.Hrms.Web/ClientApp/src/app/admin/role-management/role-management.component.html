@@ -1,0 +1,38 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-12">
+    <h1 id="tableLabel">Assign Role</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-md-4 col-lg-3">
+    <mat-form-field appearance="outline">
+      <mat-select matInput [(value)]="employeeId" placeholder="Select Employee"
+        (selectionChange)="onChangeEmployee($event)">
+        <ng-container *ngFor="let employee of employees">
+          <mat-option value="{{employee.id}}">{{employee.fullName}}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+    <span *ngIf="employeeId == undefined && submitted" class="d-block text-danger error">
+      Please select an employee
+    </span>
+    <span *ngIf="userNotFound && submitted" class="d-block text-danger error">
+      User Id not found
+    </span>
+  </div>
+  <div class="col-12 col-md-4 col-lg-3">
+    <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" class="multi-select"
+      [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+      (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"></angular2-multiselect>
+      <span *ngIf="roleNames.length === 0  && submitted" class = "d-block text-danger">
+        Please select roles
+      </span>
+  </div>
+</div>
+<div class="col-12 col-md-12 col-lg-3 p-0 mt-10">
+  <button type="submit" (click)="onSubmit()" style="font-size: smaller;" class="btn btn-success">
+    Save</button>
+</div>

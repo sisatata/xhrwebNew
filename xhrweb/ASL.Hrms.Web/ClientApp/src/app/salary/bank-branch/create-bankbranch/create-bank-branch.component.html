@@ -1,0 +1,111 @@
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'PAYROLL.BANKBRANCH.CREATE.CREATE_TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{'PAYROLL.BANKBRANCH.CREATE.EDIT_TITLE' | translate}}</h5>
+
+<form class="bankbranch-from" [formGroup]="bankbranchCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="bankBranch.companyId" (selectionChange)="onChangeCompany()">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.BANKID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="bankId" placeholder="{{'COMMON.SELECT.BANKID.PLACEHOLDER' | translate }}" [(value)]="bankBranch.bankId">
+          <ng-container *ngFor="let bank of banks">
+            <mat-option value="{{bank.id}}">{{bank.bankName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.bankId.errors && f.bankId.errors.required">{{'COMMON.SELECT.BANKID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="branchName" placeholder="{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.branchName.errors}" />
+        <mat-error *ngIf="submitted && f.branchName.errors && f.branchName.errors.required">{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.branchName.errors && f.branchName.errors.maxlength">{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHNAMELC.PLACEHOLDER' | translate }}</mat-label>
+      <input matInput formControlName="branchNameLC" placeholder="{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHNAMELC.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.branchNameLC.errors}" />
+      <mat-error *ngIf="submitted && f.branchNameLC.errors && f.branchNameLC.errors.required">{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHNAMELC.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      <mat-error *ngIf="submitted && f.branchNameLC.errors && f.branchNameLC.errors.maxlength">{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHNAMELC.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+    </mat-form-field>
+  </div>-->
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHADDRESS.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="branchAddress" placeholder="{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHADDRESS.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.branchAddress.errors}" />
+        <mat-error *ngIf="submitted && f.branchAddress.errors && f.branchAddress.errors.required">{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHADDRESS.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.branchAddress.errors && f.branchAddress.errors.maxlength">{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.BRANCHADDRESS.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTPERSON.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="contactPerson" placeholder="{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTPERSON.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.contactPerson.errors}" />
+        <mat-error *ngIf="submitted && f.contactPerson.errors && f.contactPerson.errors.required">{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTPERSON.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.contactPerson.errors && f.contactPerson.errors.maxlength">{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTPERSON.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTNUMBER.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="contactNumber" placeholder="{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTNUMBER.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.contactNumber.errors}" />
+        <mat-error *ngIf="submitted && f.contactNumber.errors && f.contactNumber.errors.required">{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTNUMBER.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.contactNumber.errors && f.contactNumber.errors.maxlength">{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTNUMBER.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTEMAILID.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="contactEmailId" placeholder="{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTEMAILID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.contactEmailId.errors}" />
+        <mat-error *ngIf="submitted && f.contactEmailId.errors && f.contactEmailId.errors.required">{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTEMAILID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.contactEmailId.errors && f.contactEmailId.errors.maxlength">{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.CONTACTEMAILID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="sortOrder" placeholder="{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.sortOrder.errors}" />
+        <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.required">{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.SORTORDER.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.maxlength">{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.SORTORDER.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+      <input matInput formControlName="companyId" placeholder="{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.COMPANYID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.companyId.errors}" />
+      <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{ 'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.maxlength">{{'PAYROLL.BANKBRANCH.CREATE.CREATE_FORM.COMPANYID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+    </mat-form-field>
+  </div>-->
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+

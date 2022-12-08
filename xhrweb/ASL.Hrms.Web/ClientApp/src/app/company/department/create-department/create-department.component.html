@@ -1,0 +1,98 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'COMPANY.DEPARTMENT.CREATE.EDIT_TITLE' | translate }}</h5>
+<form class="department-from" [formGroup]="departmentCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId"
+          placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="department.companyId"
+          (selectionChange)="onChangeCompany()">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">Company is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.BRANCHID.PLACEHOLDER' | translate }}</mat-label>
+       
+        <mat-select matInput formControlName="branchId"
+          placeholder="{{ 'COMMON.SELECT.BRANCHID.PLACEHOLDER' | translate }}" [(value)]="department.branchId"
+          (selectionChange)="onChangeBranch()">
+          <ng-container *ngFor="let branch of branches">
+            <mat-option value="{{branch.id}}">{{branch.branchName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.branchId.errors && f.branchId.errors.required">Branch is required</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.DEPARTMENTNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="departmentName" [(value)]="department.departmentName"
+          placeholder="{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.DEPARTMENTNAME.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.departmentName.errors}" />
+        <mat-error *ngIf="submitted && f.departmentName.errors && f.departmentName.errors.required">
+          {{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.DEPARTMENTNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.departmentName.errors && f.departmentName.errors.maxlength">
+          {{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.DEPARTMENTNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <input  matInput formControlName="departmentLocalizedName" [(value)]="department.departmentLocalizedName" placeholder="{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.DEPARTMENTLOCALIZEDNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.departmentLocalizedName.errors}" />
+        <div *ngIf="submitted && f.departmentLocalizedName.errors">
+          <mat-error *ngIf="f.departmentLocalizedName.errors.required">{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.DEPARTMENTLOCALIZEDNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          <mat-error *ngIf="f.departmentLocalizedName.errors.maxlength">{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORMDEPARTMENTLOCALIZEDNAMEE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+        </div>
+      </mat-form-field>
+    </div>-->
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="shortName" [(value)]="department.shortName"
+          placeholder="{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.shortName.errors}">
+        <mat-error *ngIf="submitted && f.shortName.errors && f.shortName.errors.required">
+          {{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.SHORTNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.shortName.errors && f.shortName.errors.maxlength">
+          {{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.SHORTNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <input type="number"  matInput formControlName="sortOrder" [(value)]="department.sortOrder" placeholder="{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.sortOrder.errors}" />
+        <div *ngIf="submitted && f.sortOrder.errors">
+          <mat-error *ngIf="f.sortOrder.errors.required">{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.SORTORDER.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          <mat-error *ngIf="f.sortOrder.errors.maxlength">{{ 'COMPANY.DEPARTMENT.CREATE.CREATE_FORM.SORTORDER.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+        </div>
+      </mat-form-field>
+    </div>-->
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessages}}
+          
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,93 @@
+
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'COMPANY.FINANCIALYEAR.CREATE.EDIT_TITLE' | translate }}</h5>
+<form class="financialYear-from" [formGroup]="financialYearCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="financialYear.companyId" (selectionChange)="onChangeCompany()">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="financialYearName" placeholder="{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.financialYearName.errors}" />
+        <mat-error *ngIf="submitted && f.financialYearName.errors && f.financialYearName.errors.required">{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.financialYearName.errors && f.financialYearName.errors.maxlength">{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARLOCALIZEDNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="financialYearLocalizedName" placeholder="{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARLOCALIZEDNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.financialYearLocalizedName.errors}" />
+        <mat-error *ngIf="submitted && f.financialYearLocalizedName.errors && f.financialYearLocalizedName.errors.required">{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARLOCALIZEDNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.financialYearLocalizedName.errors && f.financialYearLocalizedName.errors.maxlength">{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARLOCALIZEDNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>-->
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARSTARTDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [matDatepicker]="financialYearStartDate" formControlName="financialYearStartDate" (click)="financialYearStartDate.open()"
+               placeholder="{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARSTARTDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.financialYearStartDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="financialYearStartDate"></mat-datepicker-toggle>
+        <mat-datepicker #financialYearStartDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.financialYearStartDate.errors && f.financialYearStartDate.errors.required">{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARSTARTDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.financialYearStartDate.errors && f.financialYearStartDate.errors.maxlength"></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARENDDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [matDatepicker]="financialYearEndDate" formControlName="financialYearEndDate" (click)="financialYearEndDate.open()"
+               placeholder="{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARENDDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.financialYearEndDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="financialYearEndDate"></mat-datepicker-toggle>
+        <mat-datepicker #financialYearEndDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.financialYearEndDate.errors && f.financialYearEndDate.errors.required">{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.FINANCIALYEARENDDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.financialYearEndDate.errors && f.financialYearEndDate.errors.maxlength"></mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isRunningYear" [(value)]="financialYear.isRunningYear"
+                    matTooltip="Is Running Year?">
+        {{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.ISRUNNINGYEAR.PLACEHOLDER' | translate }}
+      </mat-checkbox>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="sortOrder" placeholder="{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.SORTORDER.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.sortOrder.errors}" />
+        <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.required">{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.SORTORDER.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.sortOrder.errors && f.sortOrder.errors.maxlength">{{ 'COMPANY.FINANCIALYEAR.CREATE.CREATE_FORM.SORTORDER.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessages}}
+          
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+

@@ -1,0 +1,98 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{'PAYROLL.INCOMETAXINVESTMENT.CREATE.TITLE' | translate}}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">Edit Income Tax Investment</h5>
+<h6 *ngIf="incomeTaxInvestmentCreateForm.invalid && submitted" class="text-danger">Please enter valid data and fill up
+  the required fields.</h6>
+  <h6 *ngIf="isDateOverLap && submitted" class="text-danger">{{dateOverLapErrorMessage}} 
+  </h6>
+<form [formGroup]="incomeTaxInvestmentCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId"
+          [disabled]="true">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.companyId.errors">
+          <mat-error *ngIf="f.companyId.errors.required">Company is required</mat-error>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXINVESTMENT.CREATE.INVESTMENT_PERCENTAGE.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input matInput type="number" formControlName="investmentPercentage"
+          [(value)]="incomeTaxInvestment.investmentPercentage" placeholder="{{'PAYROLL.INCOMETAXINVESTMENT.CREATE.INVESTMENT_PERCENTAGE.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.investmentPercentage.errors}">
+        <mat-error *ngIf="submitted && f.investmentPercentage.errors && f.investmentPercentage.errors.required">
+          {{'PAYROLL.INCOMETAXINVESTMENT.CREATE.INVESTMENT_PERCENTAGE.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.investmentPercentage.errors && f.investmentPercentage.errors.maxlength">
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXINVESTMENT.CREATE.WAIVER_PERCENTAGE.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input matInput type="number" formControlName="waiverPercentage"
+          [(value)]="incomeTaxInvestment.waiverPercentage" placeholder="{{'PAYROLL.INCOMETAXINVESTMENT.CREATE.WAIVER_PERCENTAGE.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.waiverPercentage.errors}">
+        <mat-error *ngIf="submitted && f.waiverPercentage.errors && f.waiverPercentage.errors.required">
+          {{'PAYROLL.INCOMETAXINVESTMENT.CREATE.WAIVER_PERCENTAGE.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.waiverPercentage.errors && f.waiverPercentage.errors.maxlength">
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input  (focus)="onFocus()" matInput [matDatepicker]="startDate" formControlName="startDate"
+          [(value)]="incomeTaxInvestment.startDate" (click)="startDate.open()" placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">Start
+          date is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input (focus)="onFocus()" matInput [matDatepicker]="endDate" formControlName="endDate" [(value)]="incomeTaxInvestment.endDate"
+          (click)="endDate.open()" placeholder="{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.endDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">End
+          date is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.PLACEHOLDER' | translate}}
+        </mat-label>
+        <input matInput formControlName="remarks" [(value)]="incomeTaxInvestment.remarks"
+          placeholder="{{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.PLACEHOLDER' | translate}}"
+          [ngClass]="{'is-invalid': submitted && f.remarks.errors}">
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.required">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.REQUIRED_ERROR_TEXT' | translate}}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.remarks.errors && f.remarks.errors.maxlength">
+          {{'PAYROLL.INCOMETAXPAYERTYPE.CREATE.REMARKS.MAX_LENGTH_ERROR_TEXT' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

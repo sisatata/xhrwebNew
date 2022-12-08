@@ -1,0 +1,53 @@
+.nav-link[data-toggle].collapsed:after {
+  content: " ▾";
+}
+
+.nav-link[data-toggle]:not(.collapsed):after {
+  content: " ▴";
+}
+#sidebarMenu{
+  transition: all 0.3s;
+}
+#float-icon{
+  display: none;
+}
+@media only screen and (max-width: 1024px) {
+  .nav li {
+    max-width: 100%;
+  }
+  
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar-sticky li.nav-item a {
+   
+    font-size: 9px;
+   
+}
+.attendance{
+  font-size: 9px;;
+}
+
+}
+
+.float{
+	position:fixed;
+	width:30px;
+	height:60px;
+	bottom:40px;
+	left:0;
+  top:100px;
+	background-color:#00B259;
+  color: #fff;
+	z-index: 9999;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.my-float{
+	margin-top:22px;
+}
+#float-icon:hover{
+  cursor: pointer;
+  color:#fff;
+}

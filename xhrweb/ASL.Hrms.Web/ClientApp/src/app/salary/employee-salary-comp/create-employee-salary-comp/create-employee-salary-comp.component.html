@@ -1,0 +1,72 @@
+ <h5 mat-dialog-title *ngIf = "!isEditMode" >{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_TITLE' | translate}}</h5 >
+ <h5 mat-dialog-title *ngIf = "isEditMode" >{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.EDIT_TITLE' | translate}}</h5>
+  
+ <form class="employeesalarycomponent-from" [formGroup]="employeesalarycomponentCreateForm" enctype="multipart/form-data"> 
+<mat-dialog-content class="mat-typography">
+  
+<div class="form-group">
+ <mat-form-field appearance = "outline">
+         <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+         <mat-select matInput formControlName="companyId" placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="employeesalarycomponent.companyId" (selectionChange)="onChangeCompany()">
+           <ng-container *ngFor = "let company of companies" > 
+             <mat-option value="{{company.id}}">{{company.companyName}}</mat-option> 
+           </ng-container> 
+         </mat-select> 
+         <mat-error *ngIf = "submitted && f.companyId.errors && f.companyId.errors.required" >{{'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error> 
+       </mat-form-field> 
+     </div> 
+  
+     <div class="form-group">
+       <mat-form-field appearance = "outline"> 
+         <mat-label>{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.EMPLOYEESALARYID.PLACEHOLDER' | translate }}</mat-label> 
+         <input matInput formControlName="employeeSalaryId" placeholder="{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.EMPLOYEESALARYID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.employeeSalaryId.errors}"/>
+<mat-error *ngIf = "submitted && f.employeeSalaryId.errors && f.employeeSalaryId.errors.required" >{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.EMPLOYEESALARYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error> 
+         <mat-error *ngIf = "submitted && f.employeeSalaryId.errors && f.employeeSalaryId.errors.maxlength" >{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.EMPLOYEESALARYID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+       </mat-form-field> 
+     </div> 
+  
+     <div class="form-group">
+       <mat-form-field appearance = "outline"> 
+         <mat-label>{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.SALARYSTRUCTURECOMPONENTID.PLACEHOLDER' | translate }}</mat-label> 
+         <input matInput formControlName="salaryStructureComponentId" placeholder="{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.SALARYSTRUCTURECOMPONENTID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.salaryStructureComponentId.errors}"/>
+<mat-error *ngIf = "submitted && f.salaryStructureComponentId.errors && f.salaryStructureComponentId.errors.required" >{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.SALARYSTRUCTURECOMPONENTID.REQUIERED_ERROR_TEXT' | translate }}</mat-error> 
+         <mat-error *ngIf = "submitted && f.salaryStructureComponentId.errors && f.salaryStructureComponentId.errors.maxlength" >{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.SALARYSTRUCTURECOMPONENTID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+       </mat-form-field> 
+     </div> 
+  
+     <div class="form-group">
+       <mat-form-field appearance = "outline"> 
+         <mat-label>{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.COMPONENTAMOUNT.PLACEHOLDER' | translate }}</mat-label> 
+         <input matInput formControlName="componentAmount" placeholder="{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.COMPONENTAMOUNT.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.componentAmount.errors}"/>
+<mat-error *ngIf = "submitted && f.componentAmount.errors && f.componentAmount.errors.required" >{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.COMPONENTAMOUNT.REQUIERED_ERROR_TEXT' | translate }}</mat-error> 
+         <mat-error *ngIf = "submitted && f.componentAmount.errors && f.componentAmount.errors.maxlength" >{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.COMPONENTAMOUNT.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+       </mat-form-field> 
+     </div> 
+  
+     <div class="form-group">
+       <mat-form-field appearance = "outline"> 
+         <mat-label>{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.COMPANYID.PLACEHOLDER' | translate }}</mat-label> 
+         <input matInput formControlName="companyId" placeholder="{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.COMPANYID.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.companyId.errors}"/>
+<mat-error *ngIf = "submitted && f.companyId.errors && f.companyId.errors.required" >{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error> 
+         <mat-error *ngIf = "submitted && f.companyId.errors && f.companyId.errors.maxlength" >{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.COMPANYID.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+       </mat-form-field> 
+     </div> 
+  
+     <div class="form-group">
+       <mat-form-field appearance = "outline"> 
+         <mat-label>{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.ISDELETED.PLACEHOLDER' | translate }}</mat-label> 
+         <input matInput formControlName="isDeleted" placeholder="{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.ISDELETED.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.isDeleted.errors}"/>
+<mat-error *ngIf = "submitted && f.isDeleted.errors && f.isDeleted.errors.required" >{{ 'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.ISDELETED.REQUIERED_ERROR_TEXT' | translate }}</mat-error> 
+         <mat-error *ngIf = "submitted && f.isDeleted.errors && f.isDeleted.errors.maxlength" >{{'COMPANY.EMPLOYEESALARYCOMPONENT.CREATE.CREATE_FORM.ISDELETED.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+       </mat-form-field> 
+     </div> 
+  
+  
+   </mat-dialog-content> 
+  
+   <mat-dialog-actions> 
+     <button mat-raised-button mat-dialog-close (click)="close()">{{'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button> 
+     <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button> 
+   </mat-dialog-actions> 
+ </form>
+

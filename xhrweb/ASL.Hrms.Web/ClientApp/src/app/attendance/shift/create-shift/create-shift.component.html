@@ -1,0 +1,477 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'ATTENDANCE.SHIFT.CREATE.EDIT_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isShiftDuplicate" class="text-danger">Shift Code should not be duplicate</h5>
+<form class="shift-from" [formGroup]="shiftCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select matInput formControlName="companyId"
+              placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="shift.companyId"
+              (selectionChange)="onChangeCompany()">
+              <ng-container *ngFor="let company of companies">
+                <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">
+              {{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'COMMON.SELECT.SHIFTGROUPID.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select matInput formControlName="shiftGroupId"
+              placeholder="{{ 'COMMON.SELECT.SHIFTGROUPID.PLACEHOLDER' | translate }}" [(value)]="shift.shiftGroupId"
+              (selectionChange)="onChangeShifGroup()">
+              <ng-container *ngFor="let shiftGroup of shiftGroups">
+                <mat-option value="{{shiftGroup.id}}">{{shiftGroup.shiftGroupName}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.shiftGroupId.errors && f.shiftGroupId.errors.required">
+              {{ 'COMMON.SELECT.SHIFTGROUPID.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTNAME.PLACEHOLDER' | translate }}</mat-label>
+            <input matInput formControlName="shiftName"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTNAME.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.shiftName.errors}" />
+            <mat-error *ngIf="submitted && f.shiftName.errors && f.shiftName.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTNAME.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.shiftName.errors && f.shiftName.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTNAME.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTLOCALIZEDNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="shiftLocalizedName"
+               placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTLOCALIZEDNAME.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.shiftLocalizedName.errors}" />
+        <mat-error *ngIf="submitted && f.shiftLocalizedName.errors && f.shiftLocalizedName.errors.required">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTLOCALIZEDNAME.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.shiftLocalizedName.errors && f.shiftLocalizedName.errors.maxlength">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTLOCALIZEDNAME.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>-->
+      <div class="col-sm-6">
+
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTCODE.PLACEHOLDER' | translate }}</mat-label>
+            <input matInput formControlName="shiftCode" [readonly]="isEditMode"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTCODE.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.shiftCode.errors}" />
+            <mat-error *ngIf="submitted && f.shiftCode.errors && f.shiftCode.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTCODE.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.shiftCode.errors && f.shiftCode.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTCODE.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTIN.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="shiftIn"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTIN.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.shiftIn.errors}" [ngxTimepicker]="shiftInTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #shiftInTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.shiftIn.errors && f.shiftIn.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTIN.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.shiftIn.errors && f.shiftIn.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTIN.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTOUT.PLACEHOLDER' | translate }}</mat-label>
+          <input type="text" matInput formControlName="shiftOut"
+            placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTOUT.PLACEHOLDER' | translate }}"
+            [ngClass]="{'is-invalid': submitted && f.shiftOut.errors}" [ngxTimepicker]="shiftOutTimepicker"
+            [disableClick]="false" readonly />
+          <mat-icon matSuffix>access_time</mat-icon>
+          <ngx-material-timepicker #shiftOutTimepicker></ngx-material-timepicker>
+          <mat-error *ngIf="submitted && f.shiftOut.errors && f.shiftOut.errors.required">
+            {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTOUT.REQUIERED_ERROR_TEXT' | translate }}
+          </mat-error>
+          <mat-error *ngIf="submitted && f.shiftOut.errors && f.shiftOut.errors.maxlength">
+            {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTOUT.MAXLENGTH_ERROR_TEXT' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTLATE.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="shiftLate"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTLATE.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.shiftLate.errors}" [ngxTimepicker]="shiftLateTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #shiftLateTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.shiftLate.errors && f.shiftLate.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTLATE.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.shiftLate.errors && f.shiftLate.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.SHIFTLATE.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.EARLYOUT.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="earlyOut"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.EARLYOUT.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.earlyOut.errors}" [ngxTimepicker]="earlyOutTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #earlyOutTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.earlyOut.errors && f.earlyOut.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.EARLYOUT.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.earlyOut.errors && f.earlyOut.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.EARLYOUT.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.LUNCHBREAKIN.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="lunchBreakIn"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.LUNCHBREAKIN.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.lunchBreakIn.errors}" [ngxTimepicker]="lunchBreakInTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #lunchBreakInTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.lunchBreakIn.errors && f.lunchBreakIn.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.LUNCHBREAKIN.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.lunchBreakIn.errors && f.lunchBreakIn.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.LUNCHBREAKIN.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.LUNCHBREAKOUT.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="lunchBreakOut"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.LUNCHBREAKOUT.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.lunchBreakOut.errors}" [ngxTimepicker]="lunchBreakOutTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #lunchBreakOutTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.lunchBreakOut.errors && f.lunchBreakOut.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.LUNCHBREAKOUT.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.lunchBreakOut.errors && f.lunchBreakOut.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.LUNCHBREAKOUT.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.REGHOUR.LABEL' | translate }}</mat-label>
+        <input type="text" matInput formControlName="regHour"
+          placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.REGHOUR.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.regHour.errors}" />
+
+        <mat-error *ngIf="submitted && f.regHour.errors && f.regHour.errors.required">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.REGHOUR.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.regHour.errors && f.regHour.errors.maxlength">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.REGHOUR.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+    <div class="row">
+
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANIN.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="ramadanIn"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANIN.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.ramadanIn.errors}" [ngxTimepicker]="ramadanInTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #ramadanInTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.ramadanIn.errors && f.ramadanIn.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANIN.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.ramadanIn.errors && f.ramadanIn.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANIN.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANOUT.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="ramadanOut"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANOUT.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.ramadanOut.errors}" [ngxTimepicker]="ramadanOutTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #ramadanOutTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.ramadanOut.errors && f.ramadanOut.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANOUT.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.ramadanOut.errors && f.ramadanOut.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANOUT.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLATE.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="ramadanLate"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLATE.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.ramadanLate.errors}" [ngxTimepicker]="ramadanLateTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #ramadanLateTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.ramadanLate.errors && f.ramadanLate.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLATE.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.ramadanLate.errors && f.ramadanLate.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLATE.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANEARLYOUT.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="ramadanEarlyOut"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANEARLYOUT.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.ramadanEarlyOut.errors}"
+              [ngxTimepicker]="ramadanEarlyOutTimepicker" [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #ramadanEarlyOutTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.ramadanEarlyOut.errors && f.ramadanEarlyOut.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANEARLYOUT.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.ramadanEarlyOut.errors && f.ramadanEarlyOut.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANEARLYOUT.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLUNCHBREAKIN.PLACEHOLDER' | translate }}
+            </mat-label>
+            <input type="text" matInput formControlName="ramadanLunchBreakIn"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLUNCHBREAKIN.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.ramadanLunchBreakIn.errors}"
+              [ngxTimepicker]="ramadanLunchBreakInTimepicker" [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #ramadanLunchBreakInTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.ramadanLunchBreakIn.errors && f.ramadanLunchBreakIn.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLUNCHBREAKIN.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.ramadanLunchBreakIn.errors && f.ramadanLunchBreakIn.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLUNCHBREAKIN.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLUNCHBREAKOUT.PLACEHOLDER' | translate }}
+            </mat-label>
+            <input type="text" matInput formControlName="ramadanLunchBreakOut"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLUNCHBREAKOUT.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.ramadanLunchBreakOut.errors}"
+              [ngxTimepicker]="ramadanLunchBreakOutTimepicker" [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #ramadanLunchBreakOutTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.ramadanLunchBreakOut.errors && f.ramadanLunchBreakOut.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLUNCHBREAKOUT.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.ramadanLunchBreakOut.errors && f.ramadanLunchBreakOut.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RAMADANLUNCHBREAKOUT.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.STARTTIME.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="startTime"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.STARTTIME.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.startTime.errors}" [ngxTimepicker]="startTimeTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #startTimeTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.startTime.errors && f.startTime.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.STARTTIME.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.startTime.errors && f.startTime.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.STARTTIME.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.ENDTIME.PLACEHOLDER' | translate }}</mat-label>
+            <input type="text" matInput formControlName="endTime"
+              placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.ENDTIME.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.endTime.errors}" [ngxTimepicker]="endTimeTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #endTimeTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.endTime.errors && f.endTime.errors.required">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.ENDTIME.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.endTime.errors && f.endTime.errors.maxlength">
+              {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.ENDTIME.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.GRACEIN.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="graceIn"
+               placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.GRACEIN.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.graceIn.errors}" />
+        <mat-error *ngIf="submitted && f.graceIn.errors && f.graceIn.errors.required">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.GRACEIN.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.graceIn.errors && f.graceIn.errors.maxlength">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.GRACEIN.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>-->
+    <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.GRACEOUT.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="graceOut"
+               placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.GRACEOUT.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.graceOut.errors}" />
+        <mat-error *ngIf="submitted && f.graceOut.errors && f.graceOut.errors.required">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.GRACEOUT.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.graceOut.errors && f.graceOut.errors.maxlength">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.GRACEOUT.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>-->
+    <!--<div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RANGE.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="range"
+          placeholder="{{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RANGE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.range.errors}" />
+        <mat-error *ngIf="submitted && f.range.errors && f.range.errors.required">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RANGE.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="submitted && f.range.errors && f.range.errors.maxlength">
+          {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.RANGE.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>-->
+
+
+    <!--<div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isRollingShift" [(value)]="shift.isRollingShift"
+                    matTooltip="Is Rolling Shift?">
+        {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.ISROLLINGSHIFT.PLACEHOLDER' | translate }}
+      </mat-checkbox>
+    </div>-->
+    <!--<div class="form-group">
+
+      <mat-checkbox class="form-group" formControlName="isRelaborShift" [(value)]="shift.isRelaborShift"
+        matTooltip="Is Relabor Shift?">
+        {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.ISRELABORSHIFT.PLACEHOLDER' | translate }}
+      </mat-checkbox>
+    </div>-->
+    <!--<div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isActive" [(value)]="shift.isActive" matTooltip="Is Active?">
+        {{ 'ATTENDANCE.SHIFT.CREATE.CREATE_FORM.ISACTIVE.PLACEHOLDER' | translate }}
+      </mat-checkbox>
+    </div>-->
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessages}}
+          
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

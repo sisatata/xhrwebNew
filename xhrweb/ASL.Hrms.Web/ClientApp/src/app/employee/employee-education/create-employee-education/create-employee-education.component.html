@@ -1,0 +1,142 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.EDIT_TITLE' | translate }}</h5>
+<h6 *ngIf="submitted && employeeEducationCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+<h6 *ngIf="submitted && isDuplicateFound" class="text-danger">S.S.C. or H.S.C can't be duplicate</h6>
+<form [formGroup]="employeeEducationCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+  
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.EDUCATIONALDEGREEID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="educationalDegreeId" [(value)]="employeeEducation.educationalDegreeId"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.EDUCATIONALDEGREEID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let item of educationalDegrees">
+            <mat-option value="{{item.id}}">{{item.lookUpTypeName}}</mat-option>
+          </ng-container>
+        </mat-select>
+       
+        <mat-error *ngIf="f.educationalDegreeId.errors && f.educationalDegreeId.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.EDUCATIONALDEGREEID.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+      
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.EDUCATIONALINSTITUTEID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="educationalInstituteId"
+          [(value)]="employeeEducation.educationalInstituteId"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.EDUCATIONALINSTITUTEID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let item of educationalInstitutes">
+            <mat-option value="{{item.id}}">{{item.lookUpTypeName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <!-- <div *ngIf="submitted && f.educationalInstituteId.errors"> -->
+        <mat-error *ngIf="f.educationalInstituteId.errors && f.educationalInstituteId.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.EDUCATIONALINSTITUTEID.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <!-- </div> -->
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.SESSION.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="session" [(value)]="employeeEducation.session"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.SESSION.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.session.errors}">
+        <!-- <div *ngIf="submitted && f.session.errors"> -->
+        <mat-error *ngIf="f.session.errors && f.session.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.SESSION.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="f.session.errors && f.session.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.SESSION.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+        <!-- </div> -->
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.PASSINGYEAR.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="passingYear" [(value)]="employeeEducation.passingYear"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.PASSINGYEAR.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.passingYear.errors}">
+        <!-- <div *ngIf="submitted && f.passingYear.errors"> -->
+        <mat-error *ngIf="f.passingYear.errors && f.passingYear.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.PASSINGYEAR.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="f.passingYear.errors && f.passingYear.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.PASSINGYEAR.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+        <!-- </div> -->
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.BOARDORUNIVERSITY.PLACEHOLDER' | translate }}
+        </mat-label>
+        <input matInput formControlName="boardorUniversity" [(value)]="employeeEducation.boardorUniversity"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.BOARDORUNIVERSITY.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.boardorUniversity.errors}">
+        <!-- <div *ngIf="submitted && f.boardorUniversity.errors"> -->
+        <mat-error *ngIf="f.boardorUniversity.errors && f.boardorUniversity.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.BOARDORUNIVERSITY.REQUIERED_ERROR_TEXT' | translate }}
+        </mat-error>
+        <mat-error *ngIf="f.boardorUniversity.errors && f.boardorUniversity.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.BOARDORUNIVERSITY.MAXLENGTH_ERROR_TEXT' | translate }}
+        </mat-error>
+        <!-- </div> -->
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.RESULT.PLACEHOLDER' | translate }} </mat-label>
+        <input matInput formControlName="result" [(value)]="employeeEducation.result"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.RESULT.PLACEHOLDER' | translate }} Ex: A (4.9)/First division"
+          [ngClass]="{'is-invalid': submitted && f.result.errors}">
+        <!-- <div *ngIf="submitted && f.result.errors"> -->
+        <mat-error *ngIf="f.result.errors && f.result.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.RESULT.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="f.result.errors && f.result.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.RESULT.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+        <!-- </div> -->
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.RESULTTYPE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="resultType" [(value)]="employeeEducation.resultType"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.RESULTTYPE.PLACEHOLDER' | translate }} (Grade/Division)"
+          [ngClass]="{'is-invalid': submitted && f.resultType.errors}">
+        <!-- <div *ngIf="submitted && f.resultType.errors"> -->
+        <mat-error *ngIf="f.resultType.errors && f.resultType.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.RESULTTYPE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="f.resultType.errors && f.resultType.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.RESULTTYPE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+        <!-- </div> -->
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.OUTOF.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="outOf" [(value)]="employeeEducation.outOf"
+          placeholder="{{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.OUTOF.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': submitted && f.outOf.errors}">
+        <!-- <div *ngIf="submitted && f.outOf.errors"> -->
+        <mat-error *ngIf="f.outOf.errors && f.outOf.errors.required">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.OUTOF.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="f.outOf.errors && f.outOf.errors.maxlength">
+          {{ 'EMPLOYEE.EMPLOYEEEDUCATION.CREATE.CREATE_FORM.OUTOF.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+        <!-- </div> -->
+      </mat-form-field>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        {{errorMessage}}
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

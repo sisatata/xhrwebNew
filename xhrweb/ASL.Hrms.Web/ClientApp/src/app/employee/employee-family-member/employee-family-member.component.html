@@ -1,0 +1,55 @@
+<section *blockUI="'employeeFamilyMember-list-section'">
+  <!--<h1 id="tableLabel">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TITLE' | translate }}</h1>-->
+  <div class="row float-right m-1 p-2">
+    <button  *ngIf="isAdmin || isHRManager" mat-raised-button (click)="createEmployeeFamilyMember()"
+      matTooltip="{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}"
+      class="btn btn-success">
+      <mat-icon class="create-icon-button">add</mat-icon>
+      {{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}
+    </button>
+  </div>
+  <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+    <thead>
+      <tr class="table-secondary">
+        <th *ngIf="isAdmin || isHRManager" class="text-center">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.FAMILIYMEMBERNAME' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.DATEOFBIRTH' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.EDUCATIONCLASS' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.EDUCATIONALINSTITUTE' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.EDUCATIONYEAR' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.RELATIONTYPENAME' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.ISDEPENDANT' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.ISELIGIBLEFORMEDICAL' | translate }}</th>
+        <th>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.INDEX.TABLE.HEADER.ISELIGIBLEFOREDUCATION' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of employeeFamilyMembers">
+        <td *ngIf="isAdmin || isHRManager" class="pt-0 text-center">
+          <button mat-icon-button (click)="editEmployeeFamilyMember(item)"
+            matTooltip="{{ 'EMPLOYEE.EMPLOYEEPHONE.INDEX.EDIT_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon>create</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onDeleteEmployeeFamilyMember(item)"
+            matTooltip="{{ 'EMPLOYEE.EMPLOYEEPHONE.INDEX.DELETE_BUTTON_TOOLTIP' | translate }}">
+            <mat-icon class="mat-icon-delete">delete</mat-icon>
+          </button>
+        </td>
+        <td>{{item.familiyMemberName}}</td>
+        <td>{{item.dateOfBirth | date: 'dd/MM/yyyy'}}</td>
+        <td>{{item.educationClass}}</td>
+        <td>{{item.educationalInstitue}}</td>
+        <td>{{item.educationYear}}</td>
+        <td>{{item.relationTypeName}}</td>
+        <td>{{item.isDependant !== true? 'No' : 'Yes'  }}</td>
+        <td>{{item.isEligibleForMedical !== true? 'No' : 'Yes' }}</td>
+        <td>{{item.isEligibleForEducation !== true? 'No' : 'Yes' }}</td>
+      </tr>
+    </tbody>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        {{errorMessages}}
+      </div>
+    </mat-error>
+  </table>
+</section>

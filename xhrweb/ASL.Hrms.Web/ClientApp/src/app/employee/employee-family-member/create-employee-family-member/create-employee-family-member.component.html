@@ -1,0 +1,128 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.EDIT_TITLE' | translate }}</h5>
+
+
+<h6 *ngIf="submitted && employeeFamilyMemberCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}</h6>
+
+<form class="employeeFamilyMember-from" [formGroup]="employeeFamilyMemberCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <!-- <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId" [(value)]="employeeFamilyMember.companyId" (selectionChange)="onChangeCompany()"
+                    placeholder=" {{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div> -->
+
+   
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.FAMILIYMEMBERNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="familiyMemberName" [(value)]="employeeFamilyMember.familiyMemberName"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.FAMILIYMEMBERNAME.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.familiyMemberName.errors}">
+        <mat-error *ngIf="submitted && f.familiyMemberName.errors && f.familiyMemberName.errors.required">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.FAMILIYMEMBERNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.familiyMemberName.errors && f.familiyMemberName.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.FAMILIYMEMBERNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.DATEOFBIRTH.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [matDatepicker]="dateOfBirth" formControlName="dateOfBirth" [(value)]="employeeFamilyMember.dateOfBirth"
+               (click)="dateOfBirth.open()" placeholder="{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.DATEOFBIRTH.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': f.dateOfBirth.errors}">
+        <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+        <mat-datepicker #dateOfBirth></mat-datepicker>
+        <mat-error *ngIf="submitted && f.dateOfBirth.errors && f.dateOfBirth.errors.required">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.DATEOFBIRTH.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.dateOfBirth.errors && f.dateOfBirth.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.DATEOFBIRTH.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONCLASS.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="educationClass" [(value)]="employeeFamilyMember.educationClass"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONCLASS.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.educationClass.errors}">
+        <mat-error *ngIf="f.educationClass.errors && f.educationClass.errors.required">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONCLASS.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="f.educationClass.errors && f.educationClass.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONCLASS.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONALINSTITUTE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="educationalInstitute" [(value)]="employeeFamilyMember.educationalInstitute"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONALINSTITUTE.PLACEHOLDER' | translate }}"
+               [ngClass]="{'is-invalid': submitted && f.educationalInstitute.errors}">
+        <mat-error *ngIf="submitted && f.educationalInstitute.errors && f.educationalInstitute.errors.required">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONALINSTITUTE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.educationalInstitute.errors && f.educationalInstitute.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONALINSTITUTE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONYEAR.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="educationYear" [(value)]="employeeFamilyMember.educationYear"
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONYEAR.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.educationYear.errors}">
+        <mat-error *ngIf="submitted && f.educationYear.errors && f.educationYear.errors.required">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONYEAR.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.educationYear.errors && f.educationYear.errors.maxlength">{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.EDUCATIONYEAR.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.RELATIONTYPEID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="relationTypeId" [(value)]="employeeFamilyMember.relationTypeId"
+                    placeholder="{{ 'COMMON.SELECT.RELATIONTYPEID.PLACEHOLDER' | translate }}">
+          <ng-container *ngFor="let relationType of relationTypes">
+            <mat-option value="{{relationType.id}}">{{relationType.lookUpTypeName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.relationTypeId.errors && f.relationTypeId.errors.required">{{ 'COMMON.SELECT.RELATIONTYPEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isDependant" [(value)]="employeeFamilyMember.isDependant"
+                    matTooltip="{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.ISDEPENDANT.TOOLTIP' | translate }}">
+        {{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.ISDEPENDANT.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isEligibleForMedical" [(value)]="employeeFamilyMember.isEligibleForMedical"
+                    matTooltip="{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.ISELIGIBLEFORMEDICAL.TOOLTIP' | translate }}">
+        {{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.ISELIGIBLEFORMEDICAL.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isEligibleForEducation" [(value)]="employeeFamilyMember.isEligibleForEducation"
+                    matTooltip="{{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.ISELIGIBLEFOREDUCATION.TOOLTIP' | translate }}">
+        {{ 'EMPLOYEE.EMPLOYEEFAMILYMEMBER.CREATE.CREATE_FORM.ISELIGIBLEFOREDUCATION.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+       
+          {{errorMessage}}
+         
+      </div>
+  </mat-error>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+
+

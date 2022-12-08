@@ -1,0 +1,124 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title>{{ 'PAYROLL.EARNLEAVEENCASHMENT.CREATE.TITLE' | translate}}</h5>
+<form class="employee-from" [formGroup]="employeeEarnLeaveEncashmentCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select matInput formControlName="employeeId" [(value)]="earnLeaveEncashment.employeeId"
+              placeholder="{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}"
+              (selectionChange)="onChangeEmployee($event.value)">
+              <ng-container *ngFor="let employee of employees">
+                <mat-option value="{{employee.id}}">{{employee.fullName}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.employeeId.errors && f.employeeId.errors.required">
+              {{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{'LEAVE.LEAVETYPE.INDEX.TITLE' | translate}}</mat-label>
+            <mat-select matInput formControlName="leaveTypeId" placeholder="Leave Type"
+              [(value)]="earnLeaveEncashment.leaveTypeId">
+              <ng-container *ngFor="let leaveType of leaveTypes">
+                <mat-option value="{{leaveType.id}}">{{leaveType.leaveTypeName}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.leaveTypeId.errors && f.leaveTypeId.errors.required">
+              {{ 'LEAVE.LEAVEAPPLICATION.CREATE.ERROR.LEAVE_TYPE_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'COMMON.SELECT.FINANCIALYEARID.PLACEHOLDER' | translate }}</mat-label>
+            <mat-select matInput formControlName="financialYearId"
+              placeholder="{{ 'COMMON.SELECT.FINANCIALYEARID.PLACEHOLDER' | translate }}"
+              [(value)]="earnLeaveEncashment.financialYearId" (selectionChange)="onChangeFinancialYear($event.value)">
+              <ng-container *ngFor="let financialYear of financialYears">
+                <mat-option value="{{financialYear.id}}">{{financialYear.financialYearName}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.financialYearId.errors && f.financialYearId.errors.required">
+              {{ 'COMMON.SELECT.FINANCIALYEARID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label class="label-font"> {{'COMPANY.MONTHCYCLE.INDEX.TITLE' | translate }}</mat-label>
+            <mat-select placeholder="Month Cycle" formControlName="monthCycleId"
+              [(value)]="earnLeaveEncashment.monthCycleId">
+              <mat-option *ngFor="let item of monthCycles" [value]="item.id">
+                {{item.monthCycleName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.monthCycleId.errors && f.monthCycleId.errors.required">
+              {{'COMMON.SELECT.MONTHCYCLEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'PAYROLL.EARNLEAVEENCASHMENT.CREATE.CREATE_FORM.ENCASHDATE.PLACEHOLDER' | translate}}
+            </mat-label>
+            <input matInput [matDatepicker]="encashDate" formControlName="encashDate"
+              [(value)]="earnLeaveEncashment.encashDate" (click)="encashDate.open()"
+              placeholder="{{ 'PAYROLL.EARNLEAVEENCASHMENT.CREATE.CREATE_FORM.ENCASHDATE.PLACEHOLDER' | translate}}"
+              [ngClass]="{'is-invalid': f.encashDate.errors}">
+            <mat-datepicker-toggle matSuffix [for]="encashDate"></mat-datepicker-toggle>
+            <mat-datepicker #encashDate></mat-datepicker>
+            <mat-error *ngIf="submitted && f.encashDate.errors && f.encashDate.errors.required">
+              {{ 'PAYROLL.EARNLEAVEENCASHMENT.CREATE.CREATE_FORM.ENCASHDATE.REQUIRED_ERROR_TEXT' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'PAYROLL.EARNLEAVEENCASHMENT.CREATE.CREATE_FORM.ELENCASHEDDAYS.PLACEHOLDER' | translate}}
+            </mat-label>
+            <input type="number" matInput formControlName="elEncashedDays"
+              [(value)]="earnLeaveEncashment.elEncashedDays"
+              placeholder="{{ 'PAYROLL.EARNLEAVEENCASHMENT.CREATE.CREATE_FORM.ELENCASHEDDAYS.PLACEHOLDER' | translate}}"
+              [ngClass]="{'is-invalid': submitted && f.elEncashedDays.errors}">
+            <mat-error *ngIf="submitted && f.elEncashedDays.errors && f.elEncashedDays.errors.required">
+              {{ 'PAYROLL.EARNLEAVEENCASHMENT.CREATE.CREATE_FORM.ELENCASHEDDAYS.REQUIRED_ERROR_TEXT' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.REMARKS' | translate }}</mat-label>
+            <input matInput formControlName="remarks" [(value)]="earnLeaveEncashment.remarks"
+              placeholder="{{ 'ATTENDANCE.EMPLOYEEATTENDANCE.INDEX.TABLE.HEADER.REMARKS' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.remarks.errors}">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+        {{errorMessages}}
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

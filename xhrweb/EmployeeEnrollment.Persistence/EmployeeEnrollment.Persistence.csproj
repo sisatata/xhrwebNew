@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200420064014_Reference_IDs_Modified_To_GUID.cs" />
+    <Compile Remove="Migrations\20200420064014_Reference_IDs_Modified_To_GUID.Designer.cs" />
+    <Compile Remove="Migrations\20200420064330_Reference_IDs_Modified_To_GUID.cs" />
+    <Compile Remove="Migrations\20200420064330_Reference_IDs_Modified_To_GUID.Designer.cs" />
+    <Compile Remove="Migrations\20200421062646_Nationality_Type_Modified.cs" />
+    <Compile Remove="Migrations\20200421062646_Nationality_Type_Modified.Designer.cs" />
+    <Compile Remove="Migrations\20200712064724_EmployeeImage_Added.cs" />
+    <Compile Remove="Migrations\20200712064724_EmployeeImage_Added.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeEnrollment.Core\EmployeeEnrollment.Core.csproj" />
+  </ItemGroup>
+
+</Project>

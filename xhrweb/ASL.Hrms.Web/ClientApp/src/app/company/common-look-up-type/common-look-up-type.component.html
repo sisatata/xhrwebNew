@@ -1,0 +1,124 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<div class="row d-flex justify-content-between mt-3 mb-3">
+  <div class="col-sm-12 col-md-8">
+    <h1>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TITLE' | translate }}</h1>
+  </div>
+  <div class="col-md-3 col-sm-10" *ngIf="isSystemAdmin">
+    <button mat-raised-button (click)="createCommonLookUpType()" class="btn btn-success btn-block text-center"
+      matTooltip="{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}">
+      <mat-icon class="create-icon-button">add</mat-icon>
+      {{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}
+    </button>
+  </div>
+</div>
+<form [formGroup]="commonLookUpTypeFilterFormGroup" (ngSubmit)="getCommonLookUpTypes()">
+  <div class="row ">
+    <div class="col-sm-6 col-md-4">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId"
+          (selectionChange)="onChangeCompany($event.value)">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">
+          {{ 'COMMON.SELECT.COMPANYID.REQUIRED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <!--<div class="col-sm-6 float-right">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>-->
+  </div>
+</form>
+<section *blockUI="'common-lookup-type-section'">
+  <div class="card">
+    <div class="position-relative">
+      <div class="table-responsive cnstr-record product-tbl">
+        <table class="table table-light table-hover table-responsive-sm text-nowrap" aria-labelledby="tableLabel">
+          <thead>
+            <tr class="table-secondary">
+              <th class="text-center">{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+              <!--<th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.PARENT' | translate }}</th>-->
+              <th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.SHORTCODE' | translate }}</th>
+              <th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.LOOKUPTYPENAME' | translate }}</th>
+              <!--<th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.LOOKUPTYPENAMELC' | translate }}</th>-->
+              <th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.REMARKS' | translate }}</th>
+              <!--<th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.SORTORDER' | translate }}</th>-->
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of commonLookUpTypes; let i = index">
+            <tr>
+              <td class="pt-0 text-center">
+                <button mat-icon-button (click)="createCommonLookUpTypeFromList(item.id)"
+                  matTooltip="{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}">
+                  <mat-icon>add</mat-icon>
+                </button>
+                <button mat-icon-button (click)="editCommonLookUpType(item)" *ngIf="item.companyId"
+                  matTooltip="{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.EDIT_BUTTON_TOOLTIP' | translate }}">
+                  <mat-icon>create</mat-icon>
+                </button>
+                <!-- <button mat-icon-button (click)="onDeleteCommonLookUpType(item)"
+                  matTooltip="{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.DELETE_BUTTON_TOOLTIP' | translate }}">
+                  <mat-icon class="mat-icon-delete">delete</mat-icon>
+                </button> -->
+                <button mat-icon-button *ngIf="!hideme[i]" (click)="showChildList(i,item.shortCode)">
+                  <mat-icon>list</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="hideme[i]" (click)="hideme[i] = !hideme[i]">
+                  <mat-icon class="mat-icon-delete">close</mat-icon>
+                </button>
+              </td>
+              <td>{{item.shortCode}}</td>
+              <td>{{item.lookUpTypeName}}</td>
+              <td>{{item.remarks}}</td>
+            </tr>
+            <tr [hidden]="!hideme[i]" class="sub-table no-bg">
+              <td align="center"></td>
+              <td colspan="15" class="p-0">
+                <table class="table mb-0 table-striped">
+                  <thead>  
+                    <tr>
+                      <th class="text-center">{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.ACTIONS' | translate }}
+                      </th>
+                      <th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.SHORTCODE' | translate }}</th>
+                      <th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.LOOKUPTYPENAME' | translate }}</th>
+                      <!--<th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.LOOKUPTYPENAMELC' | translate }}</th>-->
+                      <th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.REMARKS' | translate }}</th>
+                      <th>{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.HEADER.SORTORDER' | translate }}</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let child of childList[i]">
+                    <tr>
+                      <td class="pt-0">
+                        <button mat-icon-button (click)="editCommonLookUpType(child)"
+                          matTooltip="{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.EDIT_BUTTON_TOOLTIP' | translate }}">
+                          <mat-icon>create</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="onDeleteCommonLookUpType(child)"
+                          matTooltip="{{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.DELETE_BUTTON_TOOLTIP' | translate }}">
+                          <mat-icon class="mat-icon-delete">delete</mat-icon>
+                        </button>
+                      </td>
+                      <td>{{child.shortCode}}</td>
+                      <td>{{child.lookUpTypeName}}</td>
+                      <!--<td>{{item.lookUpTypeNameLC}}</td>-->
+                      <td>{{child.remarks}}</td>
+                      <td>{{child.sortOrder}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr *ngIf="commonLookUpTypes.length==0">
+              <td colspan="8" class="text-center">
+                {{ 'COMPANY.COMMONLOOKUPTYPE.INDEX.TABLE.NODATAFOUNDTEXT' | translate }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+::ng-deep .c-btn{
+    background-color: white;
+    border: 2px solid green
+}
+.multi-select{
+    display: block;
+    margin-top: 4px;
+}
+.error{
+    margin-top: -23px;
+}
+
+::ng-deep .selected-list .c-list .c-token{
+    background: green;
+}
+::ng-deep .c-token {
+    color: white;
+}
+::ng-deep .c-angle-down{
+    top: 35%!important;
+    width: 10px!important;
+    width: 10px!important;
+}
+::ng-deep.pure-checkbox input[type=checkbox]+label:before {
+    box-sizing: content-box;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    margin-top: -9px;
+    text-align: center;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 3px;
+    /* color: red; */
+    /* background: #218838; */
+    border: 1px solid #218838;
+}
+::ng-deep.pure-checkbox input[type=checkbox]:checked+label:after {
+    color: #218838!important;
+}
+ss-multiselect-dropdown > div.btn-group > ul.dropdown-menu {
+    width: 100%;
+  }
+  .w-100{
+      width: 100%;
+  }
+  ::ng-deep .selected-list .c-btn {
+    color: #808a9a!important;
+    font-size: 16px;
+    font-family: Helvetica, sans-serif;
+  }
+  ::ng-deep .selected-list .c-list .c-token {
+      font-size: 10px;
+  }

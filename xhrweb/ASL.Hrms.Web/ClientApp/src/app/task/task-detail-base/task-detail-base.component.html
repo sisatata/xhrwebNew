@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+    <h1 id="tableLabel">{{'TASK.TASKDETAIL.INDEX.TITLE' | translate}}</h1>
+  </div>
+  <div class="col-lg-3  d-lg-block d-md-none d-sm-none"></div>
+  <div class="col-lg-3 col-md-6 col-12">
+    <button style="margin-top: 10px;margin-bottom: 10px;" mat-raised-button (click)="createTaskDetail()"
+      class="btn btn-success btn-block text-center;" matTooltip="Add {{'TASK.TASKCATEGORY.INDEX.TITLE' | translate}}">
+      <mat-icon class="create-icon-button">add</mat-icon>
+      {{'TASK.TASKDETAIL.INDEX.BUTTONTEXT' | translate}}
+    </button>
+  </div>
+</div>
+
+<form [formGroup]="taskDetaiBsaelFilterFormGroup">
+  <div class="row">
+    <div class="col-md-3 col-12">
+      <mat-form-field appearance="outline">
+        <mat-label> {{ 'COMPANY.COMPANY.CREATE.CREATE_FORM.COMPANYNAME.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select placeholder="{{'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" formControlName="companyId">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">Company is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="col-12 col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" (click)="startDatePicker.open()"
+          placeholder="Start Date" [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+        <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">
+          {{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.STARTDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-3">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput [matDatepicker]="endDatePicker" formControlName="endDate" (click)="endDatePicker.open()"
+          placeholder="{{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.PLACEHOLDER' | translate }}"
+          [ngClass]="{'is-invalid': f.endDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+        <mat-error *ngIf="submitted && f.endDate.errors && f.endDate.errors.required">
+          {{ 'PAYROLL.EMPLOYEEBANKACCOUNT.CREATE.CREATE_FORM.ENDDATE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-1 col-md-4 col-sm-12">
+      <button mat-raised-button type="button" (click)="sendValue()" class="btn btn-success btn-block text-center mb-2"
+        matTooltip="search">
+        Search
+      </button>
+    </div>
+    <div class="col-lg-1 col-md-4 col-sm-12">
+      <button mat-raised-button type="button" (click)="exportTaskList()"
+        class="btn btn-success btn-block text-center mb-2" matTooltip="export">
+        Export
+      </button>
+    </div>
+  </div>
+</form>
+<app-task-detail></app-task-detail>

@@ -1,0 +1,172 @@
+
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode">{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_TITLE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'LEAVE.LEAVETYPE.CREATE.EDIT_TITLE' | translate }}</h5>
+
+<form class="leaveType-from" [formGroup]="leaveTypeCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+        <mat-select matInput formControlName="companyId"
+                    placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}"
+                    [(value)]="leaveType.companyId" (selectionChange)="onChangeCompany()">
+          <ng-container *ngFor="let company of companies">
+            <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+          </ng-container>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">{{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'LEAVE.LEAVEGROUP.INDEX.TITLE' | translate}}
+        </mat-label>
+        <mat-select matInput formControlName="leaveTypeGroupId"
+        [(ngModel)]="leaveGroupId"
+                    placeholder="{{'LEAVE.LEAVEGROUP.INDEX.TITLE' | translate}}">
+          <ng-container *ngFor="let item of leaveGroups">
+            <mat-option [value]="item.id">{{item.leaveTypeGroupName}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.LEAVETYPENAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="leaveTypeName" placeholder="{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.LEAVETYPENAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.leaveTypeName.errors}" />
+        <mat-error *ngIf="submitted && f.leaveTypeName.errors && f.leaveTypeName.errors.required">{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.LEAVETYPENAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.leaveTypeName.errors && f.leaveTypeName.errors.maxlength">{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.LEAVETYPENAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--<div class="form-group">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.LEAVETYPELOCALIZEDNAME.PLACEHOLDER' | translate }}</mat-label>
+      <input matInput formControlName="leaveTypeLocalizedName" placeholder="{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.LEAVETYPELOCALIZEDNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.leaveTypeLocalizedName.errors}" />
+      <mat-error *ngIf="submitted && f.leaveTypeLocalizedName.errors && f.leaveTypeLocalizedName.errors.required">{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.LEAVETYPELOCALIZEDNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      <mat-error *ngIf="submitted && f.leaveTypeLocalizedName.errors && f.leaveTypeLocalizedName.errors.maxlength">{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.LEAVETYPELOCALIZEDNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+    </mat-form-field>
+  </div>-->
+
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}</mat-label>
+        <input matInput formControlName="leaveTypeShortName" placeholder="{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.SHORTNAME.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.leaveTypeShortName.errors}">
+        <mat-error *ngIf="submitted && f.leaveTypeShortName.errors && f.leaveTypeShortName.errors.required">{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.SHORTNAME.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.leaveTypeShortName.errors && f.leaveTypeShortName.errors.maxlength">{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.SHORTNAME.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.BALANCE.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="balance" placeholder="{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.BALANCE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.balance.errors}">
+        <mat-error *ngIf="submitted && f.balance.errors && f.balance.errors.required">{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.BALANCE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+        <mat-error *ngIf="submitted && f.balance.errors && f.balance.errors.maxlength">{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.BALANCE.MAXLENGTH_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isCarryForward" [(value)]="leaveType.isCarryForward"
+                    matTooltip="Is Carry Forward?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISCARRYFORWARD.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isFemaleSpecific" [(value)]="leaveType.isFemaleSpecific" matTooltip="is Female Specific?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISFEMALESPECIFIC.TITLE' | translate }}
+      </mat-checkbox>
+
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isPaid" [(value)]="leaveType.isPaid"
+                    matTooltip="Is Paid?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISPAID.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isEncashable" [(value)]="leaveType.isEncashable"
+                    matTooltip="Is Encashable?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISENCASHABLE.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ENCASHRESERVEBALANCE.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="encashReserveBalance" [(value)]="leaveType.encashReserveBalance"
+               placeholder="{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ENCASHRESERVEBALANCE.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.encashReserveBalance.errors}" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isDependOnDateOfConfirmation" [(value)]="leaveType.isDependOnDateOfConfirmation"
+                    matTooltip="Is Depend On Date Of Confirmation?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISDEPENDONDATEOFCONFIRMATION.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isLeaveDaysFixed" [(value)]="leaveType.isLeaveDaysFixed"
+                    matTooltip="Is Leave Days Fixed?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISLEAVEDAYSFIXED.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isBasedWorkingDays" [(value)]="leaveType.isBasedWorkingDays"
+                    matTooltip="Is Based Working Days?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISBASEDWORKINGDAYS.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.CONSECUTIVELIMIT.PLACEHOLDER' | translate }}</mat-label>
+        <input type="number" matInput formControlName="consecutiveLimit" [(value)]="leaveType.consecutiveLimit"
+               placeholder="{{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.CONSECUTIVELIMIT.PLACEHOLDER' | translate }}" [ngClass]="{'is-invalid': submitted && f.consecutiveLimit.errors}" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isAllowAdvanceLeaveApply" [(value)]="leaveType.isAllowAdvanceLeaveApply"
+                    matTooltip="Is Allow Advance Leave Apply?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISALLOWADVANELEAVEAPPLY.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isAllowWithPrecedingHoliday" [(value)]="leaveType.isAllowWithPrecedingHoliday"
+                    matTooltip="Is Allow With Preceding Holiday?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISALLOWWITHPRECEDINGHOLIDAY.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isAllowOpeningBalance" [(value)]="leaveType.isAllowOpeningBalance"
+                    matTooltip="Is Allow Opening Balance?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISALLOWOPENINGBALANCE.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <div class="form-group">
+      <mat-checkbox class="form-group" formControlName="isPreventPostLeaveApply" [(value)]="leaveType.isPreventPostLeaveApply"
+                    matTooltip="Is Prevent Post Leave Apply?">
+        {{ 'LEAVE.LEAVETYPE.CREATE.CREATE_FORM.ISPREVENTPOSTLEAVEAPPLY.TITLE' | translate }}
+      </mat-checkbox>
+    </div>
+    <mat-error *ngIf="!isFormValid">
+      <div class="d-flex">
+
+        {{errorMessages}}
+
+      </div>
+    </mat-error>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+
+

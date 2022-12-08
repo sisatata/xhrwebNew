@@ -1,0 +1,52 @@
+<!--<h1 id="tableLabel">{{ 'EMPLOYEE.EMPLOYEEEMAIL.INDEX.TITLE' | translate }}</h1>-->
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<div style="position:fixed;z-index:9999;left:50%;top:30%" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+<div class="row float-right m-1 p-2">
+    <button mat-raised-button matTooltip="{{ 'COMPANY.COMPANYEMAIL.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}" (click)="createCompanyEmail()" class="btn btn-success">
+      <mat-icon class="create-icon-button">add</mat-icon>{{ 'COMPANY.COMPANYEMAIL.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}
+    </button>
+  </div>
+  
+  
+  <section *blockUI="'company-email-section'">
+    <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+      <thead>
+        <tr class="table-secondary">
+          <th class="text-center">{{ 'EMPLOYEE.EMPLOYEEEMAIL.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEEEMAIL.INDEX.TABLE.HEADER.EMAILADDRESS' | translate }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEEEMAIL.INDEX.TABLE.HEADER.ISPRIMARY' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of companyEmails">
+          <td class="pt-0 text-center">
+            <button mat-icon-button (click)="editCompanyEmail(item)" matTooltip="{{ 'COMPANY.COMPANYEMAIL.INDEX.EDIT_BUTTON_TOOLTIP' | translate }}">
+              <mat-icon>create</mat-icon>
+            </button>
+  
+            <button mat-icon-button (click)="onDeleteCompanyEmail(item)" matTooltip="{{ 'COMPANY.COMPANYEMAIL.INDEX.DELETE_BUTTON_TOOLTIP' | translate }}">
+              <mat-icon class="mat-icon-delete">delete</mat-icon>
+            </button>
+          </td>
+          <td>{{item.emailAddress}}</td>
+          <td>{{item.isPrimary === false? 'No': 'Yes'}}</td>
+          
+        </tr>
+        <tr *ngIf="companyEmails.length==0">
+          <td colspan="11" class="text-center">No data found</td>
+        </tr>
+      </tbody>
+      <mat-error *ngIf="!isFormValid">
+        <div class="d-flex mx-auto">
+         
+           {{errorMessage}}
+            
+        </div>
+    </mat-error>
+    </table>
+  </section>
+  

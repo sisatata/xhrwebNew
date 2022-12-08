@@ -1,0 +1,428 @@
+<h5 mat-dialog-title>{{ 'ATTENDANCE.SHIFTALLOCATION.CREATE.EDIT_TITLE' | translate }}</h5>
+
+<form class="shiftAllocation-from" [formGroup]="shiftAllocationCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select disabled matInput formControlName="companyId" placeholder="{{ 'COMMON.SELECT.COMPANYID.PLACEHOLDER' | translate }}" [(value)]="shiftAllocation.companyId" (selectionChange)="onChangeCompany()">
+            <ng-container *ngFor="let company of companies">
+              <mat-option value="{{company.id}}">{{company.companyName}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <div *ngIf="submitted && f.companyId.errors">
+            <mat-error *ngIf="f.companyId.errors.required">{{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.BRANCHID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select disabled matInput formControlName="branchId" placeholder="{{ 'COMMON.SELECT.BRANCHID.PLACEHOLDER' | translate }}" [(value)]="shiftAllocation.branchId" (selectionChange)="onChangeBranch()">
+            <ng-container *ngFor="let branch of branches">
+              <mat-option value="{{branch.id}}">{{branch.branchName}}</mat-option>
+            </ng-container>
+          </mat-select>
+          <div *ngIf="submitted && f.branchId.errors">
+            <mat-error *ngIf="f.branchId.errors.required">{{ 'COMMON.SELECT.BRANCHID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.DEPARTMENTID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select disabled placeholder="{{ 'COMMON.SELECT.DEPARTMENTID.PLACEHOLDER' | translate }}" formControlName="departmentId" [(value)]="shiftAllocation.departmentId" (selectionChange)="onChangeDepartment()">
+            <mat-option *ngFor="let department of departments" [value]="department.id">
+              {{department.departmentName}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.departmentId.errors">
+            <mat-error *ngIf="f.departmentId.errors.required">{{ 'COMMON.SELECT.DEPARTMENTID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.DESIGNATIONID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select disabled placeholder="{{ 'COMMON.SELECT.DESIGNATIONID.PLACEHOLDER' | translate }}" formControlName="designationId" [(value)]="shiftAllocation.designationId" (selectionChange)="onChangeDesignation()">
+            <mat-option *ngFor="let designation of designations" [value]="designation.id">
+              {{designation.designationName}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.designationId.errors">
+            <mat-error *ngIf="f.designationId.errors.required">{{ 'COMMON.SELECT.DESIGNATIONID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Financial Year</mat-label>
+          <mat-select disabled placeholder="Financial Year" formControlName="financialYearId" (selectionChange)="onChangeFinancialYears($event)">
+            <mat-option *ngFor="let item of financialYears" [value]="item.id">
+              {{item.financialYearName}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.financialYearId.errors">
+            <mat-error *ngIf="f.financialYearId.errors.required">{{ 'COMMON.SELECT.FINANCIALYEARID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </div>
+        </mat-form-field>  
+      </div>
+
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.MONTHCYCLEID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select disabled placeholder="{{ 'COMMON.SELECT.MONTHCYCLEID.PLACEHOLDER' | translate }}"
+                      formControlName="monthCycleId" (selectionChange)="onChangeMonthCycle($event)">
+            <mat-option *ngFor="let item of monthCycles" [value]="item.id">
+              {{item.monthCycleName}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.monthCycleId.errors">
+            <mat-error *ngIf="f.monthCycleId.errors.required">{{ 'COMMON.SELECT.MONTHCYCLEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select disabled placeholder="{{ 'COMMON.SELECT.EMPLOYEEID.PLACEHOLDER' | translate }}" formControlName="employeeId" (selectionChange)="onChangeEmployee($event)">
+            <mat-option *ngFor="let item of employees" [value]="item.id">
+              {{item.fullName}}
+            </mat-option>
+          </mat-select>
+          <div *ngIf="submitted && f.employeeId.errors">
+            <mat-error *ngIf="f.employeeId.errors.required">{{ 'COMMON.SELECT.EMPLOYEEID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c1</mat-label>
+          <mat-select placeholder="C1" formControlName="c1" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c2</mat-label>
+          <mat-select placeholder="C2" formControlName="c2" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c3</mat-label>
+          <mat-select placeholder="C3" formControlName="c3" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c4</mat-label>
+          <mat-select placeholder="C4" formControlName="c4" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c5</mat-label>
+          <mat-select placeholder="C5" formControlName="c5" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c6</mat-label>
+          <mat-select placeholder="C6" formControlName="c6" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c7</mat-label>
+          <mat-select placeholder="C7" formControlName="c7" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c8</mat-label>
+          <mat-select placeholder="C8" formControlName="c8" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c9</mat-label>
+          <mat-select placeholder="C9" formControlName="c9" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c10</mat-label>
+          <mat-select placeholder="C10" formControlName="c10" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c11</mat-label>
+          <mat-select placeholder="C11" formControlName="c11" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c12</mat-label>
+          <mat-select placeholder="C12" formControlName="c12" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c13</mat-label>
+          <mat-select placeholder="C13" formControlName="c13" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c14</mat-label>
+          <mat-select placeholder="C14" formControlName="c14" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c15</mat-label>
+          <mat-select placeholder="C15" formControlName="c15" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c16</mat-label>
+          <mat-select placeholder="C16" formControlName="c16" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c17</mat-label>
+          <mat-select placeholder="C17" formControlName="c17" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c18</mat-label>
+          <mat-select placeholder="C18" formControlName="c18" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c19</mat-label>
+          <mat-select placeholder="C19" formControlName="c19" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c20</mat-label>
+          <mat-select placeholder="C20" formControlName="c20" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c21</mat-label>
+          <mat-select placeholder="C21" formControlName="c21" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c22</mat-label>
+          <mat-select placeholder="C22" formControlName="c22" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c23</mat-label>
+          <mat-select placeholder="C23" formControlName="c23" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c24</mat-label>
+          <mat-select placeholder="C24" formControlName="c24" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c25</mat-label>
+          <mat-select placeholder="C25" formControlName="c25" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c26</mat-label>
+          <mat-select placeholder="C26" formControlName="c26" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>c27</mat-label>
+          <mat-select placeholder="C27" formControlName="c27" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline" *ngIf="maxDayOfMonth>=28">
+          <mat-label>c28</mat-label>
+          <mat-select placeholder="C28" formControlName="c28" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline" *ngIf="maxDayOfMonth>=29">
+          <mat-label>c29</mat-label>
+          <mat-select placeholder="C29" formControlName="c29" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline" *ngIf="maxDayOfMonth>=30">
+          <mat-label>c30</mat-label>
+          <mat-select placeholder="C30" formControlName="c30" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <mat-form-field appearance="outline" *ngIf="maxDayOfMonth>=31">
+          <mat-label>c31</mat-label>
+          <mat-select placeholder="C31" formControlName="c31" (selectionChange)="onChangeShift($event)">
+            <mat-option *ngFor="let item of shifts" [value]="item.shiftCode">
+              {{item.shiftCode}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.UPDATE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>
+
+
+
+
+

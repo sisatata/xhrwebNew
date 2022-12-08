@@ -1,0 +1,74 @@
+.image-logo {
+    display: block;
+    /*font-family: Poppins-Bold;*/
+    font-size: 30px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+  }
+  
+    .image-logo img {
+      font-size: 60px;
+    }
+  
+      .image-logo img:hover {
+        cursor: pointer;
+      }
+  
+  #fileLabel {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  #photoFile {
+    line-height: 1 !important;
+  }
+  
+  /* ::ng-deep .mat-select-content{
+    width:200px !important;
+    background-color: red;   
+  } */
+
+.back-button{
+   position: absolute;
+   top: 1rem;
+   right: 1rem;
+   z-index: 99;
+}
+@media only screen and (max-width : 480px) {
+  #recaptcha_challenge_image{
+  margin: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  }
+  #recaptcha_response_field
+  {
+  margin: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  }
+  .recaptchatable #recaptcha_image {
+  margin: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+  }
+  .recaptchatable .recaptcha_r1_c1, 
+  .recaptchatable .recaptcha_r3_c1, 
+  .recaptchatable .recaptcha_r3_c2, 
+  .recaptchatable .recaptcha_r7_c1, 
+  .recaptchatable .recaptcha_r8_c1, 
+  .recaptchatable .recaptcha_r3_c3, 
+  .recaptchatable .recaptcha_r2_c1, 
+  .recaptchatable .recaptcha_r4_c1, 
+  .recaptchatable .recaptcha_r4_c2, 
+  .recaptchatable .recaptcha_r4_c4, 
+  .recaptchatable .recaptcha_image_cell {
+
+  margin: 0 !important;
+  width: 100% !important;
+  background: none !important;
+  height: auto !important;
+  }
+
+}
+  

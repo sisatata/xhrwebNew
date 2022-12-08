@@ -1,0 +1,51 @@
+<!--<h1 id="tableLabel">{{ 'COMPANY.COMPANYPHONE.INDEX.TITLE' | translate }}</h1>-->
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<div class="row float-right m-1 p-2">
+    <button mat-raised-button matTooltip="{{ 'COMPANY.COMPANYPHONE.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}" (click)="createCompanyPhone()" class="btn btn-success">
+      <mat-icon class="create-icon-button">add</mat-icon>{{ 'COMPANY.COMPANYPHONE.INDEX.CREATE_BUTTON_TOOLTIP' | translate }}
+    </button>
+  </div>
+  
+  
+  <section *blockUI="'company-phone-section'">
+    <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+      <thead>
+        <tr class="table-secondary">
+          <th></th>
+          <th class="text-center">{{ 'EMPLOYEE.EMPLOYEEPHONE.INDEX.TABLE.HEADER.ACTIONS' | translate }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEEPHONE.INDEX.TABLE.HEADER.PHONENUMBER' | translate }}</th>
+          <!-- <th>{{ 'EMPLOYEE.EMPLOYEEPHONE.INDEX.TABLE.HEADER.PHONETYPEID' | translate }}</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of companyPhones">
+          <td></td>
+          <td class="pt-0 text-center">
+            <button mat-icon-button (click)="editCompanyPhone(item)" matTooltip="{{ 'COMPANY.COMPANYPHONE.INDEX.EDIT_BUTTON_TOOLTIP' | translate }}">
+              <mat-icon>create</mat-icon>
+            </button>
+  
+            <button mat-icon-button (click)="onDeleteCompanyPhone(item)" matTooltip="{{ 'COMPANY.COMPANYPHONE.INDEX.DELETE_BUTTON_TOOLTIP' | translate }}">
+              <mat-icon class="mat-icon-delete">delete</mat-icon>
+            </button>
+          </td>
+          <td>{{item.phoneNumber}}</td>
+          <!-- <td>{{item.phoneTypeId}}</td> -->
+         
+        </tr>
+        <mat-error *ngIf="!isFormValid">
+          <div class="d-flex">
+           
+              {{errorMessages}}
+              
+          </div>
+      </mat-error>
+        <tr *ngIf="companyPhones.length==0">
+          <td colspan="11" class="text-center">{{ 'COMPANY.COMPANYPHONE.INDEX.TABLE.NODATAFOUNDTEXT' | translate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  

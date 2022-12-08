@@ -1,0 +1,72 @@
+<div class="spinner-border"  style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading" role="status">
+  
+</div>
+<h1 id="tableLabel">Attendance Process</h1>
+
+
+<form [formGroup]="attendanceProcessFilterFormGroup" (ngSubmit)="processAttendance()">
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline">
+        <mat-label>Company</mat-label>
+        <mat-select placeholder="Company" formControlName="companyId" [(value)]="attendanceProcess.companyId"
+          (selectionChange)="onChangeCompany($event.value)">
+          <mat-option *ngFor="let item of companies" [value]="item.id">
+            {{item.companyName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.companyId.errors && f.companyId.errors.required">
+          {{ 'COMMON.SELECT.COMPANYID.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline">
+        <mat-label>Financial Year</mat-label>
+        <mat-select placeholder="Financial Year" formControlName="attendanceCalendarId"
+          [(value)]="attendanceProcess.attendanceCalendarId" (selectionChange)="onChangeFinancialYears($event)">
+          <mat-option *ngFor="let item of financialYears" [value]="item.id">
+            {{item.financialYearName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.attendanceCalendarId.errors && f.attendanceCalendarId.errors.required">
+          Financial Year is required</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="processingStartDate" formControlName="processingStartDate"
+          [(value)]="attendanceProcess.processingStartDate" (click)="processingStartDate.open()"
+          placeholder="Start Date" [ngClass]="{'is-invalid': f.processingStartDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="processingStartDate"></mat-datepicker-toggle>
+        <mat-datepicker #processingStartDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.processingStartDate.errors && f.processingStartDate.errors.required">Start date
+          is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field appearance="outline">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="processingEndDate" formControlName="processingEndDate"
+          [(value)]="attendanceProcess.processingEndDate" (click)="processingEndDate.open()" placeholder="End Date"
+          [ngClass]="{'is-invalid': f.processingEndDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="processingEndDate"></mat-datepicker-toggle>
+        <mat-datepicker #processingEndDate></mat-datepicker>
+        <mat-error *ngIf="submitted && f.processingEndDate.errors && f.processingEndDate.errors.required">End date is
+          required</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <br />
+  <div class="row">
+    <div class="col-sm-6 float-right">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+
+</form>

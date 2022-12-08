@@ -1,0 +1,141 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<mat-accordion>
+  <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="h6">
+        {{ 'EMPLOYEE.EMPLOYEE.EMPLOYEEENROLLMENT.TITLE' | translate }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <form [formGroup]="employeeEnrollmentForm" enctype="multipart/form-data" (ngSubmit)="saveEmployeeEnrollment()">
+      <mat-card class="example-card">
+        <mat-card-header>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.EMPLOYEEENROLLMENT.JOINING_DATE.CAPTION' | translate }}</mat-label>
+                <input matInput [matDatepicker]="joiningDate" formControlName="joiningDate"
+                  [(value)]="employeeEnrollment.joiningDate" (click)="joiningDate.open()" placeholder="Joining Date"
+                  [ngClass]="{'is-invalid': f.joiningDate.errors}">
+                <mat-datepicker-toggle matSuffix [for]="joiningDate"></mat-datepicker-toggle>
+                <mat-datepicker #joiningDate></mat-datepicker>               
+                  <mat-error *ngIf="submitted && f.joiningDate.errors && f.joiningDate.errors.required">Joining date is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.EMPLOYEEENROLLMENT.PERMANENT_DATE.CAPTION' | translate }}</mat-label>
+                <input matInput [matDatepicker]="permanentDate" formControlName="permanentDate"
+                  [(value)]="employeeEnrollment.permanentDate" (click)="permanentDate.open()"
+                  placeholder="Permanent Date" [ngClass]="{'is-invalid': f.permanentDate.errors}">
+                <mat-datepicker-toggle matSuffix [for]="permanentDate"></mat-datepicker-toggle>
+                <mat-datepicker #permanentDate></mat-datepicker>
+                <div *ngIf="submitted && f.permanentDate.errors">
+                  <mat-error *ngIf="f.permanentDate.errors.required">*</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.EMPLOYEEENROLLMENT.QUIT_DATE.CAPTION' | translate }}</mat-label>
+                <input matInput [matDatepicker]="quitDate" formControlName="quitDate"
+                  [(value)]="employeeEnrollment.quitDate" (click)="quitDate.open()" placeholder="Quit Date"
+                  [ngClass]="{'is-invalid': f.quitDate.errors}">
+                <mat-datepicker-toggle matSuffix [for]="quitDate"></mat-datepicker-toggle>
+                <mat-datepicker #quitDate></mat-datepicker>
+                <div *ngIf="submitted && f.quitDate.errors">
+                  <mat-error *ngIf="f.quitDate.errors.required">*</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.EMPLOYEEENROLLMENT.STATUS.CAPTION' | translate }}</mat-label>
+                <input class="example-full-width" matInput
+                  [(value)]="employeeEnrollment.employeeStatusName  === undefined ? '' : employeeEnrollment.employeeStatusName"
+                  placeholder="{{ 'EMPLOYEE.EMPLOYEE.EMPLOYEEENROLLMENT.STATUS.CAPTION' | translate }}" [readonly]="true">
+                <button mat-icon-button matSuffix (click)="editEmployeeStatus()" type="button">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.EMPLOYEEENROLLMENT.GRADE.CAPTION' | translate }}</mat-label>
+                <mat-select matInput formControlName="gradeId" [(value)]="employeeEnrollment.gradeId"
+                  placeholder="Grade">
+                  <ng-container *ngFor="let grade of grades">
+                    <mat-option value="{{grade.id}}">{{grade.gradeName}}</mat-option>
+                  </ng-container>
+                </mat-select>
+                <div *ngIf="submitted && f.gradeId.errors">
+                  <mat-error *ngIf="f.gradeId.errors.required">*</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'EMPLOYEE.EMPLOYEE.EMPLOYEEENROLLMENT.CONFIRMATION_RULE.CAPTION' | translate }}
+                </mat-label>
+                <mat-select matInput formControlName="confirmationId" [(value)]="employeeEnrollment.confirmationId"
+                  placeholder="Confirmation Rule">
+                  <ng-container *ngFor="let confirmationRule of confirmationRules">
+                    <mat-option value="{{confirmationRule.id}}">{{confirmationRule.ruleName}}</mat-option>
+                  </ng-container>
+                </mat-select>
+                <div *ngIf="submitted && f.confirmationId.errors">
+                  <mat-error *ngIf="f.confirmationId.errors.required">*</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>{{'LEAVE.LEAVEGROUP.INDEX.TITLE' | translate}}
+                </mat-label>
+                <mat-select matInput formControlName="leaveTypeGroupId" [(ngModel)]="employeeEnrollment.leaveTypeGroupId"
+                  placeholder="{{'LEAVE.LEAVEGROUP.INDEX.TITLE' | translate}}" (selectionChange)="leaveGroupTypeChange($event.value);" >
+                  <ng-container *ngFor="let item of leaveGroups ">
+                    <mat-option [value]="item.id">{{item.leaveTypeGroupName}}</mat-option>
+                  </ng-container>
+                </mat-select>
+                <div *ngIf="submitted && f.leaveTypeGroup.errors">
+                  <mat-error *ngIf="f.leaveTypeGroup.errors.required">Leave Group is required</mat-error>
+                </div>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" *ngIf="this.isEnrolled">
+            <div class="col-md-3">
+              <img class="img-profile rounded-circle" [src]="profilePictureSrc"
+                style="max-height:150px; max-width:150px; width:100%; height:100%">
+              <input *ngIf="isAdmin || isHRManager" #file id="image" type="file" multiple (change)="uploadImage(file.files)"
+                placeholder="Upload Image">
+            </div>
+            <div class="col-md-3">
+              <img class="img-profile rounded-circle" [src]="signatureSrc"
+                style="max-height:150px; max-width:150px; width:100%; height:100%">
+              <input *ngIf="isAdmin || isHRManager" #signature id="signature" type="file" multiple (change)="uploadSignature(signature.files)"
+                placeholder="Upload Signature">
+            </div>
+          </div>
+          
+        </mat-card-content>
+        <mat-card-actions align="right">
+          <button *ngIf="isAdmin || isHRManager" class="btn btn-success" type="submit" mat-button>{{ 'COMMON.SAVE_BUTTON_TEXT' | translate}}</button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-error *ngIf="!isFormValid">
+        <div class="d-flex">
+          {{errorMessages}}
+        </div>
+      </mat-error>
+    </form>
+
+    
+  </mat-expansion-panel>
+</mat-accordion>

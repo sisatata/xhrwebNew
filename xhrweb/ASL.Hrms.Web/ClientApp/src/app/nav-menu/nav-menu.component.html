@@ -1,0 +1,84 @@
+<header>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">planet HR</a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+           [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li>
+
+          <li class="nav-item dropdown" [routerLinkActive]="['link-active']">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Company
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/company']">Companies</a>
+              <a class="dropdown-item" [routerLink]="['/company/branch']">Branch</a>
+              <a class="dropdown-item" [routerLink]="['/company/department']">Department</a>
+              <a class="dropdown-item" [routerLink]="['/company/designation']">Designation</a>
+              <a class="dropdown-item" [routerLink]="['/company/financialYear']">Financial Year</a>
+              <a class="dropdown-item" [routerLink]="['/company/monthCycle']">Month Cycle</a>
+              <a class="dropdown-item" [routerLink]="['/company/common-lookup']">Common Lookup</a>
+              <!--<a class="dropdown-item" [routerLink]="['/company/officeNotice']">Office Notice</a>-->
+              <div class="dropdown-divider"></div>
+
+            </div>
+          </li>
+          <li class="nav-item dropdown" [routerLinkActive]="['link-active']">
+            <a class="nav-link dropdown-toggle" id="employeeNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Employee
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/employee']">Employees</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown" [routerLinkActive]="['link-active']">
+            <a class="nav-link dropdown-toggle" id="leaveNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Leave
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/leave/leaveType']">Leave Type</a>
+              <a class="dropdown-item" [routerLink]="['/leave/leaveApplication']">Leave Application</a>
+              <a class="dropdown-item" [routerLink]="['/leaveBalance']">Leave Balance</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown" [routerLinkActive]="['link-active']">
+            <a class="nav-link dropdown-toggle" id="attendanceNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Attendance
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="['/attendance/shiftGroup']">Shift Group</a>
+              <a class="dropdown-item" [routerLink]="['/attendance/shift']">Shift</a>
+              <a class="dropdown-item" [routerLink]="['/attendance/shiftAllocation']">Shift Allocation</a>
+              <a class="dropdown-item" [routerLink]="['/attendance/attendanceProcess']">Attendance Process</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+
+          <li class="nav-item"
+              [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/auth/login']">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

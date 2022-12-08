@@ -1,0 +1,38 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+
+</div>
+
+<h5 mat-dialog-title *ngIf = "type===1" >{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.APPROVEORREJECT.APPROVE' | translate  }}</h5>
+<h5 mat-dialog-title *ngIf = "type===2" >{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.APPROVEORREJECT.DECLINE' | translate  }}</h5>
+
+<form class="employee-from" [formGroup]="approveOrRejectLeaveRequestForm" enctype="multipart/form-data">
+    <mat-dialog-content class="mat-typography">
+  
+     
+  
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.APPROVEORREJECT.NOTES' | translate  }}</mat-label>
+          <input matInput formControlName="notes"
+                 placeholder="{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFERLIST.APPROVEORREJECT.NOTES' | translate  }}"
+                 [ngClass]="{'is-invalid': submitted && f.notes.errors}">
+          <mat-error *ngIf="f.notes.errors && f.notes.errors.maxlength">Max length should be 250</mat-error>
+         
+        </mat-form-field>
+      </div>
+      
+      <mat-error *ngIf="!isFormValid">
+        <div class="d-flex">
+         
+            {{errorMessages}}
+            
+        </div>
+    </mat-error>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions>
+      <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+      <button mat-raised-button (click)="onSubmit()" class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+    </mat-dialog-actions>
+  </form>

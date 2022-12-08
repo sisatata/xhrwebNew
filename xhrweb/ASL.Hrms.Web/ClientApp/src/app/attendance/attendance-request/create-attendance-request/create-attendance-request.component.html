@@ -1,0 +1,110 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+<h5 mat-dialog-title *ngIf="!isEditMode"> {{ 'ATTENDANCE.ATTENDANCEREQUEST.CREATE.CREATE' | translate }}</h5>
+<h5 mat-dialog-title *ngIf="isEditMode">{{ 'ATTENDANCE.ATTENDANCEREQUEST.CREATE.EDIT' | translate }}</h5>
+<h6 *ngIf="submitted && attendanceRequestCreateForm.invalid" class="text-danger">{{'COMMON.ERROR_TEXT' | translate}}
+</h6>
+<form class="employee-from" [formGroup]="attendanceRequestCreateForm" enctype="multipart/form-data">
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.REQUEST_TYPE' | translate }}</mat-label>
+            <mat-select matInput formControlName="requestTypeId" (selectionChange)="onChangeRequestType();" [(ngModel)]="attendanceRequest.requestTypeId"
+              placeholder="{{ 'LEAVE.LEAVEREQUEST.INDEX.TABLE.HEADER.REQUEST_TYPE' | translate }}">
+              <ng-container *ngFor="let item of requestTypes">
+                <mat-option [value]="item.id">{{item.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error *ngIf="submitted && f.requestTypeId.errors && f.requestTypeId.errors.required">
+              {{ 'ATTENDANCE.ATTENDANCEREQUEST.CREATE.REQUEST_TYPE.REQUIERED_ERROR_TEXT' | translate }}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.ATTENDANCEREQUEST.INDEX.TABLE.HEADER.REQUEST_DATE' | translate }}
+            </mat-label>
+            <input [(ngModel)]="requestDate" matInput [matDatepicker]="startDatePicker" formControlName="startDate"
+              (click)="startDatePicker.open()"
+              placeholder="{{ 'ATTENDANCE.ATTENDANCEREQUEST.INDEX.TABLE.HEADER.REQUEST_DATE' | translate }}"
+              [ngClass]="{'is-invalid': f.startDate.errors}">
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+            <mat-error *ngIf="submitted && f.startDate.errors && f.startDate.errors.required">
+              {{ 'ATTENDANCE.ATTENDANCEREQUEST.CREATE.REQUEST_DATE.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label> {{requestTimePlaceHolder}}</mat-label>
+            <input [(ngModel)]="requestTime" type="text" matInput formControlName="time"
+              placeholder="{{ requestTimePlaceHolder }}"
+              [ngClass]="{'is-invalid': submitted && f.time.errors}" [ngxTimepicker]="timeTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #timeTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.time.errors && f.time.errors.required">
+              {{ requestTimeErrorPlaceHolder}}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.time.errors && f.time.errors.maxlength">
+              {{ 'ATTENDANCE.ATTENDANCEREQUEST.CREATE.REQUEST_TIME.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-12" *ngIf="showRequestEndDate">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label> End Time</mat-label>
+            <input [(ngModel)]="requestEndTime" type="text" matInput formControlName="endTime"
+              placeholder=""
+              [ngClass]="{'is-invalid': submitted && f.endTime.errors}" [ngxTimepicker]="timeTimepicker"
+              [disableClick]="false" readonly />
+            <mat-icon matSuffix>access_time</mat-icon>
+            <ngx-material-timepicker #timeTimepicker></ngx-material-timepicker>
+            <mat-error *ngIf="submitted && f.endTime.errors && f.endTime.errors.required">
+             End time is required
+            </mat-error>
+            <mat-error *ngIf="submitted && f.endTime.errors && f.endTime.errors.maxlength">
+              {{ 'ATTENDANCE.ATTENDANCEREQUEST.CREATE.REQUEST_TIME.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="form-group">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'ATTENDANCE.HOLIDAY.CREATE.CREATE_FORM.REASON.PLACEHOLDER' | translate }}</mat-label>
+            <input matInput formControlName="reason"
+              placeholder="{{ 'ATTENDANCE.HOLIDAY.CREATE.CREATE_FORM.REASON.PLACEHOLDER' | translate }}"
+              [ngClass]="{'is-invalid': submitted && f.reason.errors}" />
+            <mat-error *ngIf="submitted && f.reason.errors && f.reason.errors.required">
+              {{ 'ATTENDANCE.HOLIDAY.CREATE.CREATE_FORM.REASON.REQUIERED_ERROR_TEXT' | translate }}
+            </mat-error>
+            <mat-error *ngIf="submitted && f.reason.errors && f.reason.errors.maxlength">
+              {{ 'ATTENDANCE.HOLIDAY.CREATE.CREATE_FORM.REASON.MAXLENGTH_ERROR_TEXT' | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-error *ngIf="!isFormValid">
+        <div class="d-flex">
+          {{errorMessages}}
+        </div>
+      </mat-error>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="close()">{{ 'COMMON.CANCEL_BUTTON_TEXT' | translate }}</button>
+    <button mat-raised-button (click)="onSubmit()"
+      class="btn btn-success">{{ 'COMMON.SAVE_BUTTON_TEXT' | translate }}</button>
+  </mat-dialog-actions>
+</form>

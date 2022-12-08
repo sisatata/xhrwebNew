@@ -1,0 +1,247 @@
+<div class="spinner-border" style="position:fixed;z-index:9999;left:50%;top:30%; color:#218838;" *ngIf="loading"
+  role="status">
+</div>
+  <div class="row d-flex justify-content-between mt-3 mb-3">
+    <div class="col-sm-12 col-md-6">
+      <h1 id="tableLabel">{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.INDEX.TITLE' | translate}}</h1>
+    </div>
+  </div>
+  <form [formGroup]="employeePromotionTransferForm">
+    <div class="row">
+      <div class="col-md-12 col-12">
+        <app-search-filter [companyId]="companyId" [showInputField]="false">
+        </app-search-filter>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-5 col-12">
+        <div class="form-group">
+          <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" ngDefaultControl
+            formControlName="employeeId" name="selectedItems" [settings]="settings" (onSelect)="onItemSelect($event.id)"
+            (onDeSelect)="onItemDeselect($event)" (onDeSelectAll)="onItemDeselect($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-12">
+        <button mat-raised-button type="button" (click)="search()" class="btn btn-success btn-block text-center mb-2"
+          matTooltip="seacrh" [disabled]="isEditMode">
+          {{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.INDEX.SEARCH_EMPLOYEES' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="row" *ngIf="showReasons">
+      <div class="col-lg-2 col-md-3 col-12" >
+        <mat-form-field appearance="outline" >
+          <mat-label> {{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.REASON' | translate }}</mat-label>
+          <mat-select (selectionChange)="onChangeReasons($event.value);"  placeholder="Reason" formControlName="incrementTypeId">
+            <mat-option *ngFor="let item of reasons" [value]="item.id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="submitted && f.incrementTypeId.errors && f.incrementTypeId.errors.required">Company is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      </div>
+      <div class="row" *ngIf="showIncrementRelatedFields">
+      <div class="col-lg-2 col-md-3 col-12" >
+        <mat-form-field appearance="outline">
+          <mat-label> {{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.PROPOSED_DATE' | translate  }}
+          </mat-label>
+          <input matInput [matDatepicker]="proposedDatePicker" formControlName = "proposedDate"
+            (click)="proposedDatePicker.open()" placeholder="{{'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.PROPOSED_DATE' | translate  }}"
+            >
+          <mat-datepicker-toggle matSuffix [for]="promotionDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #proposedDatePicker></mat-datepicker>
+          
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2 col-md-3 col-12" >
+        <mat-form-field appearance="outline" >
+          <mat-label>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.PERCENTAGE/FIXED' | translate  }}</mat-label>
+          <mat-select (selectionChange)="onChangeValueTypes($event.value);"  placeholder="{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.PERCENTAGE/FIXED' | translate  }}" formControlName="incrementValueTypeId">
+            <mat-option *ngFor="let item of valueTypes" [value]="item.id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+          
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2 col-md-3 col-12"  >
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.BASIC/GROSS' | translate  }}</mat-label>
+          <mat-select  placeholder="{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.BASIC/GROSS' | translate  }}" formControlName="incrementOn" [disabled]="isFixed">
+            <mat-option *ngFor="let item of incrementOnTypes" [value]="item.id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+         
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2 col-md-3 col-12" >
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.AMOUNT' | translate  }}</mat-label>
+        <input matInput formControlName="incrementValue" 
+               placeholder="{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.AMOUNT' | translate  }}"
+               [ngClass]="{'is-invalid': submitted && f.incrementValue.errors}">
+       
+      </mat-form-field>
+      </div>
+      
+<div class="col-lg-2 col-md-3 col-12">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'EMPLOYEE.EMPLOYEE.EMPLOYEEENROLLMENT.GRADE.CAPTION' | translate }}</mat-label>
+    <mat-select matInput formControlName="newGradeId"
+      placeholder="Grade">
+      <ng-container *ngFor="let grade of grades">
+        <mat-option value="{{grade.id}}">{{grade.gradeName}}</mat-option>
+      </ng-container>
+    </mat-select>
+    <div *ngIf="submitted && f.newGradeId.errors">
+      <mat-error *ngIf="f.newGradeId.errors.required">*</mat-error>
+    </div>
+  </mat-form-field>
+</div>
+
+
+<div class="col-lg-2 col-md-3 col-12">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.SALARYSTRUCTUREID.PLACEHOLDER' | translate }}</mat-label>
+    <mat-select matInput formControlName="newSalaryStructureId" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.SALARYSTRUCTUREID.PLACEHOLDER' | translate }}">
+      <ng-container *ngFor="let salaryStructure of salaryStructures">
+        <mat-option value="{{salaryStructure.id}}">{{salaryStructure.structureName}}</mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error *ngIf="submitted && f.newSalaryStructureId.errors && f.newSalaryStructureId.errors.required">Salary Structure is required</mat-error>
+  </mat-form-field>
+</div>
+<div class="col-lg-2 col-md-3 col-12">
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.PAYMENTOPTIONID.PLACEHOLDER' | translate }}</mat-label>
+    <mat-select matInput [(ngModel)]="employeePromotionTransfer.newPaymentOptionId" formControlName="newPaymentOptionId" placeholder="{{'PAYROLL.EMPLOYEESALARY.CREATE.CREATE_FORM.PAYMENTOPTIONID.PLACEHOLDER' | translate }}">
+      <ng-container *ngFor="let paymentOption of paymentOptions">
+        <mat-option [value]="paymentOption.paymentOptionId">{{paymentOption.optionName}}</mat-option>
+      </ng-container>
+    </mat-select>
+    <mat-error *ngIf="submitted && f.newPaymentOptionId.errors && f.newPaymentOptionId.errors.required">Payment option is required</mat-error>
+  </mat-form-field>
+</div>
+      <div class="col-lg-2 col-md-3 col-12" >
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="startDate" formControlName="startDate" (click)="startDate.open()" placeholder="Start Date" [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+        
+      </mat-form-field>
+      </div>
+     
+    
+      
+    </div>
+    <div class="row" *ngIf = "showTransferRelatedFields">
+      <div class="col-sm-12 col-md-3 col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Company</mat-label>
+          <mat-select placeholder="Company" formControlName="newCompanyId"
+                      >
+            <mat-option *ngFor="let item of companies" [value]="item.id">
+              {{item.companyName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-3 col-lg-2">
+       
+        <mat-form-field appearance="outline">
+          <mat-label>Branch</mat-label>
+          <mat-select placeholder="Branch" formControlName="newBranchId"
+                      (selectionChange)="onChangeBranch($event.value)" [(value)]="branchId" [multiple]="showMultiple">
+            <mat-option *ngFor="let item of branches" [value]="item.id">
+              {{item.branchName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
+      </div>
+      <div class="col-sm-12 col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.DEPARTMENTID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select placeholder="{{ 'COMMON.SELECT.DEPARTMENTID.PLACEHOLDER' | translate }}"
+                      formControlName="newDepartmentId" (selectionChange)="onChangeDepartment($event.value)" >
+            <mat-option *ngFor="let item of departments" [value]="item.id">
+              {{item.departmentName}}
+            </mat-option>
+          </mat-select>
+        
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-lg-2">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'COMMON.SELECT.DESIGNATIONID.PLACEHOLDER' | translate }}</mat-label>
+          <mat-select placeholder="{{ 'COMMON.SELECT.DESIGNATIONID.PLACEHOLDER' | translate }}"
+                      formControlName="newPositionId">
+            <mat-option *ngFor="let item of designations" [value]="item.id">
+              {{item.designationName}} - {{item.departmentName}}
+            </mat-option>
+          </mat-select>
+         
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2 col-md-3 col-12" *ngIf="showTransferRelatedFields && !showIncrementRelatedFields" >
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="startDate" formControlName="startDate" (click)="startDate.open()" placeholder="Start Date" [ngClass]="{'is-invalid': f.startDate.errors}">
+        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+        
+      </mat-form-field>
+      </div>
+     
+    </div>
+    <div class="row">
+      <div class="col-lg-2 col-md-4 col-sm-12" *ngIf= "showTransferRelatedFields || showIncrementRelatedFields">
+        <button mat-raised-button type="button" (click)="onSubmit()" class="btn btn-success btn-block text-center mb-2"
+          matTooltip="seacrh" [disabled]="employeePromotionTransferForm.invalid">
+          {{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.CREATE.UPDATE' | translate  }}
+        </button>
+        </div>
+    </div>
+    
+  </form>
+  <div class="table-responsive">
+    <table class='table table-light table-hover table-responsive-sm text-nowrap' aria-labelledby="tableLabel">
+      <thead>
+        <tr class="table-secondary">
+          <th>{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.EMPLOYEEID' | translate }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.BRANCH' | translate }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEE.INDEX.TABLE.HEADER.DEPARTMENT' | translate }}</th>
+          <th>{{ 'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.POSITION' | translate }}</th>
+          <th>{{ 'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.GRADE' | translate }}</th>
+          <th>{{ 'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.SALARYSTRUCTURE' | translate }}</th>
+          <th>{{ 'PAYROLL.EMPLOYEESALARY.INDEX.TABLE.HEADER.GROSSSALARY' | translate }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.INDEX.EMAIL_ADDRESS' | translate   }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.INDEX.HOUSE_RENT' | translate   }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.INDEX.BASIC' | translate   }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.INDEX.MEDICAL' | translate   }}</th>
+          <th>{{ 'EMPLOYEE.EMPLOYEEPROMOTIONTRANSFER.INDEX.CONVEYANCE' | translate   }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of employeeDetails;">
+          <td>{{item?.companyEmployeeId}}</td>
+          <td>{{item?.branchName}}</td>
+          <td>{{item?.departmentName}}</td>
+          <td>{{item?.designationName}}</td>
+          <td>{{item?.gradeName}}</td>
+          <td>{{item?.structureName}}</td>
+          <td>{{item?.grossSalary}}</td>
+          <td>{{item?.loginId}}</td>
+          <td>{{item?.employeeSalaryComponentList[0].componentAmount}}</td>
+          <td>{{item?.employeeSalaryComponentList[1].componentAmount}}</td>
+          <td>{{item?.employeeSalaryComponentList[2].componentAmount}}</td>
+          <td>{{item?.employeeSalaryComponentList[3].componentAmount}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+ 
+   

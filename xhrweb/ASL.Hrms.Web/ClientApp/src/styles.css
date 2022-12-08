@@ -1,0 +1,830 @@
+/* You can add global styles to this file, and also import other style files */
+/* Provide sufficient contrast against white background */
+code {
+  color: #e01a76;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* To override default scroller style */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: grey; 
+}
+/* To override default scroller style */
+/*@import "../src/assets/css/content.css";
+@import "../src/assets/css/components.css";
+@import "../src/assets/css/material.css";*/
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "../src/assets/css/material.css";
+/* Override angular material's default style */
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+mat-form-field {
+  width: 100%;
+}
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label {   color: green; }
+.mat-select-value {
+  color: green;
+ 
+}
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: green;
+}
+/* Add below class only if all of the modal is green color */
+.mat-dialog-container {
+color:green;
+}
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: green;
+  background: #F9F9F9;
+  /*background-color: lightgrey !important;*/
+}
+/* Font color */
+input.mat-input-element {
+  color: green;
+}
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background: green;
+}
+.create-icon-button {
+  height: 30px !important;
+  width: 30px !important;
+  font-size: 30px !important;
+  color: white !important;
+}
+.create-icon-small-button {
+  height: 30px !important;
+  width: 30px !important;
+  font-size: 30px !important;
+  color: white !important;
+}
+.cdk-overlay-container {
+  z-index: 9999;
+  /*To override material modal as it is hiding below the fixed header*/
+}
+.mat-checkbox .mat-checkbox-frame {
+  border-color: green !important;
+}
+.mat-checkbox-checked .mat-checkbox-background {
+  background-color: green !important;
+}
+.mat-icon{
+    color:green;
+}
+  .mat-icon.mat-icon-delete {
+    color: red !important;
+  }
+/* The below style is used to adjust the height of the material input outline */
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.3em 0 0.5em 0;
+}
+/* The above style is used to adjust the height of the material input outline */
+.mat-form-field-appearance-outline .mat-form-field-label {
+  top: 1.1275em;
+  margin-top: -0.25em;
+}
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-appearance-outline.mat-form-field-can-float .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label {
+  transform: translateY(-1.59375em) scale(0.75);
+  width: 133.3333333333%;
+  top: 1.70em;
+  margin-top: -0.25em;
+}
+/* .label-font{
+  font-size: 1.02rem;
+} */
+mat-label{
+  font-size: 1.03rem;
+}
+/* Override angular material's default style */
+/*From Layout Html,css*/
+/*font-face*/
+@font-face {
+  font-family: "Manrope VF";
+  src: url(assets/fonts/variable/Manrope[wght].ttf) format("truetype-variations");
+  font-style: normal;
+  font-variation-settings: "wght" 500;
+  font-variation-ligatures: normal;
+  font-weight: 200 800;
+}
+@font-face {
+  font-family: Manrope;
+  src: url(assets/fonts/web/Manrope-ExtraLight.woff2) format("woff2");
+  font-weight: 200;
+}
+@font-face {
+  font-family: Manrope;
+  src: url(assets/fonts/web/Manrope-Light.woff2) format("woff2");
+  font-weight: 300;
+}
+@font-face {
+  font-family: Manrope;
+  src: url(assets/fonts/web/Manrope-Regular.woff2) format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: Manrope;
+  src: url(assets/fonts/web/Manrope-Medium.woff2) format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-family: Manrope;
+  src: url(assets/fonts/web/Manrope-SemiBold.woff2) format("woff2");
+  font-weight: 600;
+}
+@font-face {
+  font-family: Manrope;
+  src: url(assets/fonts/web/Manrope-Bold.woff2) format("woff2");
+  font-weight: 700;
+}
+@font-face {
+  font-family: Manrope;
+  src: url(assets/fonts/web/Manrope-ExtraBold.woff2) format("woff2");
+  font-weight: 800;
+}
+body, html, input {
+  font-family: "Manrope VF", Manrope;
+  font-variation-settings: "wght" 500;
+}
+/*font-face*/
+body {
+  background: #F6F7FB;
+  overflow-x: hidden !important;
+}
+/*typography*/
+h1 {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 48px;
+  color: #0B0F32;
+}
+.intro-text {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  color: #747E8C;
+  max-width: 550px;
+  margin-bottom: 60px;
+}
+  
+/*.logo*/
+/*sidebar*/
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background: #fff;
+  /* Behind the navbar */
+  padding: 48px 0 0;
+  /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+  .sidebar .nav-link.active, .sidebar .nav-link:hover {
+    font-family: Manrope, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: #0B0F32;
+    border-color: transparent transparent transparent #00A651;
+    border-style: solid;
+    border-width: 4px;
+    transform: skewX(-180deg);
+  }
+    .sidebar .nav-link.active i, .sidebar .nav-link:hover i {
+      color: #00A651;
+    }
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+  }
+}
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Scrollable contents if viewport is shorter than content. */
+}
+@supports (position: -webkit-sticky) or (position: sticky) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+  }
+  .sidebar .nav-link:hover .feather, .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+.sidebar-heading {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+/*.sidebar*/
+.navbar .navbar-toggler {
+  top: 0.25rem;
+  right: 1rem;
+}
+.navbar .form-control {
+  padding: 0.75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+ul.navbar-nav.utility-nav {
+  flex-direction: row;
+}
+.banner-image img {
+  width: 100%;
+  border-radius: 15px;
+}
+.nav-link {
+  display: block;
+  padding: 0.4rem 1rem;
+  border-color: transparent transparent transparent transparent;
+  border-style: solid;
+  border-width: 4px;
+  margin-bottom: 1px;
+}
+  .nav-link i {
+    font-size: 21px;
+    margin-right: 18px;
+  }
+.logo img {
+  margin: 15px 0;
+}
+.sidebar-sticky {
+  margin-top: 70px;
+}
+  .sidebar-sticky li.nav-item a {
+    font-family: Manrope, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: #8C97A4;
+  }
+/*card style*/
+.card-title {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  color: #0B0F32;
+}
+/*.card style*/
+nav.navbar {
+  background: rgba(246, 247, 251, 0.95);
+}
+.navbar-brand {
+  background: #fff;
+  /* This below line is used to make a horizontal line on the upper topbar after logo */
+  /* box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1); */
+}
+.sign-in-link {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 26px;
+  color: #00A651;
+  text-transform: uppercase;
+  border: 0;
+}
+.utility-nav {
+  padding-right: 30px;
+}
+.btn-register {
+  background: #00A651;
+  border-radius: 5px;
+  padding: 12px 49px;
+  margin-left: 40px;
+}
+.section-wrapper {
+  padding: 0 6px 0 36px;
+}
+section.banner-image {
+  margin-bottom: 40px;
+}
+.search-wrapper input {
+  background: url("assets/images/search-solid.png") no-repeat 10px #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  height: 60px;
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #8C97A4;
+  padding-left: 45px;
+}
+.search-wrapper .input-group-append button {
+  border: 1px solid #ced4da;
+  background: #fff;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05);
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #8C97A4;
+  padding: 6px 20px;
+  border-left: 1px solid transparent;
+}
+  .search-wrapper .input-group-append button::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 20px;
+    background: #E2E3E6;
+    position: absolute;
+    left: 0;
+    top: 20px;
+  }
+.dropdown-toggle::after {
+  content: url("assets/images/down-arrow.png");
+  border: 0;
+  vertical-align: top;
+}
+.card-area {
+  margin-top: 30px;
+}
+.card {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  border: 0;
+}
+.card-text p {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+  color: #758291;
+}
+  .card-text p i {
+    margin-right: 8px;
+    font-size: 18px;
+  }
+  .card-text p.text-course-fee {
+    font-family: Manrope, sans-serif;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 800;
+  }
+.text-course-fee {
+  font-family: Manrope, sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 800;
+}
+.card-text p .amount-blue {
+  color: #0066FF;
+  text-transform: uppercase;
+}
+.amount-blue {
+  color: #0066FF;
+  text-transform: uppercase;
+}
+.card-text p .amount-green {
+  color: #00A651;
+  text-transform: uppercase;
+}
+.amount-green {
+  color: #00A651;
+  text-transform: uppercase;
+}
+.btn-apply-now {
+  margin-top: 20px;
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 26px;
+  align-items: center;
+  text-align: center;
+  color: #00A651;
+  padding: 12px;
+}
+.load-more {
+  background: #00A651;
+  border-radius: 5px;
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 26px;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+  max-width: 326px;
+  height: 50px;
+  margin: 50px auto 100px;
+}
+.navbar .navbar-toggler {
+  top: 2.25rem;
+  right: 1rem;
+}
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+  }
+  ul.navbar-nav.utility-nav {
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .section-wrapper {
+    padding: 0;
+  }
+  .section-wrapper {
+    padding: 0;
+    margin-top: 40px;
+  }
+}
+@media (max-width: 575px) {
+  .search-wrapper button.btn-success {
+    margin-top: 20px;
+    margin-left: 0 !important;
+  }
+}
+/*From Layout Html,css*/
+/*font-face*/
+body {
+  background: #F6F7FB;
+}
+/*typography*/
+h1 {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 48px;
+  color: #0B0F32;
+}
+.intro-text {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  color: #747E8C;
+  max-width: 550px;
+  margin-bottom: 60px;
+}
+/*.typography*/
+/*logo*/
+.navbar-brand {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: none;
+}
+.navbar-brand img {
+  /* width: 175px; */
+  /* margin-right: 84px; */
+  margin: 0 auto;
+  max-width: 100%;
+}
+/*.logo*/
+/*sidebar*/
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background: #fff;
+  /* Behind the navbar */
+  padding: 48px 0 0;
+  /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+  .sidebar .nav-link.active, .sidebar .nav-link:hover {
+    font-family: Manrope, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 26px;
+    color: #0B0F32;
+    border-color: transparent transparent transparent #00A651;
+    border-style: solid;
+    border-width: 4px;
+    transform: skewX(-180deg);
+  }
+    .sidebar .nav-link.active i, .sidebar .nav-link:hover i {
+      color: #00A651;
+    }
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+  }
+}
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Scrollable contents if viewport is shorter than content. */
+}
+@supports (position: -webkit-sticky) or (position: sticky) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+  }
+  .sidebar .nav-link:hover .feather, .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+.sidebar-heading {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+/*.sidebar*/
+.navbar .navbar-toggler {
+  top: 0.25rem;
+  right: 1rem;
+}
+.navbar .form-control {
+  padding: 0.75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+ul.navbar-nav.utility-nav {
+  flex-direction: row;
+}
+.banner-image img {
+  width: 100%;
+  border-radius: 15px;
+}
+.nav-link {
+  display: block;
+  padding: 0.4rem 1rem;
+  border-color: transparent transparent transparent transparent;
+  border-style: solid;
+  border-width: 4px;
+  margin-bottom: 1px;
+}
+  .nav-link i {
+    font-size: 21px;
+    margin-right: 18px;
+  }
+  .sidebar-sticky li.nav-item a {
+    font-family: Manrope, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 26px;
+    color: #8C97A4;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+/*card style*/
+.card-title {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  color: #0B0F32;
+}
+/*.card style*/
+nav.navbar {
+  background: rgba(246, 247, 251, 0.95);
+}
+.sign-in-link {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 26px;
+  color: #00A651;
+  text-transform: uppercase;
+  border: 0;
+}
+.utility-nav {
+  padding-right: 30px;
+}
+.btn-register {
+  background: #00A651;
+  border-radius: 5px;
+  padding: 12px 49px;
+  margin-left: 40px;
+}
+.section-wrapper {
+  padding: 0 6px 0 36px;
+  margin-right: 20px;
+}
+section.banner-image {
+  margin-bottom: 40px;
+}
+.search-wrapper input {
+  background: url("assets/images/search-solid.png") no-repeat 10px #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  height: 60px;
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #8C97A4;
+  padding-left: 45px;
+}
+.search-wrapper .input-group-append button {
+  border: 1px solid #ced4da;
+  background: #fff;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05);
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #8C97A4;
+  padding: 6px 20px;
+  border-left: 1px solid transparent;
+}
+  .search-wrapper .input-group-append button::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 20px;
+    background: #E2E3E6;
+    position: absolute;
+    left: 0;
+    top: 20px;
+  }
+.dropdown-toggle::after {
+  content: url("assets/images/down-arrow.png");
+  border: 0;
+  vertical-align: top;
+}
+.card-area {
+  margin-top: 30px;
+}
+.card {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  border: 0;
+}
+.card-text p {
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+  color: #758291;
+}
+  .card-text p i {
+    margin-right: 8px;
+    font-size: 18px;
+  }
+  .card-text p.text-course-fee {
+    font-family: Manrope, sans-serif;
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 800;
+  }
+  .card-text p .amount-blue {
+    color: #0066FF;
+    text-transform: uppercase;
+  }
+  .card-text p .amount-green {
+    color: #00A651;
+    text-transform: uppercase;
+  }
+.btn-apply-now {
+  margin-top: 20px;
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 26px;
+  align-items: center;
+  text-align: center;
+  color: #00A651;
+  padding: 12px;
+}
+input:disabled {
+  font-weight: 700;
+}
+.mat-select-disabled .mat-select-value {
+  font-weight: 700;
+}
+.load-more {
+  background: #00A651;
+  border-radius: 5px;
+  font-family: Manrope, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 26px;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+  max-width: 326px;
+  height: 50px;
+  margin: 50px auto 100px;
+}
+.navbar .navbar-toggler {
+  top: 5.25rem;
+  right: 1rem;
+}
+.ngx-pagination .current {
+  background: green !important;
+}
+
+::ng-deep .mat-select-value-text{
+font-size: 13px!important;
+}
+.mat-form-field-wrapper{
+  font-size: 13px;
+}
+.table-responsive td{
+  font-size: 14px;
+ 
+ 
+}
+.mat-icon-button{
+height: 35px!important;
+}
+
+.mat-raised-button{
+  font-size: 0.80rem;
+}
+.mat-calendar-controls .mat-icon-button{
+height: 40px!important;
+}
+th{
+  font-size: 14px;
+}
+@media (max-width: 767.98px) {
+  .sidebar {
+    top: 5rem;
+  }
+  ul.navbar-nav.utility-nav {
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .section-wrapper {
+    padding: 0;
+  }
+  .section-wrapper {
+    padding: 0;
+    margin-top: 40px;
+  }
+}
+@media (max-width: 575px) {
+  .search-wrapper button.btn-success {
+    margin-top: 20px;
+    margin-left: 0 !important;
+  }
+}
+/*# sourceMappingURL=style.css.map */
+/*From Layout Html,css*/
