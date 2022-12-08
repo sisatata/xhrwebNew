@@ -1,0 +1,25 @@
+<nav mat-tab-nav-bar   class="header">
+ 
+    <a mat-tab-link   > </a>
+   
+     <a mat-tab-link *ngFor="let link of links"
+        (click)="activeLink = link.name"
+        [routerLink]="link.route"
+        [active]="activeLink == link.name">   <mat-icon aria-hidden="false" *ngIf="link.name==='Home'"     aria-label="Example home icon" fontIcon="home"></mat-icon>  {{ getName(link.name) }} </a>
+    
+   </nav>
+   <router-outlet></router-outlet>
+
+MatIconModule,
+  
+    ProgressModule,
+    BadgeModule,
+    MatListModule,
+    CardModule,
+    NavModule,
+    SidebarModule,
+    MatTabsModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    ListGroupModule,
